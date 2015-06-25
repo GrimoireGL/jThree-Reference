@@ -7,12 +7,16 @@ reactify = require 'coffee-reactify'
 gutil = require 'gulp-util'
 plumber = require 'gulp-plumber'
 rename = require 'gulp-rename'
+gulpif = require 'gulp-if'
 
 others = [
 ]
 
+env_production = false
 gulp.task 'default', ['build']
-gulp.task 'build', ['build:others', 'browserify']
+gulp.task 'enable-build-production-mode', -> env_production = true
+gulp.task 'build', ['enable-build-production-mode', 'build:others', 'browserify']
+gulp.task 'build-dev', ['build:others', 'browserify']
 gulp.task 'build:others', ("build:#{it.suffix}" for it in others)
 
 watching = false
@@ -27,12 +31,14 @@ target = [
     name: 'app.js'
     dest: ''
     bundleExternal: false
+    minify: false
   ,
     suffix: 'browser'
     src: 'src/browser.coffee'
     name: 'bundle.js'
     dest: 'public/js'
     bundleExternal: true
+    minify: true
 ]
 
 gulp.task "browserify", ("browserify:#{it.suffix}" for it in target)
@@ -51,7 +57,7 @@ target.forEach (it) ->
         .pipe buffer()
         .pipe sourcemaps.init
           loadMaps: true
-        # .pipe uglify()
+        .pipe gulpif(env_production, gulpif(it.minify, uglify()))
         .pipe rename(it.name)
         .pipe sourcemaps.write('./')
         .pipe gulp.dest(it.dest)
