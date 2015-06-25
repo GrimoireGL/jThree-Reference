@@ -2,18 +2,18 @@
 
 ## Summary
 
-jThree-Reference is the documentation of core jThree. But, It is designed to serve for sharing as well as looking up. It plays the role of connecting everybody in the jThree community.
+jThree-Reference is a documentation of jThree core. This is designed to serve not only class references and tutorial but also sharing. It plays the role of connecting users in jThree's community.
 
 ## Useful index based on jThree
 
-It serves indexes based on jThree architecture. It allows you to make time shorten to find target item, and never disturbs your progress.
+It generates indexes based on jThree architecture. It allows you to make the time shorter to find target reference, and never makes you annoying.
 
 ## What is Community?
 
-Traditionally, reference is read-only static existance.
+Ordinary, references are read-only static existence..
 
-You can do following:
+The features developed in this repository enables users...
 
-* Add comments
-* Share sample codes or tips
+* Add comments to references
+* Share sample codes or tips among users
 * Link your own plugins to the items
