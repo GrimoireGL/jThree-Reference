@@ -1,2 +1,6 @@
 .DS_Store
 node_modules/
+/app.js
+/app.js.map
+/public/js/bundle.js
+/public/js/bundle.js.map
