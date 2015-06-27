@@ -31,4 +31,6 @@ server.get '*', (req, res) ->
     initialStates: JSON.stringify initialStates
     markup: React.renderToString React.createElement(Root, {context})
 
-server.listen (process.env.PORT || 5000)
+console.log 'running on:', (process.env.PORT || 5000), process.env.IP
+
+server.listen(process.env.PORT || 5000, process.env.IP)

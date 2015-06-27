@@ -33,9 +33,9 @@
   "scripts": {
     "start": "foreman start",
     "debug": "node debug app.js",
-    "build": "gulp --require coffee-script build",
-    "build-dev": "gulp --require coffee-script build-dev",
-    "watch": "gulp --require coffee-script watch"
+    "build": "./node_modules/.bin/gulp --require coffee-script/register build",
+    "build-dev": "./node_modules/.bin/gulp --require coffee-script/register build-dev",
+    "watch": "./node_modules/.bin/gulp --require coffee-script/register watch"
   },
   "author": "pnlybubbles",
   "license": "MIT"
