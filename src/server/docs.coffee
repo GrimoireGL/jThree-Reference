@@ -1,10 +1,26 @@
+###
+@providesModule Docs
+###
+
 fs = require 'fs'
 config = require './stateInitializer/initializeStateConfig'
 
-class Docs
-  constructor: ->
-    @json = JSON.parse(fs.readFileSync(config.typedoc.path_to_json))
 
+###
+Convert TypeDoc json to Docs object
+
+@param {string} path to json
+###
+class Docs
+  constructor: (path)->
+    @json = JSON.parse(fs.readFileSync(path || config.typedoc.path_to_json))
+
+  ###
+  get global class typedoc json as object
+
+  @param {string|number} id of doc
+  @api public
+  ###
   getGlobalClassById: (id) ->
     for group, i in @json.groups
       if group.title == "External modules"
