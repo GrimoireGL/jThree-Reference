@@ -7,22 +7,25 @@ Router = require '../renderer/lib/router'
 class InitializeState
   constructor: ->
     @docs = new Docs()
-    @routesGen = new RoutesGen(@docs.json)
-    @router = new Router(config.router.root, @routesGen.routes)
+    @routes = new RoutesGen(@docs.json).routes
+    @dir_tree = new DirTree(@docs.json).dir_tree
+    @router = new Router(config.router.root, @routes)
 
   initialize: (req) ->
     initial_doc_data = {}
     @router.route req.originalUrl, (route, argu) =>
-      id = argu.route_arr[2]
-      if id?
-        initial_doc_data[id.toString()] = @docs.getGlobalClassById(id)
+      file_id = argu.route_arr[2]?.toString()
+      factor_id = argu.route_arr[3]?.toString()
+      if file_id? && factor_id?
+        initial_doc_data[file_id] ||= {}
+        initial_doc_data[file_id][factor_id] = @docs.getGlobalClassById(file_id, factor_id)
     initialState =
       RouteStore:
         fragment: req.originalUrl
         root: config.router.root
-        routes: @routesGen.routes
+        routes: @routes
       DocStore:
-        dir_tree: new DirTree(@docs.json).dir_tree
+        dir_tree: @dir_tree
         doc_data: initial_doc_data
     return initialState
 

@@ -15,8 +15,8 @@ the global class in typedoc json.
 Construct dir_tree like below.
 
 -- path
-a/file1 id1
-a/b/file2 id2
+a/file1 obj1
+a/b/file2 obj2
 
 -- routes
 {
@@ -25,12 +25,12 @@ a/b/file2 id2
       dir: {
         b: {
           file: {
-            file2: id2
+            file2: obj2
           }
         }
       },
       file: {
-        file1: di1
+        file1: obj1
       }
     }
   }
@@ -39,18 +39,19 @@ a/b/file2 id2
 class DirTree
   constructor: (json) ->
     @json = json
-    @dir_tree = {}
-    constructDirTree()
+    @dir_tree = constructDirTree(@json)
 
   ###
   construct tree formed object from docs json
 
   @api private
   ###
-  constructDirTree = ->
-    @json.children.forEach (child, i) =>
+  constructDirTree = (json) ->
+    dir_tree = {}
+    json.children.forEach (child, i) ->
       arr = child.name.replace(/"/g, '').split('/')
-      @dir_tree = _.merge({}, @dir_tree, arrayToDirTree(arr, child.id))
+      dir_tree = _.merge({}, dir_tree, arrayToDirTree(arr, child))
+    return dir_tree
 
   ###
   construct no branched tree recursively by array
@@ -59,14 +60,21 @@ class DirTree
   @param {any} the top of nested hash
   @api private
   ###
-  arrayToDirTree = (arr, top) ->
+  arrayToDirTree = (arr, top, def_arr) ->
     res = {}
     if arr.length == 1
       res.file = {}
-      res.file[arr[0]] = top
+      top.groups?.forEach (group) ->
+        group.children.forEach (id) ->
+          top.children.forEach (gchild) ->
+            if gchild.id == id
+              res.file[gchild.name] =
+                name: gchild.name
+                kindString: gchild.kindString
+                path: (def_arr ? arr)[0..-2].concat [gchild.name]
     else
       res.dir = {}
-      res.dir[arr[0]] = arrayToDirTree(arr[1..-1], top)
+      res.dir[arr[0]] = arrayToDirTree(arr[1..-1], top, def_arr ? arr)
     return res
 
 module.exports = DirTree

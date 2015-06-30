@@ -11,9 +11,10 @@ class DocStore extends Flux.Store
     @state = objectAssign(@state, context.initialStates.DocStore)
     @register keys.updateDoc, @updateDoc
 
-  updateDoc: (id, data) ->
+  updateDoc: (file_id, factor_id, data) ->
     doc_data = @state.doc_data
-    doc_data[id.toString()] = data
+    doc_data[file_id.toString()] ||= {}
+    doc_data[file_id.toString()][factor_id.toString()] = data
     @setState
       doc_data: doc_data
 

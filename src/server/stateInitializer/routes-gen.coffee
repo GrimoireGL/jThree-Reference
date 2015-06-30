@@ -22,11 +22,14 @@ class RoutesGen
       dir = child.name.replace(/\"/g, '')
       dir_arr = dir.split('/')
       dir_arr.forEach (d, j) ->
-        routes["#{prefix}/#{dir_arr[0..j].join('/')}"] =
-          if j != dir_arr.length - 1
-            "#{prefix}:global"
-          else
-            "#{prefix}:global:#{child.id}"
+        if j != dir_arr.length - 1
+          routes["#{prefix}/#{dir_arr[0..j].join('/')}"] = "#{prefix}:global"
+        else
+          child.groups?.forEach (group) ->
+            group.children.forEach (id) ->
+              child.children.forEach (gchild) ->
+                if gchild.id == id
+                  routes["#{prefix}#{if dir_arr.length == 1 then '' else '/' + dir_arr[0..(j - 1)].join('/')}/#{gchild.name}"] = "#{prefix}:global:#{child.id}:#{gchild.id}"
     routes["#{prefix}"] = "#{prefix}"
     return routes
 

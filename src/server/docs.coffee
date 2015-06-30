@@ -18,15 +18,17 @@ class Docs
   ###
   get global class typedoc json as object
 
-  @param {string|number} id of doc
+  @param {string|number} id of child of doc root
+  @param {string|number} id of grandchild of doc root
   @api public
   ###
-  getGlobalClassById: (id) ->
-    for group, i in @json.groups
-      if group.title == "External modules"
-        index = group.children.indexOf parseInt(id, 10)
-        if index != -1
-          return @json.children[index]
+  getGlobalClassById: (file_id, factor_id) ->
+    for child in @json.children
+      if child.id == parseInt(file_id, 10)
+        for gchild in child.children
+          if gchild.id == parseInt(factor_id, 10)
+            console.log gchild.name
+            return gchild
     return null
 
 module.exports = Docs

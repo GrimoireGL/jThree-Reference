@@ -7,11 +7,11 @@ class DocAction extends Flux.Action
   constructor: ->
     super
 
-  updateDoc: (id) ->
-    console.log id
+  updateDoc: (file_id, factor_id) ->
+    console.log file_id, factor_id
     new Promise (resolve, reject) =>
       request
-        .get "/api/class/global/#{id}"
+        .get "/api/class/global/#{file_id}/#{factor_id}"
         .end (err, res) ->
           if res.ok
             resolve res.body
@@ -19,7 +19,7 @@ class DocAction extends Flux.Action
             reject err
     .then (res) =>
       console.log res
-      @dispatch(keys.updateDoc, id, res)
+      @dispatch(keys.updateDoc, file_id, factor_id, res)
     .catch (err) ->
       console.error err
 

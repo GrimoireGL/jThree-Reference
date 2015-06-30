@@ -2,7 +2,6 @@ React = require 'react'
 Route = require './route-component'
 Link = require './link-component'
 DocContainerComponent = require './doc-container-component'
-_ = require 'lodash'
 
 class ClassDocComponent extends React.Component
   constructor: (props) ->
@@ -21,8 +20,7 @@ class ClassDocComponent extends React.Component
   componentWillUnmount: ->
     @store.removeChangeListener(@_onChange.bind(@))
 
-  constructNestedList: (dir_tree, traced) ->
-    traced ||= []
+  constructNestedList: (dir_tree) ->
     <div>
       <ul>
         {
@@ -30,22 +28,18 @@ class ClassDocComponent extends React.Component
           if dir_tree.dir?
             for dir, tree of dir_tree.dir
               return_elm.push do =>
-                traced_ = _.clone(traced, true)
-                traced_.push dir
                 <li key={dir}>
                   <span>{dir}</span>
                   {
-                    @constructNestedList(tree, traced_)
+                    @constructNestedList(tree)
                   }
                 </li>
           if dir_tree.file?
-            for file, id of dir_tree.file
+            for file, top of dir_tree.file
               return_elm.push do ->
-                traced_ = _.clone(traced, true)
-                traced_.push file
                 <li key={file}>
                   {
-                    <Link href={"/class/#{traced_.join('/')}"}>{file}</Link>
+                    <Link href={"/class/#{top.path.join('/')}"}>{"(#{top.kindString}) #{top.name}"}</Link>
                   }
                 </li>
           return_elm
