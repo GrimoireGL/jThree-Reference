@@ -1,14 +1,15 @@
 React = require 'react'
+Radium = require 'radium'
 
 class ListFolderComponent extends React.Component
   constructor: (props) ->
     super props
     @state =
-      expanded: false
+      folded: true
 
   toggle_fold: ->
     @setState
-      expanded: !@state.expanded
+      folded: !@state.folded
 
   render: ->
     <div>
@@ -16,14 +17,30 @@ class ListFolderComponent extends React.Component
         return_elm = []
         React.Children.forEach @props.children, (child) =>
           if child.props.type == 'folder'
-            return_elm.push React.cloneElement(child, {onClick: @toggle_fold.bind(@)})
+            return_elm.push do =>
+              <div key='folder' onClick={@toggle_fold.bind(@)} >
+                {
+                  child
+                }
+              </div>
           if child.props.type == 'children'
-            return_elm.push React.cloneElement(child, {style: {display: (if @state.expanded then 'block' else 'none')}})
+            return_elm.push do =>
+              <div key='children' style={styles[if @state.folded then 'folded' else 'expanded']}>
+                {
+                  child
+                }
+              </div>
         return_elm
       }
     </div>
 
+styles =
+  folded:
+    display: 'none'
+  expanded:
+    display: 'block'
+
 ListFolderComponent.contextTypes =
   ctx: React.PropTypes.any
 
-module.exports = ListFolderComponent
+module.exports = Radium ListFolderComponent

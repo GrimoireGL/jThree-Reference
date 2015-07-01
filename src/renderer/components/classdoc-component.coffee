@@ -1,8 +1,7 @@
 React = require 'react'
 Route = require './route-component'
-Link = require './link-component'
 DocContainerComponent = require './doc-container-component'
-ListFolderComponent = require './list-folder-component'
+ListComponent = require './list-component'
 
 class ClassDocComponent extends React.Component
   constructor: (props) ->
@@ -21,41 +20,10 @@ class ClassDocComponent extends React.Component
   componentWillUnmount: ->
     @store.removeChangeListener(@_onChange.bind(@))
 
-  constructNestedList: (dir_tree) ->
-    <ul>
-      {
-        return_elm = []
-        if dir_tree.dir?
-          for dir, tree of dir_tree.dir
-            return_elm.push do =>
-              <li key={dir}>
-              <ListFolderComponent>
-                <span type='folder'>{dir}</span>
-                <div type='children'>
-                  {
-                    @constructNestedList(tree)
-                  }
-                </div>
-              </ListFolderComponent>
-              </li>
-        if dir_tree.file?
-          for file, top of dir_tree.file
-            return_elm.push do ->
-              <li key={file}>
-                {
-                  <Link href={"/class/#{top.path.join('/')}"}>{"(#{top.kindString}) #{top.name}"}</Link>
-                }
-              </li>
-        return_elm
-      }
-    </ul>
-
   render: ->
     <div>
       <div>
-        {
-          @constructNestedList(@state.dir_tree)
-        }
+        <ListComponent dir_tree={@state.dir_tree} />
       </div>
       <div>
         <Route>
