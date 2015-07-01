@@ -22,35 +22,33 @@ class ClassDocComponent extends React.Component
     @store.removeChangeListener(@_onChange.bind(@))
 
   constructNestedList: (dir_tree) ->
-    <div>
-      <ul>
-        {
-          return_elm = []
-          if dir_tree.dir?
-            for dir, tree of dir_tree.dir
-              return_elm.push do =>
-                <li key={dir}>
-                <ListFolderComponent>
-                  <span type='folder'>{dir}</span>
-                  <div type='children'>
-                    {
-                      @constructNestedList(tree)
-                    }
-                  </div>
-                </ListFolderComponent>
-                </li>
-          if dir_tree.file?
-            for file, top of dir_tree.file
-              return_elm.push do ->
-                <li key={file}>
+    <ul>
+      {
+        return_elm = []
+        if dir_tree.dir?
+          for dir, tree of dir_tree.dir
+            return_elm.push do =>
+              <li key={dir}>
+              <ListFolderComponent>
+                <span type='folder'>{dir}</span>
+                <div type='children'>
                   {
-                    <Link href={"/class/#{top.path.join('/')}"}>{"(#{top.kindString}) #{top.name}"}</Link>
+                    @constructNestedList(tree)
                   }
-                </li>
-          return_elm
-        }
-      </ul>
-    </div>
+                </div>
+              </ListFolderComponent>
+              </li>
+        if dir_tree.file?
+          for file, top of dir_tree.file
+            return_elm.push do ->
+              <li key={file}>
+                {
+                  <Link href={"/class/#{top.path.join('/')}"}>{"(#{top.kindString}) #{top.name}"}</Link>
+                }
+              </li>
+        return_elm
+      }
+    </ul>
 
   render: ->
     <div>
