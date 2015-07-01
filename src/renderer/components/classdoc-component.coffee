@@ -2,6 +2,7 @@ React = require 'react'
 Route = require './route-component'
 Link = require './link-component'
 DocContainerComponent = require './doc-container-component'
+ListFolderComponent = require './list-folder-component'
 
 class ClassDocComponent extends React.Component
   constructor: (props) ->
@@ -29,10 +30,14 @@ class ClassDocComponent extends React.Component
             for dir, tree of dir_tree.dir
               return_elm.push do =>
                 <li key={dir}>
-                  <span>{dir}</span>
-                  {
-                    @constructNestedList(tree)
-                  }
+                <ListFolderComponent>
+                  <span type='folder'>{dir}</span>
+                  <div type='children'>
+                    {
+                      @constructNestedList(tree)
+                    }
+                  </div>
+                </ListFolderComponent>
                 </li>
           if dir_tree.file?
             for file, top of dir_tree.file
