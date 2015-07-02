@@ -3,6 +3,7 @@ Radium = require 'radium'
 Link = require './link-component'
 ListFolderComponent = require './list-folder-component'
 ListItemComponent = require './list-item-component'
+CharIconComponent = require './char-icon-component'
 
 class ListComponent extends React.Component
   constructor: (props) ->
@@ -17,7 +18,9 @@ class ListComponent extends React.Component
             return_elm.push do =>
               <li key={dir}>
                 <ListFolderComponent>
-                  <ListItemComponent type='folder'>{dir}</ListItemComponent>
+                  <ListItemComponent type='folder'>
+                    <span style={styles.clickable}>{dir}</span>
+                  </ListItemComponent>
                   <div type='children'>
                     {
                       @constructNestedList(tree)
@@ -30,7 +33,8 @@ class ListComponent extends React.Component
             return_elm.push do ->
               <li key={file}>
                 <ListItemComponent>
-                  <Link href={"/class/#{top.path.join('/')}"}>{"(#{top.kindString}) #{top.name}"}</Link>
+                  <CharIconComponent char={top.kindString[0]} color='333' />
+                  <Link href={"/class/#{top.path.join('/')}"} style={[styles.clickable, styles.link]}>{top.name}</Link>
                 </ListItemComponent>
               </li>
         return_elm
@@ -38,11 +42,22 @@ class ListComponent extends React.Component
     </ul>
 
   render: ->
-    @constructNestedList(@props.dir_tree)
+    <div style={styles.wrapper}>
+      {
+        @constructNestedList(@props.dir_tree)
+      }
+    </div>
 
 styles =
   ul:
     listStyle: 'none'
+    paddingLeft: 20
+  wrapper:
+    width: 400
+  clickable:
+    cursor: 'pointer'
+  link:
+    textDecoration: 'none'
 
 ListComponent.contextTypes =
   ctx: React.PropTypes.any

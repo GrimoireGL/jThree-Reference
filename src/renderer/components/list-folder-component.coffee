@@ -1,5 +1,6 @@
 React = require 'react'
 Radium = require 'radium'
+CharIconComponent = require './char-icon-component'
 
 class ListFolderComponent extends React.Component
   constructor: (props) ->
@@ -20,7 +21,8 @@ class ListFolderComponent extends React.Component
             return_elm.push do =>
               <div key='folder' onClick={@toggle_fold.bind(@)} >
                 {
-                  child
+                  React.cloneElement child,
+                    prepend: <CharIconComponent char={if @state.folded then '+' else '-'} color='333' style={styles.toggle} />
                 }
               </div>
           if child.props.type == 'children'
@@ -37,6 +39,8 @@ class ListFolderComponent extends React.Component
 styles =
   folded:
     display: 'none'
+  toggle:
+    cursor: 'pointer'
   expanded:
     display: 'block'
 

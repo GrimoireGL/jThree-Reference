@@ -1,4 +1,5 @@
 React = require 'react'
+Radium = require 'radium'
 
 class LinkComponent extends React.Component
   constructor: (props) ->
@@ -9,11 +10,11 @@ class LinkComponent extends React.Component
     @context.ctx.routeAction.navigate(@props.href)
 
   render: ->
-    <a href={@props.href} onClick={ @navigate.bind(@) }>
+    <a href={@props.href} onClick={@navigate.bind(@)} style={@props.style}>
       {@props.children}
     </a>
 
 LinkComponent.contextTypes =
   ctx: React.PropTypes.any
 
-module.exports = LinkComponent
+module.exports = Radium LinkComponent

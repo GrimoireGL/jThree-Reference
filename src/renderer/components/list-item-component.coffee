@@ -8,14 +8,33 @@ class ListItemComponent extends React.Component
   render: ->
     <div style={styles.base}>
       {
-        @props.children
+        return_elm = []
+        prepend = []
+        append = []
+        if @props.prepend?
+          prepend = if @props.prepend instanceof Array then @props.prepend else [@props.prepend]
+          prepend = prepend.map (elm, i) ->
+            React.cloneElement elm,
+              key: 'p' + i
+          return_elm = return_elm.concat prepend
+        React.Children.forEach @props.children, (child, i) ->
+          return_elm.push do ->
+            React.cloneElement child,
+              key: i
+        if @props.append?
+          append = if @props.append instanceof Array then @props.append else [@props.append]
+          append = append.map (elm, i) ->
+            React.cloneElement elm,
+              key: 'a' + i
+          return_elm = return_elm.concat append
+        return_elm
       }
     </div>
 
 styles =
   base:
-    height: 20
-    fontSize: 16
+    height: 26
+    fontSize: 14
 
 ListItemComponent.contextTypes =
   ctx: React.PropTypes.any
