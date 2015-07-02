@@ -1,3 +1,17 @@
+@font-face {
+  font-family: 'Roboto';
+  src:url('../assets/Roboto/Roboto-Light.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src:url('../assets/Roboto/Roboto-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
 body {
   margin: 0;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
 }
