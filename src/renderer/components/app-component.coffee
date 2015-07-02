@@ -4,6 +4,7 @@ Link = require './link-component'
 IndexComponent = require './index-component'
 ErrorComponent = require './error-component'
 ClassDocComponent = require './classdoc-component'
+HeaderComponent = require './header-component'
 
 class AppComponent extends React.Component
   constructor: (props) ->
@@ -11,10 +12,7 @@ class AppComponent extends React.Component
 
   render: ->
     <div>
-      <Route addClassName='active'>
-        <li route='index'><Link href='/'>Home</Link></li>
-        <li route='class'><Link href='/class'>ClassReference</Link></li>
-      </Route>
+      <HeaderComponent />
       <Route>
         <IndexComponent route='index' />
         <ClassDocComponent route='class' />
