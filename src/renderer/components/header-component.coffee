@@ -30,6 +30,7 @@ styles =
     backgroundColor: '#444'
     height: 80
     position: 'relative'
+    userSelect: 'none'
 
   head:
     position: 'absolute'
@@ -41,9 +42,11 @@ styles =
     color: '#eee'
     marginRight: 20
     fontSize: 30
+    cursor: 'default'
 
   subtitle:
     color: '#ccc'
+    cursor: 'default'
 
   nav:
     position: 'absolute'

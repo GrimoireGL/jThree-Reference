@@ -33,7 +33,7 @@ class ListComponent extends React.Component
             return_elm.push do =>
               <li key={file}>
                 <ListItemComponent>
-                  <CharIconComponent char={top.kindString[0]} style={@genIconStyle(top.kindString)} />
+                  <CharIconComponent char={top.kindString[0]} style={[@genIconStyle(top.kindString), styles.icon]} />
                   <Link href={"/class/#{top.path.join('/')}"} style={[styles.clickable, styles.link]}>{top.name}</Link>
                 </ListItemComponent>
               </li>
@@ -84,6 +84,11 @@ styles =
 
   link:
     textDecoration: 'none'
+    color: '#333'
+
+  icon:
+    fontWeight: 'normal'
+    cursor: 'default'
 
 ListComponent.contextTypes =
   ctx: React.PropTypes.any

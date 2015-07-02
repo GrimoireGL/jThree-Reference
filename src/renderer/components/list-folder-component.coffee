@@ -42,8 +42,8 @@ styles =
   toggle:
     cursor: 'pointer'
     color: '#fff'
-    backgroundColor: '#777'
-    borderColor: '#777'
+    backgroundColor: '#666'
+    borderColor: '#666'
   expanded:
     display: 'block'
 

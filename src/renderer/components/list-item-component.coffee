@@ -35,6 +35,8 @@ styles =
   base:
     height: 30
     fontSize: 14
+    userSelect: 'none'
+    color: '#333'
 
 ListItemComponent.contextTypes =
   ctx: React.PropTypes.any
