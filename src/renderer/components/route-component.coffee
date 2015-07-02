@@ -1,4 +1,5 @@
 React = require 'react'
+Radium = require 'radium'
 Router = require '../lib/router'
 
 class RouteComponent extends React.Component
@@ -26,7 +27,7 @@ class RouteComponent extends React.Component
   # shouldComponentUpdate: (nextProps, nextState) ->
 
   render: ->
-    <div>
+    <div style={@props.style}>
       {
         @router.route @state.fragment, @props.logined, (route, argu, default_route, fragment, default_fragment) =>
           if default_route? && default_fragment?
@@ -65,4 +66,4 @@ class RouteComponent extends React.Component
 RouteComponent.contextTypes =
   ctx: React.PropTypes.any
 
-module.exports = RouteComponent
+module.exports = Radium RouteComponent

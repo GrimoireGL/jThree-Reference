@@ -33,7 +33,7 @@ class ListItemComponent extends React.Component
 
 styles =
   base:
-    height: 26
+    height: 30
     fontSize: 14
 
 ListItemComponent.contextTypes =

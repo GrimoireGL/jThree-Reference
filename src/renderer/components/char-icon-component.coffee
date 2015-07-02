@@ -6,8 +6,15 @@ class CharIconComponent extends React.Component
     super props
 
   render: ->
-    <span style={[styles.base, @props.style]}>
-      {@props.char}
+    <span style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
+      {
+        if @props.char?
+          <span>{@props.char}</span>
+        else if @props.icomoon?
+          <span className={"icon-#{@props.icomoon}"}></span>
+        else
+          null
+      }
     </span>
 
 styles =
@@ -17,7 +24,7 @@ styles =
     height: 18
     borderWidth: 1
     borderStyle: 'solid'
-    borderColor: '000'
+    borderColor: '#000'
     marginRight: 10
     textAlign: 'center'
 

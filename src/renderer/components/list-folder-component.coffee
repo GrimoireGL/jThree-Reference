@@ -22,7 +22,7 @@ class ListFolderComponent extends React.Component
               <div key='folder' onClick={@toggle_fold.bind(@)} >
                 {
                   React.cloneElement child,
-                    prepend: <CharIconComponent char={if @state.folded then '+' else '-'} color='333' style={styles.toggle} />
+                    prepend: <CharIconComponent icomoon={if @state.folded then 'plus' else 'minus'} style={styles.toggle} />
                 }
               </div>
           if child.props.type == 'children'
@@ -41,6 +41,9 @@ styles =
     display: 'none'
   toggle:
     cursor: 'pointer'
+    color: '#fff'
+    backgroundColor: '#777'
+    borderColor: '#777'
   expanded:
     display: 'block'
 
