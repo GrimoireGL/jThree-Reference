@@ -62,5 +62,5 @@ target.forEach (it) ->
           loadMaps: true
         .pipe gulpif(env_production, gulpif(it.minify, uglify()))
         .pipe rename(it.name)
-        .pipe sourcemaps.write('./')
+        .pipe gulpif(!env_production, sourcemaps.write('./'))
         .pipe gulp.dest(it.dest)
