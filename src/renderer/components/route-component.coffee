@@ -8,7 +8,6 @@ class RouteComponent extends React.Component
 
   _onChange: ->
     @setState @store.get()
-    console.log 'onChange', @store.get()
 
   componentWillMount: ->
     @store = @context.ctx.routeStore

@@ -8,7 +8,6 @@ class DocAction extends Flux.Action
     super
 
   updateDoc: (file_id, factor_id) ->
-    console.log file_id, factor_id
     new Promise (resolve, reject) =>
       request
         .get "/api/class/global/#{file_id}/#{factor_id}"
