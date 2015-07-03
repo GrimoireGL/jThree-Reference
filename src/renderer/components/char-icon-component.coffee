@@ -25,6 +25,7 @@ styles =
     borderWidth: 1
     borderStyle: 'solid'
     borderColor: '#000'
+    marginTop: 4
     marginRight: 10
     textAlign: 'center'
 

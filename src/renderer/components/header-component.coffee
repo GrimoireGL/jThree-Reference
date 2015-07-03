@@ -30,7 +30,7 @@ styles =
     backgroundColor: '#444'
     height: 80
     position: 'relative'
-    userSelect: 'none'
+    WebkitUserSelect: 'none'
 
   head:
     position: 'absolute'

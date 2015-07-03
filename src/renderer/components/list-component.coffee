@@ -20,8 +20,8 @@ class ListComponent extends React.Component
             return_elm.push do =>
               <li key={dir}>
                 <ListFolderComponent folded={folded}>
-                  <ListItemComponent type='folder'>
-                    <span style={styles.clickable}>{dir}</span>
+                  <ListItemComponent type='folder' style={styles.item}>
+                    <span style={[styles.clickable, styles.item_text]}>{dir}</span>
                   </ListItemComponent>
                   <div type='children'>
                     {
@@ -32,11 +32,18 @@ class ListComponent extends React.Component
               </li>
         if dir_tree.file?
           for file, top of dir_tree.file
+            highlight = top.path.every (v, i) =>
+              v == @props.argu.fragment_arr[1..top.path.length][i]
+            highlight_style = {}
+            if highlight
+              highlight_style =
+                backgroundColor: '#666'
+                color: '#fff'
             return_elm.push do =>
               <li key={file}>
-                <ListItemComponent>
+                <ListItemComponent style={styles.item}>
                   <CharIconComponent char={top.kindString[0]} style={[@genIconStyle(top.kindString), styles.icon]} />
-                  <Link href={"/class/#{top.path.join('/')}"} style={[styles.clickable, styles.link]}>{top.name}</Link>
+                  <Link href={"/class/#{top.path.join('/')}"} style={[styles.clickable, styles.link, styles.item_text, highlight_style]}>{top.name}</Link>
                 </ListItemComponent>
               </li>
         return_elm
@@ -90,9 +97,20 @@ styles =
     textDecoration: 'none'
     color: '#333'
 
+  item:
+    display: 'flex'
+    flexDirection: 'row'
+    flexWrap: 'nowrap'
+
   icon:
     fontWeight: 'normal'
     cursor: 'default'
+
+  item_text:
+    paddingTop: 5
+    paddingLeft: 6
+    marginRight: 10
+    flexGrow: '1'
 
 ListComponent.contextTypes =
   ctx: React.PropTypes.any

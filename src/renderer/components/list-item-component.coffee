@@ -6,7 +6,7 @@ class ListItemComponent extends React.Component
     super props
 
   render: ->
-    <div style={styles.base}>
+    <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       {
         return_elm = []
         prepend = []
@@ -35,7 +35,7 @@ styles =
   base:
     height: 30
     fontSize: 14
-    userSelect: 'none'
+    WebkitUserSelect: 'none'
     color: '#333'
 
 ListItemComponent.contextTypes =
