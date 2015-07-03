@@ -21,7 +21,9 @@ class ListComponent extends React.Component
               <li key={dir}>
                 <ListFolderComponent folded={folded}>
                   <ListItemComponent type='folder' style={styles.item}>
-                    <span style={[styles.clickable, styles.item_text]}>{dir}</span>
+                    <span style={styles.item_text}>
+                      <span style={styles.clickable}>{dir}</span>
+                    </span>
                   </ListItemComponent>
                   <div type='children'>
                     {
@@ -34,16 +36,20 @@ class ListComponent extends React.Component
           for file, top of dir_tree.file
             highlight = top.path.every (v, i) =>
               v == @props.argu.fragment_arr[1..top.path.length][i]
-            highlight_style = {}
+            highlight_styles = {}
             if highlight
-              highlight_style =
-                backgroundColor: '#666'
-                color: '#fff'
+              highlight_styles =
+                wrap:
+                  backgroundColor: '#666'
+                content:
+                  color: '#fff'
             return_elm.push do =>
               <li key={file}>
                 <ListItemComponent style={styles.item}>
                   <CharIconComponent char={top.kindString[0]} style={[@genIconStyle(top.kindString), styles.icon]} />
-                  <Link href={"/class/#{top.path.join('/')}"} style={[styles.clickable, styles.link, styles.item_text, highlight_style]}>{top.name}</Link>
+                  <span style={[styles.item_text, highlight_styles.wrap]}>
+                    <Link href={"/class/#{top.path.join('/')}"} style={[styles.clickable, styles.link, highlight_styles.content]}>{top.name}</Link>
+                  </span>
                 </ListItemComponent>
               </li>
         return_elm
