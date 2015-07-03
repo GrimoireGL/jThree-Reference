@@ -65,7 +65,7 @@ class ListComponent extends React.Component
     return style
 
   render: ->
-    <div style={styles.wrapper}>
+    <div style={Array.prototype.concat.apply([], [styles.wrapper, @props.style])}>
       {
         @constructNestedList(@props.dir_tree)
       }
@@ -74,10 +74,12 @@ class ListComponent extends React.Component
 styles =
   ul:
     listStyle: 'none'
-    paddingLeft: 20
+    paddingLeft: 22
 
   wrapper:
-    width: 400
+    borderRightWidth: 1
+    borderRightColor: '#ccc'
+    borderRightStyle: 'solid'
 
   clickable:
     cursor: 'pointer'

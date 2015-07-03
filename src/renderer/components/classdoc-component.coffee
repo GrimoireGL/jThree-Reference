@@ -1,4 +1,5 @@
 React = require 'react'
+Radium = require 'radium'
 Route = require './route-component'
 DocContainerComponent = require './doc-container-component'
 ListComponent = require './list-component'
@@ -21,18 +22,32 @@ class ClassDocComponent extends React.Component
     @store.removeChangeListener(@_onChange.bind(@))
 
   render: ->
-    <div>
-      <div>
+    <div style={styles.base}>
+      <div style={styles.list}>
         <ListComponent dir_tree={@state.dir_tree} />
       </div>
-      <div>
+      <div style={styles.container}>
         <Route>
           <DocContainerComponent doc_data={@state.doc_data} />
         </Route>
       </div>
     </div>
 
+styles =
+  base:
+    paddingTop: 10
+    paddingBottom: 10
+    paddingLeft: 10
+    paddingRight: 10
+    display: 'flex'
+    flexDirection: 'row'
+    flexWrap: 'nowrap'
+  list:
+    width: 350
+  container:
+    flexGrow: '1'
+
 ClassDocComponent.contextTypes =
   ctx: React.PropTypes.any
 
-module.exports = ClassDocComponent
+module.exports = Radium ClassDocComponent
