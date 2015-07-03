@@ -12,7 +12,7 @@
     "lodash": "^3.9.3",
     "material-flux": "^1.2.1",
     "object-assign": "^3.0.0",
-    "radium": "^0.13.2",
+    "radium": "pnlybubbles/radium#2dc0971399a6841cda5c54ae2fdaa9e80d719d8e",
     "react": "^0.13.3",
     "source-map-support": "^0.3.1",
     "superagent": "^1.2.0"
