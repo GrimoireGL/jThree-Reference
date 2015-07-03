@@ -32,6 +32,7 @@ target = [
     dest: ''
     bundleExternal: false
     minify: false
+    detectGlobals: false
   ,
     suffix: 'browser'
     src: 'src/browser.coffee'
@@ -39,6 +40,7 @@ target = [
     dest: 'public/js'
     bundleExternal: true
     minify: true
+    detectGlobals: true
 ]
 
 gulp.task "browserify", ("browserify:#{it.suffix}" for it in target)
@@ -53,6 +55,7 @@ target.forEach (it) ->
           extensions: ['.coffee', '.js']
           debug: true
           transform: ['coffee-reactify']
+          detectGlobals: it.detectGlobals
           bundleExternal: it.bundleExternal
         .pipe buffer()
         .pipe sourcemaps.init
