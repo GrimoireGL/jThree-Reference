@@ -15,9 +15,11 @@ class ListComponent extends React.Component
         return_elm = []
         if dir_tree.dir?
           for dir, tree of dir_tree.dir
+            folded = !tree.path.every (v, i) =>
+              v == @props.argu.fragment_arr[1..tree.path.length][i]
             return_elm.push do =>
               <li key={dir}>
-                <ListFolderComponent>
+                <ListFolderComponent folded={folded}>
                   <ListItemComponent type='folder'>
                     <span style={styles.clickable}>{dir}</span>
                   </ListItemComponent>

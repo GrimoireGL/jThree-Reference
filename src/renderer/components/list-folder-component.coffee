@@ -6,7 +6,7 @@ class ListFolderComponent extends React.Component
   constructor: (props) ->
     super props
     @state =
-      folded: true
+      folded: @props.folded ? true
 
   toggle_fold: ->
     @setState

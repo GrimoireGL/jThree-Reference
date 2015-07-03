@@ -43,6 +43,8 @@ class Router
         argu = {}
         argu.route = r
         argu.route_arr = r.split(':')
+        argu.fragment = fragment
+        argu.fragment_arr = fragment.split('/')
         argu.match = match
         if logined?
           auth = @auth[r]
@@ -55,6 +57,8 @@ class Router
                   argu = {}
                   argu.route = r_
                   argu.route_arr = r_.split(':')
+                  argu.fragment = auth.renavigate
+                  argu.fragment_arr = auth.renavigate.split('/')
                   argu.match = match_
                   return resolve?(r_, argu, r, auth.renavigate, fragment)
               console.warn('\'renavigate\' fragment is not found in routes.')

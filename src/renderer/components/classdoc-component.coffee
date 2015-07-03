@@ -24,7 +24,9 @@ class ClassDocComponent extends React.Component
   render: ->
     <div style={styles.base}>
       <div style={styles.list}>
-        <ListComponent dir_tree={@state.dir_tree} />
+        <Route>
+          <ListComponent dir_tree={@state.dir_tree} />
+        </Route>
       </div>
       <div style={styles.container}>
         <Route>

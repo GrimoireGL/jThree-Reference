@@ -25,12 +25,12 @@ a/b/file2 obj2
       dir: {
         b: {
           file: {
-            file2: obj2
+            class2: obj2
           }
         }
       },
       file: {
-        file1: obj1
+        class1: obj1
       }
     }
   }
@@ -62,6 +62,10 @@ class DirTree
   ###
   arrayToDirTree = (arr, top, def_arr) ->
     res = {}
+    unless def_arr?
+      res.path = []
+    else
+      res.path = def_arr[0..(-(arr.length + 1))]
     if arr.length == 1
       res.file = {}
       top.groups?.forEach (group) ->
