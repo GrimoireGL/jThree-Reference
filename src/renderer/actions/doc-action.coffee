@@ -20,7 +20,7 @@ class DocAction extends Flux.Action
     .then (res) =>
       console.log res
       console.log 'request end', (+new Date()).toString()[-4..-1]
-      @dispatch(keys.updateDoc, file_id, factor_id, res)
+      @dispatch(keys.updateDoc, res)
     .catch (err) ->
       console.error err
 

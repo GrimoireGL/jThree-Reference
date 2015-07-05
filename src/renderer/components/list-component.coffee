@@ -46,7 +46,7 @@ class ListComponent extends React.Component
             return_elm.push do =>
               <li key={file}>
                 <ListItemComponent style={styles.item} update={highlight} name={top.name}>
-                  <CharIconComponent char={top.kindString[0]} style={[@genIconStyle(top.kindString), styles.icon]} />
+                  <CharIconComponent char={top.kindString[0]} style={[@genKindStringStyle(top.kindString), styles.icon]} />
                   <span style={[styles.item_text, highlight_styles.wrap]}>
                     <Link href={"/class/#{top.path.join('/')}"} style={[styles.clickable, styles.link, highlight_styles.content]}>{top.name}</Link>
                   </span>
@@ -56,7 +56,7 @@ class ListComponent extends React.Component
       }
     </ul>
 
-  genIconStyle: (kindString) ->
+  genKindStringStyle: (kindString) ->
     color = '#333333'
 
     switch kindString

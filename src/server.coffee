@@ -21,7 +21,7 @@ initializeState = new InitializeState()
 
 server.get '/api/class/global/:file_id/:factor_id', (req, res) ->
   console.log req.originalUrl
-  res.json docs.getGlobalClassById req.params.file_id, req.params.factor_id
+  res.json docs.getDocDataById req.params.file_id, req.params.factor_id
 
 server.get '*', (req, res) ->
   console.log req.originalUrl

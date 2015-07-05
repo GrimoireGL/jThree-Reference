@@ -1,6 +1,7 @@
 Flux = require 'material-flux'
 keys = require '../keys'
 objectAssign = require 'object-assign'
+merge = require 'lodash.merge'
 
 class DocStore extends Flux.Store
   constructor: (context) ->
@@ -11,10 +12,9 @@ class DocStore extends Flux.Store
     @state = objectAssign(@state, context.initialStates.DocStore)
     @register keys.updateDoc, @updateDoc
 
-  updateDoc: (file_id, factor_id, data) ->
+  updateDoc: (data) ->
     doc_data = @state.doc_data
-    doc_data[file_id.toString()] ||= {}
-    doc_data[file_id.toString()][factor_id.toString()] = data
+    doc_data = merge {}, doc_data, data
     @setState
       doc_data: doc_data
 
