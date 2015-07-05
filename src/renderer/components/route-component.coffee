@@ -97,7 +97,7 @@ class RouteComponent extends React.Component
                 if @props.addStyle?
                   React.cloneElement child,
                     argu: argu
-                    style: @props.addStyle
+                    style: Array.prototype.concat.apply([], [child.props.style, @props.addStyle])
                 else
                   React.cloneElement child,
                     argu: argu
