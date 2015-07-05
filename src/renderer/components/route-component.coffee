@@ -2,6 +2,58 @@ React = require 'react'
 Radium = require 'radium'
 Router = require '../lib/router'
 
+###
+Routing support component
+
+*** Props ***
+@props.addStyle {obj|array} active children's style object or array of it
+@props.style {obj|array} this style object or array of it
+
+*** Usage ***
+
+-- General routing
+Only rendered child component which has @props.route equals to current routing.
+
+Example:
+<Route>
+  <Index route='index' />
+  <About route='about' />
+</Route>
+
+
+-- Only add styles
+If @props.addStyle is provided, all children components are visibled, but child
+component which has @props.route equals to current routing is given @props.style
+specified by @props.addStyle.
+
+Example:
+<Route addStyle={styles.active}>
+  <li route='index'>Index</li>
+  <li route='about'>About</li>
+</Route>
+styles =
+  active:
+    backgroundColor: '#f00'
+
+
+-- Special routing
+If children components has no @props.route, always all components are visible.
+Children components can get routing by @props.argu and construct individual
+routing inside its component. @props.argu is always given in other style of usage.
+
+Summary of @props.argu object:
+@props.argu.match {array} match data from fragment
+@props.argu.route {string} current route
+@props.argu.route_arr {array} current route string splited by ":"
+@props.argu.fragment {string} current url fragment
+@props.argu.fragment_arr {array} current url fragment splited by "/"
+
+Example:
+<Route>
+  <List />
+</Route>
+
+###
 class RouteComponent extends React.Component
   constructor: (props) ->
     super props
@@ -42,15 +94,15 @@ class RouteComponent extends React.Component
                 else
                   match = false
               if match
-                if @props.addClassName?
+                if @props.addStyle?
                   React.cloneElement child,
                     argu: argu
-                    className: @props.addClassName
+                    style: @props.addStyle
                 else
                   React.cloneElement child,
                     argu: argu
               else
-                if @props.addClassName?
+                if @props.addStyle?
                   React.cloneElement child,
                     argu: argu
                 else
