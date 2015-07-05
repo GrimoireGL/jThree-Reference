@@ -7,6 +7,7 @@ class DocContainerComponents extends React.Component
     super props
 
   render: ->
+    # console.log "render DocContainer", (+new Date()).toString()[-4..-1]
     file_id = @props.argu.route_arr[2]?.toString()
     factor_id = @props.argu.route_arr[3]?.toString()
     <div>

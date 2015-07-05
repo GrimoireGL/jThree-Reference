@@ -28,6 +28,7 @@ class RouteComponent extends React.Component
   render: ->
     <div style={@props.style}>
       {
+        console.log 'route', (+new Date()).toString()[-4..-1], @props.children.type?.displayName || @props.children.type?.name || @props.children[0]?.type?.displayName || @props.children[0]?.type?.name
         @router.route @state.fragment, @props.logined, (route, argu, default_route, fragment, default_fragment) =>
           if default_route? && default_fragment?
             @context.ctx.routeAction.navigate(fragment, {replace: true, silent: true})

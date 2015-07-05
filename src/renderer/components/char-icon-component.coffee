@@ -6,6 +6,7 @@ class CharIconComponent extends React.Component
     super props
 
   render: ->
+    # console.log "render CharIcon", (+new Date()).toString()[-4..-1]
     <span style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       {
         if @props.char?

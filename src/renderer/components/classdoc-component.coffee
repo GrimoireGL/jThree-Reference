@@ -22,6 +22,7 @@ class ClassDocComponent extends React.Component
     @store.removeChangeListener(@_onChange.bind(@))
 
   render: ->
+    # console.log "render ClassDoc", (+new Date()).toString()[-4..-1]
     <div style={styles.base}>
       <div style={styles.list}>
         <Route>

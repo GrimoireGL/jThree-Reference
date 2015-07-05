@@ -8,6 +8,7 @@ class DocAction extends Flux.Action
     super
 
   updateDoc: (file_id, factor_id) ->
+    console.log 'request', (+new Date()).toString()[-4..-1]
     new Promise (resolve, reject) =>
       request
         .get "/api/class/global/#{file_id}/#{factor_id}"
@@ -18,6 +19,7 @@ class DocAction extends Flux.Action
             reject err
     .then (res) =>
       console.log res
+      console.log 'request end', (+new Date()).toString()[-4..-1]
       @dispatch(keys.updateDoc, file_id, factor_id, res)
     .catch (err) ->
       console.error err

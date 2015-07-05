@@ -5,7 +5,11 @@ class ListItemComponent extends React.Component
   constructor: (props) ->
     super props
 
+  shouldComponentUpdate: (nextProps, nextState) ->
+    return (@props.update != undefined && nextProps.update != undefined && @props.update != nextProps.update) || @props.update == undefined
+
   render: ->
+    # console.log "render ListItem #{@props.name}", (+new Date()).toString()[-4..-1]
     <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       {
         return_elm = []

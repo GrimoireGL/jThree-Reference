@@ -19,8 +19,8 @@ class ListComponent extends React.Component
               v == @props.argu.fragment_arr[1..tree.path.length][i]
             return_elm.push do =>
               <li key={dir}>
-                <ListFolderComponent folded={folded}>
-                  <ListItemComponent type='folder' style={styles.item}>
+                <ListFolderComponent folded={folded} name={dir}>
+                  <ListItemComponent type='folder' style={styles.item} update={null} name={dir}>
                     <span style={styles.item_text}>
                       <span style={styles.clickable}>{dir}</span>
                     </span>
@@ -45,7 +45,7 @@ class ListComponent extends React.Component
                   color: '#fff'
             return_elm.push do =>
               <li key={file}>
-                <ListItemComponent style={styles.item}>
+                <ListItemComponent style={styles.item} update={highlight} name={top.name}>
                   <CharIconComponent char={top.kindString[0]} style={[@genIconStyle(top.kindString), styles.icon]} />
                   <span style={[styles.item_text, highlight_styles.wrap]}>
                     <Link href={"/class/#{top.path.join('/')}"} style={[styles.clickable, styles.link, highlight_styles.content]}>{top.name}</Link>
@@ -79,7 +79,11 @@ class ListComponent extends React.Component
 
     return style
 
+  shouldComponentUpdate: (nextProps, nextState) ->
+    return JSON.stringify(@props.argu) != JSON.stringify(nextProps.argu)
+
   render: ->
+    # console.log "render List", (+new Date()).toString()[-4..-1]
     <div style={Array.prototype.concat.apply([], [styles.wrapper, @props.style])}>
       {
         @constructNestedList(@props.dir_tree)
