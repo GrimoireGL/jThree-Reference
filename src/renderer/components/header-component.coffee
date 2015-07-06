@@ -14,7 +14,7 @@ class HeaderComponent extends React.Component
         <span style={styles.subtitle}>Reference</span>
       </div>
       <nav style={styles.nav}>
-        <Route addClassName='active' style={styles.li_cont}>
+        <Route addStyle={styles.active} style={styles.li_cont}>
           <li route='index' key='0' style={[styles.li]}>
             <Link href='/' style={styles.link}>Overview</Link>
           </li>
@@ -30,7 +30,7 @@ styles =
     backgroundColor: '#444'
     height: 80
     position: 'relative'
-    userSelect: 'none'
+    WebkitUserSelect: 'none'
 
   head:
     position: 'absolute'
@@ -53,6 +53,8 @@ styles =
     top: '50%'
     transform: 'translateY(-50%)'
     right: 40
+
+  active: {}
 
   li_cont:
     clear: 'both'

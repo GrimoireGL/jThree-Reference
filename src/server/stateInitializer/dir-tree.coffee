@@ -3,7 +3,7 @@
 ###
 
 objectAssign = require 'object-assign'
-_ = require 'lodash'
+merge = require 'lodash.merge'
 
 
 ###
@@ -50,7 +50,7 @@ class DirTree
     dir_tree = {}
     json.children.forEach (child, i) ->
       arr = child.name.replace(/"/g, '').split('/')
-      dir_tree = _.merge({}, dir_tree, arrayToDirTree(arr, child))
+      dir_tree = merge {}, dir_tree, arrayToDirTree(arr, child)
     return dir_tree
 
   ###

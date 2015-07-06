@@ -12,7 +12,12 @@ class ListFolderComponent extends React.Component
     @setState
       folded: !@state.folded
 
+  shouldComponentUpdate: (nextProps, nextState) ->
+    # console.log @props.folded, nextProps.folded, @state.folded, nextState.folded, @props.name
+    return nextState.folded == false || @state.folded != nextState.folded
+
   render: ->
+    # console.log "render ListFolder #{@props.name}", (+new Date()).toString()[-4..-1]
     <div>
       {
         return_elm = []

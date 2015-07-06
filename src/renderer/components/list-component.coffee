@@ -19,9 +19,11 @@ class ListComponent extends React.Component
               v == @props.argu.fragment_arr[1..tree.path.length][i]
             return_elm.push do =>
               <li key={dir}>
-                <ListFolderComponent folded={folded}>
-                  <ListItemComponent type='folder'>
-                    <span style={styles.clickable}>{dir}</span>
+                <ListFolderComponent folded={folded} name={dir}>
+                  <ListItemComponent type='folder' style={styles.item} update={null} name={dir}>
+                    <span style={styles.item_text}>
+                      <span style={styles.clickable}>{dir}</span>
+                    </span>
                   </ListItemComponent>
                   <div type='children'>
                     {
@@ -32,18 +34,29 @@ class ListComponent extends React.Component
               </li>
         if dir_tree.file?
           for file, top of dir_tree.file
+            highlight = top.path.every (v, i) =>
+              v == @props.argu.fragment_arr[1..top.path.length][i]
+            highlight_styles = {}
+            if highlight
+              highlight_styles =
+                wrap:
+                  backgroundColor: '#666'
+                content:
+                  color: '#fff'
             return_elm.push do =>
               <li key={file}>
-                <ListItemComponent>
-                  <CharIconComponent char={top.kindString[0]} style={[@genIconStyle(top.kindString), styles.icon]} />
-                  <Link href={"/class/#{top.path.join('/')}"} style={[styles.clickable, styles.link]}>{top.name}</Link>
+                <ListItemComponent style={styles.item} update={highlight} name={top.name}>
+                  <CharIconComponent char={top.kindString[0]} style={[@genKindStringStyle(top.kindString), styles.icon]} />
+                  <span style={[styles.item_text, highlight_styles.wrap]}>
+                    <Link href={"/class/#{top.path.join('/')}"} style={[styles.clickable, styles.link, highlight_styles.content]}>{top.name}</Link>
+                  </span>
                 </ListItemComponent>
               </li>
         return_elm
       }
     </ul>
 
-  genIconStyle: (kindString) ->
+  genKindStringStyle: (kindString) ->
     color = '#333333'
 
     switch kindString
@@ -66,7 +79,11 @@ class ListComponent extends React.Component
 
     return style
 
+  shouldComponentUpdate: (nextProps, nextState) ->
+    return JSON.stringify(@props.argu) != JSON.stringify(nextProps.argu)
+
   render: ->
+    # console.log "render List", (+new Date()).toString()[-4..-1]
     <div style={Array.prototype.concat.apply([], [styles.wrapper, @props.style])}>
       {
         @constructNestedList(@props.dir_tree)
@@ -90,9 +107,20 @@ styles =
     textDecoration: 'none'
     color: '#333'
 
+  item:
+    display: 'flex'
+    flexDirection: 'row'
+    flexWrap: 'nowrap'
+
   icon:
     fontWeight: 'normal'
     cursor: 'default'
+
+  item_text:
+    paddingTop: 5
+    paddingLeft: 6
+    marginRight: 10
+    flexGrow: '1'
 
 ListComponent.contextTypes =
   ctx: React.PropTypes.any

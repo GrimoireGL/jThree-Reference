@@ -17,8 +17,7 @@ class InitializeState
       file_id = argu.route_arr[2]?.toString()
       factor_id = argu.route_arr[3]?.toString()
       if file_id? && factor_id?
-        initial_doc_data[file_id] ||= {}
-        initial_doc_data[file_id][factor_id] = @docs.getGlobalClassById(file_id, factor_id)
+        initial_doc_data = @docs.getDocDataById file_id, factor_id
     initialState =
       RouteStore:
         fragment: req.originalUrl

@@ -1,21 +1,24 @@
 React = require 'react'
+Radium = require 'radium'
 Route = require './route-component'
 Link = require './link-component'
+DocTitleComponent = require './doc-title-component'
 
 class DocContainerComponents extends React.Component
   constructor: (props) ->
     super props
 
   render: ->
+    # console.log "render DocContainer", (+new Date()).toString()[-4..-1]
     file_id = @props.argu.route_arr[2]?.toString()
     factor_id = @props.argu.route_arr[3]?.toString()
-    <div>
+    <div style={styles.base}>
       {
         if file_id? && factor_id?
           current = @props.doc_data[file_id]?[factor_id]
           if current?
             <div>
-              <h1>{current.name}</h1>
+              <DocTitleComponent current={current} from={@props.doc_data[file_id].from} />
               <div>
                 {
                   if current.groups?
@@ -55,7 +58,14 @@ class DocContainerComponents extends React.Component
       }
     </div>
 
+styles =
+  base:
+    paddingLeft: 40
+    paddingRight: 40
+    paddingTop: 20
+    paddingBottom: 20
+
 DocContainerComponents.contextTypes =
   ctx: React.PropTypes.any
 
-module.exports = DocContainerComponents
+module.exports = Radium DocContainerComponents

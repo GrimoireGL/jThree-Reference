@@ -9,7 +9,6 @@ class RouteAction extends Flux.Action
     if History?.Adapter?
       History.Adapter.bind window, 'statechange' , =>
         state = History.getState()
-        console.log 'statechange', state.hash
         @dispatch(keys.route, state.hash)
     else
       console.warn 'html5-history is not available.' if window?
@@ -17,8 +16,6 @@ class RouteAction extends Flux.Action
   navigate: (path, options) ->
     path = "/#{@clearSlashes path}"
     if History?.Adapter?
-      console.log History.getState().hash
-      console.log 'navigate', path, options
       if options?.replace == true
         History.replaceState null, null, path, undefined, options?.silent
       else
