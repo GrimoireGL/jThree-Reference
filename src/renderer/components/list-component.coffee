@@ -20,7 +20,7 @@ class ListComponent extends React.Component
             return_elm.push do =>
               <li key={dir}>
                 <ListFolderComponent folded={folded} name={dir}>
-                  <ListItemComponent type='folder' style={styles.item} update={null} name={dir}>
+                  <ListItemComponent type='folder' style={styles.item} name={dir}>
                     <span style={styles.item_text}>
                       <span style={styles.clickable}>{dir}</span>
                     </span>
