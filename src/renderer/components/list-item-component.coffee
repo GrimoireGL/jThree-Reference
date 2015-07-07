@@ -40,6 +40,7 @@ styles =
     height: 30
     fontSize: 14
     WebkitUserSelect: 'none'
+    MozUserSelect: 'none'
     color: '#333'
 
 ListItemComponent.contextTypes =

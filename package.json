@@ -13,7 +13,7 @@
     "lodash.merge": "^3.3.2",
     "material-flux": "^1.2.1",
     "object-assign": "^3.0.0",
-    "radium": "pnlybubbles/radium#2dc0971399a6841cda5c54ae2fdaa9e80d719d8e",
+    "radium": "pnlybubbles/radium#64300db7f744eeb7c0b7cacf67eddf3a4bb6735e",
     "react": "^0.13.3",
     "source-map-support": "^0.3.1",
     "superagent": "^1.2.0"
