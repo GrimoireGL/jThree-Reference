@@ -844,7 +844,8 @@ styles = {
     backgroundColor: '#444',
     height: 80,
     position: 'relative',
-    WebkitUserSelect: 'none'
+    WebkitUserSelect: 'none',
+    MozUserSelect: 'none'
   },
   head: {
     position: 'absolute',
@@ -1037,7 +1038,6 @@ ListComponent = (function(superClass) {
               }, React.createElement(ListItemComponent, {
                 "type": 'folder',
                 "style": styles.item,
-                "update": null,
                 "name": dir
               }, React.createElement("span", {
                 "style": styles.item_text
@@ -1321,6 +1321,7 @@ styles = {
     height: 30,
     fontSize: 14,
     WebkitUserSelect: 'none',
+    MozUserSelect: 'none',
     color: '#333'
   }
 };
