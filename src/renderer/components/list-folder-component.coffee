@@ -18,7 +18,7 @@ class ListFolderComponent extends React.Component
 
   render: ->
     # console.log "render ListFolder #{@props.name}", (+new Date()).toString()[-4..-1]
-    <div>
+    <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       {
         return_elm = []
         React.Children.forEach @props.children, (child) =>
@@ -42,6 +42,7 @@ class ListFolderComponent extends React.Component
     </div>
 
 styles =
+  base: {}
   folded:
     display: 'none'
   toggle:
