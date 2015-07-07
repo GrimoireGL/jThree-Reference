@@ -31,6 +31,7 @@ styles =
     height: 80
     position: 'relative'
     WebkitUserSelect: 'none'
+    MozUserSelect: 'none'
 
   head:
     position: 'absolute'
