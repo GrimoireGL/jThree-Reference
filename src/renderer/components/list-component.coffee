@@ -10,7 +10,7 @@ class ListComponent extends React.Component
     super props
 
   constructNestedList: (dir_tree) ->
-    <ul style={styles.ul}>
+    <ul style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       {
         return_elm = []
         if dir_tree.dir?
@@ -91,7 +91,7 @@ class ListComponent extends React.Component
     </div>
 
 styles =
-  ul:
+  base:
     listStyle: 'none'
     paddingLeft: 22
 

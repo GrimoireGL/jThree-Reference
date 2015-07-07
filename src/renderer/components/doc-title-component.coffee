@@ -27,7 +27,7 @@ class DocTitleComponent extends React.Component
       borderColor: color
 
   render: ->
-    <div style={styles.base}>
+    <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       <div style={styles.title_wrap}>
         <div style={[styles.kind_string, @genKindStringStyle(@props.current.kindString)]}>{@props.current.kindString}</div>
         <div style={styles.title}>{@props.current.name}</div>
@@ -36,9 +36,12 @@ class DocTitleComponent extends React.Component
     </div>
 
 styles =
-  base: {}
+  base:
+    marginBottom: 40
+
   title_wrap:
     overflow: 'hidden'
+
   kind_string:
     fontSize: 18
     borderStyle: 'solid'
@@ -49,6 +52,7 @@ styles =
     paddingRight: 12
     marginTop: 3
     float: 'left'
+
   title:
     fontSize: 35
     paddingLeft: 12
@@ -57,6 +61,7 @@ styles =
     color: '#000'
     float: 'left'
     fontWeight: 'bold'
+
   from:
     marginTop: 10
     fontSize: 15

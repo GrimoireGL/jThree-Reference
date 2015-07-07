@@ -3,6 +3,8 @@ Radium = require 'radium'
 Route = require './route-component'
 Link = require './link-component'
 DocTitleComponent = require './doc-title-component'
+DocDescriptionComponent = require './doc-description-component'
+DocItemComponent = require './doc-item-component'
 
 class DocContainerComponents extends React.Component
   constructor: (props) ->
@@ -12,35 +14,19 @@ class DocContainerComponents extends React.Component
     # console.log "render DocContainer", (+new Date()).toString()[-4..-1]
     file_id = @props.argu.route_arr[2]?.toString()
     factor_id = @props.argu.route_arr[3]?.toString()
-    <div style={styles.base}>
+    <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       {
         if file_id? && factor_id?
           current = @props.doc_data[file_id]?[factor_id]
           if current?
             <div>
               <DocTitleComponent current={current} from={@props.doc_data[file_id].from} />
+              <DocDescriptionComponent current={current} />
               <div>
                 {
                   if current.groups?
                     for group in current.groups
-                      <div key={group.kind}>
-                        <h2>{group.title}</h2>
-                        <div>
-                          {
-                            for id in group.children
-                              child = null
-                              for c in current.children
-                                if c.id == id
-                                  child = c
-                              if child?
-                                <div key={child.id}>
-                                  <h3>{child.name}</h3>
-                                </div>
-                              else
-                                null
-                          }
-                        </div>
-                      </div>
+                      <DocItemComponent key={group.kind} group={group} current={current} />
                   else
                     null
                 }

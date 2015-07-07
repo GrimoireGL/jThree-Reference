@@ -8,7 +8,7 @@ class HeaderComponent extends React.Component
     super props
 
   render: ->
-    <div style={styles.header}>
+    <div style={styles.base}>
       <div style={styles.head}>
         <span style={styles.title}>jThree</span>
         <span style={styles.subtitle}>Reference</span>
@@ -26,7 +26,7 @@ class HeaderComponent extends React.Component
     </div>
 
 styles =
-  header:
+  base:
     backgroundColor: '#444'
     height: 80
     position: 'relative'

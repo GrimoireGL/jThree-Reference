@@ -23,7 +23,7 @@ class ClassDocComponent extends React.Component
 
   render: ->
     # console.log "render ClassDoc", (+new Date()).toString()[-4..-1]
-    <div style={styles.base}>
+    <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       <div style={styles.list}>
         <Route>
           <ListComponent dir_tree={@state.dir_tree} />
@@ -47,6 +47,7 @@ styles =
     flexWrap: 'nowrap'
   list:
     width: 350
+    minWidth: 350
   container:
     flexGrow: '1'
 
