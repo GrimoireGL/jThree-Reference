@@ -17,6 +17,8 @@ InitializeState = require('./server/initializeState');
 
 Docs = require('./server/docs');
 
+console.log("environment: " + "production");
+
 server = express();
 
 server.use('/static', express["static"]('public'));
@@ -27,7 +29,11 @@ server.get('/favicon.ico', function(req, res) {});
 
 docs = new Docs();
 
-initializeState = new InitializeState();
+initializeState = new InitializeState(docs);
+
+docs.getJsonScheduler(3 * 60 * 60, function() {
+  return initializeState.gen();
+});
 
 server.get('/api/class/global/:file_id/:factor_id', function(req, res) {
   console.log(req.originalUrl);
@@ -1584,18 +1590,24 @@ objectAssign = require('object-assign');
 
 Router = (function() {
   function Router(root, routes) {
-    this.setRoot(root);
-    if (routes != null) {
-      this.routes = routes;
-    }
+    root = '/';
+    this.routes = {};
     this.auth = {};
+    this.setRoot(root);
+    this.setRoute(routes);
   }
 
   Router.prototype.setRoot = function(root) {
     return this.root = (root != null) && root !== '/' ? '/' + this.clearSlashes(root) + '/' : '/';
   };
 
-  Router.prototype.setRoute = function(path, route) {
+  Router.prototype.setRoute = function(routes) {
+    if (routes != null) {
+      return this.routes = routes;
+    }
+  };
+
+  Router.prototype.addRoute = function(path, route) {
     var routes;
     if (route == null) {
       routes = path;
@@ -1785,13 +1797,17 @@ module.exports = RouteStore;
 /*
 @providesModule Docs
  */
-var Docs, clone, config, fs;
+var Docs, Promise, clone, config, fs, request;
 
 fs = require('fs');
 
 config = require('./stateInitializer/initializeStateConfig');
 
 clone = require('lodash.clone');
+
+request = require('request');
+
+Promise = require('bluebird');
 
 
 /*
@@ -1802,8 +1818,47 @@ Convert TypeDoc json to Docs object
 
 Docs = (function() {
   function Docs(path) {
-    this.json = JSON.parse(fs.readFileSync(path || config.typedoc.path_to_json));
+    this.json = {};
   }
+
+  Docs.prototype.getJsonScheduler = function(interval, cb) {
+    if ("production" === 'production') {
+      this.getDocsJson(cb);
+    } else if ("production" === 'development') {
+      this.json = JSON.parse(fs.readFileSync(config.typedoc.path_to_json));
+      cb();
+    }
+    console.log('got json');
+    return setTimeout((function(_this) {
+      return function() {
+        return _this.getJsonScheduler(interval, cb);
+      };
+    })(this), interval * 1000);
+  };
+
+  Docs.prototype.getDocsJson = function(cb) {
+    var options;
+    options = {
+      url: 'https://raw.githubusercontent.com/jThreeJS/jThree/gh-pages/docs/develop.json',
+      json: true
+    };
+    return new Promise(function(resolve, reject) {
+      return request.get(options, function(error, response, body) {
+        if (!error && response.statusCode === 200) {
+          return resolve(body);
+        } else {
+          return reject(error);
+        }
+      });
+    }).then((function(_this) {
+      return function(res) {
+        _this.json = res;
+        return cb();
+      };
+    })(this))["catch"](function(err) {
+      return console.log("get error: " + err);
+    });
+  };
 
 
   /*
@@ -1886,7 +1941,7 @@ module.exports = Docs;
 
 
 
-},{"./stateInitializer/initializeStateConfig":29,"fs":undefined,"lodash.clone":undefined}],27:[function(require,module,exports){
+},{"./stateInitializer/initializeStateConfig":29,"bluebird":undefined,"fs":undefined,"lodash.clone":undefined,"request":undefined}],27:[function(require,module,exports){
 var DirTree, Docs, InitializeState, Router, RoutesGen, config;
 
 RoutesGen = require('./stateInitializer/routes-gen');
@@ -1900,12 +1955,18 @@ Docs = require('./docs');
 Router = require('../renderer/lib/router');
 
 InitializeState = (function() {
-  function InitializeState() {
-    this.docs = new Docs();
-    this.routes = new RoutesGen(this.docs.json).routes;
-    this.dir_tree = new DirTree(this.docs.json).dir_tree;
-    this.router = new Router(config.router.root, this.routes);
+  function InitializeState(docs) {
+    this.docs = docs;
+    this.routeGen = new RoutesGen();
+    this.dirTree = new DirTree();
+    this.router = new Router(config.router.root, this.routeGen.routes);
   }
+
+  InitializeState.prototype.gen = function() {
+    this.routeGen.gen(this.docs.json);
+    this.dirTree.gen(this.docs.json);
+    return this.router.setRoute(this.routeGen.routes);
+  };
 
   InitializeState.prototype.initialize = function(req) {
     var initialState, initial_doc_data;
@@ -1924,10 +1985,10 @@ InitializeState = (function() {
       RouteStore: {
         fragment: req.originalUrl,
         root: config.router.root,
-        routes: this.routes
+        routes: this.router.routes
       },
       DocStore: {
-        dir_tree: this.dir_tree,
+        dir_tree: this.dirTree.dir_tree,
         doc_data: initial_doc_data
       }
     };
@@ -1989,9 +2050,19 @@ DirTree = (function() {
   var arrayToDirTree, constructDirTree;
 
   function DirTree(json) {
-    this.json = json;
-    this.dir_tree = constructDirTree(this.json);
+    this.dir_tree = constructDirTree(json);
   }
+
+
+  /*
+  construct tree formed object from docs json
+  
+  @api public
+   */
+
+  DirTree.prototype.gen = function(json) {
+    return this.dir_tree = constructDirTree(json);
+  };
 
 
   /*
@@ -2001,13 +2072,17 @@ DirTree = (function() {
    */
 
   constructDirTree = function(json) {
-    var dir_tree;
+    var dir_tree, ref;
     dir_tree = {};
-    json.children.forEach(function(child, i) {
-      var arr;
-      arr = child.name.replace(/"/g, '').split('/');
-      return dir_tree = merge({}, dir_tree, arrayToDirTree(arr, child));
-    });
+    if (json != null) {
+      if ((ref = json.children) != null) {
+        ref.forEach(function(child, i) {
+          var arr;
+          arr = child.name.replace(/"/g, '').split('/');
+          return dir_tree = merge({}, dir_tree, arrayToDirTree(arr, child));
+        });
+      }
+    }
     return dir_tree;
   };
 
@@ -2082,53 +2157,57 @@ var RoutesGen, objectAssign;
 objectAssign = require('object-assign');
 
 RoutesGen = (function() {
+  var constructClassRoutes, constructErrorRoutes;
+
   function RoutesGen(json) {
-    this.json = json;
     this.routes = {};
-    this.constructRoutes();
+    this._constructRoutes(json);
   }
 
-  RoutesGen.prototype.updateJson = function(json) {
-    this.json = json;
-    return this.constructRoutes();
+  RoutesGen.prototype.gen = function(json) {
+    return this._constructRoutes(json);
   };
 
-  RoutesGen.prototype.constructRoutes = function() {
+  RoutesGen.prototype._constructRoutes = function(json) {
     this.routes = {};
-    this.routes = objectAssign(this.routes, this.constructClassRoutes());
-    return this.routes = objectAssign(this.routes, this.constructErrorRoutes());
+    this.routes = objectAssign(this.routes, constructClassRoutes(json));
+    return this.routes = objectAssign(this.routes, constructErrorRoutes());
   };
 
-  RoutesGen.prototype.constructClassRoutes = function() {
-    var prefix, routes;
+  constructClassRoutes = function(json) {
+    var prefix, ref, routes;
     prefix = 'class';
     routes = {};
-    this.json.children.forEach(function(child, i) {
-      var dir, dir_arr;
-      dir = child.name.replace(/\"/g, '');
-      dir_arr = dir.split('/');
-      return dir_arr.forEach(function(d, j) {
-        var ref;
-        if (j !== dir_arr.length - 1) {
-          return routes[prefix + "/" + (dir_arr.slice(0, +j + 1 || 9e9).join('/'))] = prefix + ":global";
-        } else {
-          return (ref = child.groups) != null ? ref.forEach(function(group) {
-            return group.children.forEach(function(id) {
-              return child.children.forEach(function(gchild) {
-                if (gchild.id === id) {
-                  return routes["" + prefix + (dir_arr.length === 1 ? '' : '/' + dir_arr.slice(0, +(j - 1) + 1 || 9e9).join('/')) + "/" + gchild.name] = prefix + ":global:" + child.id + ":" + gchild.id;
-                }
-              });
-            });
-          }) : void 0;
-        }
-      });
-    });
+    if (json != null) {
+      if ((ref = json.children) != null) {
+        ref.forEach(function(child, i) {
+          var dir, dir_arr;
+          dir = child.name.replace(/\"/g, '');
+          dir_arr = dir.split('/');
+          return dir_arr.forEach(function(d, j) {
+            var ref1;
+            if (j !== dir_arr.length - 1) {
+              return routes[prefix + "/" + (dir_arr.slice(0, +j + 1 || 9e9).join('/'))] = prefix + ":global";
+            } else {
+              return (ref1 = child.groups) != null ? ref1.forEach(function(group) {
+                return group.children.forEach(function(id) {
+                  return child.children.forEach(function(gchild) {
+                    if (gchild.id === id) {
+                      return routes["" + prefix + (dir_arr.length === 1 ? '' : '/' + dir_arr.slice(0, +(j - 1) + 1 || 9e9).join('/')) + "/" + gchild.name] = prefix + ":global:" + child.id + ":" + gchild.id;
+                    }
+                  });
+                });
+              }) : void 0;
+            }
+          });
+        });
+      }
+    }
     routes["" + prefix] = "" + prefix;
     return routes;
   };
 
-  RoutesGen.prototype.constructErrorRoutes = function() {
+  constructErrorRoutes = function() {
     var routes;
     routes = {
       '.*': 'error'
