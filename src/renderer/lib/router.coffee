@@ -2,14 +2,19 @@ objectAssign = require 'object-assign'
 
 class Router
   constructor: (root, routes) ->
-    @setRoot(root)
-    @routes = routes if routes?
+    root = '/'
+    @routes = {}
     @auth = {}
+    @setRoot root
+    @setRoute routes
 
   setRoot: (root) ->
     @root = if root? && root != '/' then '/' + @clearSlashes(root) + '/' else '/'
 
-  setRoute: (path, route) ->
+  setRoute: (routes) ->
+    @routes = routes if routes?
+
+  addRoute: (path, route) ->
     unless route?
       routes = path
     else

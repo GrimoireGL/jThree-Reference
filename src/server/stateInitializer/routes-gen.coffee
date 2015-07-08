@@ -2,23 +2,21 @@ objectAssign = require 'object-assign'
 
 class RoutesGen
   constructor: (json) ->
-    @json = json
     @routes = {}
-    @constructRoutes()
+    @_constructRoutes json
 
-  updateJson: (json) ->
-    @json = json
-    @constructRoutes()
+  gen: (json) ->
+    @_constructRoutes json
 
-  constructRoutes: ->
+  _constructRoutes: (json) ->
     @routes = {}
-    @routes = objectAssign(@routes, @constructClassRoutes())
-    @routes = objectAssign(@routes, @constructErrorRoutes())
+    @routes = objectAssign(@routes, constructClassRoutes(json))
+    @routes = objectAssign(@routes, constructErrorRoutes())
 
-  constructClassRoutes: ->
+  constructClassRoutes = (json) ->
     prefix = 'class'
     routes = {}
-    @json.children.forEach (child, i) ->
+    json?.children?.forEach (child, i) ->
       dir = child.name.replace(/\"/g, '')
       dir_arr = dir.split('/')
       dir_arr.forEach (d, j) ->
@@ -33,7 +31,7 @@ class RoutesGen
     routes["#{prefix}"] = "#{prefix}"
     return routes
 
-  constructErrorRoutes: ->
+  constructErrorRoutes = ->
     routes = {
       '.*' : 'error'
     }
