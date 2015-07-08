@@ -8,6 +8,8 @@ Root = require './renderer/components/root-component'
 InitializeState = require './server/initializeState'
 Docs = require './server/docs'
 
+console.log "environment: #{process.env.NODE_ENV}"
+
 server = express()
 
 server.use '/static', express.static('public')
@@ -17,7 +19,9 @@ template = Handlebars.compile fs.readFileSync("#{fs.realpathSync('./')}/view/ind
 server.get '/favicon.ico', (req, res) ->
 
 docs = new Docs()
-initializeState = new InitializeState()
+initializeState = new InitializeState(docs)
+docs.getJsonScheduler 3 * 60 * 60, ->
+  initializeState.gen()
 
 server.get '/api/class/global/:file_id/:factor_id', (req, res) ->
   console.log req.originalUrl

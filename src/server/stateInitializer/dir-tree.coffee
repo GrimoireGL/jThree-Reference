@@ -38,8 +38,15 @@ a/b/file2 obj2
 ###
 class DirTree
   constructor: (json) ->
-    @json = json
-    @dir_tree = constructDirTree(@json)
+    @dir_tree = constructDirTree(json)
+
+  ###
+  construct tree formed object from docs json
+
+  @api public
+  ###
+  gen: (json) ->
+    @dir_tree = constructDirTree(json)
 
   ###
   construct tree formed object from docs json
@@ -48,7 +55,7 @@ class DirTree
   ###
   constructDirTree = (json) ->
     dir_tree = {}
-    json.children.forEach (child, i) ->
+    json?.children?.forEach (child, i) ->
       arr = child.name.replace(/"/g, '').split('/')
       dir_tree = merge {}, dir_tree, arrayToDirTree(arr, child)
     return dir_tree

@@ -8,6 +8,7 @@ gutil = require 'gulp-util'
 plumber = require 'gulp-plumber'
 rename = require 'gulp-rename'
 gulpif = require 'gulp-if'
+envify = require 'envify/custom'
 
 others = [
 ]
@@ -57,6 +58,9 @@ target.forEach (it) ->
           transform: ['coffee-reactify']
           detectGlobals: it.detectGlobals
           bundleExternal: it.bundleExternal
+          setup: (b) ->
+            b.transform envify
+              NODE_ENV: if env_production then 'production' else 'development'
         .pipe buffer()
         .pipe sourcemaps.init
           loadMaps: true

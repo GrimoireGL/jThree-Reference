@@ -5,7 +5,8 @@
 fs = require 'fs'
 config = require './stateInitializer/initializeStateConfig'
 clone = require 'lodash.clone'
-
+request = require 'request'
+Promise = require 'bluebird'
 
 ###
 Convert TypeDoc json to Docs object
@@ -14,7 +15,34 @@ Convert TypeDoc json to Docs object
 ###
 class Docs
   constructor: (path)->
-    @json = JSON.parse(fs.readFileSync(path || config.typedoc.path_to_json))
+    @json = {}
+
+  getJsonScheduler: (interval, cb) ->
+    if process.env.NODE_ENV == 'production'
+      @getDocsJson cb
+    else if process.env.NODE_ENV == 'development'
+      @json = JSON.parse(fs.readFileSync(config.typedoc.path_to_json))
+      cb()
+    console.log 'got json'
+    setTimeout =>
+      @getJsonScheduler interval, cb
+    , interval * 1000
+
+  getDocsJson: (cb) ->
+    options =
+      url: 'https://raw.githubusercontent.com/jThreeJS/jThree/gh-pages/docs/develop.json'
+      json: true
+    new Promise (resolve, reject) ->
+      request.get options, (error, response, body) ->
+        if !error && response.statusCode == 200
+          resolve body
+        else
+          reject error
+    .then (res) =>
+      @json = res
+      cb()
+    .catch (err) ->
+      console.log "get error: #{err}"
 
   ###
   get global class typedoc json as object

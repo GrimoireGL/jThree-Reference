@@ -5,11 +5,16 @@ Docs = require './docs'
 Router = require '../renderer/lib/router'
 
 class InitializeState
-  constructor: ->
-    @docs = new Docs()
-    @routes = new RoutesGen(@docs.json).routes
-    @dir_tree = new DirTree(@docs.json).dir_tree
-    @router = new Router(config.router.root, @routes)
+  constructor: (docs) ->
+    @docs = docs
+    @routeGen = new RoutesGen()
+    @dirTree = new DirTree()
+    @router = new Router(config.router.root, @routeGen.routes)
+
+  gen: ->
+    @routeGen.gen @docs.json
+    @dirTree.gen @docs.json
+    @router.setRoute @routeGen.routes
 
   initialize: (req) ->
     initial_doc_data = {}
@@ -22,9 +27,9 @@ class InitializeState
       RouteStore:
         fragment: req.originalUrl
         root: config.router.root
-        routes: @routes
+        routes: @router.routes
       DocStore:
-        dir_tree: @dir_tree
+        dir_tree: @dirTree.dir_tree
         doc_data: initial_doc_data
     return initialState
 
