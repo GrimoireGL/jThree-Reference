@@ -75,14 +75,11 @@ class DirTree
       res.path = def_arr[0..(-(arr.length + 1))]
     if arr.length == 1
       res.file = {}
-      top.groups?.forEach (group) ->
-        group.children.forEach (id) ->
-          top.children.forEach (gchild) ->
-            if gchild.id == id
-              res.file[gchild.name] =
-                name: gchild.name
-                kindString: gchild.kindString
-                path: (def_arr ? arr)[0..-2].concat [gchild.name]
+      top?.children?.forEach (gchild) ->
+        res.file[gchild.name] =
+          name: gchild.name
+          kindString: gchild.kindString
+          path: (def_arr ? arr)[0..-2].concat [gchild.name]
     else
       res.dir = {}
       res.dir[arr[0]] = arrayToDirTree(arr[1..-1], top, def_arr ? arr)
