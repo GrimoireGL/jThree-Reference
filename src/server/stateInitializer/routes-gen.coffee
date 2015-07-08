@@ -23,7 +23,7 @@ class RoutesGen
         if j != dir_arr.length - 1
           routes["#{prefix}/#{dir_arr[0..j].join('/')}"] = "#{prefix}:global"
         else
-          child?.children?.forEach (gchild) ->
+          child.children?.forEach (gchild) ->
             routes["#{prefix}#{if dir_arr.length == 1 then '' else '/' + dir_arr[0..(j - 1)].join('/')}/#{gchild.name}"] = "#{prefix}:global:#{child.id}:#{gchild.id}"
     routes["#{prefix}"] = "#{prefix}"
     return routes

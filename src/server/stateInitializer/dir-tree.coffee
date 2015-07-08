@@ -75,7 +75,7 @@ class DirTree
       res.path = def_arr[0..(-(arr.length + 1))]
     if arr.length == 1
       res.file = {}
-      top?.children?.forEach (gchild) ->
+      top.children?.forEach (gchild) ->
         res.file[gchild.name] =
           name: gchild.name
           kindString: gchild.kindString
