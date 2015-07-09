@@ -11,26 +11,37 @@ class DocSignaturesComponent extends React.Component
       {
         elm = []
         if c.signatures?
-          elm.push <span>{c.signatures[0].name}</span>
+          elm.push <span style={styles.emphasis}>{c.signatures[0].name}</span>
           elm.push <span>(</span>
           c.signatures[0].parameters?.forEach (prm, i) ->
             elm.push <span>{prm.name}</span>
             elm.push <span>: </span>
-            elm.push <span>{prm.type.name}</span>
+            elm.push <span style={[styles.emphasis, styles.oblique]}>{prm.type.name}</span>
             if prm.type.isArray
               elm.push <span>[]</span>
+            if prm.type.typeArguments?
+              elm.push <span>{'<'}</span>
+              prm.type.typeArguments.forEach (targ, i) ->
+                elm.push <span style={[styles.emphasis, styles.oblique]}>{targ.name}</span>
+                if i != prm.type.typeArguments.length - 1
+                  elm.push <span>, </span>
+              elm.push <span>{'>'}</span>
             if i != c.signatures[0].parameters.length - 1
               elm.push <span>, </span>
           elm.push <span>)</span>
           elm.push <span>: </span>
-          elm.push <span>{c.signatures[0].type.name}</span>
+          elm.push <span style={[styles.emphasis, styles.oblique]}>{c.signatures[0].type.name}</span>
         else if c.type?
-          elm.push <span>{c.name}</span>
+          elm.push <span style={styles.emphasis}>{c.name}</span>
           elm.push <span>: </span>
-          elm.push <span>{c.type.name}</span>
+          elm.push <span style={[styles.emphasis, styles.oblique]}>{c.type.name}</span>
+          console.log c.type.typeArguments
           if c.type.typeArguments?
             elm.push <span>{'<'}</span>
-            elm.push <span>{c.type.typeArguments[0].name}</span>
+            c.type.typeArguments.forEach (targ, i) ->
+              elm.push <span style={[styles.emphasis, styles.oblique]}>{targ.name}</span>
+              if i != c.type.typeArguments.length - 1
+                elm.push <span>, </span>
             elm.push <span>{'>'}</span>
         else
           dstyle = {}
@@ -47,9 +58,9 @@ class DocSignaturesComponent extends React.Component
             elm.push do ->
               <div style={dstyle.get_signature}>
                 <span>get </span>
-                <span>{c.name}</span>
+                <span style={styles.emphasis}>{c.name}</span>
                 <span>(): </span>
-                <span>{c.getSignature[0].type.name}</span>
+                <span style={[styles.emphasis, styles.oblique]}>{c.getSignature[0].type.name}</span>
                 {
                   if c.getSignature[0].type.isArray
                     <span>[]</span>
@@ -59,20 +70,20 @@ class DocSignaturesComponent extends React.Component
             elm.push do ->
               <div style={dstyle.set_signature}>
                 <span>set </span>
-                <span>{c.name}</span>
+                <span style={styles.emphasis}>{c.name}</span>
                 <span>(</span>
                 {
                   prm_elm = []
                   c.setSignature[0].parameters.forEach (prm, i) ->
                     prm_elm.push <span>{prm.name}</span>
                     prm_elm.push <span>: </span>
-                    prm_elm.push <span>{prm.type.name}</span>
+                    prm_elm.push <span style={[styles.emphasis, styles.oblique]}>{prm.type.name}</span>
                     if i != c.setSignature[0].parameters.length - 1
                       prm_elm.push <span>, </span>
                   prm_elm
                 }
                 <span>): </span>
-                <span>{c.getSignature[0].type.name}</span>
+                <span style={[styles.emphasis, styles.oblique]}>{c.getSignature[0].type.name}</span>
                 {
                   if c.getSignature[0].type.isArray
                     <span>[]</span>
@@ -85,13 +96,19 @@ class DocSignaturesComponent extends React.Component
 styles =
   base:
     backgroundColor: '#333'
-    color: '#ddd'
+    color: '#999'
     paddingTop: 14
     paddingBottom: 13
     paddingLeft: 50
     paddingRight: 50
     marginRight: -50
     marginLeft: -50
+
+  emphasis:
+    color: '#eee'
+
+  oblique:
+    fontStyle: 'italic'
 
   code:
     fontFamily: 'Menlo, Monaco, Consolas, "Courier New", monospace'
