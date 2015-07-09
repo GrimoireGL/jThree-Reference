@@ -11,11 +11,14 @@ class DocDetailContainerComponent extends React.Component
       @context.ctx.routeAction.navigate(document.location.pathname.match(/^(.+)\/[^\/]+$/)[1])
 
   updateWrapperWidth: ->
-    @setState
-      wrapperWidth: React.findDOMNode(@refs.docDetailBase).clientWidth
+    if @props.argu.route_arr[1]?.toString() == 'local'
+      @setState
+        wrapperWidth: React.findDOMNode(@refs.docDetailBase).clientWidth
+
+  componentDidUpdate: ->
+    @updateWrapperWidth()
 
   componentDidMount: ->
-    @updateWrapperWidth()
     window.addEventListener 'resize', @updateWrapperWidth.bind(@)
 
   componentWillUnmount: ->
