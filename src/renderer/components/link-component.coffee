@@ -25,10 +25,8 @@ class LinkComponent extends React.Component
 
   navigate: (e) ->
     e.preventDefault()
-    href = @props.href
-    if href[0] != '/'
-      href = "#{document.location.pathname}/#{href}"
-    @context.ctx.routeAction.navigate(href)
+    e.stopPropagation()
+    @context.ctx.routeAction.navigate(@props.href)
 
   render: ->
     <a href={@props.href} onClick={@navigate.bind(@)} style={@props.style}>
