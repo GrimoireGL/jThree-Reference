@@ -7,9 +7,6 @@ class DocDetailTitleComponent extends React.Component
   constructor: (props) ->
     super props
 
-  close: ->
-    @context.ctx.routeAction.navigate(document.location.pathname.match(/^(.+)\/[^\/]+$/)[1])
-
   genKindStringStyle: (kindString) ->
     color = '#333333'
 
@@ -35,7 +32,7 @@ class DocDetailTitleComponent extends React.Component
       <div style={styles.title_wrap}>
         <div style={[styles.kind_string, @genKindStringStyle(@props.current.kindString)]}>{@props.current.kindString}</div>
         <div style={[styles.title]}>
-          <span style={styles.title_from} onClick={@close.bind(@)}>{@props.from.name}</span>.<span>{@props.current.name}</span>
+          <span>.</span><span>{@props.current.name}</span>
         </div>
       </div>
       <DocSignaturesComponent style={styles.signatures} current={@props.current} />
