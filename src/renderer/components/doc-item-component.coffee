@@ -7,9 +7,19 @@ class DocItemComponent extends React.Component
     super props
 
   render: ->
-    <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
-      <div style={styles.subtitle}>{@props.group.title}</div>
-      <DocTableComponent group={@props.group} current={@props.current} style={styles.content} />
+    dstyle = {}
+    if @props.collapsed
+      dstyle =
+        base:
+          marginBottom: 30
+        subtitle:
+          marginLeft: 0
+          fontSize: 15
+        content:
+          marginTop: 8
+    <div style={Array.prototype.concat.apply([], [styles.base, @props.style, dstyle.base])}>
+      <div style={[styles.subtitle, dstyle.subtitle]}>{@props.group.title}</div>
+      <DocTableComponent group={@props.group} current={@props.current} style={[styles.content, dstyle.content]} collapsed={@props.collapsed} />
     </div>
 
 styles =

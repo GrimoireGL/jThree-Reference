@@ -27,12 +27,41 @@ class DocTitleComponent extends React.Component
       borderColor: color
 
   render: ->
-    <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
+    dstyle = {}
+    if @props.collapsed
+      dstyle =
+        base:
+          marginBottom: 30
+
+        kind_string:
+          fontSize: 14
+          paddingTop: 3
+          paddingBottom: 1
+          paddingLeft: 12
+          paddingRight: 12
+          marginLeft: 0
+          marginRight: 12
+          textAlign: 'center'
+          float: 'none'
+          display: 'inline-block'
+
+        title:
+          fontSize: 20
+          paddingLeft: 0
+          paddingRight: 0
+          float: 'none'
+          marginTop: 10
+          marginLeft: 0
+
+    <div style={Array.prototype.concat.apply([], [styles.base, @props.style, dstyle.base])}>
       <div style={styles.title_wrap}>
-        <div style={[styles.kind_string, @genKindStringStyle(@props.current.kindString)]}>{@props.current.kindString}</div>
-        <div style={styles.title}>{@props.current.name}</div>
+        <div style={[styles.kind_string, @genKindStringStyle(@props.current.kindString), dstyle.kind_string]}>{@props.current.kindString}</div>
+        <div style={[styles.title, dstyle.title]}>{@props.current.name}</div>
       </div>
-      <div style={styles.from}>{"#{@props.current.kindString} in #{@props.from.name}"}</div>
+      {
+        unless @props.collapsed
+          <div style={styles.from}>{"#{@props.current.kindString} in #{@props.from.name}"}</div>
+      }
     </div>
 
 styles =

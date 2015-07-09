@@ -10,7 +10,7 @@ class ListComponent extends React.Component
     super props
 
   constructNestedList: (dir_tree) ->
-    <ul style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
+    <ul style={styles.ul}>
       {
         return_elm = []
         if dir_tree.dir?
@@ -84,21 +84,18 @@ class ListComponent extends React.Component
 
   render: ->
     # console.log "render List", (+new Date()).toString()[-4..-1]
-    <div style={Array.prototype.concat.apply([], [styles.wrapper, @props.style])}>
+    <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       {
         @constructNestedList(@props.dir_tree)
       }
     </div>
 
 styles =
-  base:
+  base: {}
+
+  ul:
     listStyle: 'none'
     paddingLeft: 22
-
-  wrapper:
-    borderRightWidth: 1
-    borderRightColor: '#ccc'
-    borderRightStyle: 'solid'
 
   clickable:
     cursor: 'pointer'
