@@ -10,6 +10,17 @@ class DocDetailContainerComponent extends React.Component
     if @props.argu.route_arr[1]?.toString() == 'local'
       @context.ctx.routeAction.navigate(document.location.pathname.match(/^(.+)\/[^\/]+$/)[1])
 
+  updateWrapperWidth: ->
+    @setState
+      wrapperWidth: React.findDOMNode(@refs.docDetailBase).clientWidth
+
+  componentDidMount: ->
+    @updateWrapperWidth()
+    window.addEventListener 'resize', @updateWrapperWidth.bind(@)
+
+  componentWillUnmount: ->
+    window.removeEventListener 'resize', @updateWrapperWidth.bind(@)
+
   render: ->
     file_id = @props.argu.route_arr[2]?.toString()
     factor_id = @props.argu.route_arr[3]?.toString()
@@ -17,22 +28,29 @@ class DocDetailContainerComponent extends React.Component
     collapsed = false
     if @props.argu.route_arr[1]?.toString() == 'local'
       collapsed = true
+    dstyle = {}
+    if @state.wrapperWidth
+      dstyle =
+        wrapper:
+          width: @state.wrapperWidth
     if collapsed
-      <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
-        <div style={styles.close} onClick={@close.bind(@)}>
-          <span className='icon-close' style={styles.close_icon}></span>
+      <div style={Array.prototype.concat.apply([], [styles.base, @props.style])} ref='docDetailBase'>
+        <div style={[styles.wrapper, dstyle.wrapper]}>
+          <div style={styles.close} onClick={@close.bind(@)}>
+            <span className='icon-close' style={styles.close_icon}></span>
+          </div>
+          {
+            if file_id? && factor_id?
+              current = @props.doc_data[file_id]?[factor_id]
+              if current?
+                current_local = null
+                for c in current.children
+                  if c.id?.toString() == local_factor_id
+                    current_local = c
+                if current_local?
+                  <DocDetailTitleComponent current={current_local} from={current} />
+          }
         </div>
-        {
-          if file_id? && factor_id?
-            current = @props.doc_data[file_id]?[factor_id]
-            if current?
-              current_local = null
-              for c in current.children
-                if c.id?.toString() == local_factor_id
-                  current_local = c
-              if current_local?
-                <DocDetailTitleComponent current={current_local} from={current} />
-        }
       </div>
     else
       null
@@ -41,11 +59,19 @@ styles =
   base:
     boxShadow: '0 0 3px 0 rgba(0, 0, 0, 0.4)'
     backgroundColor: '#fff'
+    position: 'relative'
+    overflow: 'hidden'
+
+  wrapper:
+    position: 'absolute'
+    top: 0
+    left: 0
+    bottom: 0
     paddingLeft: 50
     paddingRight: 50
     paddingTop: 30
     paddingBottom: 30
-    position: 'relative'
+    boxSizing: 'border-box'
 
   close:
     position: 'absolute'
