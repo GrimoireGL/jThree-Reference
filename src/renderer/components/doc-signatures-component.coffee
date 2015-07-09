@@ -9,26 +9,76 @@ class DocSignaturesComponent extends React.Component
     c = @props.current
     <div style={Array.prototype.concat.apply([], [styles.base, @props.style, styles.code])}>
       {
-        return_elm = []
+        elm = []
         if c.signatures?
-          return_elm.push <span>{c.signatures[0].name}</span>
-          return_elm.push <span>(</span>
+          elm.push <span>{c.signatures[0].name}</span>
+          elm.push <span>(</span>
           c.signatures[0].parameters?.forEach (prm, i) ->
-            return_elm.push <span>{prm.name}</span>
-            return_elm.push <span>: </span>
-            return_elm.push <span>{prm.type.name}</span>
+            elm.push <span>{prm.name}</span>
+            elm.push <span>: </span>
+            elm.push <span>{prm.type.name}</span>
             if prm.type.isArray
-              return_elm.push <span>[]</span>
+              elm.push <span>[]</span>
             if i != c.signatures[0].parameters.length - 1
-              return_elm.push <span>, </span>
-          return_elm.push <span>)</span>
-          return_elm.push <span>: </span>
-          return_elm.push <span>{c.signatures[0].type.name}</span>
+              elm.push <span>, </span>
+          elm.push <span>)</span>
+          elm.push <span>: </span>
+          elm.push <span>{c.signatures[0].type.name}</span>
         else if c.type?
-          return_elm.push <span>{c.name}</span>
-          return_elm.push <span>: </span>
-          return_elm.push <span>{c.type.name}</span>
-        return_elm
+          elm.push <span>{c.name}</span>
+          elm.push <span>: </span>
+          elm.push <span>{c.type.name}</span>
+          if c.type.typeArguments?
+            elm.push <span>{'<'}</span>
+            elm.push <span>{c.type.typeArguments[0].name}</span>
+            elm.push <span>{'>'}</span>
+        else
+          dstyle = {}
+          if c.getSignature? && c.setSignature?
+            dstyle =
+              get_signature:
+                paddingBottom: 11
+                borderBottomWidth: 1
+                borderBottomStyle: 'solid'
+                borderBottomColor: '#555'
+              set_signature:
+                paddingTop: 10
+          if c.getSignature?
+            elm.push do ->
+              <div style={dstyle.get_signature}>
+                <span>get </span>
+                <span>{c.name}</span>
+                <span>(): </span>
+                <span>{c.getSignature[0].type.name}</span>
+                {
+                  if c.getSignature[0].type.isArray
+                    <span>[]</span>
+                }
+              </div>
+          if c.setSignature?
+            elm.push do ->
+              <div style={dstyle.set_signature}>
+                <span>set </span>
+                <span>{c.name}</span>
+                <span>(</span>
+                {
+                  prm_elm = []
+                  c.setSignature[0].parameters.forEach (prm, i) ->
+                    prm_elm.push <span>{prm.name}</span>
+                    prm_elm.push <span>: </span>
+                    prm_elm.push <span>{prm.type.name}</span>
+                    if i != c.setSignature[0].parameters.length - 1
+                      prm_elm.push <span>, </span>
+                  prm_elm
+                }
+                <span>): </span>
+                <span>{c.getSignature[0].type.name}</span>
+                {
+                  if c.getSignature[0].type.isArray
+                    <span>[]</span>
+                }
+              </div>
+        elm
       }
     </div>
 
