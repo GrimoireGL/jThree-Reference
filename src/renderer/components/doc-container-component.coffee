@@ -27,7 +27,7 @@ class DocContainerComponents extends React.Component
         base:
           boxSizing: 'border-box'
           width: 120
-          paddingLeft: 15
+          paddingLeft: 18
           paddingRight: 0
           transitionProperty: 'all'
           transitionDuration: '0.1s'
@@ -36,9 +36,6 @@ class DocContainerComponents extends React.Component
 
           ':hover':
             width: 210
-            transitionProperty: 'all'
-            transitionDuration: '0.1s'
-            transitionTimingFunction: 'ease-in-out'
     <div style={Array.prototype.concat.apply([], [styles.base, @props.style, dstyle.base])} onClick={@close.bind(@)}>
       {
         if file_id? && factor_id?
@@ -75,10 +72,10 @@ class DocContainerComponents extends React.Component
 
 styles =
   base:
-    paddingLeft: 40
-    paddingRight: 40
-    paddingTop: 20
-    paddingBottom: 20
+    paddingLeft: 50
+    paddingRight: 50
+    paddingTop: 30
+    paddingBottom: 30
 
 DocContainerComponents.contextTypes =
   ctx: React.PropTypes.any

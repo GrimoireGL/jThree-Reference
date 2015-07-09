@@ -1,5 +1,6 @@
 React = require 'react'
 Radium = require 'radium'
+DocDetailTitleComponent = require './doc-detail-title-component'
 
 class DocDetailContainerComponent extends React.Component
   constructor: (props) ->
@@ -18,7 +19,9 @@ class DocDetailContainerComponent extends React.Component
       collapsed = true
     if collapsed
       <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
-        <div onClick={@close.bind(@)}>close</div>
+        <div style={styles.close} onClick={@close.bind(@)}>
+          <span className='icon-close' style={styles.close_icon}></span>
+        </div>
         {
           if file_id? && factor_id?
             current = @props.doc_data[file_id]?[factor_id]
@@ -28,7 +31,7 @@ class DocDetailContainerComponent extends React.Component
                 if c.id?.toString() == local_factor_id
                   current_local = c
               if current_local?
-                <h1>{current_local.name}</h1>
+                <DocDetailTitleComponent current={current_local} from={current} />
         }
       </div>
     else
@@ -36,8 +39,30 @@ class DocDetailContainerComponent extends React.Component
 
 styles =
   base:
-    boxShadow: '-3px 0 4px 0 rgba(0, 0, 0, 0.2)'
+    boxShadow: '0 0 3px 0 rgba(0, 0, 0, 0.4)'
     backgroundColor: '#fff'
+    paddingLeft: 50
+    paddingRight: 50
+    paddingTop: 30
+    paddingBottom: 30
+    position: 'relative'
+
+  close:
+    position: 'absolute'
+    top: 7
+    left: 8
+    cursor: 'pointer'
+
+  close_icon:
+    borderWidth: 0
+    fontSize: 20
+    color: '#aaa'
+    transitionProperty: 'all'
+    transitionDuration: '0.1s'
+    transitionTimingFunction: 'ease-in-out'
+
+    ':hover':
+      color: '#111'
 
 DocDetailContainerComponent.contextTypes =
   ctx: React.PropTypes.any

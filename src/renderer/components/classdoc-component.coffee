@@ -40,14 +40,15 @@ class ClassDocComponent extends React.Component
 
 styles =
   base:
-    paddingLeft: 10
-    paddingRight: 10
     display: 'flex'
     flexDirection: 'row'
     flexWrap: 'nowrap'
   list:
-    width: 350
-    minWidth: 350
+    boxSizing: 'border-box'
+    paddingLeft: 10
+    paddingTop: 10
+    width: 360
+    minWidth: 360
     borderRightWidth: 1
     borderRightColor: '#ccc'
     borderRightStyle: 'solid'
