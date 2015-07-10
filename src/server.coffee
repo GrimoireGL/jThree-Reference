@@ -1,4 +1,4 @@
-# require('source-map-support').install()
+require('source-map-support').install() if process.env.NODE_ENV == 'development'
 express = require 'express'
 fs = require 'fs'
 Handlebars = require 'handlebars'
