@@ -35,7 +35,6 @@ class DocSignaturesComponent extends React.Component
           elm.push <span style={styles.emphasis}>{c.name}</span>
           elm.push <span>: </span>
           elm.push <span style={[styles.emphasis, styles.oblique]}>{c.type.name}</span>
-          console.log c.type.typeArguments
           if c.type.typeArguments?
             elm.push <span>{'<'}</span>
             c.type.typeArguments.forEach (targ, i) ->
