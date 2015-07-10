@@ -4,6 +4,7 @@ DocTableComponent = require './doc-table-component'
 
 ###
 @props.title [required] subtitle of this item
+@props.subtitleStyle
 @props.style
 @props.children
 ###
@@ -13,7 +14,7 @@ class DocItemComponent extends React.Component
 
   render: ->
     <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
-      <div style={styles.subtitle}>{@props.title}</div>
+      <div style={Array.prototype.concat.apply([], [styles.subtitle, @props.subtitleStyle])}>{@props.title}</div>
       {
         React.Children.map @props.children, (child) ->
           React.cloneElement child,

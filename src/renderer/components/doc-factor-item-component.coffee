@@ -24,7 +24,7 @@ class DocFactorItemComponent extends React.Component
           fontSize: 15
         content:
           marginTop: 8
-    <DocItemComponent title={@props.group.title} style={Array.prototype.concat.apply([], [@props.style, dstyle.base])}>
+    <DocItemComponent title={@props.group.title} style={Array.prototype.concat.apply([], [@props.style, dstyle.base])} subtitleStyle={dstyle.subtitle}>
       <DocFactorTableComponent group={@props.group} current={@props.current} style={[dstyle.content]} collapsed={@props.collapsed} />
     </DocItemComponent>
 
