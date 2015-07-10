@@ -48,7 +48,6 @@ class DocContainerComponents extends React.Component
               {
                 unless collapsed
                   <DocDescriptionComponent current={current} />
-
               }
               <div>
                 {

@@ -42,7 +42,7 @@ class DocSignaturesComponent extends React.Component
               if i != c.type.typeArguments.length - 1
                 elm.push <span>, </span>
             elm.push <span>{'>'}</span>
-        else
+        else if c.getSignature? || c.setSignature?
           dstyle = {}
           if c.getSignature? && c.setSignature?
             dstyle =
@@ -88,6 +88,9 @@ class DocSignaturesComponent extends React.Component
                     <span>[]</span>
                 }
               </div>
+        else if c.name
+          elm.push <span style={styles.emphasis}>{c.name}</span>
+          elm.push <span>:</span>
         elm
       }
     </div>
