@@ -38,7 +38,7 @@ class DocDetailContainerComponent extends React.Component
                   <DocDetailTitleComponent current={current_local} from={current} />
                   <DocDescriptionComponent text={current_local.signatures?[0].comment?.shortText} />
                   {
-                    if current_local.signatures?
+                    if current_local.signatures?[0].parameters?
                       <DocDetailParameterComponent current={current_local} />
                   }
                 </div>
