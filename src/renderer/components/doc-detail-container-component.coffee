@@ -2,6 +2,7 @@ React = require 'react'
 Radium = require 'radium'
 DocDetailTitleComponent = require './doc-detail-title-component'
 DocSlideWrapperComponent = require './doc-slide-wrapper-component'
+DocDescriptionComponent = require './doc-description-component'
 
 class DocDetailContainerComponent extends React.Component
   constructor: (props) ->
@@ -32,7 +33,10 @@ class DocDetailContainerComponent extends React.Component
                 if c.id?.toString() == local_factor_id
                   current_local = c
               if current_local?
-                <DocDetailTitleComponent current={current_local} from={current} />
+                <div>
+                  <DocDetailTitleComponent current={current_local} from={current} />
+                  <DocDescriptionComponent text={current_local.signatures?[0].comment?.shortText} />
+                </div>
         }
       </DocSlideWrapperComponent>
     else

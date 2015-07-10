@@ -4,7 +4,7 @@ Route = require './route-component'
 Link = require './link-component'
 DocTitleComponent = require './doc-title-component'
 DocDescriptionComponent = require './doc-description-component'
-DocItemComponent = require './doc-item-component'
+DocFactorItemComponent = require './doc-factor-item-component'
 
 class DocContainerComponents extends React.Component
   constructor: (props) ->
@@ -47,13 +47,13 @@ class DocContainerComponents extends React.Component
               <DocTitleComponent current={current} from={@props.doc_data[file_id].from} collapsed={collapsed} />
               {
                 unless collapsed
-                  <DocDescriptionComponent current={current} />
+                  <DocDescriptionComponent text={current.comment?.shortText} />
               }
               <div>
                 {
                   if current.groups?
                     for group in current.groups
-                      <DocItemComponent key={group.kind} group={group} current={current} collapsed={collapsed} />
+                      <DocFactorItemComponent key={group.kind} group={group} current={current} collapsed={collapsed} />
                   else
                     null
                 }
