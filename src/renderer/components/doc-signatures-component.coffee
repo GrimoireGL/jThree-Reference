@@ -17,8 +17,6 @@ class DocSignaturesComponent extends React.Component
             elm.push <span>{prm.name}</span>
             elm.push <span>: </span>
             elm.push <span style={[styles.emphasis, styles.oblique]}>{prm.type.name}</span>
-            if prm.type.isArray
-              elm.push <span>[]</span>
             if prm.type.typeArguments?
               elm.push <span>{'<'}</span>
               prm.type.typeArguments.forEach (targ, i) ->
@@ -26,6 +24,8 @@ class DocSignaturesComponent extends React.Component
                 if i != prm.type.typeArguments.length - 1
                   elm.push <span>, </span>
               elm.push <span>{'>'}</span>
+            if prm.type.isArray
+              elm.push <span>[]</span>
             if i != c.signatures[0].parameters.length - 1
               elm.push <span>, </span>
           elm.push <span>)</span>
@@ -42,6 +42,8 @@ class DocSignaturesComponent extends React.Component
               if i != c.type.typeArguments.length - 1
                 elm.push <span>, </span>
             elm.push <span>{'>'}</span>
+          if c.type.isArray
+              elm.push <span>[]</span>
         else if c.getSignature? || c.setSignature?
           dstyle = {}
           if c.getSignature? && c.setSignature?
