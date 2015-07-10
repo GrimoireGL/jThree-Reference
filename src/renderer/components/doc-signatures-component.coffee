@@ -14,7 +14,9 @@ class DocSignaturesComponent extends React.Component
           elm.push <span style={styles.emphasis}>{c.signatures[0].name}</span>
           elm.push <span>(</span>
           c.signatures[0].parameters?.forEach (prm, i) ->
-            elm.push <span>{prm.name}</span>
+            elm.push <span style={styles.emphasis}>{prm.name}</span>
+            if prm.defaultValue?
+              elm.push <span>{'?'}</span>
             elm.push <span>: </span>
             elm.push <span style={[styles.emphasis, styles.oblique]}>{prm.type.name}</span>
             if prm.type.typeArguments?
