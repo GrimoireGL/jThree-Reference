@@ -52,7 +52,7 @@ styles =
   close_icon:
     borderWidth: 0
     fontSize: 20
-    color: '#aaa'
+    color: '#ccc'
     transitionProperty: 'all'
     transitionDuration: '0.1s'
     transitionTimingFunction: 'ease-in-out'
