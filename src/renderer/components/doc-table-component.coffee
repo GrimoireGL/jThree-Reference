@@ -25,13 +25,9 @@ class DocTableComponent extends React.Component
                 odd_even_style = if i % 2 == 1 then {} else {backgroundColor: '#F2F2F2'}
                 # alt_text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt libero, suscipit, rerum id ipsum provident voluptas deleniti dolor dignissimos nostrum, deserunt, vel voluptatem a. Nostrum rerum illum cum reiciendis quisquam! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa distinctio iure recusandae sapiente voluptatibus. Nobis corporis architecto numquam quibusdam, culpa quaerat voluptates, incidunt saepe dolore, velit distinctio placeat sequi accusantium."[0..Math.round(Math.random() * 478)]
                 alt_text = 'no description'
-                if @props.collapsed
-                  href = "#{document.location.pathname.match(/^(.+)\/[^\/]+$/)[1]}/#{child.name}"
-                else
-                  href = "#{document.location.pathname}/#{child.name}"
                 <tr key={child.id} style={[styles.tb_item, odd_even_style]}>
                   <td style={[styles.tb_item, styles.tb_key, dstyle.tb_key]}>
-                    <Link style={styles.link} href={href}>{child.name}</Link>
+                    <Link style={styles.link} uniqRoute={"class:local:.+?:#{@props.current.id}:#{child.id}"}>{child.name}</Link>
                   </td>
                   {
                     unless @props.collapsed
