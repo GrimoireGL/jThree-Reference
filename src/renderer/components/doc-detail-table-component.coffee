@@ -6,7 +6,7 @@ DocTableComponent = require './doc-table-component'
 ###
 @props.current [required] local current which is child of current factor
 ###
-class DocFactorTableComponent extends React.Component
+class DocDetailTableComponent extends React.Component
   constructor: (props) ->
     super props
 
@@ -56,7 +56,7 @@ styles =
     ':hover':
       textDecoration: 'underline'
 
-DocFactorTableComponent.contextTypes =
+DocDetailTableComponent.contextTypes =
   ctx: React.PropTypes.any
 
-module.exports = Radium DocFactorTableComponent
+module.exports = Radium DocDetailTableComponent
