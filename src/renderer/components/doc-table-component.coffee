@@ -22,7 +22,7 @@ class DocTableComponent extends React.Component
                 {
                   for cell, j in row
                     dstyle = if j == 0 then styles.tb_key else styles.tb_desc
-                    <td key={"#{@props.prefix}-#{i}-#{j}"} style={[styles.tb_item, dstyle, @props.cellStyles[j]]}>
+                    <td key={"#{@props.prefix}-#{i}-#{j}"} style={[styles.tb_item, dstyle, @props.cellStyles?[j]]}>
                       {cell}
                     </td>
                 }
@@ -48,7 +48,7 @@ styles =
     paddingRight: 20
 
   tb_desc:
-    color: '#333'
+    color: '#666'
 
 DocTableComponent.contextTypes =
   ctx: React.PropTypes.any
