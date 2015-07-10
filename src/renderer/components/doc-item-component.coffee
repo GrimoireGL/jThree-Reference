@@ -2,6 +2,11 @@ React = require 'react'
 Radium = require 'radium'
 DocTableComponent = require './doc-table-component'
 
+###
+@props.title [required] subtitle of this item
+@props.style
+@props.children
+###
 class DocItemComponent extends React.Component
   constructor: (props) ->
     super props

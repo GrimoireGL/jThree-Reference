@@ -1,8 +1,14 @@
 React = require 'react'
 Radium = require 'radium'
-DocTableComponent = require './doc-table-component'
+DocFactorTableComponent = require './doc-factor-table-component'
 DocItemComponent = require './doc-item-component'
 
+###
+@props.group [required] parent of current factor
+@props.current [required] current factor
+@props.collapsed [required]
+@props.style
+###
 class DocFactorItemComponent extends React.Component
   constructor: (props) ->
     super props
@@ -19,7 +25,7 @@ class DocFactorItemComponent extends React.Component
         content:
           marginTop: 8
     <DocItemComponent title={@props.group.title} style={Array.prototype.concat.apply([], [@props.style, dstyle.base])}>
-      <DocTableComponent group={@props.group} current={@props.current} style={[dstyle.content]} collapsed={@props.collapsed} />
+      <DocFactorTableComponent group={@props.group} current={@props.current} style={[dstyle.content]} collapsed={@props.collapsed} />
     </DocItemComponent>
 
 DocFactorItemComponent.contextTypes =
