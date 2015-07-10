@@ -30,6 +30,7 @@ class DocContainerComponents extends React.Component
           paddingLeft: 18
           paddingRight: 0
           overflow: 'hidden'
+          whiteSpace: 'nowrap'
           transitionProperty: 'all'
           transitionDuration: '0.1s'
           # transitionDelay: '0.5s'

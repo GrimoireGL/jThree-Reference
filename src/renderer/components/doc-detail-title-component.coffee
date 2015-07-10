@@ -17,9 +17,10 @@ class DocDetailTitleComponent extends React.Component
         color = '#598213'
       when 'Method'
         color = '#6E00FF'
-        # color = '#B17509'
       when 'Accessor'
         color = '#D04C35'
+      when 'Enumeration member'
+        color = '#B17509'
       else
         color = '#333333'
 
