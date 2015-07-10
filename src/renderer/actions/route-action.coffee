@@ -14,7 +14,10 @@ class RouteAction extends Flux.Action
       console.warn 'html5-history is not available.' if window?
 
   navigate: (path, options) ->
-    path = "/#{@clearSlashes path}"
+    if path[0] != '/'
+      path = "#{document.location.pathname}/#{@clearSlashes path}"
+    else
+      path = "/#{@clearSlashes path}"
     if History?.Adapter?
       if options?.replace == true
         History.replaceState null, null, path, undefined, options?.silent

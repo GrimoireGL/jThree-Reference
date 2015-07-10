@@ -4,29 +4,56 @@ Route = require './route-component'
 Link = require './link-component'
 DocTitleComponent = require './doc-title-component'
 DocDescriptionComponent = require './doc-description-component'
-DocItemComponent = require './doc-item-component'
+DocFactorItemComponent = require './doc-factor-item-component'
 
 class DocContainerComponents extends React.Component
   constructor: (props) ->
     super props
 
+  close: ->
+    if @props.argu.route_arr[1]?.toString() == 'local'
+      @context.ctx.routeAction.navigate(document.location.pathname.match(/^(.+)\/[^\/]+$/)[1])
+
   render: ->
     # console.log "render DocContainer", (+new Date()).toString()[-4..-1]
     file_id = @props.argu.route_arr[2]?.toString()
     factor_id = @props.argu.route_arr[3]?.toString()
-    <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
+    collapsed = false
+    if @props.argu.route_arr[1]?.toString() == 'local'
+      collapsed = true
+    dstyle = {}
+    if collapsed
+      dstyle =
+        base:
+          boxSizing: 'border-box'
+          width: 120
+          paddingLeft: 18
+          paddingRight: 0
+          overflow: 'hidden'
+          whiteSpace: 'nowrap'
+          transitionProperty: 'all'
+          transitionDuration: '0.1s'
+          # transitionDelay: '0.5s'
+          transitionTimingFunction: 'ease-in-out'
+
+          ':hover':
+            width: 210
+    <div style={Array.prototype.concat.apply([], [styles.base, @props.style, dstyle.base])} onClick={@close.bind(@)}>
       {
         if file_id? && factor_id?
           current = @props.doc_data[file_id]?[factor_id]
           if current?
             <div>
-              <DocTitleComponent current={current} from={@props.doc_data[file_id].from} />
-              <DocDescriptionComponent current={current} />
+              <DocTitleComponent current={current} from={@props.doc_data[file_id].from} collapsed={collapsed} />
+              {
+                unless collapsed
+                  <DocDescriptionComponent text={current.comment?.shortText} />
+              }
               <div>
                 {
                   if current.groups?
                     for group in current.groups
-                      <DocItemComponent key={group.kind} group={group} current={current} />
+                      <DocFactorItemComponent key={group.kind} group={group} current={current} collapsed={collapsed} />
                   else
                     null
                 }
@@ -46,10 +73,10 @@ class DocContainerComponents extends React.Component
 
 styles =
   base:
-    paddingLeft: 40
-    paddingRight: 40
-    paddingTop: 20
-    paddingBottom: 20
+    paddingLeft: 50
+    paddingRight: 50
+    paddingTop: 30
+    paddingBottom: 30
 
 DocContainerComponents.contextTypes =
   ctx: React.PropTypes.any

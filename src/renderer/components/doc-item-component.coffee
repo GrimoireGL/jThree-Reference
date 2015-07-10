@@ -8,8 +8,12 @@ class DocItemComponent extends React.Component
 
   render: ->
     <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
-      <div style={styles.subtitle}>{@props.group.title}</div>
-      <DocTableComponent group={@props.group} current={@props.current} style={styles.content} />
+      <div style={styles.subtitle}>{@props.title}</div>
+      {
+        React.Children.map @props.children, (child) ->
+          React.cloneElement child,
+            style: Array.prototype.concat.apply([], [styles.content, child.props.style])
+      }
     </div>
 
 styles =

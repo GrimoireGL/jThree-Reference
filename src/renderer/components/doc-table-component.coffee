@@ -7,6 +7,11 @@ class DocTableComponent extends React.Component
     super props
 
   render: ->
+    dstyle = {}
+    if @props.collapsed
+      dstyle =
+        tb_key:
+          minWidth: 210
     <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       <table style={styles.table}>
         <tbody>
@@ -21,10 +26,13 @@ class DocTableComponent extends React.Component
                 # alt_text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt libero, suscipit, rerum id ipsum provident voluptas deleniti dolor dignissimos nostrum, deserunt, vel voluptatem a. Nostrum rerum illum cum reiciendis quisquam! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa distinctio iure recusandae sapiente voluptatibus. Nobis corporis architecto numquam quibusdam, culpa quaerat voluptates, incidunt saepe dolore, velit distinctio placeat sequi accusantium."[0..Math.round(Math.random() * 478)]
                 alt_text = 'no description'
                 <tr key={child.id} style={[styles.tb_item, odd_even_style]}>
-                  <td style={[styles.tb_item, styles.tb_key]}>
-                    <Link style={styles.link}>{child.name}</Link>
+                  <td style={[styles.tb_item, styles.tb_key, dstyle.tb_key]}>
+                    <Link style={styles.link} uniqRoute={"class:local:.+?:#{@props.current.id}:#{child.id}"}>{child.name}</Link>
                   </td>
-                  <td style={[styles.tb_item, styles.tb_desc]}>{child.comment?.shortText ? alt_text}</td>
+                  {
+                    unless @props.collapsed
+                      <td style={[styles.tb_item, styles.tb_desc]}>{child.comment?.shortText ? alt_text}</td>
+                  }
                 </tr>
               else
                 null
@@ -52,6 +60,8 @@ styles =
     color: '#333'
 
   link:
+    color: '#000'
+    textDecoration: 'none'
     cursor: 'pointer'
 
     ':hover':

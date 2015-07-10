@@ -1,8 +1,9 @@
 React = require 'react'
 Radium = require 'radium'
 Route = require './route-component'
-DocContainerComponent = require './doc-container-component'
 ListComponent = require './list-component'
+DocContainerComponent = require './doc-container-component'
+DocDetailContainerComponent = require './doc-detail-container-component'
 
 class ClassDocComponent extends React.Component
   constructor: (props) ->
@@ -30,25 +31,39 @@ class ClassDocComponent extends React.Component
         </Route>
       </div>
       <div style={styles.container}>
-        <Route>
-          <DocContainerComponent doc_data={@state.doc_data} />
+        <Route style={styles.doc_wrapper}>
+          <DocContainerComponent style={styles.doc_container} doc_data={@state.doc_data} />
+          <DocDetailContainerComponent style={styles.doc_detail_container} doc_data={@state.doc_data} />
         </Route>
       </div>
     </div>
 
 styles =
   base:
-    paddingTop: 10
-    paddingBottom: 10
-    paddingLeft: 10
-    paddingRight: 10
     display: 'flex'
     flexDirection: 'row'
     flexWrap: 'nowrap'
   list:
-    width: 350
-    minWidth: 350
+    boxSizing: 'border-box'
+    paddingLeft: 10
+    paddingTop: 10
+    width: 360
+    minWidth: 360
+    borderRightWidth: 1
+    borderRightColor: '#ccc'
+    borderRightStyle: 'solid'
   container:
+    flexGrow: '1'
+    display: 'flex'
+    flexDirection: 'column'
+    flexWrap: 'nowrap'
+  doc_wrapper:
+    display: 'flex'
+    flexDirection: 'row'
+    flexWrap: 'nowrap'
+    flex: '1'
+  doc_container: {}
+  doc_detail_container:
     flexGrow: '1'
 
 ClassDocComponent.contextTypes =
