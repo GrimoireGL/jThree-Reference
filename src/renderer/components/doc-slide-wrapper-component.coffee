@@ -5,16 +5,20 @@ class DocSlideWrapperComponent extends React.Component
   constructor: (props) ->
     super props
 
+  handleEvent: (e) ->
+    if e.type == 'resize'
+      @updateWrapperWidth()
+
   updateWrapperWidth: ->
     @setState
       wrapperWidth: React.findDOMNode(@refs.docDetailBase).clientWidth
 
   componentDidMount: ->
     @updateWrapperWidth()
-    window.addEventListener 'resize', @updateWrapperWidth.bind(@)
+    window.addEventListener 'resize', @
 
   componentWillUnmount: ->
-    window.removeEventListener 'resize', @updateWrapperWidth.bind(@)
+    window.removeEventListener 'resize', @
 
   render: ->
     dstyle = {}
