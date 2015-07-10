@@ -49,15 +49,11 @@ class DocContainerComponents extends React.Component
                 unless collapsed
                   <DocDescriptionComponent text={current.comment?.shortText} />
               }
-              <div>
-                {
-                  if current.groups?
-                    for group in current.groups
-                      <DocFactorItemComponent key={group.kind} group={group} current={current} collapsed={collapsed} />
-                  else
-                    null
-                }
-              </div>
+              {
+                if current.groups?
+                  for group in current.groups
+                    <DocFactorItemComponent key={group.kind} group={group} current={current} collapsed={collapsed} />
+              }
             </div>
           else
             if window?
