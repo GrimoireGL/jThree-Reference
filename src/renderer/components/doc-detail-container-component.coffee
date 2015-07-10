@@ -4,6 +4,7 @@ DocDetailTitleComponent = require './doc-detail-title-component'
 DocSlideWrapperComponent = require './doc-slide-wrapper-component'
 DocDescriptionComponent = require './doc-description-component'
 DocDetailParameterComponent = require './doc-detail-parameters-component'
+DocDetailReturnComponent = require './doc-detail-return-components'
 
 class DocDetailContainerComponent extends React.Component
   constructor: (props) ->
@@ -40,6 +41,10 @@ class DocDetailContainerComponent extends React.Component
                   {
                     if current_local.signatures?[0].parameters?
                       <DocDetailParameterComponent current={current_local} />
+                  }
+                  {
+                    if current_local.signatures?
+                      <DocDetailReturnComponent current={current_local} />
                   }
                 </div>
         }

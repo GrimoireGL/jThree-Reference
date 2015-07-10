@@ -1,6 +1,6 @@
 React = require 'react'
 Radium = require 'radium'
-DocDetailTableComponent = require './doc-detail-table-component'
+DocDetailParameterTableComponent = require './doc-detail-parameter-table-component'
 DocItemComponent = require './doc-item-component'
 
 ###
@@ -12,7 +12,7 @@ class DocDetailParametersComponent extends React.Component
 
   render: ->
     <DocItemComponent title='Parameters' style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
-      <DocDetailTableComponent current={@props.current} style={[styles.content]} />
+      <DocDetailParameterTableComponent current={@props.current} style={[styles.content]} />
     </DocItemComponent>
 
 styles =
