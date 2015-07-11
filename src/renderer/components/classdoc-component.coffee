@@ -4,6 +4,7 @@ Route = require './route-component'
 ListComponent = require './list-component'
 DocContainerComponent = require './doc-container-component'
 DocDetailContainerComponent = require './doc-detail-container-component'
+DocSlideWrapperComponent = require './doc-slide-wrapper-component'
 
 class ClassDocComponent extends React.Component
   constructor: (props) ->
@@ -32,8 +33,10 @@ class ClassDocComponent extends React.Component
       </div>
       <div style={styles.container}>
         <Route style={styles.doc_wrapper}>
-          <DocContainerComponent style={styles.doc_container} doc_data={@state.doc_data} />
-          <DocDetailContainerComponent style={styles.doc_detail_container} doc_data={@state.doc_data} />
+          <DocSlideWrapperComponent>
+            <DocContainerComponent style={styles.doc_container} doc_data={@state.doc_data} />
+            <DocDetailContainerComponent style={styles.doc_detail_container} doc_data={@state.doc_data} />
+          </DocSlideWrapperComponent>
         </Route>
       </div>
     </div>

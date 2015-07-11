@@ -18,46 +18,22 @@ class DocContainerComponents extends React.Component
     # console.log "render DocContainer", (+new Date()).toString()[-4..-1]
     file_id = @props.argu.route_arr[2]?.toString()
     factor_id = @props.argu.route_arr[3]?.toString()
-    collapsed = false
-    if @props.argu.route_arr[1]?.toString() == 'local'
-      collapsed = true
-    dstyle = {}
-    if collapsed
-      dstyle =
-        base:
-          boxSizing: 'border-box'
-          width: 120
-          paddingLeft: 18
-          paddingRight: 0
-          overflow: 'hidden'
-          whiteSpace: 'nowrap'
-          transitionProperty: 'all'
-          transitionDuration: '0.1s'
-          # transitionDelay: '0.5s'
-          transitionTimingFunction: 'ease-in-out'
-
-          ':hover':
-            width: 210
-    <div style={Array.prototype.concat.apply([], [styles.base, @props.style, dstyle.base])} onClick={@close.bind(@)}>
+    <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       {
         if file_id? && factor_id?
           current = @props.doc_data[file_id]?[factor_id]
           if current?
             <div>
-              <DocTitleComponent current={current} from={@props.doc_data[file_id].from} collapsed={collapsed} />
+              <DocTitleComponent current={current} from={@props.doc_data[file_id].from} collapsed={@props.collapsed} />
               {
-                unless collapsed
+                unless @props.collapsed
                   <DocDescriptionComponent text={current.comment?.shortText} />
               }
-              <div>
-                {
-                  if current.groups?
-                    for group in current.groups
-                      <DocFactorItemComponent key={group.kind} group={group} current={current} collapsed={collapsed} />
-                  else
-                    null
-                }
-              </div>
+              {
+                if current.groups?
+                  for group in current.groups
+                    <DocFactorItemComponent key={group.kind} group={group} current={current} collapsed={@props.collapsed} />
+              }
             </div>
           else
             if window?
@@ -66,17 +42,11 @@ class DocContainerComponents extends React.Component
               throw new Error 'doc_data must be initialized by initialStates'
               # TODO: show activity indicator while loading docs
             <span>Loading...</span>
-        else
-          null
       }
     </div>
 
 styles =
-  base:
-    paddingLeft: 50
-    paddingRight: 50
-    paddingTop: 30
-    paddingBottom: 30
+  base: {}
 
 DocContainerComponents.contextTypes =
   ctx: React.PropTypes.any

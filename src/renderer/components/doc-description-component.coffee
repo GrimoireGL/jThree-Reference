@@ -2,6 +2,9 @@ React = require 'react'
 Radium = require 'radium'
 DocItemComponent = require './doc-item-component'
 
+###
+@props.text description text
+###
 class DocDescriptionComponent extends React.Component
   constructor: (props) ->
     super props
