@@ -1,6 +1,7 @@
 React = require 'react'
 Radium = require 'radium'
 DocItemComponent = require './doc-item-component'
+colors = require './colors/color-definition'
 
 ###
 @props.text description text
@@ -20,7 +21,7 @@ styles =
   base: {}
 
   content:
-    color: '#333'
+    color: colors.general.r.default
 
 DocDescriptionComponent.contextTypes =
   ctx: React.PropTypes.any

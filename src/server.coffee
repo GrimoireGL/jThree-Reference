@@ -1,5 +1,6 @@
 require('source-map-support').install() if process.env.NODE_ENV == 'development'
 express = require 'express'
+favicon = require 'serve-favicon'
 fs = require 'fs'
 Handlebars = require 'handlebars'
 React = require 'react'
@@ -13,10 +14,9 @@ console.log "environment: #{process.env.NODE_ENV}"
 server = express()
 
 server.use '/static', express.static('public')
+server.use favicon("#{fs.realpathSync('./')}/public/assets/favicon/favicon.ico")
 
 template = Handlebars.compile fs.readFileSync("#{fs.realpathSync('./')}/view/index.hbs").toString()
-
-server.get '/favicon.ico', (req, res) ->
 
 docs = new Docs()
 initializeState = new InitializeState(docs)

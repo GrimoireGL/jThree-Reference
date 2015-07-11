@@ -10,8 +10,9 @@ class RoutesGen
 
   _constructRoutes: (json) ->
     @routes = {}
-    @routes = objectAssign(@routes, constructClassRoutes(json))
-    @routes = objectAssign(@routes, constructErrorRoutes())
+    @routes = objectAssign {}, @routes, constructClassRoutes(json)
+    @routes = objectAssign {}, @routes, constructIndexRoutes()
+    @routes = objectAssign {}, @routes, constructErrorRoutes()
 
   constructClassRoutes = (json) ->
     prefix = 'class'
@@ -30,10 +31,14 @@ class RoutesGen
     routes["#{prefix}"] = "#{prefix}"
     return routes
 
+  constructIndexRoutes = ->
+    routes =
+      '' : 'index'
+    return routes
+
   constructErrorRoutes = ->
-    routes = {
+    routes =
       '.*' : 'error'
-    }
     return routes
 
 module.exports = RoutesGen

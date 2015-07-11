@@ -17,6 +17,7 @@
     "radium": "pnlybubbles/radium#64300db7f744eeb7c0b7cacf67eddf3a4bb6735e",
     "react": "^0.13.3",
     "request": "^2.58.0",
+    "serve-favicon": "^2.3.0",
     "source-map-support": "^0.3.1",
     "superagent": "^1.2.0"
   },

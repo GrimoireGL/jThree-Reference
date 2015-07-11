@@ -12,7 +12,9 @@ class AppComponent extends React.Component
 
   render: ->
     <div>
-      <HeaderComponent />
+      <Route>
+        <HeaderComponent notroute='index' />
+      </Route>
       <Route>
         <IndexComponent route='index' />
         <ClassDocComponent route='class' />

@@ -1,5 +1,6 @@
 React = require 'react'
 Radium = require 'radium'
+colors = require './colors/color-definition'
 
 ###
 @props.table [required] 2 dimension array of ReactElement data
@@ -18,7 +19,7 @@ class DocTableComponent extends React.Component
           {
             for row, i in @props.table
               odd_even_style = if i % 2 == 1 then {} else {backgroundColor: '#F2F2F2'}
-              <tr key={"#{@props.prefix}-#{i}"} style={[styles.tb_item, odd_even_style]}>
+              <tr key={"#{@props.prefix}-#{i}"} style={[styles.tb_row, odd_even_style]}>
                 {
                   for cell, j in row
                     dstyle = if j == 0 then styles.tb_key else styles.tb_desc
@@ -38,6 +39,10 @@ styles =
   table:
     borderSpacing: 0
 
+  tb_row:
+    ':hover':
+      backgroundColor: colors.main.n.light
+
   tb_item:
     paddingTop: 9
     paddingBottom: 7
@@ -46,9 +51,10 @@ styles =
 
   tb_key:
     paddingRight: 20
+    color: colors.general.r.emphasis
 
   tb_desc:
-    color: '#666'
+    color: colors.general.r.moderate
 
 DocTableComponent.contextTypes =
   ctx: React.PropTypes.any

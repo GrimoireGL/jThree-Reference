@@ -1,5 +1,6 @@
 React = require 'react'
 Radium = require 'radium'
+colors = require './colors/color-definition'
 
 class ListItemComponent extends React.Component
   constructor: (props) ->
@@ -41,7 +42,7 @@ styles =
     fontSize: 14
     WebkitUserSelect: 'none'
     MozUserSelect: 'none'
-    color: '#333'
+    color: colors.general.r.default
 
 ListItemComponent.contextTypes =
   ctx: React.PropTypes.any

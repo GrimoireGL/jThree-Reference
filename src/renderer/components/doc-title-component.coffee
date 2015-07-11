@@ -1,12 +1,13 @@
 React = require 'react'
 Radium = require 'radium'
+colors = require './colors/color-definition'
 
 class DocTitleComponent extends React.Component
   constructor: (props) ->
     super props
 
   genKindStringStyle: (kindString) ->
-    color = '#333333'
+    color = colors.general.r.default
 
     switch kindString
       when 'Class'
@@ -20,7 +21,7 @@ class DocTitleComponent extends React.Component
       when 'Function'
         color = '#6E00FF'
       else
-        color = '#333333'
+        color = colors.general.r.default
 
     style =
       color: color
@@ -87,14 +88,14 @@ styles =
     paddingLeft: 12
     paddingRight: 12
     marginLeft: 10
-    color: '#000'
+    color: colors.general.r.emphasis
     float: 'left'
     fontWeight: 'bold'
 
   from:
     marginTop: 10
     fontSize: 15
-    color: '#aaa'
+    color: colors.general.r.light
 
 DocTitleComponent.contextTypes =
   ctx: React.PropTypes.any

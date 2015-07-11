@@ -2,6 +2,7 @@ React = require 'react'
 Radium = require 'radium'
 objectAssign = require 'object-assign'
 clone = require 'lodash.clone'
+colors = require './colors/color-definition'
 
 ###
 @props.children[0] [require] to be left
@@ -119,13 +120,13 @@ styles =
   close_icon:
     borderWidth: 0
     fontSize: 20
-    color: '#ccc'
+    color: colors.general.r.light
     transitionProperty: 'all'
     transitionDuration: '0.1s'
     transitionTimingFunction: 'ease-in-out'
 
     ':hover':
-      color: '#111'
+      color: colors.general.r.default
 
   wrapper:
     position: 'absolute'

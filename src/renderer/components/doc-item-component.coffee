@@ -1,6 +1,7 @@
 React = require 'react'
 Radium = require 'radium'
 DocTableComponent = require './doc-table-component'
+colors = require './colors/color-definition'
 
 ###
 @props.title [required] subtitle of this item
@@ -29,6 +30,7 @@ styles =
   subtitle:
     fontSize: 23
     fontWeight: 'bold'
+    color: colors.general.r.default
 
   content:
     fontSize: 15
