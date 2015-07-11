@@ -16,10 +16,13 @@ class HeaderComponent extends React.Component
       </div>
       <nav style={styles.nav}>
         <Route addStyle={styles.active} style={styles.li_cont}>
-          <li route='index' key='0' style={[styles.li]}>
-            <Link href='/' style={styles.link}>Overview</Link>
+          <li route='index' key='index' style={[styles.li]}>
+            <Link href='/' style={styles.link}>Top</Link>
           </li>
-          <li route='class' key='1' style={[styles.li, styles.left_separator]}>
+          <li route='overview' key='overview' style={[styles.li, styles.left_separator]}>
+            <Link href='/overview' style={styles.link}>Overview</Link>
+          </li>
+          <li route='class' key='class' style={[styles.li, styles.left_separator]}>
             <Link href='/class' style={styles.link}>Reference</Link>
           </li>
         </Route>
