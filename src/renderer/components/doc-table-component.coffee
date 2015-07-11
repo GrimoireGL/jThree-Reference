@@ -18,7 +18,7 @@ class DocTableComponent extends React.Component
           {
             for row, i in @props.table
               odd_even_style = if i % 2 == 1 then {} else {backgroundColor: '#F2F2F2'}
-              <tr key={"#{@props.prefix}-#{i}"} style={[styles.tb_item, odd_even_style]}>
+              <tr key={"#{@props.prefix}-#{i}"} style={[styles.tb_row, odd_even_style]}>
                 {
                   for cell, j in row
                     dstyle = if j == 0 then styles.tb_key else styles.tb_desc
@@ -37,6 +37,10 @@ styles =
 
   table:
     borderSpacing: 0
+
+  tb_row:
+    ':hover':
+      backgroundColor: '#E6F2FF'
 
   tb_item:
     paddingTop: 9
