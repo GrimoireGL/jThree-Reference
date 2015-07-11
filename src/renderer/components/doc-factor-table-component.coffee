@@ -2,6 +2,7 @@ React = require 'react'
 Radium = require 'radium'
 Link = require './link-component'
 DocTableComponent = require './doc-table-component'
+colors = require './colors/color-definition'
 
 ###
 @props.group [required] parent of current factor
@@ -42,7 +43,7 @@ styles =
   base: {}
 
   link:
-    color: '#000'
+    color: colors.general.r.emphasis
     textDecoration: 'none'
     cursor: 'pointer'
 

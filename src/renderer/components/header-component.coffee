@@ -2,6 +2,7 @@ React = require 'react'
 Radium = require 'radium'
 Route = require './route-component'
 Link = require './link-component'
+colors = require './colors/color-definition'
 
 class HeaderComponent extends React.Component
   constructor: (props) ->
@@ -27,7 +28,7 @@ class HeaderComponent extends React.Component
 
 styles =
   base:
-    backgroundColor: '#444'
+    backgroundColor: colors.main.n.default
     height: 80
     position: 'relative'
     WebkitUserSelect: 'none'
@@ -40,13 +41,14 @@ styles =
     left: 40
 
   title:
-    color: '#eee'
+    color: colors.main.r.emphasis
     marginRight: 20
     fontSize: 30
+    fontWeight: 'bold'
     cursor: 'default'
 
   subtitle:
-    color: '#ccc'
+    color: colors.main.r.default
     cursor: 'default'
 
   nav:
@@ -55,7 +57,8 @@ styles =
     transform: 'translateY(-50%)'
     right: 40
 
-  active: {}
+  active:
+    color: colors.main.r.emphasis
 
   li_cont:
     clear: 'both'
@@ -68,13 +71,16 @@ styles =
     paddingRight: 20
 
   left_separator:
-    borderLeftColor: '#aaa'
+    borderLeftColor: colors.main.r.moderate
     borderLeftStyle: 'solid'
     borderLeftWidth: 1
 
   link:
     textDecoration: 'none'
-    color: '#ccc'
+    color: colors.main.r.default
+
+    ':hover':
+      color: colors.main.r.emphasis
 
 HeaderComponent.contextTypes =
   ctx: React.PropTypes.any

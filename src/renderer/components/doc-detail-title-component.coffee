@@ -2,13 +2,14 @@ React = require 'react'
 Radium = require 'radium'
 Link = require './link-component'
 DocSignaturesComponent = require './doc-signatures-component'
+colors = require './colors/color-definition'
 
 class DocDetailTitleComponent extends React.Component
   constructor: (props) ->
     super props
 
   genKindStringStyle: (kindString) ->
-    color = '#333333'
+    color = colors.general.r.default
 
     switch kindString
       when 'Constructor'
@@ -22,7 +23,7 @@ class DocDetailTitleComponent extends React.Component
       when 'Enumeration member'
         color = '#B17509'
       else
-        color = '#333333'
+        color = colors.general.r.default
 
     style =
       color: color
@@ -63,7 +64,7 @@ styles =
     paddingLeft: 12
     paddingRight: 12
     marginLeft: 10
-    color: '#000'
+    color: colors.general.r.emphasis
     float: 'left'
     fontWeight: 'bold'
 

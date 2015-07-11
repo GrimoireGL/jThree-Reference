@@ -2,6 +2,7 @@ React = require 'react'
 Radium = require 'radium'
 Link = require './link-component'
 DocTableComponent = require './doc-table-component'
+colors = require './colors/color-definition'
 
 ###
 @props.current [required] local current which is child of current factor
@@ -39,16 +40,16 @@ styles =
   base: {}
 
   type:
-    color: '#bbb'
+    color: colors.general.r.light
 
   oblique:
     fontStyle: 'italic'
 
   emphasis:
-    color: '#333'
+    color: colors.general.r.default
 
   link:
-    color: '#000'
+    color: colors.general.r.emphasis
     textDecoration: 'none'
     cursor: 'pointer'
 

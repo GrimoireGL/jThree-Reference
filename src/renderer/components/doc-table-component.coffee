@@ -1,5 +1,6 @@
 React = require 'react'
 Radium = require 'radium'
+colors = require './colors/color-definition'
 
 ###
 @props.table [required] 2 dimension array of ReactElement data
@@ -40,7 +41,7 @@ styles =
 
   tb_row:
     ':hover':
-      backgroundColor: '#E6F2FF'
+      backgroundColor: colors.main.n.light
 
   tb_item:
     paddingTop: 9
@@ -50,9 +51,10 @@ styles =
 
   tb_key:
     paddingRight: 20
+    color: colors.general.r.emphasis
 
   tb_desc:
-    color: '#666'
+    color: colors.general.r.moderate
 
 DocTableComponent.contextTypes =
   ctx: React.PropTypes.any

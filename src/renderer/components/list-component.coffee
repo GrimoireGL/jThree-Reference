@@ -4,6 +4,7 @@ Link = require './link-component'
 ListFolderComponent = require './list-folder-component'
 ListItemComponent = require './list-item-component'
 CharIconComponent = require './char-icon-component'
+colors = require './colors/color-definition'
 
 class ListComponent extends React.Component
   constructor: (props) ->
@@ -40,9 +41,9 @@ class ListComponent extends React.Component
             if highlight
               highlight_styles =
                 wrap:
-                  backgroundColor: '#666'
+                  backgroundColor: colors.main.n.moderate
                 content:
-                  color: '#fff'
+                  color: colors.main.r.emphasis
             return_elm.push do =>
               <li key={file}>
                 <ListItemComponent style={styles.item} update={highlight} name={top.name}>
@@ -57,7 +58,7 @@ class ListComponent extends React.Component
     </ul>
 
   genKindStringStyle: (kindString) ->
-    color = '#333333'
+    color = colors.general.r.default
 
     switch kindString
       when 'Class'
@@ -71,7 +72,7 @@ class ListComponent extends React.Component
       when 'Function'
         color = '#6E00FF'
       else
-        color = '#333333'
+        color = colors.general.r.default
 
     style =
       color: color
@@ -102,7 +103,7 @@ styles =
 
   link:
     textDecoration: 'none'
-    color: '#333'
+    color: colors.general.r.default
 
   item:
     display: 'flex'

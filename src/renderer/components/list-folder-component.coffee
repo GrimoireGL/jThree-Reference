@@ -1,6 +1,7 @@
 React = require 'react'
 Radium = require 'radium'
 CharIconComponent = require './char-icon-component'
+colors = require './colors/color-definition'
 
 class ListFolderComponent extends React.Component
   constructor: (props) ->
@@ -47,9 +48,9 @@ styles =
     display: 'none'
   toggle:
     cursor: 'pointer'
-    color: '#fff'
-    backgroundColor: '#666'
-    borderColor: '#666'
+    color: colors.main.r.emphasis
+    backgroundColor: colors.main.n.moderate
+    borderColor: colors.main.n.moderate
   expanded:
     display: 'block'
 
