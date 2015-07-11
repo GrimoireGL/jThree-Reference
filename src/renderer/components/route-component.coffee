@@ -12,12 +12,21 @@ Routing support component
 *** Usage ***
 
 -- General routing
-Only rendered child component which has @props.route equals to current routing.
+Only rendered child component which has @props.route equal to current routing.
 
 Example:
 <Route>
   <Index route='index' />
   <About route='about' />
+</Route>
+
+
+-- Inverse routing
+Only rendered child component which has @props.route not equal to current routing.
+
+Example:
+<Route>
+  <Header notroute='index' />
 </Route>
 
 
@@ -85,14 +94,15 @@ class RouteComponent extends React.Component
           if default_route? && default_fragment?
             @context.ctx.routeAction.navigate(fragment, {replace: true, silent: true})
           React.Children.map @props.children, (child) =>
-            if child.props.route?
+            if child.props.route? || child.props.notroute?
               match = false
               route_arr = route.split(':')
-              child.props.route.split(':').forEach (r, i) ->
+              (child.props.route || child.props.notroute).split(':').forEach (r, i) ->
                 if r == route_arr[i]
                   match = true
                 else
                   match = false
+              match = !match if child.props.notroute?
               if match
                 if @props.addStyle?
                   React.cloneElement child,
