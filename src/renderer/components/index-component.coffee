@@ -25,20 +25,22 @@ class IndexComponent extends React.Component
         </div>
       </div>
       <div style={styles.wrapper}>
-        <div style={styles.container} key='overview'>
+        <div style={styles.link_container} key='overview'>
           <Link href='/overview' style={styles.link}>
-            <div style={styles.icon_wrap}>
+            <div style={styles.link_icon_wrap}>
               <span className='icon-earth'></span>
             </div>
-            <div style={styles.label}>OverView</div>
+            <div style={styles.link_label}>OverView</div>
+            <div style={styles.link_desc}>Tutorial, tags, tips. You can post sample codes and share.</div>
           </Link>
         </div>
-        <div style={styles.container} key='reference'>
+        <div style={styles.link_container} key='reference'>
           <Link href='/class' style={styles.link}>
-            <div style={styles.icon_wrap}>
+            <div style={styles.link_icon_wrap}>
               <span className='icon-books'></span>
             </div>
-            <div style={styles.label}>Reference</div>
+            <div style={styles.link_label}>Reference</div>
+            <div style={styles.link_desc}>jThree API reference. You can search classes, methods, properties...</div>
           </Link>
         </div>
       </div>
@@ -108,30 +110,40 @@ styles =
     flexWrap: 'nowrap'
     justifyContent: 'space-around'
 
-  container:
+  link_container:
+    boxSizing: 'border-box'
     paddingTop: 20
     paddingBottom: 20
     paddingRight: 20
     paddingLeft: 20
+    width: 300
 
   link:
+    display: 'block'
     textDecoration: 'none'
-    color: colors.main.n.default
     cursor: 'pointer'
     transitionProperty: 'all'
     transitionDuration: '0.1s'
     transitionTimingFunction: 'ease-in-out'
 
     ':hover':
-      color: colors.main.n.moderate
+      opacity: '0.8'
 
-  icon_wrap:
+  link_icon_wrap:
     fontSize: 50
     textAlign: 'center'
+    color: colors.main.n.default
 
-  label:
+  link_label:
     fontSize: 20
     textAlign: 'center'
+    color: colors.main.n.default
+
+  link_desc:
+    marginTop: 10
+    fontSize: 13
+    textAlign: 'center'
+    color: colors.main.n.moderate
 
 IndexComponent.contextTypes =
   ctx: React.PropTypes.any
