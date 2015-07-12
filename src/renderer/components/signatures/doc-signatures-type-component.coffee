@@ -6,6 +6,8 @@ DocSignaturesTypeargumentsComponent = require './doc-signatures-typearguments-co
 type.name<typeArgument, ...>[]
 
 @props.type [required]
+@props.emphasisStyle
+@props.style
 ###
 class DocSignaturesTypeComponent extends React.Component
   constructor: (props) ->
@@ -15,14 +17,26 @@ class DocSignaturesTypeComponent extends React.Component
     <span style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       {
         elm = []
-        # type.name
-        elm.push <span style={[@props.emphasisStyle, styles.oblique]}>{@props.type.name}</span>
-        # <typeArguments, ...>
-        if @props.type.typeArguments
-          elm.push <DocSignaturesTypeargumentsComponent typeArguments={@props.type.typeArguments} emphasisStyle={@props.emphasisStyle} />
-        # []
-        if @props.type.isArray
-          elm.push <span>[]</span>
+        if !@props.type.name? && @props.type.type == 'reflection'
+          # type.name
+          #
+          # TODO
+          #
+          name = ''
+          if @props.type.declaration?.signatures?
+            name = 'function'
+          else if @props.type.declaration?.children?
+            name = 'object'
+          elm.push <span style={[@props.emphasisStyle, styles.oblique]}>{name}</span>
+        else
+          # type.name
+          elm.push <span style={[@props.emphasisStyle, styles.oblique]}>{@props.type.name}</span>
+          # <typeArguments, ...>
+          if @props.type.typeArguments
+            elm.push <DocSignaturesTypeargumentsComponent typeArguments={@props.type.typeArguments} emphasisStyle={@props.emphasisStyle} />
+          # []
+          if @props.type.isArray
+            elm.push <span>[]</span>
         elm
       }
     </span>

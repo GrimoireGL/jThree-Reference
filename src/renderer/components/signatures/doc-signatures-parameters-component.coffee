@@ -7,6 +7,8 @@ DocSignaturesTypeComponent = require './doc-signatures-type-component'
 (name?: type.name<typeArgument, ...>, ...)
 
 @props.parameters [required]
+@props.emphasisStyle
+@props.style
 ###
 class DocSignaturesParametersComponent extends React.Component
   constructor: (props) ->
@@ -34,9 +36,6 @@ class DocSignaturesParametersComponent extends React.Component
 
 styles =
   base: {}
-
-  oblique:
-    fontStyle: 'italic'
 
 DocSignaturesParametersComponent.contextTypes =
   ctx: React.PropTypes.any

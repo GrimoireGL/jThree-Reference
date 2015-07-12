@@ -40,7 +40,8 @@
     "debug": "node debug app.js",
     "build": "./node_modules/.bin/gulp --require coffee-script/register build",
     "build-dev": "./node_modules/.bin/gulp --require coffee-script/register build-dev",
-    "watch": "./node_modules/.bin/gulp --require coffee-script/register watch"
+    "watch": "./node_modules/.bin/gulp --require coffee-script/register watch",
+    "watch-prd": "./node_modules/.bin/gulp --require coffee-script/register watch-prd"
   },
   "author": "pnlybubbles",
   "license": "MIT"
