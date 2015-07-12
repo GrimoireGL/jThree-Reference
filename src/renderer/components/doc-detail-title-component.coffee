@@ -37,6 +37,10 @@ class DocDetailTitleComponent extends React.Component
           <span>.</span><span>{@props.current.name}</span>
         </div>
       </div>
+      {
+        if @props.current.inheritedFrom?
+          <div style={styles.from}>{"Inherited from #{@props.current.inheritedFrom.name.replace(/__constructor/, 'constructor')}"}</div>
+      }
       <DocSignaturesComponent style={styles.signatures} current={@props.current} />
     </div>
 
@@ -71,6 +75,11 @@ styles =
   title_from:
     textDecoration: 'underline'
     cursor: 'pointer'
+
+  from:
+    marginTop: 10
+    fontSize: 15
+    color: colors.general.r.light
 
   signatures:
     marginTop: 23
