@@ -17,7 +17,7 @@ class DocDetailReturnTableComponent extends React.Component
         table = []
         alt_text = 'no description'
         table_row = []
-        prm = @props.current.signatures[0]
+        prm = @props.current.signatures?[0] || @props.current.getSignature?[0] || @props.current.setSignature?[0]
         elm = []
         elm.push <span style={[styles.emphasis, styles.oblique]}>{prm.type.name}</span>
         if prm.type.typeArguments?
@@ -30,7 +30,7 @@ class DocDetailReturnTableComponent extends React.Component
         if prm.type.isArray
           elm.push <span>[]</span>
         table_row.push <span style={styles.type}>{elm}</span>
-        table_row.push <span>{alt_text}</span>
+        table_row.push <span>{@props.current.comment?.returns || @props.current.signatures?[0].comment?.returns || @props.current.getSignature?[0].comment?.returns || @props.current.setSignature?[0].comment?.returns || alt_text}</span>
         table.push table_row
         <DocTableComponent prefix="#{@props.current.id}-rtn" table={table} />
       }

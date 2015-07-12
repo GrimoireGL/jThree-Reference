@@ -1,5 +1,6 @@
 React = require 'react'
 Radium = require 'radium'
+Link = require './link-component'
 colors = require './colors/color-definition'
 
 class DocTitleComponent extends React.Component
@@ -61,7 +62,10 @@ class DocTitleComponent extends React.Component
       </div>
       {
         unless @props.collapsed
-          <div style={styles.from}>{"#{@props.current.kindString} in #{@props.from.name}"}</div>
+          <div style={styles.from}>
+            <span>{"#{@props.current.kindString} in "}</span>
+            <a style={styles.link} target='_new' href={"https://github.com/jThreeJS/jThree/tree/develop/jThree/src/#{@props.from.name.replace(/"/g, '')}.ts"}>{"#{@props.from.name.replace(/"/g, '').replace(/$/, '.ts')}"}</a>
+          </div>
       }
     </div>
 
@@ -95,6 +99,9 @@ styles =
   from:
     marginTop: 10
     fontSize: 15
+    color: colors.general.r.light
+
+  link:
     color: colors.general.r.light
 
 DocTitleComponent.contextTypes =

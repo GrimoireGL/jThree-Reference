@@ -27,7 +27,8 @@ class DocContainerComponents extends React.Component
               <DocTitleComponent current={current} from={@props.doc_data[file_id].from} collapsed={@props.collapsed} />
               {
                 unless @props.collapsed
-                  <DocDescriptionComponent text={current.comment?.shortText} />
+                  text = [current.comment?.shortText, current.comment?.text]
+                  <DocDescriptionComponent text={text} />
               }
               {
                 if current.groups?

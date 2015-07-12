@@ -3,7 +3,7 @@ Radium = require 'radium'
 DocDetailTitleComponent = require './doc-detail-title-component'
 DocSlideWrapperComponent = require './doc-slide-wrapper-component'
 DocDescriptionComponent = require './doc-description-component'
-DocDetailParameterComponent = require './doc-detail-parameters-component'
+DocDetailParametersComponent = require './doc-detail-parameters-component'
 DocDetailReturnComponent = require './doc-detail-return-components'
 
 class DocDetailContainerComponent extends React.Component
@@ -24,15 +24,24 @@ class DocDetailContainerComponent extends React.Component
               if c.id?.toString() == local_factor_id
                 current_local = c
             if current_local?
+              text = []
+              if current_local.signatures?
+                text = [current_local.signatures[0].comment?.shortText, current_local.signatures[0].comment?.text]
+              else if current_local.getSignature?
+                text = [current_local.getSignature[0].comment?.shortText, current_local.getSignature[0].comment?.text]
+              else if current_local.setSignature?
+                text = [current_local.setSignature[0].comment?.shortText, current_local.setSignature[0].comment?.text]
+              else
+                text = [current_local.comment?.shortText, current_local.comment?.text]
               <div>
                 <DocDetailTitleComponent current={current_local} from={current} />
-                <DocDescriptionComponent text={current_local.signatures?[0].comment?.shortText} />
+                <DocDescriptionComponent text={text} />
                 {
-                  if current_local.signatures?[0].parameters?
-                    <DocDetailParameterComponent current={current_local} />
+                  if current_local.signatures?.every((s) -> s.parameters?)
+                    <DocDetailParametersComponent current={current_local} />
                 }
                 {
-                  if current_local.signatures?
+                  if current_local.signatures? || current_local.getSignature? || current_local.setSignature?
                     <DocDetailReturnComponent current={current_local} />
                 }
               </div>

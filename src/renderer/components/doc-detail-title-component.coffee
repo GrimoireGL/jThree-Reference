@@ -1,7 +1,7 @@
 React = require 'react'
 Radium = require 'radium'
 Link = require './link-component'
-DocSignaturesComponent = require './doc-signatures-component'
+DocDetailSignaturesComponent = require './doc-detail-signatures-component'
 colors = require './colors/color-definition'
 
 class DocDetailTitleComponent extends React.Component
@@ -37,7 +37,11 @@ class DocDetailTitleComponent extends React.Component
           <span>.</span><span>{@props.current.name}</span>
         </div>
       </div>
-      <DocSignaturesComponent style={styles.signatures} current={@props.current} />
+      {
+        if @props.current.inheritedFrom?
+          <div style={styles.from}>{"Inherited from #{@props.current.inheritedFrom.name.replace(/__constructor/, 'constructor')}"}</div>
+      }
+      <DocDetailSignaturesComponent style={styles.signatures} current={@props.current} />
     </div>
 
 styles =
@@ -71,6 +75,11 @@ styles =
   title_from:
     textDecoration: 'underline'
     cursor: 'pointer'
+
+  from:
+    marginTop: 10
+    fontSize: 15
+    color: colors.general.r.light
 
   signatures:
     marginTop: 23

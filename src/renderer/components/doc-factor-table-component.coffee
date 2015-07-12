@@ -32,7 +32,7 @@ class DocFactorTableComponent extends React.Component
             alt_text = 'no description'
             table_row = []
             table_row.push <Link style={styles.link} uniqRoute={"class:local:.+?:#{@props.current.id}:#{child.id}"}>{child.name}</Link>
-            table_row.push <span>{child.comment?.shortText ? alt_text}</span>
+            table_row.push <span>{child.comment?.shortText || child.signatures?[0].comment?.shortText || child.getSignature?[0].comment?.shortText || child.setSignature?[0].comment?.shortText || alt_text}</span>
             table.push table_row
         cellStyles = [dstyle.tb_key, undefined]
         <DocTableComponent prefix="#{@props.current.id}-#{@props.group.kind}" table={table} cellStyles={cellStyles} />

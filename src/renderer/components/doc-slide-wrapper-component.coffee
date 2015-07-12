@@ -116,6 +116,7 @@ styles =
     top: 7
     left: 8
     cursor: 'pointer'
+    zIndex: '1'
 
   close_icon:
     borderWidth: 0
@@ -138,6 +139,7 @@ styles =
     paddingTop: 30
     paddingBottom: 30
     boxSizing: 'border-box'
+    zIndex: '0'
 
 DocSlideWrapperComponent.contextTypes =
   ctx: React.PropTypes.any
