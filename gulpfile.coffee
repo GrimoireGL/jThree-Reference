@@ -22,6 +22,7 @@ gulp.task 'build:others', ("build:#{it.suffix}" for it in others)
 
 watching = false
 gulp.task 'enable-watch-mode', -> watching = true
+gulp.task 'watch-prd', ['enable-build-production-mode', 'watch']
 gulp.task 'watch', ['build:others', 'enable-watch-mode', 'browserify'], ->
   for it in others
     gulp.watch it.src, ["build:#{it.suffix}"]
@@ -64,7 +65,7 @@ target.forEach (it) ->
         .pipe buffer()
         .pipe sourcemaps.init
           loadMaps: true
-        .pipe gulpif(env_production, gulpif(it.minify, uglify()))
+        .pipe gulpif(!watching && env_production, gulpif(it.minify, uglify()))
         .pipe rename(it.name)
-        .pipe gulpif(!env_production, sourcemaps.write('./'))
+        .pipe gulpif(!(!watching && env_production), sourcemaps.write('./'))
         .pipe gulp.dest(it.dest)
