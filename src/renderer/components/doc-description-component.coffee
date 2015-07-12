@@ -4,17 +4,25 @@ DocItemComponent = require './doc-item-component'
 colors = require './colors/color-definition'
 
 ###
-@props.text description text
+@props.text (array|string) description text
 ###
 class DocDescriptionComponent extends React.Component
   constructor: (props) ->
     super props
 
   render: ->
-    # alt_text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt libero, suscipit, rerum id ipsum provident voluptas deleniti dolor dignissimos nostrum, deserunt, vel voluptatem a. Nostrum rerum illum cum reiciendis quisquam! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa distinctio iure recusandae sapiente voluptatibus. Nobis corporis architecto numquam quibusdam, culpa quaerat voluptates, incidunt saepe dolore, velit distinctio placeat sequi accusantium."[0..Math.round(Math.random() * 478)]
     alt_text = 'no description'
+    texts = if @props.text instanceof Array
+      @props.text
+    else
+      @props.text?.split('\n')
+    texts = if texts.some((t) -> t?) then texts else [alt_text]
     <DocItemComponent title='Description' style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
-      <div style={styles.content}>{@props.text ? alt_text}</div>
+      <div style={styles.content}>
+        {
+          texts.map (t) -> if t? then <p>{t}</p>
+        }
+      </div>
     </DocItemComponent>
 
 styles =
