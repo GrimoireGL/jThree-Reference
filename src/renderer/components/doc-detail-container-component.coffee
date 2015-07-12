@@ -3,7 +3,7 @@ Radium = require 'radium'
 DocDetailTitleComponent = require './doc-detail-title-component'
 DocSlideWrapperComponent = require './doc-slide-wrapper-component'
 DocDescriptionComponent = require './doc-description-component'
-DocDetailParameterComponent = require './doc-detail-parameters-component'
+DocDetailParametersComponent = require './doc-detail-parameters-component'
 DocDetailReturnComponent = require './doc-detail-return-components'
 
 class DocDetailContainerComponent extends React.Component
@@ -29,7 +29,7 @@ class DocDetailContainerComponent extends React.Component
                 <DocDescriptionComponent text={current_local.signatures?[0].comment?.shortText} />
                 {
                   if current_local.signatures?[0].parameters?
-                    <DocDetailParameterComponent current={current_local} />
+                    <DocDetailParametersComponent current={current_local} />
                 }
                 {
                   if current_local.signatures?
