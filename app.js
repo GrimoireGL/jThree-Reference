@@ -2880,6 +2880,8 @@ name(name?: type.name<typeArgument, ...>[], ...): type.name<typeArgument, ...>[]
 
 @props.signature [required]
 @props.name if Accessor, use this as name
+@props.emphasisStyle
+@props.style
  */
 
 DocSignaturesComponent = (function(superClass) {
@@ -2923,7 +2925,7 @@ module.exports = Radium(DocSignaturesComponent);
 
 
 },{"./doc-signatures-name-component":33,"./doc-signatures-parameters-component":34,"./doc-signatures-type-component":35,"radium":undefined,"react":undefined}],33:[function(require,module,exports){
-var DocSignaturesTypeComponent, DocSignaturesTypeargumentsComponent, Radium, React, styles,
+var DocSignaturesNameComponent, DocSignaturesTypeargumentsComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -2939,16 +2941,18 @@ name?
 
 @props.base [required]
 @props.name if Accessor, use this as name
+@props.emphasisStyle
+@props.style
  */
 
-DocSignaturesTypeComponent = (function(superClass) {
-  extend(DocSignaturesTypeComponent, superClass);
+DocSignaturesNameComponent = (function(superClass) {
+  extend(DocSignaturesNameComponent, superClass);
 
-  function DocSignaturesTypeComponent(props) {
-    DocSignaturesTypeComponent.__super__.constructor.call(this, props);
+  function DocSignaturesNameComponent(props) {
+    DocSignaturesNameComponent.__super__.constructor.call(this, props);
   }
 
-  DocSignaturesTypeComponent.prototype.render = function() {
+  DocSignaturesNameComponent.prototype.render = function() {
     var elm, name, ref;
     return React.createElement("span", {
       "style": Array.prototype.concat.apply([], [styles.base, this.props.style])
@@ -2957,22 +2961,19 @@ DocSignaturesTypeComponent = (function(superClass) {
     }, name)), (this.props.base.defaultValue != null) || ((ref = this.props.base.flags) != null ? ref.isOptional : void 0) === true ? elm.push(React.createElement("span", null, '?')) : void 0, elm));
   };
 
-  return DocSignaturesTypeComponent;
+  return DocSignaturesNameComponent;
 
 })(React.Component);
 
 styles = {
-  base: {},
-  oblique: {
-    fontStyle: 'italic'
-  }
+  base: {}
 };
 
-DocSignaturesTypeComponent.contextTypes = {
+DocSignaturesNameComponent.contextTypes = {
   ctx: React.PropTypes.any
 };
 
-module.exports = Radium(DocSignaturesTypeComponent);
+module.exports = Radium(DocSignaturesNameComponent);
 
 
 
@@ -2994,6 +2995,8 @@ DocSignaturesTypeComponent = require('./doc-signatures-type-component');
 (name?: type.name<typeArgument, ...>, ...)
 
 @props.parameters [required]
+@props.emphasisStyle
+@props.style
  */
 
 DocSignaturesParametersComponent = (function(superClass) {
@@ -3030,10 +3033,7 @@ DocSignaturesParametersComponent = (function(superClass) {
 })(React.Component);
 
 styles = {
-  base: {},
-  oblique: {
-    fontStyle: 'italic'
-  }
+  base: {}
 };
 
 DocSignaturesParametersComponent.contextTypes = {
@@ -3060,6 +3060,8 @@ DocSignaturesTypeargumentsComponent = require('./doc-signatures-typearguments-co
 type.name<typeArgument, ...>[]
 
 @props.type [required]
+@props.emphasisStyle
+@props.style
  */
 
 DocSignaturesTypeComponent = (function(superClass) {
@@ -3070,15 +3072,17 @@ DocSignaturesTypeComponent = (function(superClass) {
   }
 
   DocSignaturesTypeComponent.prototype.render = function() {
-    var elm;
+    var elm, name, ref, ref1;
     return React.createElement("span", {
       "style": Array.prototype.concat.apply([], [styles.base, this.props.style])
-    }, (elm = [], elm.push(React.createElement("span", {
+    }, (elm = [], (this.props.type.name == null) && this.props.type.type === 'reflection' ? (name = '', ((ref = this.props.type.declaration) != null ? ref.signatures : void 0) != null ? name = 'function' : ((ref1 = this.props.type.declaration) != null ? ref1.children : void 0) != null ? name = 'object' : void 0, elm.push(React.createElement("span", {
+      "style": [this.props.emphasisStyle, styles.oblique]
+    }, name))) : (elm.push(React.createElement("span", {
       "style": [this.props.emphasisStyle, styles.oblique]
     }, this.props.type.name)), this.props.type.typeArguments ? elm.push(React.createElement(DocSignaturesTypeargumentsComponent, {
       "typeArguments": this.props.type.typeArguments,
       "emphasisStyle": this.props.emphasisStyle
-    })) : void 0, this.props.type.isArray ? elm.push(React.createElement("span", null, "[]")) : void 0, elm));
+    })) : void 0, this.props.type.isArray ? elm.push(React.createElement("span", null, "[]")) : void 0), elm));
   };
 
   return DocSignaturesTypeComponent;
@@ -3101,7 +3105,7 @@ module.exports = Radium(DocSignaturesTypeComponent);
 
 
 },{"./doc-signatures-typearguments-component":36,"radium":undefined,"react":undefined}],36:[function(require,module,exports){
-var DocSignaturesComponent, Radium, React, styles,
+var DocSignaturesTypeargumentsComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -3114,30 +3118,34 @@ Radium = require('radium');
 <typeArguments, ...>
 
 @props.typeArguments [required]
+@props.emphasisStyle
+@props.style
  */
 
-DocSignaturesComponent = (function(superClass) {
-  extend(DocSignaturesComponent, superClass);
+DocSignaturesTypeargumentsComponent = (function(superClass) {
+  extend(DocSignaturesTypeargumentsComponent, superClass);
 
-  function DocSignaturesComponent(props) {
-    DocSignaturesComponent.__super__.constructor.call(this, props);
+  function DocSignaturesTypeargumentsComponent(props) {
+    DocSignaturesTypeargumentsComponent.__super__.constructor.call(this, props);
   }
 
-  DocSignaturesComponent.prototype.render = function() {
+  DocSignaturesTypeargumentsComponent.prototype.render = function() {
     var elm;
     return React.createElement("span", {
       "style": Array.prototype.concat.apply([], [styles.base, this.props.style])
-    }, (elm = [], elm.push(React.createElement("span", null, '<')), this.props.typeArguments.forEach(function(targ, i) {
-      elm.push(React.createElement("span", {
-        "style": [this.props.emphasisStyle, styles.oblique]
-      }, targ.name));
-      if (i !== this.props.typeArguments.length - 1) {
-        return elm.push(React.createElement("span", null, ", "));
-      }
-    }), elm.push(React.createElement("span", null, '>')), elm));
+    }, (elm = [], elm.push(React.createElement("span", null, '<')), this.props.typeArguments.forEach((function(_this) {
+      return function(targ, i) {
+        elm.push(React.createElement("span", {
+          "style": [_this.props.emphasisStyle, styles.oblique]
+        }, targ.name));
+        if (i !== _this.props.typeArguments.length - 1) {
+          return elm.push(React.createElement("span", null, ", "));
+        }
+      };
+    })(this)), elm.push(React.createElement("span", null, '>')), elm));
   };
 
-  return DocSignaturesComponent;
+  return DocSignaturesTypeargumentsComponent;
 
 })(React.Component);
 
@@ -3148,11 +3156,11 @@ styles = {
   }
 };
 
-DocSignaturesComponent.contextTypes = {
+DocSignaturesTypeargumentsComponent.contextTypes = {
   ctx: React.PropTypes.any
 };
 
-module.exports = Radium(DocSignaturesComponent);
+module.exports = Radium(DocSignaturesTypeargumentsComponent);
 
 
 
