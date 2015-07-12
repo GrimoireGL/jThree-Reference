@@ -31,7 +31,7 @@ class DocDetailParameterTableComponent extends React.Component
           if prm.type.isArray
             elm.push <span>[]</span>
           table_row.push <span style={styles.type}>{elm}</span>
-          table_row.push <span>{prm.comment?.shortText ? (prm.comment?.text ? alt_text)}</span>
+          table_row.push <span>{prm.comment?.shortText || prm.comment?.text || alt_text}</span>
           table.push table_row
         <DocTableComponent prefix="#{@props.current.id}-prm" table={table} />
       }
