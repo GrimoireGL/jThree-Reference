@@ -22,3 +22,13 @@ module.exports =
       default: '#333'
       moderate: '#666'
       light: '#aaa'
+
+  inverse:
+    n:
+      emphasis: '#000'
+      default: '#333'
+      moderate: '#666'
+    r:
+      emphasis: 'rgba(255, 255, 255, 0.95)'
+      default: 'rgba(255, 255, 255, 0.7)'
+      moderate: 'rgba(255, 255, 255, 0.5)'
