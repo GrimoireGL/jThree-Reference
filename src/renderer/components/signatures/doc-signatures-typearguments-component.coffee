@@ -6,7 +6,7 @@ Radium = require 'radium'
 
 @props.typeArguments [required]
 ###
-class DocSignaturesComponent extends React.Component
+class DocSignaturesTypeargumentsComponent extends React.Component
   constructor: (props) ->
     super props
 
@@ -33,7 +33,7 @@ styles =
   oblique:
     fontStyle: 'italic'
 
-DocSignaturesComponent.contextTypes =
+DocSignaturesTypeargumentsComponent.contextTypes =
   ctx: React.PropTypes.any
 
-module.exports = Radium DocSignaturesComponent
+module.exports = Radium DocSignaturesTypeargumentsComponent
