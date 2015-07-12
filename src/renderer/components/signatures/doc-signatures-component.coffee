@@ -9,6 +9,8 @@ name(name?: type.name<typeArgument, ...>[], ...): type.name<typeArgument, ...>[]
 
 @props.signature [required]
 @props.name if Accessor, use this as name
+@props.emphasisStyle
+@props.style
 ###
 class DocSignaturesComponent extends React.Component
   constructor: (props) ->

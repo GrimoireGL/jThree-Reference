@@ -6,6 +6,8 @@ DocSignaturesTypeargumentsComponent = require './doc-signatures-typearguments-co
 type.name<typeArgument, ...>[]
 
 @props.type [required]
+@props.emphasisStyle
+@props.style
 ###
 class DocSignaturesTypeComponent extends React.Component
   constructor: (props) ->

@@ -5,6 +5,8 @@ Radium = require 'radium'
 <typeArguments, ...>
 
 @props.typeArguments [required]
+@props.emphasisStyle
+@props.style
 ###
 class DocSignaturesTypeargumentsComponent extends React.Component
   constructor: (props) ->
@@ -17,7 +19,7 @@ class DocSignaturesTypeargumentsComponent extends React.Component
         # <
         elm.push <span>{'<'}</span>
         # typeArguments, ...
-        @props.typeArguments.forEach (targ, i) ->
+        @props.typeArguments.forEach (targ, i) =>
           elm.push <span style={[@props.emphasisStyle, styles.oblique]}>{targ.name}</span>
           if i != @props.typeArguments.length - 1
             elm.push <span>, </span>

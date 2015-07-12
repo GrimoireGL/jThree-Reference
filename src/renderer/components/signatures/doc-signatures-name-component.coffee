@@ -7,6 +7,8 @@ name?
 
 @props.base [required]
 @props.name if Accessor, use this as name
+@props.emphasisStyle
+@props.style
 ###
 class DocSignaturesNameComponent extends React.Component
   constructor: (props) ->
@@ -34,9 +36,6 @@ class DocSignaturesNameComponent extends React.Component
 
 styles =
   base: {}
-
-  oblique:
-    fontStyle: 'italic'
 
 DocSignaturesNameComponent.contextTypes =
   ctx: React.PropTypes.any
