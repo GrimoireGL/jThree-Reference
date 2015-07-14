@@ -39,9 +39,10 @@ styles =
   base: {}
 
   from:
-    marginBottom: 11
+    marginBottom: 4
 
   tags:
+    marginTop: 11
     marginBottom: 11
 
   signatures:
