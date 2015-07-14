@@ -12,27 +12,6 @@ class DocDetailTitleComponent extends React.Component
   constructor: (props) ->
     super props
 
-  genKindStringStyle: (kindString) ->
-    color = colors.general.r.default
-
-    switch kindString
-      when 'Constructor'
-        color = '#337BFF'
-      when 'Property'
-        color = '#598213'
-      when 'Method'
-        color = '#6E00FF'
-      when 'Accessor'
-        color = '#D04C35'
-      when 'Enumeration member'
-        color = '#B17509'
-      else
-        color = colors.general.r.default
-
-    style =
-      color: color
-      borderColor: color
-
   render: ->
     dstyle =
       kind_string:
