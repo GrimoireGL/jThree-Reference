@@ -19,18 +19,23 @@ class DocTitleComponent extends React.Component
 
     switch kindString
       when 'Class'
+        color = '#337BFF'
       when 'Constructor'
         color = '#337BFF'
       when 'Interface'
+        color = '#598213'
       when 'Property'
         color = '#598213'
       when 'Enumeration'
+        color = '#B17509'
       when 'Enumeration member'
         color = '#B17509'
       when 'Module'
+        color = '#D04C35'
       when 'Accessor'
         color = '#D04C35'
       when 'Function'
+        color = '#6E00FF'
       when 'Method'
         color = '#6E00FF'
       else
@@ -47,7 +52,7 @@ class DocTitleComponent extends React.Component
         <div style={[styles.kind_string, @genKindStringStyle(@props.kindString), dstyle.kind_string]}>{@props.kindString}</div>
         <div style={[styles.title, dstyle.title]}>{@props.title}</div>
       </div>
-      <div style={styles.from}>
+      <div style={styles.info}>
         {@props.children}
       </div>
     </div>
@@ -58,6 +63,7 @@ styles =
 
   title_wrap:
     overflow: 'hidden'
+    marginBottom: 10
 
   kind_string:
     fontSize: 18
@@ -79,8 +85,7 @@ styles =
     float: 'left'
     fontWeight: 'bold'
 
-  from:
-    marginTop: 10
+  info:
     fontSize: 15
     color: colors.general.r.light
 
