@@ -2,6 +2,7 @@ React = require 'react'
 Radium = require 'radium'
 Link = require './link-component'
 DocTitleComponent = require './doc-title-component'
+DocFlagtagsComponent = require './doc-flagtags-component'
 colors = require './colors/color-definition'
 
 ###
@@ -42,19 +43,29 @@ class DocFactorTitleComponent extends React.Component
           marginLeft: 0
 
     <DocTitleComponent title={@props.current.name} kindString={@props.current.kindString} dstyle={dstyle} style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
-      <div>
-        {
-          unless @props.collapsed
+      {
+        unless @props.collapsed
+          <div style={styles.from}>
             <span>
               <span>{"#{@props.current.kindString} in "}</span>
               <a style={styles.link} target='_new' href={"https://github.com/jThreeJS/jThree/tree/develop/jThree/src/#{@props.from.name.replace(/"/g, '')}.ts"}>{"#{@props.from.name.replace(/"/g, '').replace(/$/, '.ts')}"}</a>
             </span>
-        }
-      </div>
+          </div>
+      }
+      {
+        unless @props.collapsed
+          <DocFlagtagsComponent flags={@props.current.flags} style={styles.tags} />
+      }
     </DocTitleComponent>
 
 styles =
   base: {}
+
+  from:
+    marginBottom: 11
+
+  tags:
+    marginBottom: 11
 
   link:
     color: colors.general.r.light
