@@ -5,6 +5,7 @@ DocItemComponent = require './doc-item-component'
 
 ###
 @props.current [required] local current which is child of current factor
+@props.style
 ###
 class DocDetailParametersComponent extends React.Component
   constructor: (props) ->
@@ -12,7 +13,7 @@ class DocDetailParametersComponent extends React.Component
 
   render: ->
     <DocItemComponent title='Parameters' style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
-      <DocDetailParametersTableComponent current={@props.current} style={[styles.content]} />
+      <DocDetailParametersTableComponent parameters={@props.current.signatures[0].parameters} current_id={@props.current.id} style={[styles.content]} />
     </DocItemComponent>
 
 styles =

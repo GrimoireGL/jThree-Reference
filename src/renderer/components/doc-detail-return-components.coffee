@@ -5,6 +5,7 @@ DocItemComponent = require './doc-item-component'
 
 ###
 @props.current [required] local current which is child of current factor
+@props.style
 ###
 class DocDetailReturnComponent extends React.Component
   constructor: (props) ->

@@ -6,6 +6,7 @@ colors = require './colors/color-definition'
 
 ###
 @props.current [required] local current which is child of current factor
+@props.style
 ###
 class DocDetailReturnTableComponent extends React.Component
   constructor: (props) ->
