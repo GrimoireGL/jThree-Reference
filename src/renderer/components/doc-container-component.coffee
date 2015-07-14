@@ -5,6 +5,7 @@ Link = require './link-component'
 DocDescriptionComponent = require './doc-description-component'
 DocFactorTitleComponent = require './doc-factor-title-component'
 DocFactorItemComponent = require './doc-factor-item-component'
+DocFactorHierarchyComponent = require './doc-factor-hierarchy-component'
 DocTypeparameterComponent = require './doc-typeparameter-component'
 
 class DocContainerComponents extends React.Component
@@ -34,6 +35,10 @@ class DocContainerComponents extends React.Component
               {
                 if current.typeParameter? && !@props.collapsed
                   <DocTypeparameterComponent current={current} />
+              }
+              {
+                if !@props.collapsed && (current.extendedTypes? || current.extendedBy?)
+                  <DocFactorHierarchyComponent current={current} />
               }
               {
                 if current.groups?
