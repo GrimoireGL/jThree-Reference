@@ -5,6 +5,7 @@ Link = require './link-component'
 DocDescriptionComponent = require './doc-description-component'
 DocFactorTitleComponent = require './doc-factor-title-component'
 DocFactorItemComponent = require './doc-factor-item-component'
+DocTypeparameterComponent = require './doc-typeparameter-component'
 
 class DocContainerComponents extends React.Component
   constructor: (props) ->
@@ -29,6 +30,10 @@ class DocContainerComponents extends React.Component
                 unless @props.collapsed
                   text = [current.comment?.shortText, current.comment?.text]
                   <DocDescriptionComponent text={text} />
+              }
+              {
+                if current.typeParameter? && !@props.collapsed
+                  <DocTypeparameterComponent current={current} />
               }
               {
                 if current.groups?

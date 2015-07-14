@@ -22,7 +22,8 @@ class DocDetailParameterTableComponent extends React.Component
           alt_text = 'no description'
           table_row = []
           table_row.push <span>{prm.name}</span>
-          table_row.push <span style={styles.type}><DocSignaturesTypeComponent type={prm.type} emphasisStyle={styles.emphasis} /></span>
+          if prm.type?
+            table_row.push <span style={styles.type}><DocSignaturesTypeComponent type={prm.type} emphasisStyle={styles.emphasis} /></span>
           table_row.push <span>{prm.comment?.shortText || prm.comment?.text || alt_text}</span>
           table.push table_row
         <DocTableComponent prefix="#{@props.current_id}-prm" table={table} />
