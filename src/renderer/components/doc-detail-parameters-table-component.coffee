@@ -2,8 +2,8 @@ React = require 'react'
 Radium = require 'radium'
 Link = require './link-component'
 DocTableComponent = require './doc-table-component'
-colors = require './colors/color-definition'
 DocSignaturesTypeComponent = require './signatures/doc-signatures-type-component'
+colors = require './colors/color-definition'
 
 ###
 @props.parameters [required] parameters
