@@ -6,6 +6,7 @@ DocDescriptionComponent = require './doc-description-component'
 DocFactorTitleComponent = require './doc-factor-title-component'
 DocFactorItemComponent = require './doc-factor-item-component'
 DocFactorHierarchyComponent = require './doc-factor-hierarchy-component'
+DocFactorImplementsComponent = require './doc-factor-implements-component'
 DocTypeparameterComponent = require './doc-typeparameter-component'
 
 class DocContainerComponents extends React.Component
@@ -28,17 +29,21 @@ class DocContainerComponents extends React.Component
             <div>
               <DocFactorTitleComponent current={current} from={@props.doc_data[file_id].from} collapsed={@props.collapsed} />
               {
-                unless @props.collapsed
+                if !@props.collapsed
                   text = [current.comment?.shortText, current.comment?.text]
                   <DocDescriptionComponent text={text} />
               }
               {
-                if current.typeParameter? && !@props.collapsed
+                if !@props.collapsed && current.typeParameter?
                   <DocTypeparameterComponent current={current} />
               }
               {
                 if !@props.collapsed && (current.extendedTypes? || current.extendedBy?)
                   <DocFactorHierarchyComponent current={current} />
+              }
+              {
+                if !@props.collapsed && (current.implementedTypes? || current.implementedBy?)
+                   <DocFactorImplementsComponent current={current} />
               }
               {
                 if current.groups?
