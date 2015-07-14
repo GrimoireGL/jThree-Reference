@@ -21,11 +21,12 @@ class DocSignaturesTypeComponent extends React.Component
           # type.name
           #
           # TODO
+          # serach type declaration and reflection system
           #
           name = ''
           if @props.type.declaration?.signatures?
             name = 'function'
-          else if @props.type.declaration?.children?
+          else if @props.type.declaration?.children? || @props.type.declaration?.indexSignature?
             name = 'object'
           elm.push <span style={[@props.emphasisStyle, styles.oblique]}>{name}</span>
         else

@@ -1,10 +1,11 @@
 React = require 'react'
 Radium = require 'radium'
-DocDetailTitleComponent = require './doc-detail-title-component'
 DocSlideWrapperComponent = require './doc-slide-wrapper-component'
 DocDescriptionComponent = require './doc-description-component'
+DocDetailTitleComponent = require './doc-detail-title-component'
 DocDetailParametersComponent = require './doc-detail-parameters-component'
 DocDetailReturnComponent = require './doc-detail-return-components'
+DocTypeparameterComponent = require './doc-typeparameter-component'
 
 class DocDetailContainerComponent extends React.Component
   constructor: (props) ->
@@ -36,6 +37,10 @@ class DocDetailContainerComponent extends React.Component
               <div>
                 <DocDetailTitleComponent current={current_local} from={current} />
                 <DocDescriptionComponent text={text} />
+                {
+                  if current_local.typeParameter?
+                    <DocTypeparameterComponent current={current_local} />
+                }
                 {
                   if current_local.signatures?.every((s) -> s.parameters?)
                     <DocDetailParametersComponent current={current_local} />

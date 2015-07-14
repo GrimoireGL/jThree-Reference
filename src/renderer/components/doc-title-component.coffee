@@ -3,6 +3,13 @@ Radium = require 'radium'
 Link = require './link-component'
 colors = require './colors/color-definition'
 
+###
+@props.title [required]
+@props.kindString [required]
+@props.children
+@props.dstyle
+@props.style
+###
 class DocTitleComponent extends React.Component
   constructor: (props) ->
     super props
@@ -13,13 +20,23 @@ class DocTitleComponent extends React.Component
     switch kindString
       when 'Class'
         color = '#337BFF'
+      when 'Constructor'
+        color = '#337BFF'
       when 'Interface'
+        color = '#598213'
+      when 'Property'
         color = '#598213'
       when 'Enumeration'
         color = '#B17509'
+      when 'Enumeration member'
+        color = '#B17509'
       when 'Module'
         color = '#D04C35'
+      when 'Accessor'
+        color = '#D04C35'
       when 'Function'
+        color = '#6E00FF'
+      when 'Method'
         color = '#6E00FF'
       else
         color = colors.general.r.default
@@ -29,44 +46,15 @@ class DocTitleComponent extends React.Component
       borderColor: color
 
   render: ->
-    dstyle = {}
-    if @props.collapsed
-      dstyle =
-        base:
-          marginBottom: 30
-
-        kind_string:
-          fontSize: 14
-          paddingTop: 3
-          paddingBottom: 1
-          paddingLeft: 12
-          paddingRight: 12
-          marginLeft: 0
-          marginRight: 12
-          textAlign: 'center'
-          float: 'none'
-          display: 'inline-block'
-
-        title:
-          fontSize: 20
-          paddingLeft: 0
-          paddingRight: 0
-          float: 'none'
-          marginTop: 10
-          marginLeft: 0
-
+    dstyle = if @props.dstyle? then @props.dstyle else {}
     <div style={Array.prototype.concat.apply([], [styles.base, @props.style, dstyle.base])}>
       <div style={styles.title_wrap}>
-        <div style={[styles.kind_string, @genKindStringStyle(@props.current.kindString), dstyle.kind_string]}>{@props.current.kindString}</div>
-        <div style={[styles.title, dstyle.title]}>{@props.current.name}</div>
+        <div style={[styles.kind_string, @genKindStringStyle(@props.kindString), dstyle.kind_string]}>{@props.kindString}</div>
+        <div style={[styles.title, dstyle.title]}>{@props.title}</div>
       </div>
-      {
-        unless @props.collapsed
-          <div style={styles.from}>
-            <span>{"#{@props.current.kindString} in "}</span>
-            <a style={styles.link} target='_new' href={"https://github.com/jThreeJS/jThree/tree/develop/jThree/src/#{@props.from.name.replace(/"/g, '')}.ts"}>{"#{@props.from.name.replace(/"/g, '').replace(/$/, '.ts')}"}</a>
-          </div>
-      }
+      <div style={styles.info}>
+        {@props.children}
+      </div>
     </div>
 
 styles =
@@ -75,6 +63,7 @@ styles =
 
   title_wrap:
     overflow: 'hidden'
+    marginBottom: 10
 
   kind_string:
     fontSize: 18
@@ -96,12 +85,8 @@ styles =
     float: 'left'
     fontWeight: 'bold'
 
-  from:
-    marginTop: 10
+  info:
     fontSize: 15
-    color: colors.general.r.light
-
-  link:
     color: colors.general.r.light
 
 DocTitleComponent.contextTypes =

@@ -2,11 +2,13 @@ React = require 'react'
 Radium = require 'radium'
 Link = require './link-component'
 DocTableComponent = require './doc-table-component'
-colors = require './colors/color-definition'
 DocSignaturesTypeComponent = require './signatures/doc-signatures-type-component'
+colors = require './colors/color-definition'
 
 ###
-@props.current [required] local current which is child of current factor
+@props.parameters [required] parameters
+@props.current_id [required] current.id
+@props.style
 ###
 class DocDetailParameterTableComponent extends React.Component
   constructor: (props) ->
@@ -16,14 +18,15 @@ class DocDetailParameterTableComponent extends React.Component
     <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       {
         table = []
-        for prm, i in @props.current.signatures[0].parameters
+        for prm, i in @props.parameters
           alt_text = 'no description'
           table_row = []
           table_row.push <span>{prm.name}</span>
-          table_row.push <span style={styles.type}><DocSignaturesTypeComponent type={prm.type} emphasisStyle={styles.emphasis} /></span>
+          if prm.type?
+            table_row.push <span style={styles.type}><DocSignaturesTypeComponent type={prm.type} emphasisStyle={styles.emphasis} /></span>
           table_row.push <span>{prm.comment?.shortText || prm.comment?.text || alt_text}</span>
           table.push table_row
-        <DocTableComponent prefix="#{@props.current.id}-prm" table={table} />
+        <DocTableComponent prefix="#{@props.current_id}-prm" table={table} />
       }
     </div>
 
