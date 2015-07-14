@@ -2,8 +2,8 @@ React = require 'react'
 Radium = require 'radium'
 Route = require './route-component'
 Link = require './link-component'
-DocTitleComponent = require './doc-title-component'
 DocDescriptionComponent = require './doc-description-component'
+DocFactorTitleComponent = require './doc-factor-title-component'
 DocFactorItemComponent = require './doc-factor-item-component'
 
 class DocContainerComponents extends React.Component
@@ -24,7 +24,7 @@ class DocContainerComponents extends React.Component
           current = @props.doc_data[file_id]?[factor_id]
           if current?
             <div>
-              <DocTitleComponent current={current} from={@props.doc_data[file_id].from} collapsed={@props.collapsed} />
+              <DocFactorTitleComponent current={current} from={@props.doc_data[file_id].from} collapsed={@props.collapsed} />
               {
                 unless @props.collapsed
                   text = [current.comment?.shortText, current.comment?.text]

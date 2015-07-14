@@ -1,8 +1,8 @@
 React = require 'react'
 Radium = require 'radium'
-DocDetailTitleComponent = require './doc-detail-title-component'
 DocSlideWrapperComponent = require './doc-slide-wrapper-component'
 DocDescriptionComponent = require './doc-description-component'
+DocDetailTitleComponent = require './doc-detail-title-component'
 DocDetailParametersComponent = require './doc-detail-parameters-component'
 DocDetailReturnComponent = require './doc-detail-return-components'
 

@@ -1,9 +1,13 @@
 React = require 'react'
 Radium = require 'radium'
-Link = require './link-component'
 DocDetailSignaturesComponent = require './doc-detail-signatures-component'
+DocTitleComponent = require './doc-title-component'
 colors = require './colors/color-definition'
 
+###
+@props.current [required]
+@props.style
+###
 class DocDetailTitleComponent extends React.Component
   constructor: (props) ->
     super props
@@ -30,56 +34,22 @@ class DocDetailTitleComponent extends React.Component
       borderColor: color
 
   render: ->
-    <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
-      <div style={styles.title_wrap}>
-        <div style={[styles.kind_string, @genKindStringStyle(@props.current.kindString)]}>{@props.current.kindString}</div>
-        <div style={[styles.title]}>
-          <span>.</span><span>{@props.current.name}</span>
-        </div>
+    dstyle =
+      kind_string:
+        borderRadius: 7
+
+    <DocTitleComponent title={".#{@props.current.name}"} kindString={@props.current.kindString} dstyle={dstyle} style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
+      <div>
+        {
+          if @props.current.inheritedFrom?
+            <span style={styles.from}>{"Inherited from #{@props.current.inheritedFrom.name.replace(/__constructor/, 'constructor')}"}</span>
+        }
+        <DocDetailSignaturesComponent style={styles.signatures} current={@props.current} />
       </div>
-      {
-        if @props.current.inheritedFrom?
-          <div style={styles.from}>{"Inherited from #{@props.current.inheritedFrom.name.replace(/__constructor/, 'constructor')}"}</div>
-      }
-      <DocDetailSignaturesComponent style={styles.signatures} current={@props.current} />
-    </div>
+    </DocTitleComponent>
 
 styles =
-  base:
-    marginBottom: 40
-
-  title_wrap:
-    overflow: 'hidden'
-
-  kind_string:
-    fontSize: 18
-    borderStyle: 'solid'
-    borderWidth: 1
-    paddingTop: 6
-    paddingBottom: 6
-    paddingLeft: 12
-    paddingRight: 12
-    marginTop: 3
-    float: 'left'
-    borderRadius: 7
-
-  title:
-    fontSize: 35
-    paddingLeft: 12
-    paddingRight: 12
-    marginLeft: 10
-    color: colors.general.r.emphasis
-    float: 'left'
-    fontWeight: 'bold'
-
-  title_from:
-    textDecoration: 'underline'
-    cursor: 'pointer'
-
-  from:
-    marginTop: 10
-    fontSize: 15
-    color: colors.general.r.light
+  base: {}
 
   signatures:
     marginTop: 23
