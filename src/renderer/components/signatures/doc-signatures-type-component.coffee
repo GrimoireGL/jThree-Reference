@@ -18,7 +18,9 @@ class DocSignaturesTypeComponent extends React.Component
     <span style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       {
         elm = []
-        if !@props.type.name? && @props.type.type == 'reflection'
+        if !@props.type?
+          # do nothing
+        else if !@props.type.name? && @props.type.type == 'reflection'
           # type.name
           #
           # TODO
