@@ -34,7 +34,6 @@ class AppComponent extends React.Component
     dstyle =
       main:
         height: @state.mainHeight
-    console.log @state
     <div style={styles.base}>
       <Route style={styles.header}>
         <HeaderComponent notroute='index' />
