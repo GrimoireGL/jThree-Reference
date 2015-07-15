@@ -1,5 +1,6 @@
 React = require 'react'
 Radium = require 'radium'
+Link = require '../link-component'
 DocSignaturesTypeargumentsComponent = require './doc-signatures-typearguments-component'
 
 ###
@@ -17,7 +18,9 @@ class DocSignaturesTypeComponent extends React.Component
     <span style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       {
         elm = []
-        if !@props.type.name? && @props.type.type == 'reflection'
+        if !@props.type?
+          # do nothing
+        else if !@props.type.name? && @props.type.type == 'reflection'
           # type.name
           #
           # TODO
@@ -31,7 +34,11 @@ class DocSignaturesTypeComponent extends React.Component
           elm.push <span style={[@props.emphasisStyle, styles.oblique]}>{name}</span>
         else
           # type.name
-          elm.push <span style={[@props.emphasisStyle, styles.oblique]}>{@props.type.name}</span>
+          name = if @props.type.type == 'reference'
+              <Link uniqRoute={"class:global:.+:#{@props.type.id}"} style={[styles.link, @props.emphasisStyle, styles.oblique]}>{@props.type.name}</Link>
+            else
+              <span>{@props.type.name}</span>
+          elm.push <span style={[@props.emphasisStyle, styles.oblique]}>{name}</span>
           # <typeArguments, ...>
           if @props.type.typeArguments
             elm.push <DocSignaturesTypeargumentsComponent typeArguments={@props.type.typeArguments} emphasisStyle={@props.emphasisStyle} />
@@ -47,6 +54,13 @@ styles =
 
   oblique:
     fontStyle: 'italic'
+
+  link:
+    textDecoration: 'none'
+    cursor: 'pointer'
+
+    ':hover':
+      textDecoration: 'underline'
 
 DocSignaturesTypeComponent.contextTypes =
   ctx: React.PropTypes.any

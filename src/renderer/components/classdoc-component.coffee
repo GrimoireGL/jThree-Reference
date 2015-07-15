@@ -46,6 +46,7 @@ styles =
     display: 'flex'
     flexDirection: 'row'
     flexWrap: 'nowrap'
+
   list:
     boxSizing: 'border-box'
     paddingLeft: 10
@@ -55,17 +56,27 @@ styles =
     borderRightWidth: 1
     borderRightColor: '#ccc'
     borderRightStyle: 'solid'
+    position: 'fixed'
+    top: 80
+    height: 'calc(100% - 80px)'
+    overflowY: 'scroll'
+    overflowX: 'hidden'
+
   container:
     flexGrow: '1'
     display: 'flex'
     flexDirection: 'column'
     flexWrap: 'nowrap'
+    marginLeft: 360
+
   doc_wrapper:
     display: 'flex'
     flexDirection: 'row'
     flexWrap: 'nowrap'
-    flex: '1'
+    flexGrow: '1'
+
   doc_container: {}
+
   doc_detail_container:
     flexGrow: '1'
 

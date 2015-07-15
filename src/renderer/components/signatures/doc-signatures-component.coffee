@@ -24,7 +24,7 @@ class DocSignaturesComponent extends React.Component
         elm.push <DocSignaturesNameComponent base={@props.signature} emphasisStyle={@props.emphasisStyle} name={@props.name} />
         # (name?: type.name<typeArgument, ...>, ...)
         params = @props.signature.parameters
-        params = [] if !params? && (@props.signature.kindString == 'Get signature' || @props.signature.kindString == 'Set signature' || @props.signature.kindString == 'Call signature')
+        params = [] if !params? && (@props.signature.kindString == 'Get signature' || @props.signature.kindString == 'Set signature' || @props.signature.kindString == 'Call signature' || @props.signature.kindString == 'Constructor signature')
         if params?
           elm.push <DocSignaturesParametersComponent parameters={params} emphasisStyle={@props.emphasisStyle} />
         # :

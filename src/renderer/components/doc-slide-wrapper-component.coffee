@@ -18,8 +18,13 @@ class DocSlideWrapperComponent extends React.Component
       @updateWrapperWidth()
 
   updateWrapperWidth: ->
-    @setState
-      wrapperWidth: React.findDOMNode(@refs.docWrapper).clientWidth - slide.from
+    wrapperWidth = React.findDOMNode(@refs.docWrapper).clientWidth - slide.from
+    if @state.wrapperWidth != wrapperWidth
+      @setState
+        wrapperWidth: wrapperWidth
+
+  componentDidUpdate: ->
+    @updateWrapperWidth()
 
   componentDidMount: ->
     @updateWrapperWidth()
@@ -37,9 +42,6 @@ class DocSlideWrapperComponent extends React.Component
     collapsed = false
     if @props.argu.route_arr[1]?.toString() == 'local'
       collapsed = true
-    if @state.wrapperWidth
-      dstyle.wrapper =
-          width: @state.wrapperWidth
     if collapsed
       dstyle.left =
         boxSizing: 'border-box'
@@ -55,6 +57,9 @@ class DocSlideWrapperComponent extends React.Component
 
         ':hover':
           width: slide.to
+    if @state.wrapperWidth
+      dstyle.wrapper =
+          width: @state.wrapperWidth
     props = {}
     for k, v of @props
       if k != 'children' && k != 'style'
