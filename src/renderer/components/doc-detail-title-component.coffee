@@ -1,5 +1,6 @@
 React = require 'react'
 Radium = require 'radium'
+Link = require './link-component'
 DocDetailSignaturesComponent = require './doc-detail-signatures-component'
 DocTitleComponent = require './doc-title-component'
 DocFlagtagsComponent = require './doc-flagtags-component'
@@ -13,6 +14,15 @@ class DocDetailTitleComponent extends React.Component
   constructor: (props) ->
     super props
 
+  constructLink = (name) ->
+    match = name.match(/^(.+)\.(.+)$/)
+    console.log match
+    <span>
+      <Link style={styles.link} href={"/class/#{match[1]}"}>{match[1]}</Link>
+      <span>.</span>
+      <Link style={styles.link} href={"/class/#{match[1]}/#{match[2].replace(/__constructor/, 'constructor')}"}>{match[2].replace(/__constructor/, 'constructor')}</Link>
+    </span>
+
   render: ->
     dstyle =
       kind_string:
@@ -22,13 +32,13 @@ class DocDetailTitleComponent extends React.Component
       {
         if @props.current.inheritedFrom?
           <div style={styles.from}>
-            <span>{"Inherited from #{@props.current.inheritedFrom.name.replace(/__constructor/, 'constructor')}"}</span>
+            <span><span>{"Inherited from "}</span>{constructLink(@props.current.inheritedFrom.name)}</span>
           </div>
       }
       {
         if @props.current.overwrites?
           <div style={styles.from}>
-            <span>{"Overwrites #{@props.current.overwrites.name.replace(/__constructor/, 'constructor')}"}</span>
+            <span><span>{"Overwrites "}</span>{constructLink(@props.current.overwrites.name)}</span>
           </div>
       }
       <DocFlagtagsComponent flags={@props.current.flags} style={styles.tags} />
@@ -47,6 +57,14 @@ styles =
 
   signatures:
     marginTop: 23
+
+  link:
+    color: colors.general.r.light
+    textDecoration: 'none'
+    cursor: 'pointer'
+
+    ':hover':
+      textDecoration: 'underline'
 
 DocDetailTitleComponent.contextTypes =
   ctx: React.PropTypes.any
