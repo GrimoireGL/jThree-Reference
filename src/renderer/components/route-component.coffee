@@ -89,7 +89,9 @@ class RouteComponent extends React.Component
   render: ->
     <div style={@props.style}>
       {
-        console.log 'route', (+new Date()).toString()[-4..-1], @props.children.type?.displayName || @props.children.type?.name || @props.children[0]?.type?.displayName || @props.children[0]?.type?.name
+        # _children_arr = []
+        # React.Children.forEach @props.children, (c) -> _children_arr.push c
+        # console.log 'route', (+new Date()).toString()[-4..-1], _children_arr.map (c) -> c.type?.displayName || c.type?.name || c.type
         @router.route @state.fragment, @props.logined, (route, argu, default_route, fragment, default_fragment) =>
           if default_route? && default_fragment?
             @context.ctx.routeAction.navigate(fragment, {replace: true, silent: true})

@@ -8,10 +8,12 @@ DocFactorItemComponent = require './doc-factor-item-component'
 DocFactorHierarchyComponent = require './doc-factor-hierarchy-component'
 DocFactorImplementsComponent = require './doc-factor-implements-component'
 DocTypeparameterComponent = require './doc-typeparameter-component'
+DocSearchContainerComponent = require './doc-search-container-component'
 
 class DocContainerComponents extends React.Component
   constructor: (props) ->
     super props
+    @loadingQueue = []
 
   close: ->
     if @props.argu.route_arr[1]?.toString() == 'local'
@@ -26,6 +28,12 @@ class DocContainerComponents extends React.Component
         if file_id? && factor_id?
           current = @props.doc_data[file_id]?[factor_id]
           if current?
+            splice_index = null
+            for q, i in @loadingQueue
+              if q.file_id == file_id && q.factor_id == factor_id
+                splice_index = i
+                break
+            @loadingQueue.splice splice_index, 1 if splice_index?
             <div>
               <DocFactorTitleComponent current={current} from={@props.doc_data[file_id].from} collapsed={@props.collapsed} />
               {
@@ -53,11 +61,20 @@ class DocContainerComponents extends React.Component
             </div>
           else
             if window?
-              @context.ctx.docAction.updateDoc file_id, factor_id
+              if !@loadingQueue.some((q) -> q.file_id == file_id && q.factor_id == factor_id)
+                # console.log 'get'
+                @loadingQueue.push
+                  file_id: file_id
+                  factor_id: factor_id
+                process.nextTick => @context.ctx.docAction.updateDoc file_id, factor_id
+              else
+                # console.log 'queue'
             else
               throw new Error 'doc_data must be initialized by initialStates'
               # TODO: show activity indicator while loading docs
             <span>Loading...</span>
+        else
+          <DocSearchContainerComponent />
       }
     </div>
 

@@ -23,8 +23,8 @@ class DocSlideWrapperComponent extends React.Component
       @setState
         wrapperWidth: wrapperWidth
 
-  componentDidUpdate: ->
-    @updateWrapperWidth()
+  # componentDidUpdate: ->
+  #   @updateWrapperWidth()
 
   componentDidMount: ->
     @updateWrapperWidth()
@@ -38,6 +38,7 @@ class DocSlideWrapperComponent extends React.Component
       @context.ctx.routeAction.navigate(document.location.pathname.match(/^(.+)\/[^\/]+$/)[1])
 
   render: ->
+    # console.log "render DocSlideWrapper", (+new Date()).toString()[-4..-1]
     dstyle = {}
     collapsed = false
     if @props.argu.route_arr[1]?.toString() == 'local'
