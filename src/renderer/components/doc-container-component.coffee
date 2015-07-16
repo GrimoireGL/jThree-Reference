@@ -66,7 +66,7 @@ class DocContainerComponents extends React.Component
                 @loadingQueue.push
                   file_id: file_id
                   factor_id: factor_id
-                process.nextTick => @context.ctx.docAction.updateDoc file_id, factor_id
+                @context.ctx.docAction.updateDoc file_id, factor_id
               else
                 # console.log 'queue'
             else

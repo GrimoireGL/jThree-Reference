@@ -12,23 +12,21 @@ class DocIncrementalComponent extends React.Component
 
   componentWillMount: ->
     list = @props.list
+    list.sort()
     @setState
       text: ''
       result: []
       list: list
-    process.nextTick =>
-      @setState
-        list: list.sort()
-      @updateSearch('')
+    @updateSearch('', list)
 
   updateText: (e) ->
     text = e.target.value
     @setState
       text: text
-    process.nextTick =>
-      @updateSearch(text)
+    @updateSearch(text)
 
-  updateSearch: (text) ->
+  updateSearch: (text, list) ->
+    list ||= @state.list ? []
     result = []
     md_all_completely = []
     md_all_forward = []
@@ -37,7 +35,7 @@ class DocIncrementalComponent extends React.Component
     regexp_all = new RegExp('^(.*?)(' + text + ')(.*?)$', 'i')
     regexp = new RegExp('^(.*?)(' + text.split('').join(')(.*?)(') + ')(.*?)$', 'i')
     dstyle = [styles.default, styles.emphasis]
-    for l in @state.list
+    for l in list
       match = l.match(regexp)
       if match
         match_all = l.match(regexp_all)
