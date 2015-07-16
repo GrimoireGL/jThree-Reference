@@ -16,6 +16,7 @@ class AppComponent extends React.Component
       @updateMainHeight()
 
   updateMainHeight: ->
+    # console.log 'main height'
     @setState
       mainHeight: document.documentElement.clientHeight - 80
 

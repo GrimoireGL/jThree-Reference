@@ -20,6 +20,12 @@ class ClassDocComponent extends React.Component
   componentDidMount: ->
     @store.onChange @_onChange.bind(@)
 
+  # shouldComponentUpdate: (np, ns) ->
+  #   console.log 'ClassDoc update'
+  #   console.log np, @props
+  #   console.log ns, @state
+  #   return true
+
   componentWillUnmount: ->
     @store.removeChangeListener(@_onChange.bind(@))
 
