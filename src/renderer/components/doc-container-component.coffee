@@ -8,6 +8,7 @@ DocFactorItemComponent = require './doc-factor-item-component'
 DocFactorHierarchyComponent = require './doc-factor-hierarchy-component'
 DocFactorImplementsComponent = require './doc-factor-implements-component'
 DocTypeparameterComponent = require './doc-typeparameter-component'
+DocSearchContainerComponent = require './doc-search-container-component'
 
 class DocContainerComponents extends React.Component
   constructor: (props) ->
@@ -72,6 +73,8 @@ class DocContainerComponents extends React.Component
               throw new Error 'doc_data must be initialized by initialStates'
               # TODO: show activity indicator while loading docs
             <span>Loading...</span>
+        else
+          <DocSearchContainerComponent />
       }
     </div>
 
