@@ -598,11 +598,7 @@ DocContainerComponents = (function(superClass) {
                 file_id: file_id,
                 factor_id: factor_id
               });
-              process.nextTick((function(_this) {
-                return function() {
-                  return _this.context.ctx.docAction.updateDoc(file_id, factor_id);
-                };
-              })(this));
+              this.context.ctx.docAction.updateDoc(file_id, factor_id);
             } else {
 
             }
@@ -1853,19 +1849,13 @@ DocIncrementalComponent = (function(superClass) {
   DocIncrementalComponent.prototype.componentWillMount = function() {
     var list;
     list = this.props.list;
+    list.sort();
     this.setState({
       text: '',
       result: [],
       list: list
     });
-    return process.nextTick((function(_this) {
-      return function() {
-        _this.setState({
-          list: list.sort()
-        });
-        return _this.updateSearch('');
-      };
-    })(this));
+    return this.updateSearch('', list);
   };
 
   DocIncrementalComponent.prototype.updateText = function(e) {
@@ -1874,15 +1864,12 @@ DocIncrementalComponent = (function(superClass) {
     this.setState({
       text: text
     });
-    return process.nextTick((function(_this) {
-      return function() {
-        return _this.updateSearch(text);
-      };
-    })(this));
+    return this.updateSearch(text);
   };
 
-  DocIncrementalComponent.prototype.updateSearch = function(text) {
+  DocIncrementalComponent.prototype.updateSearch = function(text, list) {
     var dstyle, elm, i, j, k, l, len, len1, len2, m, match, match_all, md, md_all, md_all_completely, md_all_forward, md_part, md_result, n, ref, ref1, ref2, regexp, regexp_all, result;
+    list || (list = (ref = this.state.list) != null ? ref : []);
     result = [];
     md_all_completely = [];
     md_all_forward = [];
@@ -1891,9 +1878,8 @@ DocIncrementalComponent = (function(superClass) {
     regexp_all = new RegExp('^(.*?)(' + text + ')(.*?)$', 'i');
     regexp = new RegExp('^(.*?)(' + text.split('').join(')(.*?)(') + ')(.*?)$', 'i');
     dstyle = [styles["default"], styles.emphasis];
-    ref = this.state.list;
-    for (j = 0, len = ref.length; j < len; j++) {
-      l = ref[j];
+    for (j = 0, len = list.length; j < len; j++) {
+      l = list[j];
       match = l.match(regexp);
       if (match) {
         match_all = l.match(regexp_all);
