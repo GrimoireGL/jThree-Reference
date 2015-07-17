@@ -299,8 +299,17 @@ CharIconComponent = (function(superClass) {
   }
 
   CharIconComponent.prototype.render = function() {
+    var dstyle, ref;
+    dstyle = {};
+    if (((ref = this.props.char) != null ? ref.length : void 0) >= 2) {
+      dstyle.base = {
+        width: 'auto',
+        paddingLeft: 8,
+        paddingRight: 8
+      };
+    }
     return React.createElement("span", {
-      "style": Array.prototype.concat.apply([], [styles.base, this.props.style])
+      "style": Array.prototype.concat.apply([], [styles.base, this.props.style, dstyle.base])
     }, (this.props.char != null ? React.createElement("span", null, this.props.char) : this.props.icomoon != null ? React.createElement("span", {
       "className": "icon-" + this.props.icomoon
     }) : null));
@@ -320,7 +329,8 @@ styles = {
     borderColor: '#000',
     marginTop: 4,
     marginRight: 10,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 13
   }
 };
 
@@ -1823,7 +1833,7 @@ module.exports = Radium(DocFlagtagsComponent);
 
 
 },{"./colors/color-definition":7,"radium":undefined,"react":undefined}],23:[function(require,module,exports){
-var DocIncrementalComponent, Radium, React, colors, styles,
+var DocIncrementalComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -1831,12 +1841,20 @@ React = require('react');
 
 Radium = require('radium');
 
+Link = require('./link-component');
+
 colors = require('./colors/color-definition');
 
 
 /*
-@props.list [required] list array of search target
+@props.list [required] list array contains hash
+hash overview:
+{target: (string), content: [ReactElement, 'match', ...]}
+target: target of search
+content: elements array which is inserted to result list. if array factor
+is 'match', it is replace to matched result element.
 @props.style
+@props.styles apply for each elements
  */
 
 DocIncrementalComponent = (function(superClass) {
@@ -1849,7 +1867,13 @@ DocIncrementalComponent = (function(superClass) {
   DocIncrementalComponent.prototype.componentWillMount = function() {
     var list;
     list = this.props.list;
-    list.sort();
+    list.sort(function(v1, v2) {
+      if (v1.target > v2.target) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
     this.setState({
       text: '',
       result: [],
@@ -1868,75 +1892,121 @@ DocIncrementalComponent = (function(superClass) {
   };
 
   DocIncrementalComponent.prototype.updateSearch = function(text, list) {
-    var dstyle, elm, i, j, k, l, len, len1, len2, m, match, match_all, md, md_all, md_all_completely, md_all_forward, md_part, md_result, n, ref, ref1, ref2, regexp, regexp_all, result;
+    var j, l, len, match, match_all, md_all, md_all_completely, md_all_forward, md_part, ref, regexp, regexp_all, result;
     list || (list = (ref = this.state.list) != null ? ref : []);
+    text = text.replace(/\s/g, '');
     result = [];
     md_all_completely = [];
     md_all_forward = [];
     md_all = [];
     md_part = [];
-    regexp_all = new RegExp('^(.*?)(' + text + ')(.*?)$', 'i');
-    regexp = new RegExp('^(.*?)(' + text.split('').join(')(.*?)(') + ')(.*?)$', 'i');
-    dstyle = [styles["default"], styles.emphasis];
+    regexp_all = new RegExp('^(.*?)(' + text.replace(/([^0-9A-Za-z_])/g, '\\$1') + ')(.*?)$', 'i');
+    regexp = new RegExp('^(.*?)(' + text.split('').map(function(v) {
+      return v.replace(/([^0-9A-Za-z_])/g, '\\$1');
+    }).join(')(.*?)(') + ')(.*?)$', 'i');
     for (j = 0, len = list.length; j < len; j++) {
       l = list[j];
-      match = l.match(regexp);
+      match = l.target.match(regexp);
       if (match) {
-        match_all = l.match(regexp_all);
+        match_all = l.target.match(regexp_all);
         if (match_all) {
           if (match_all[1] === '') {
             if (match_all[match_all.length - 1] === '') {
-              md_all_completely.push(match_all);
+              md_all_completely.push({
+                match: match_all,
+                content: l.content,
+                href: l.href
+              });
             } else {
-              md_all_forward.push(match_all);
+              md_all_forward.push({
+                match: match_all,
+                content: l.content,
+                href: l.href
+              });
             }
           } else {
-            md_all.push(match_all);
+            md_all.push({
+              match: match_all,
+              content: l.content,
+              href: l.href
+            });
           }
         } else {
-          md_part.push(match);
+          md_part.push({
+            match: match,
+            content: l.content,
+            href: l.href
+          });
         }
       }
     }
-    md_result = [].concat(md_all_completely, md_all_forward, md_all, md_part);
-    ref1 = md_result.slice(0, 10);
-    for (k = 0, len1 = ref1.length; k < len1; k++) {
-      md = ref1[k];
-      elm = [];
-      ref2 = md.slice(1);
-      for (i = n = 0, len2 = ref2.length; n < len2; i = ++n) {
-        m = ref2[i];
-        if (m !== '') {
-          elm.push(React.createElement("span", {
-            "style": dstyle[i % 2]
-          }, m));
-        }
-      }
-      result.push(React.createElement("span", null, elm));
-    }
+    result = [].concat(md_all_completely, md_all_forward, md_all, md_part);
     return this.setState({
       result: result
     });
   };
 
   DocIncrementalComponent.prototype.render = function() {
-    var l;
+    var dstyle, e, elm, i, m, md, return_elm;
+    dstyle = [styles["default"], styles.emphasis];
     return React.createElement("div", {
       "style": Array.prototype.concat.apply([], [styles.base, this.props.style])
     }, React.createElement("input", {
       "type": "text",
       "value": this.state.text,
-      "onChange": this.updateText.bind(this)
-    }), React.createElement("ul", null, (function() {
-      var j, len, ref, results;
-      ref = this.state.result;
+      "onChange": this.updateText.bind(this),
+      "style": this.props.styles.input,
+      "placeholder": 'Search'
+    }), React.createElement("ul", {
+      "style": this.props.styles.ul
+    }, (return_elm = (function() {
+      var j, k, len, len1, ref, ref1, results;
+      ref = this.state.result.slice(0, 15);
       results = [];
       for (j = 0, len = ref.length; j < len; j++) {
-        l = ref[j];
-        results.push(React.createElement("li", null, React.createElement("span", null, l)));
+        md = ref[j];
+        elm = [];
+        ref1 = md.match.slice(1);
+        for (i = k = 0, len1 = ref1.length; k < len1; i = ++k) {
+          m = ref1[i];
+          if (m !== '') {
+            elm.push(React.createElement("span", {
+              "style": dstyle[i % 2],
+              "key": i
+            }, m));
+          }
+        }
+        results.push(React.createElement("li", {
+          "style": this.props.styles.li,
+          "key": md.href
+        }, React.createElement("span", {
+          "style": this.props.styles.item
+        }, (function() {
+          var len2, n, ref2, results1;
+          ref2 = md.content;
+          results1 = [];
+          for (i = n = 0, len2 = ref2.length; n < len2; i = ++n) {
+            e = ref2[i];
+            if (e === 'match') {
+              results1.push(React.createElement(Link, {
+                "href": md.href,
+                "style": [styles.link, this.props.styles.match],
+                "key": 'match'
+              }, elm));
+            } else {
+              results1.push(React.cloneElement(e, {
+                key: "icon-" + i
+              }));
+            }
+          }
+          return results1;
+        }).call(this))));
       }
       return results;
-    }).call(this)));
+    }).call(this), this.state.result.length >= 16 ? return_elm.push(React.createElement("li", {
+      "style": [styles.more, this.props.styles.li],
+      "key": 'more'
+    }, React.createElement("span", null, (this.state.result.length - 15) + " more"))) : void 0, return_elm)));
   };
 
   return DocIncrementalComponent;
@@ -1951,6 +2021,17 @@ styles = {
   },
   "default": {
     color: colors.general.r.moderate
+  },
+  more: {
+    color: colors.general.r.light
+  },
+  link: {
+    color: colors.general.r.moderate,
+    textDecoration: 'none',
+    cursor: 'pointer',
+    ':hover': {
+      textDecoration: 'underline'
+    }
   }
 };
 
@@ -1962,7 +2043,7 @@ module.exports = Radium(DocIncrementalComponent);
 
 
 
-},{"./colors/color-definition":7,"radium":undefined,"react":undefined}],24:[function(require,module,exports){
+},{"./colors/color-definition":7,"./link-component":33,"radium":undefined,"react":undefined}],24:[function(require,module,exports){
 var DocItemComponent, DocTableComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -2030,7 +2111,7 @@ module.exports = Radium(DocItemComponent);
 
 
 },{"./colors/color-definition":7,"./doc-table-component":27,"radium":undefined,"react":undefined}],25:[function(require,module,exports){
-var DocIncrementalSearchComponent, DocSearchContainerComponent, Radium, React, colors, styles,
+var CharIconComponent, DocIncrementalSearchComponent, DocSearchContainerComponent, Radium, React, colors, find, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -2038,9 +2119,13 @@ React = require('react');
 
 Radium = require('radium');
 
-colors = require('./colors/color-definition');
+find = require('lodash.find');
 
 DocIncrementalSearchComponent = require('./doc-incremental-search-component');
+
+CharIconComponent = require('./char-icon-component');
+
+colors = require('./colors/color-definition');
 
 
 /*
@@ -2055,16 +2140,78 @@ DocSearchContainerComponent = (function(superClass) {
   }
 
   DocSearchContainerComponent.prototype.componentWillMount = function() {
-    var state;
-    this.store = this.context.ctx.routeStore;
-    state = this.store.get();
     return this.setState({
-      routes: state.routes
+      routes: this.context.ctx.routeStore.get().routes,
+      dir_tree: this.context.ctx.docStore.get().dir_tree
     });
   };
 
+  DocSearchContainerComponent.prototype.genKindStringStyle = function(kindString) {
+    var color, style;
+    color = colors.general.r["default"];
+    switch (kindString) {
+      case 'Class':
+        color = '#337BFF';
+        break;
+      case 'Constructor':
+        color = '#337BFF';
+        break;
+      case 'Interface':
+        color = '#598213';
+        break;
+      case 'Property':
+        color = '#598213';
+        break;
+      case 'Enumeration':
+        color = '#B17509';
+        break;
+      case 'Enumeration member':
+        color = '#B17509';
+        break;
+      case 'Module':
+        color = '#D04C35';
+        break;
+      case 'Accessor':
+        color = '#D04C35';
+        break;
+      case 'Function':
+        color = '#6E00FF';
+        break;
+      case 'Method':
+        color = '#6E00FF';
+        break;
+      default:
+        color = colors.general.r["default"];
+    }
+    return style = {
+      color: color,
+      borderColor: color
+    };
+  };
+
+  DocSearchContainerComponent.prototype.callDirTreeByArray = function(arr) {
+    var dir_tree, file, i, j, len, ref, ref1, v;
+    dir_tree = this.state.dir_tree;
+    for (i = j = 0, len = arr.length; j < len; i = ++j) {
+      v = arr[i];
+      if (i !== arr.length - 1) {
+        dir_tree = (ref = dir_tree.dir) != null ? ref[v] : void 0;
+      } else {
+        file = (ref1 = dir_tree.file) != null ? ref1[v] : void 0;
+        if (file != null) {
+          return file;
+        } else {
+          return void 0;
+        }
+      }
+      if (dir_tree == null) {
+        return void 0;
+      }
+    }
+  };
+
   DocSearchContainerComponent.prototype.render = function() {
-    var fragment, list, route;
+    var char_elm, char_elm_child, fragment, list, m, obj, obj_child, route;
     return React.createElement("div", {
       "style": Array.prototype.concat.apply([], [styles.base, this.props.style])
     }, ((function() {
@@ -2074,24 +2221,44 @@ DocSearchContainerComponent = (function(superClass) {
       for (fragment in ref) {
         route = ref[fragment];
         if (route.split(':')[1] === 'global') {
-          list.push(fragment.match(/.+\/(.+)$/)[1]);
+          obj = this.callDirTreeByArray(fragment.split('/').slice(1));
+          char_elm = React.createElement(CharIconComponent, {
+            "char": obj.kindString,
+            "style": this.genKindStringStyle(obj.kindString)
+          });
+          list.push({
+            target: fragment.match(/.+\/(.+?)$/)[1],
+            content: [char_elm, 'match'],
+            href: "/" + fragment
+          });
+        } else if (route.split(':')[1] === 'local') {
+          m = fragment.match(/.+\/(.+?)\/(.+?)$/);
+          obj = this.callDirTreeByArray(fragment.split('/').slice(1, -1));
+          obj_child = find(obj.children, function(v) {
+            return v.name === fragment.split('/').slice(-1)[0];
+          });
+          char_elm = React.createElement(CharIconComponent, {
+            "char": obj.kindString,
+            "style": this.genKindStringStyle(obj.kindString)
+          });
+          char_elm_child = React.createElement(CharIconComponent, {
+            "char": obj_child.kindString,
+            "style": [
+              this.genKindStringStyle(obj_child.kindString), {
+                borderRadius: 2
+              }
+            ]
+          });
+          list.push({
+            target: m[1] + "." + m[2],
+            content: [char_elm, char_elm_child, 'match'],
+            href: "/" + fragment
+          });
         }
       }
       return React.createElement(DocIncrementalSearchComponent, {
-        "list": list
-      });
-    }).call(this)), ((function() {
-      var ref;
-      list = [];
-      ref = this.state.routes;
-      for (fragment in ref) {
-        route = ref[fragment];
-        if (route.split(':')[1] === 'local') {
-          list.push(fragment.match(/.+\/(.+)$/)[1]);
-        }
-      }
-      return React.createElement(DocIncrementalSearchComponent, {
-        "list": list
+        "list": list,
+        "styles": styles
       });
     }).call(this)));
   };
@@ -2101,7 +2268,37 @@ DocSearchContainerComponent = (function(superClass) {
 })(React.Component);
 
 styles = {
-  base: {}
+  base: {},
+  input: {
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingRight: 12,
+    paddingLeft: 12,
+    fontSize: 16,
+    fontFamily: '-webkit-body',
+    fontWeight: 'normal',
+    outline: 'none',
+    borderColor: colors.general.r.moderate,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    display: 'block',
+    width: '100%',
+    boxSizing: 'border-box',
+    marginBottom: 20,
+    ':focus': {
+      outline: 'none',
+      borderColor: colors.general.r.moderate,
+      boxShadow: "0 0 4px 0 " + colors.general.r.light
+    }
+  },
+  ul: {
+    listStyle: 'none',
+    paddingLeft: 0
+  },
+  li: {
+    fontSize: 14,
+    marginBottom: 8
+  }
 };
 
 DocSearchContainerComponent.contextTypes = {
@@ -2112,7 +2309,7 @@ module.exports = Radium(DocSearchContainerComponent);
 
 
 
-},{"./colors/color-definition":7,"./doc-incremental-search-component":23,"radium":undefined,"react":undefined}],26:[function(require,module,exports){
+},{"./char-icon-component":5,"./colors/color-definition":7,"./doc-incremental-search-component":23,"lodash.find":undefined,"radium":undefined,"react":undefined}],26:[function(require,module,exports){
 var DocSlideWrapperComponent, Radium, React, clone, colors, objectAssign, slide, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -2173,6 +2370,10 @@ DocSlideWrapperComponent = (function(superClass) {
     }
   };
 
+  DocSlideWrapperComponent.prototype.search = function() {
+    return this.context.ctx.routeAction.navigate('/class');
+  };
+
   DocSlideWrapperComponent.prototype.render = function() {
     var collapsed, dstyle, k, props, ref, ref1, v;
     dstyle = {};
@@ -2183,6 +2384,7 @@ DocSlideWrapperComponent = (function(superClass) {
     if (collapsed) {
       dstyle.left = {
         boxSizing: 'border-box',
+        flexGrow: '0',
         width: slide.from,
         paddingLeft: 18,
         paddingRight: 0,
@@ -2231,14 +2433,22 @@ DocSlideWrapperComponent = (function(superClass) {
       "onClick": this.close.bind(this)
     }, React.createElement("span", {
       "className": 'icon-close',
-      "style": styles.close_icon
+      "style": styles.close_icon,
+      "key": 'icon-close'
     })), React.createElement("div", {
       "style": [styles.wrapper, dstyle.wrapper]
     }, React.Children.map(this.props.children, function(c, i) {
       if (i === 1) {
         return React.cloneElement(c, props);
       }
-    }))) : void 0));
+    }))) : void 0), (this.props.argu.route_arr[0] === 'class' && this.props.argu.route_arr.length !== 1 ? React.createElement("div", {
+      "style": styles.search,
+      "onClick": this.search.bind(this)
+    }, React.createElement("span", {
+      "className": 'icon-search',
+      "style": styles.search_icon,
+      "key": 'icon-search'
+    })) : void 0));
   };
 
   return DocSlideWrapperComponent;
@@ -2255,14 +2465,16 @@ styles = {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'nowrap',
-    flexGrow: '1'
+    flexGrow: '1',
+    position: 'relative'
   },
   left: {
     paddingLeft: 50,
     paddingRight: 50,
     paddingTop: 30,
     paddingBottom: 30,
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    flexGrow: '1'
   },
   right: {
     flexGrow: '1',
@@ -2279,8 +2491,24 @@ styles = {
     zIndex: '1'
   },
   close_icon: {
-    borderWidth: 0,
     fontSize: 20,
+    color: colors.general.r.light,
+    transitionProperty: 'all',
+    transitionDuration: '0.1s',
+    transitionTimingFunction: 'ease-in-out',
+    ':hover': {
+      color: colors.general.r["default"]
+    }
+  },
+  search: {
+    position: 'absolute',
+    top: 7,
+    right: 8,
+    cursor: 'pointer',
+    zIndex: '1'
+  },
+  search_icon: {
+    fontSize: 23,
     color: colors.general.r.light,
     transitionProperty: 'all',
     transitionDuration: '0.1s',
@@ -2519,13 +2747,13 @@ styles = {
     paddingLeft: 12,
     paddingRight: 12,
     marginTop: 3,
+    marginRight: 10,
     float: 'left'
   },
   title: {
     fontSize: 35,
     paddingLeft: 12,
     paddingRight: 12,
-    marginLeft: 10,
     color: colors.general.r.emphasis,
     float: 'left',
     fontWeight: 'bold'
@@ -2989,12 +3217,11 @@ LinkComponent = (function(superClass) {
   }
 
   LinkComponent.prototype.componentWillMount = function() {
-    var state;
-    this.store = this.context.ctx.routeStore;
-    state = this.store.get();
-    this.setState({
-      routes: state.routes
-    });
+    if (this.props.uniqRoute) {
+      this.setState({
+        routes: this.context.ctx.routeStore.get().routes
+      });
+    }
     return this.href = '#';
   };
 
@@ -4484,7 +4711,13 @@ DirTree = (function() {
           return res.file[gchild.name] = {
             name: gchild.name,
             kindString: gchild.kindString,
-            path: (def_arr != null ? def_arr : arr).slice(0, -1).concat([gchild.name])
+            path: (def_arr != null ? def_arr : arr).slice(0, -1).concat([gchild.name]),
+            children: (gchild.children || []).map(function(ggchild) {
+              return {
+                name: ggchild.name,
+                kindString: ggchild.kindString
+              };
+            })
           };
         });
       }
