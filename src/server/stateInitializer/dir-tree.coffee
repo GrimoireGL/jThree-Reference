@@ -80,6 +80,7 @@ class DirTree
           name: gchild.name
           kindString: gchild.kindString
           path: (def_arr ? arr)[0..-2].concat [gchild.name]
+          children: (gchild.children || []).map((ggchild) -> {name: ggchild.name, kindString: ggchild.kindString})
     else
       res.dir = {}
       res.dir[arr[0]] = arrayToDirTree(arr[1..-1], top, def_arr ? arr)
