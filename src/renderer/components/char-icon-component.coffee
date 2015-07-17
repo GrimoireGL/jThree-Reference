@@ -29,6 +29,7 @@ styles =
     marginTop: 4
     marginRight: 10
     textAlign: 'center'
+    fontSize: 14
 
 CharIconComponent.contextTypes =
   ctx: React.PropTypes.any
