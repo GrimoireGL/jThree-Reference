@@ -75,11 +75,11 @@ class DocIncrementalComponent extends React.Component
 
   render: ->
     dstyle = [styles.default, styles.emphasis]
-    <div style={Array.prototype.concat.apply([], [styles.base, @props.style, @props.styles.base])}>
+    <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       <input type="text" value={@state.text} onChange={@updateText.bind(@)}  style={@props.styles.input} placeholder='Search' />
       <ul style={@props.styles.ul}>
         {
-          for md in @state.result[0..14]
+          return_elm = for md in @state.result[0..14]
             elm = []
             for m, i in md.match[1..]
               elm.push <span style={dstyle[i % 2]} key={i}>{m}</span> if m != ''
@@ -94,6 +94,9 @@ class DocIncrementalComponent extends React.Component
                 }
               </span>
             </li>
+          if @state.result.length >= 16
+            return_elm.push <li style={[styles.more, @props.styles.li]} key='more'><span>{"#{@state.result.length - 15} more"}</span></li>
+          return_elm
         }
       </ul>
     </div>
@@ -107,6 +110,9 @@ styles =
 
   default:
     color: colors.general.r.moderate
+
+  more:
+    color: colors.general.r.light
 
   link:
     color: colors.general.r.moderate

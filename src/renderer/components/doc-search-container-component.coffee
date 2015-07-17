@@ -68,7 +68,7 @@ class DocSearchContainerComponent extends React.Component
         for fragment, route of @state.routes
           if route.split(':')[1] == 'global'
             obj = @callDirTreeByArray(fragment.split('/')[1..])
-            char_elm = <CharIconComponent char={obj.kindString[0]} style={@genKindStringStyle(obj.kindString)} />
+            char_elm = <CharIconComponent char={obj.kindString} style={@genKindStringStyle(obj.kindString)} />
             list.push
               target: fragment.match(/.+\/(.+?)$/)[1]
               content: [char_elm, 'match']
@@ -77,8 +77,8 @@ class DocSearchContainerComponent extends React.Component
             m = fragment.match(/.+\/(.+?)\/(.+?)$/)
             obj = @callDirTreeByArray(fragment.split('/')[1..-2])
             obj_child = obj.children.find((v) -> v.name == fragment.split('/')[-1..][0])
-            char_elm = <CharIconComponent char={obj.kindString[0]} style={@genKindStringStyle(obj.kindString)} />
-            char_elm_child = <CharIconComponent char={obj_child.kindString[0]} style={@genKindStringStyle(obj_child.kindString)} />
+            char_elm = <CharIconComponent char={obj.kindString} style={@genKindStringStyle(obj.kindString)} />
+            char_elm_child = <CharIconComponent char={obj_child.kindString} style={[@genKindStringStyle(obj_child.kindString), {borderRadius: 2}]} />
             list.push
               target: "#{m[1]}.#{m[2]}"
               content: [char_elm, char_elm_child, 'match']
@@ -102,12 +102,15 @@ styles =
     borderColor: colors.general.r.moderate
     borderWidth: 1
     borderStyle: 'solid'
-    width: 300
+    display: 'block'
+    width: '100%'
+    boxSizing: 'border-box'
+    marginBottom: 20
 
     ':focus':
       outline: 'none'
       borderColor: colors.general.r.moderate
-      boxShadow: "0 0 4px 0 #{colors.general.r.moderate}"
+      boxShadow: "0 0 4px 0 #{colors.general.r.light}"
 
   ul:
     listStyle: 'none'
@@ -115,7 +118,7 @@ styles =
 
   li:
     fontSize: 14
-    marginBottom: 4
+    marginBottom: 8
 
 DocSearchContainerComponent.contextTypes =
   ctx: React.PropTypes.any
