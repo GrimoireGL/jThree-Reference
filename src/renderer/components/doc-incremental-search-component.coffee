@@ -1,10 +1,17 @@
 React = require 'react'
 Radium = require 'radium'
+Link = require './link-component'
 colors = require './colors/color-definition'
 
 ###
-@props.list [required] list array of search target
+@props.list [required] list array contains hash
+hash overview:
+{target: (string), content: [ReactElement, 'match', ...]}
+target: target of search
+content: elements array which is inserted to result list. if array factor
+is 'match', it is replace to matched result element.
 @props.style
+@props.styles apply for each elements
 ###
 class DocIncrementalComponent extends React.Component
   constructor: (props) ->
@@ -12,7 +19,7 @@ class DocIncrementalComponent extends React.Component
 
   componentWillMount: ->
     list = @props.list
-    list.sort()
+    list.sort (v1, v2) -> if v1.target > v2.target then 1 else -1
     @setState
       text: ''
       result: []
@@ -27,44 +34,66 @@ class DocIncrementalComponent extends React.Component
 
   updateSearch: (text, list) ->
     list ||= @state.list ? []
+    text = text
+      .replace /\s/g, ''
     result = []
     md_all_completely = []
     md_all_forward = []
     md_all = []
     md_part = []
-    regexp_all = new RegExp('^(.*?)(' + text + ')(.*?)$', 'i')
-    regexp = new RegExp('^(.*?)(' + text.split('').join(')(.*?)(') + ')(.*?)$', 'i')
-    dstyle = [styles.default, styles.emphasis]
+    regexp_all = new RegExp('^(.*?)(' + text.replace(/([^0-9A-Za-z_])/g, '\\$1') + ')(.*?)$', 'i')
+    regexp = new RegExp('^(.*?)(' + text.split('').map((v) -> v.replace(/([^0-9A-Za-z_])/g, '\\$1')).join(')(.*?)(') + ')(.*?)$', 'i')
     for l in list
-      match = l.match(regexp)
+      match = l.target.match(regexp)
       if match
-        match_all = l.match(regexp_all)
+        match_all = l.target.match(regexp_all)
         if match_all
           if match_all[1] == ''
             if match_all[match_all.length - 1] == ''
-              md_all_completely.push match_all
+              md_all_completely.push
+                match: match_all
+                content: l.content
+                href: l.href
             else
-              md_all_forward.push match_all
+              md_all_forward.push
+                match: match_all
+                content: l.content
+                href: l.href
           else
-            md_all.push match_all
+            md_all.push
+              match: match_all
+              content: l.content
+              href: l.href
         else
-          md_part.push match
-    md_result = [].concat md_all_completely, md_all_forward, md_all, md_part
-    for md in md_result[0..9]
-      elm = []
-      for m, i in md[1..-1]
-        elm.push <span style={dstyle[i % 2]}>{m}</span> if m != ''
-      result.push <span>{elm}</span>
+          md_part.push
+            match: match
+            content: l.content
+            href: l.href
+    result = [].concat md_all_completely, md_all_forward, md_all, md_part
     @setState
       result: result
 
   render: ->
-    <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
-      <input type="text" value={@state.text} onChange={@updateText.bind(@)} />
-      <ul>
+    dstyle = [styles.default, styles.emphasis]
+    <div style={Array.prototype.concat.apply([], [styles.base, @props.style, @props.styles.base])}>
+      <input type="text" value={@state.text} onChange={@updateText.bind(@)}  style={@props.styles.input} placeholder='Search' />
+      <ul style={@props.styles.ul}>
         {
-          for l in @state.result
-            <li><span>{l}</span></li>
+          for md in @state.result[0..14]
+            elm = []
+            for m, i in md.match[1..]
+              elm.push <span style={dstyle[i % 2]} key={i}>{m}</span> if m != ''
+            <li style={@props.styles.li} key={md.href}>
+              <span style={@props.styles.item}>
+                {
+                  for e, i in md.content
+                    if e == 'match'
+                      <Link href={md.href} style={[styles.link, @props.styles.match]} key='match'>{elm}</Link>
+                    else
+                      React.cloneElement e, {key: "icon-#{i}"}
+                }
+              </span>
+            </li>
         }
       </ul>
     </div>
@@ -78,6 +107,14 @@ styles =
 
   default:
     color: colors.general.r.moderate
+
+  link:
+    color: colors.general.r.moderate
+    textDecoration: 'none'
+    cursor: 'pointer'
+
+    ':hover':
+      textDecoration: 'underline'
 
 DocIncrementalComponent.contextTypes =
   ctx: React.PropTypes.any
