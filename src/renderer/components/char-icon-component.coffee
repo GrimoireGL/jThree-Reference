@@ -7,7 +7,13 @@ class CharIconComponent extends React.Component
 
   render: ->
     # console.log "render CharIcon", (+new Date()).toString()[-4..-1]
-    <span style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
+    dstyle = {}
+    if @props.char?.length >= 2
+      dstyle.base =
+        width: 'auto'
+        paddingLeft: 8
+        paddingRight: 8
+    <span style={Array.prototype.concat.apply([], [styles.base, @props.style, dstyle.base])}>
       {
         if @props.char?
           <span>{@props.char}</span>
@@ -29,6 +35,7 @@ styles =
     marginTop: 4
     marginRight: 10
     textAlign: 'center'
+    fontSize: 13
 
 CharIconComponent.contextTypes =
   ctx: React.PropTypes.any

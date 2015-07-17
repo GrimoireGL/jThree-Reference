@@ -37,6 +37,9 @@ class DocSlideWrapperComponent extends React.Component
     if @props.argu.route_arr[1]?.toString() == 'local'
       @context.ctx.routeAction.navigate(document.location.pathname.match(/^(.+)\/[^\/]+$/)[1])
 
+  search: ->
+    @context.ctx.routeAction.navigate '/class'
+
   render: ->
     # console.log "render DocSlideWrapper", (+new Date()).toString()[-4..-1]
     dstyle = {}
@@ -46,6 +49,7 @@ class DocSlideWrapperComponent extends React.Component
     if collapsed
       dstyle.left =
         boxSizing: 'border-box'
+        flexGrow: '0'
         width: slide.from
         paddingLeft: 18
         paddingRight: 0
@@ -78,7 +82,7 @@ class DocSlideWrapperComponent extends React.Component
         if collapsed
           <div style={styles.right} ref='docRight'>
             <div style={styles.close} onClick={@close.bind(@)}>
-              <span className='icon-close' style={styles.close_icon}></span>
+              <span className='icon-close' style={styles.close_icon} key='icon-close'></span>
             </div>
             <div style={[styles.wrapper, dstyle.wrapper]}>
               {
@@ -86,6 +90,12 @@ class DocSlideWrapperComponent extends React.Component
                   React.cloneElement c, props if i == 1
               }
             </div>
+          </div>
+      }
+      {
+        if @props.argu.route_arr[0] == 'class' && @props.argu.route_arr.length != 1
+          <div style={styles.search} onClick={@search.bind(@)}>
+            <span className='icon-search' style={styles.search_icon} key='icon-search'></span>
           </div>
       }
     </div>
@@ -102,6 +112,7 @@ styles =
     flexDirection: 'row'
     flexWrap: 'nowrap'
     flexGrow: '1'
+    position: 'relative'
 
   left:
     paddingLeft: 50
@@ -109,6 +120,7 @@ styles =
     paddingTop: 30
     paddingBottom: 30
     boxSizing: 'border-box'
+    flexGrow: '1'
 
   right:
     flexGrow: '1'
@@ -125,8 +137,24 @@ styles =
     zIndex: '1'
 
   close_icon:
-    borderWidth: 0
     fontSize: 20
+    color: colors.general.r.light
+    transitionProperty: 'all'
+    transitionDuration: '0.1s'
+    transitionTimingFunction: 'ease-in-out'
+
+    ':hover':
+      color: colors.general.r.default
+
+  search:
+    position: 'absolute'
+    top: 7
+    right: 8
+    cursor: 'pointer'
+    zIndex: '1'
+
+  search_icon:
+    fontSize: 23
     color: colors.general.r.light
     transitionProperty: 'all'
     transitionDuration: '0.1s'

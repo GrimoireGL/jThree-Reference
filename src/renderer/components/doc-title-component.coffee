@@ -74,13 +74,13 @@ styles =
     paddingLeft: 12
     paddingRight: 12
     marginTop: 3
+    marginRight: 10
     float: 'left'
 
   title:
     fontSize: 35
     paddingLeft: 12
     paddingRight: 12
-    marginLeft: 10
     color: colors.general.r.emphasis
     float: 'left'
     fontWeight: 'bold'

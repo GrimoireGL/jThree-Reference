@@ -35,10 +35,9 @@ class LinkComponent extends React.Component
     super props
 
   componentWillMount: ->
-    @store = @context.ctx.routeStore
-    state = @store.get()
-    @setState
-      routes: state.routes
+    if @props.uniqRoute
+      @setState
+        routes: @context.ctx.routeStore.get().routes
     @href = '#'
 
   navigate: (e) ->
