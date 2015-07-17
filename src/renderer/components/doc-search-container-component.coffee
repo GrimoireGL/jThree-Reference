@@ -1,8 +1,9 @@
 React = require 'react'
 Radium = require 'radium'
-colors = require './colors/color-definition'
+find = require 'lodash.find'
 DocIncrementalSearchComponent = require './doc-incremental-search-component'
 CharIconComponent = require './char-icon-component'
+colors = require './colors/color-definition'
 
 ###
 @props.style
@@ -76,7 +77,7 @@ class DocSearchContainerComponent extends React.Component
           else if route.split(':')[1] == 'local'
             m = fragment.match(/.+\/(.+?)\/(.+?)$/)
             obj = @callDirTreeByArray(fragment.split('/')[1..-2])
-            obj_child = obj.children.find((v) -> v.name == fragment.split('/')[-1..][0])
+            obj_child = find obj.children, (v) -> v.name == fragment.split('/')[-1..][0]
             char_elm = <CharIconComponent char={obj.kindString} style={@genKindStringStyle(obj.kindString)} />
             char_elm_child = <CharIconComponent char={obj_child.kindString} style={[@genKindStringStyle(obj_child.kindString), {borderRadius: 2}]} />
             list.push
