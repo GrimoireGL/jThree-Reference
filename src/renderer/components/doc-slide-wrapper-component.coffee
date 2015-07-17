@@ -46,6 +46,7 @@ class DocSlideWrapperComponent extends React.Component
     if collapsed
       dstyle.left =
         boxSizing: 'border-box'
+        flexGrow: '0'
         width: slide.from
         paddingLeft: 18
         paddingRight: 0
@@ -109,6 +110,7 @@ styles =
     paddingTop: 30
     paddingBottom: 30
     boxSizing: 'border-box'
+    flexGrow: '1'
 
   right:
     flexGrow: '1'
