@@ -428,7 +428,9 @@ styles = {
     top: 80,
     height: 'calc(100% - 80px)',
     overflowY: 'scroll',
-    overflowX: 'hidden'
+    overflowX: 'hidden',
+    zIndex: 10,
+    backgroundColor: '#fff'
   },
   container: {
     flexGrow: '1',
@@ -1214,7 +1216,6 @@ DocDetailTitleComponent = (function(superClass) {
   constructLink = function(name) {
     var match;
     match = name.match(/^(.+)\.(.+)$/);
-    console.log(match);
     return React.createElement("span", null, React.createElement(Link, {
       "style": styles.link,
       "href": "/class/" + match[1]
@@ -2277,6 +2278,7 @@ styles = {
     paddingLeft: 12,
     fontSize: 16,
     fontFamily: '-webkit-body',
+    fontFamily: '-moz-body',
     fontWeight: 'normal',
     outline: 'none',
     borderColor: colors.general.r.moderate,
@@ -3405,7 +3407,7 @@ ListComponent = (function(superClass) {
   };
 
   ListComponent.prototype.shouldComponentUpdate = function(nextProps, nextState) {
-    return JSON.stringify(this.props.argu) !== JSON.stringify(nextProps.argu);
+    return this.props.argu.route !== nextProps.argu.route;
   };
 
   ListComponent.prototype.render = function() {
@@ -3473,21 +3475,32 @@ ListFolderComponent = (function(superClass) {
   extend(ListFolderComponent, superClass);
 
   function ListFolderComponent(props) {
-    var ref;
     ListFolderComponent.__super__.constructor.call(this, props);
-    this.state = {
+  }
+
+  ListFolderComponent.prototype.componentWillMount = function() {
+    var ref;
+    return this.state = {
       folded: (ref = this.props.folded) != null ? ref : true
     };
-  }
+  };
+
+  ListFolderComponent.prototype.componentWillReceiveProps = function(nextProps) {
+    if (this.state.folded) {
+      return this.setState({
+        folded: nextProps.folded
+      });
+    }
+  };
+
+  ListFolderComponent.prototype.shouldComponentUpdate = function(nextProps, nextState) {
+    return nextState.folded === false || this.state.folded !== nextState.folded;
+  };
 
   ListFolderComponent.prototype.toggle_fold = function() {
     return this.setState({
       folded: !this.state.folded
     });
-  };
-
-  ListFolderComponent.prototype.shouldComponentUpdate = function(nextProps, nextState) {
-    return nextState.folded === false || this.state.folded !== nextState.folded;
   };
 
   ListFolderComponent.prototype.render = function() {
