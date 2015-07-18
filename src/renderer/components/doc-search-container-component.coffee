@@ -54,11 +54,7 @@ class DocSearchContainerComponent extends React.Component
       if i != arr.length - 1
         dir_tree = dir_tree.dir?[v]
       else
-        file = dir_tree.file?[v]
-        if file?
-          return file
-        else
-          return undefined
+        return dir_tree.file?[v]
       if !dir_tree?
         return undefined
 
@@ -69,6 +65,7 @@ class DocSearchContainerComponent extends React.Component
         for fragment, route of @state.routes
           if route.split(':')[1] == 'global'
             obj = @callDirTreeByArray(fragment.split('/')[1..])
+            continue unless obj?
             char_elm = <CharIconComponent char={obj.kindString} style={@genKindStringStyle(obj.kindString)} />
             list.push
               target: fragment.match(/.+\/(.+?)$/)[1]
@@ -77,6 +74,7 @@ class DocSearchContainerComponent extends React.Component
           else if route.split(':')[1] == 'local'
             m = fragment.match(/.+\/(.+?)\/(.+?)$/)
             obj = @callDirTreeByArray(fragment.split('/')[1..-2])
+            continue unless obj?
             obj_child = find obj.children, (v) -> v.name == fragment.split('/')[-1..][0]
             char_elm = <CharIconComponent char={obj.kindString} style={@genKindStringStyle(obj.kindString)} />
             char_elm_child = <CharIconComponent char={obj_child.kindString} style={[@genKindStringStyle(obj_child.kindString), {borderRadius: 2}]} />
