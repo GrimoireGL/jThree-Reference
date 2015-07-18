@@ -13,32 +13,20 @@ class DocSlideWrapperComponent extends React.Component
   constructor: (props) ->
     super props
 
-  handleEvent: (e) ->
-    if e.type == 'resize'
-      @updateWrapperWidth()
-
-  updateWrapperWidth: ->
-    wrapperWidth = React.findDOMNode(@refs.docWrapper).clientWidth - slide.from
-    if @state.wrapperWidth != wrapperWidth
-      @setState
-        wrapperWidth: wrapperWidth
-
-  # componentDidUpdate: ->
-  #   @updateWrapperWidth()
-
-  componentDidMount: ->
-    @updateWrapperWidth()
-    window.addEventListener 'resize', @
-
-  componentWillUnmount: ->
-    window.removeEventListener 'resize', @
-
   close: ->
     if @props.argu.route_arr[1]?.toString() == 'local'
       @context.ctx.routeAction.navigate(document.location.pathname.match(/^(.+)\/[^\/]+$/)[1])
 
   search: ->
     @context.ctx.routeAction.navigate '/class'
+
+  mouseOverLeft: ->
+    @setState
+      hoverLeft: true
+
+  mouseOutLeft: ->
+    @setState
+      hoverLeft: false
 
   render: ->
     # console.log "render DocSlideWrapper", (+new Date()).toString()[-4..-1]
@@ -50,29 +38,30 @@ class DocSlideWrapperComponent extends React.Component
       dstyle.left =
         boxSizing: 'border-box'
         flexGrow: '0'
-        width: slide.from
         paddingLeft: 18
         paddingRight: 0
-        overflow: 'hidden'
+        overflowX: 'hidden'
+        overflowY: 'scroll'
         whiteSpace: 'nowrap'
-        transitionProperty: 'all'
-        transitionDuration: '0.1s'
-        # transitionDelay: '0.5s'
-        transitionTimingFunction: 'ease-in-out'
+        height: 'calc(100% - 80px)'
+        position: 'fixed'
 
-        ':hover':
-          width: slide.to
+      dstyle.right =
+        marginLeft: if @state.hoverLeft then slide.to else slide.from
+
     if @state.wrapperWidth
       dstyle.wrapper =
           width: @state.wrapperWidth
+
     props = {}
     for k, v of @props
       if k != 'children' && k != 'style'
         props[k] = clone v, true
     objectAssign props,
       collapsed: collapsed
+
     <div style={Array.prototype.concat.apply([], [styles.base, @props.style])} ref='docWrapper'>
-      <div style={[styles.left, dstyle.left]} ref='docLeft' onClick={@close.bind(@)}>
+      <div style={[styles.left, dstyle.left]} ref='docLeft' onClick={@close.bind(@)} onMouseOver={@mouseOverLeft.bind(@)} onMouseOut={@mouseOutLeft.bind(@)}>
         {
           React.Children.map @props.children, (c, i) ->
             React.cloneElement c, props if i == 0
@@ -80,7 +69,7 @@ class DocSlideWrapperComponent extends React.Component
       </div>
       {
         if collapsed
-          <div style={styles.right} ref='docRight'>
+          <div style={[styles.right, dstyle.right]} ref='docRight'>
             <div style={styles.close} onClick={@close.bind(@)}>
               <span className='icon-close' style={styles.close_icon} key='icon-close'></span>
             </div>
@@ -164,10 +153,6 @@ styles =
       color: colors.general.r.default
 
   wrapper:
-    position: 'absolute'
-    top: 0
-    left: 0
-    bottom: 0
     paddingLeft: 50
     paddingRight: 50
     paddingTop: 30
