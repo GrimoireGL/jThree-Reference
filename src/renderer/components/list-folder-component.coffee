@@ -12,8 +12,9 @@ class ListFolderComponent extends React.Component
       folded: @props.folded ? true
 
   componentWillReceiveProps: (nextProps) ->
-    @setState
-      folded: nextProps.folded ? true
+    if @state.folded
+      @setState
+        folded: nextProps.folded
 
   shouldComponentUpdate: (nextProps, nextState) ->
     # console.log @props.folded, nextProps.folded, @state.folded, nextState.folded, @props.name
