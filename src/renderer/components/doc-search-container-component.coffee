@@ -96,6 +96,7 @@ styles =
     paddingLeft: 12
     fontSize: 16
     fontFamily: '-webkit-body'
+    fontFamily: '-moz-body'
     fontWeight: 'normal'
     outline: 'none'
     borderColor: colors.general.r.moderate

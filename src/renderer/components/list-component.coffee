@@ -81,7 +81,7 @@ class ListComponent extends React.Component
     return style
 
   shouldComponentUpdate: (nextProps, nextState) ->
-    return JSON.stringify(@props.argu) != JSON.stringify(nextProps.argu)
+    return @props.argu.route != nextProps.argu.route
 
   render: ->
     # console.log "render List", (+new Date()).toString()[-4..-1]

@@ -16,7 +16,6 @@ class DocDetailTitleComponent extends React.Component
 
   constructLink = (name) ->
     match = name.match(/^(.+)\.(.+)$/)
-    console.log match
     <span>
       <Link style={styles.link} href={"/class/#{match[1]}"}>{match[1]}</Link>
       <span>.</span>

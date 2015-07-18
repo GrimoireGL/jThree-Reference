@@ -67,6 +67,8 @@ styles =
     height: 'calc(100% - 80px)'
     overflowY: 'scroll'
     overflowX: 'hidden'
+    zIndex: 10
+    backgroundColor: '#fff'
 
   container:
     flexGrow: '1'
