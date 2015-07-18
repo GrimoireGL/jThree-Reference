@@ -2190,19 +2190,14 @@ DocSearchContainerComponent = (function(superClass) {
   };
 
   DocSearchContainerComponent.prototype.callDirTreeByArray = function(arr) {
-    var dir_tree, file, i, j, len, ref, ref1, v;
+    var dir_tree, i, j, len, ref, ref1, v;
     dir_tree = this.state.dir_tree;
     for (i = j = 0, len = arr.length; j < len; i = ++j) {
       v = arr[i];
       if (i !== arr.length - 1) {
         dir_tree = (ref = dir_tree.dir) != null ? ref[v] : void 0;
       } else {
-        file = (ref1 = dir_tree.file) != null ? ref1[v] : void 0;
-        if (file != null) {
-          return file;
-        } else {
-          return void 0;
-        }
+        return (ref1 = dir_tree.file) != null ? ref1[v] : void 0;
       }
       if (dir_tree == null) {
         return void 0;
@@ -2222,6 +2217,9 @@ DocSearchContainerComponent = (function(superClass) {
         route = ref[fragment];
         if (route.split(':')[1] === 'global') {
           obj = this.callDirTreeByArray(fragment.split('/').slice(1));
+          if (obj == null) {
+            continue;
+          }
           char_elm = React.createElement(CharIconComponent, {
             "char": obj.kindString,
             "style": this.genKindStringStyle(obj.kindString)
@@ -2234,6 +2232,9 @@ DocSearchContainerComponent = (function(superClass) {
         } else if (route.split(':')[1] === 'local') {
           m = fragment.match(/.+\/(.+?)\/(.+?)$/);
           obj = this.callDirTreeByArray(fragment.split('/').slice(1, -1));
+          if (obj == null) {
+            continue;
+          }
           obj_child = find(obj.children, function(v) {
             return v.name === fragment.split('/').slice(-1)[0];
           });
