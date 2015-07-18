@@ -6,16 +6,22 @@ colors = require './colors/color-definition'
 class ListFolderComponent extends React.Component
   constructor: (props) ->
     super props
+
+  componentWillMount: ->
     @state =
       folded: @props.folded ? true
 
-  toggle_fold: ->
+  componentWillReceiveProps: (nextProps) ->
     @setState
-      folded: !@state.folded
+      folded: nextProps.folded ? true
 
   shouldComponentUpdate: (nextProps, nextState) ->
     # console.log @props.folded, nextProps.folded, @state.folded, nextState.folded, @props.name
     return nextState.folded == false || @state.folded != nextState.folded
+
+  toggle_fold: ->
+    @setState
+      folded: !@state.folded
 
   render: ->
     # console.log "render ListFolder #{@props.name}", (+new Date()).toString()[-4..-1]
