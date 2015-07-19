@@ -5,6 +5,11 @@ DocAction = require './actions/doc-action'
 DocStore = require './stores/doc-store'
 
 class Context extends Flux.Context
+  ###*
+   * construct context for flux
+   * @param  {Object} initialStates initialize state for stores
+   * @return {Context}
+  ###
   constructor: (initialStates) ->
     super
     @initialStates = initialStates

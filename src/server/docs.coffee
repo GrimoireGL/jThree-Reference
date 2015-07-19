@@ -8,15 +8,20 @@ clone = require 'lodash.clone'
 request = require 'request'
 Promise = require 'bluebird'
 
-###
-Convert TypeDoc json to Docs object
-
-@param {string} path to json
-###
 class Docs
+  ###*
+   * Convert TypeDoc json to Docs object
+   * @param  {String} path path to json
+   * @return {Docs}
+  ###
   constructor: (path)->
     @json = {}
 
+  ###*
+   * set periodic interval timer to get json
+   * @param  {Number}   interval timer interval (second)
+   * @param  {Function} cb       callback function called on reseived json
+  ###
   getJsonScheduler: (interval, cb) ->
     if process.env.NODE_ENV == 'production'
       @getDocsJson cb
@@ -28,6 +33,10 @@ class Docs
       @getJsonScheduler interval, cb
     , interval * 1000
 
+  ###*
+   * request json
+   * @param  {Function} cb callback function on resolved request
+  ###
   getDocsJson: (cb) ->
     options =
       url: 'https://raw.githubusercontent.com/jThreeJS/jThree/gh-pages/docs/develop.json'
@@ -44,12 +53,11 @@ class Docs
     .catch (err) ->
       console.log "get error: #{err}"
 
-  ###
-  get global class typedoc json as object
-
-  @param {string|number} id of child of doc root
-  @param {string|number} id of grandchild of doc root
-  @api public
+  ###*
+   * get global class(factor) typedoc json as object
+   * @param  {String|Number} file_id   id of child of doc root
+   * @param  {String|Number} factor_id id of grandchild of doc root
+   * @return {Object}                  object of specifyed class(factor) in typedoc
   ###
   getGlobalClassById: (file_id, factor_id) ->
     for child in @json.children
@@ -60,11 +68,10 @@ class Docs
             return gchild
     return null
 
-  ###
-  get global file typedoc json as object not including children
-
-  @param {string|number} id of child of doc root
-  @api public
+  ###*
+   * get global file typedoc json as object not including children
+   * @param  {String|Number} file_id id of child of doc root
+   * @return {Object}                object of specifyed file in typedoc
   ###
   getGlobalFileById: (file_id) ->
     for child in @json.children
@@ -75,12 +82,11 @@ class Docs
         return c
     return null
 
-  ###
-  Costruct doc_data object formed for doc store.
-
-  @param {string|number} id of child of doc root
-  @param {string|number} id of grandchild of doc root
-  @api public
+  ###*
+   * Costruct doc_data object formed for doc store
+   * @param  {String|Number} file_id   id of child of doc root
+   * @param  {String|Number} factor_id id of grandchild of doc root
+   * @return {Object}                  object of doc_data specifyed by id of file and factor                  
   ###
   getDocDataById: (file_id, factor_id) ->
     data = @getGlobalClassById(file_id, factor_id)

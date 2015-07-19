@@ -23,10 +23,24 @@ initializeState = new InitializeState(docs)
 docs.getJsonScheduler 3 * 60 * 60, ->
   initializeState.gen()
 
+
+###*
+ * API for get doc data
+ * @param  {Object} req express request object
+ * @param  {Object} res express response object
+ * @return {[type]}     [description]
+###
 server.get '/api/class/global/:file_id/:factor_id', (req, res) ->
   console.log req.originalUrl
   res.json docs.getDocDataById req.params.file_id, req.params.factor_id
 
+
+###*
+ * All page view request routing is processed here
+ * generate view by React server-side rendering
+ * @param  {Object} req express request object
+ * @param  {Object} res express response object
+###
 server.get '*', (req, res) ->
   console.log req.originalUrl
   initialStates = initializeState.initialize(req)
@@ -34,6 +48,7 @@ server.get '*', (req, res) ->
   res.send template
     initialStates: JSON.stringify initialStates
     markup: React.renderToString React.createElement(Root, {context})
+
 
 console.log 'running on', 'PORT:', (process.env.PORT || 5000), 'IP:', process.env.IP
 

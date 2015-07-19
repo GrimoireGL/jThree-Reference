@@ -1,8 +1,10 @@
-###
-root[category][situation][grade]
-category: name of category
-situation: (n|r) n is normal(background), r is reverse(font)
-grade: (emphasis|default|moderate|light)
+###*
+ * Color definition for components styles
+ * root[category][situation][grade]
+ * category: name of category
+ * situation: (n|r) n is normal(background), r is reverse(font)
+ * grade: (emphasis|default|moderate|light)
+ * @type {Object}
 ###
 module.exports =
   main:
