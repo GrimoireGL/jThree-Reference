@@ -17,9 +17,9 @@ class DocDetailTitleComponent extends React.Component
   constructLink = (name) ->
     match = name.match(/^(.+)\.(.+)$/)
     <span>
-      <Link style={styles.link} href={"/class/#{match[1]}"}>{match[1]}</Link>
+      <Link style={styles.link} to={"/class/?.*/#{match[1]}"}>{match[1]}</Link>
       <span>.</span>
-      <Link style={styles.link} href={"/class/#{match[1]}/#{match[2].replace(/__constructor/, 'constructor')}"}>{match[2].replace(/__constructor/, 'constructor')}</Link>
+      <Link style={styles.link} to={"/class/?.*/#{match[1]}/#{match[2].replace(/__constructor/, 'constructor')}"}>{match[2].replace(/__constructor/, 'constructor')}</Link>
     </span>
 
   render: ->
