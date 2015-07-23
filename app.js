@@ -1269,10 +1269,10 @@ DocDetailTitleComponent = (function(superClass) {
     match = name.match(/^(.+)\.(.+)$/);
     return React.createElement("span", null, React.createElement(Link, {
       "style": styles.link,
-      "href": "/class/" + match[1]
+      "to": "/class/?.*/" + match[1]
     }, match[1]), React.createElement("span", null, "."), React.createElement(Link, {
       "style": styles.link,
-      "href": "/class/" + match[1] + "/" + (match[2].replace(/__constructor/, 'constructor'))
+      "to": "/class/?.*/" + match[1] + "/" + (match[2].replace(/__constructor/, 'constructor'))
     }, match[2].replace(/__constructor/, 'constructor')));
   };
 
@@ -3251,8 +3251,16 @@ If you want to navigate other pages except relative route, normaly use <a> tag.
 Example:
 <Link href='/index'>Index</Link>
 
+-- By specifying path including RegExp
+If @props.to is specified, seach path by using RegExp from RouteStore and give set to component's href attribute.
+Warning: routes are not always up-to-date because @state.routes is not link to
+RouteStore state due to a performance probrem.
+
+Example:
+<Link to='/.* /deeppage'>DeepPage</Link>
+
 -- By specifying unique route
-If uniqRoute is specified, search path from RouteStore and give set to component's
+If @props.uniqRoute is specified, search path by using RegExp from RouteStore and give set to component's
 href attribute.
 Warning: Even if uniqRoute is not unique, path(for exapmle '.*' including regexp
 in the path) is permanently set to href.
@@ -3271,7 +3279,7 @@ LinkComponent = (function(superClass) {
   }
 
   LinkComponent.prototype.componentWillMount = function() {
-    if (this.props.uniqRoute) {
+    if (this.props.uniqRoute || this.props.to) {
       this.setState({
         routes: this.context.ctx.routeStore.get().routes
       });
@@ -3286,14 +3294,23 @@ LinkComponent = (function(superClass) {
   };
 
   LinkComponent.prototype.render = function() {
-    var fragment, ref, route;
+    var fragment, ref, ref1, route;
     this.href = '#';
     if (this.props.href) {
       this.href = this.props.href;
-    } else if (this.props.uniqRoute != null) {
+    } else if (this.props.to) {
       ref = this.state.routes;
       for (fragment in ref) {
         route = ref[fragment];
+        if (fragment.match(new RegExp("^" + (this.props.to.replace(/^\//, '').replace(/\//g, '\/')) + "$"))) {
+          this.href = "/" + fragment;
+          break;
+        }
+      }
+    } else if (this.props.uniqRoute != null) {
+      ref1 = this.state.routes;
+      for (fragment in ref1) {
+        route = ref1[fragment];
         if (route.match(new RegExp("^" + this.props.uniqRoute + "$"))) {
           this.href = "/" + fragment;
           break;
