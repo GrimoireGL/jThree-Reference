@@ -14,12 +14,27 @@ class DocDetailTitleComponent extends React.Component
   constructor: (props) ->
     super props
 
-  constructLink = (name) ->
-    match = name.match(/^(.+)\.(.+)$/)
+  constructLink: (current) ->
+    routes = @context.ctx.routeStore.get().routes
+    match = current.name.match(/^(.+)\.(.+)$/)
+    detail_href = '#'
+    factor_href = '#'
+    local_match = null
+    global_match = null
+    for fragment, route of routes
+      local_match = route.match new RegExp("^class:local:(.+):(.+):#{current.id}$")
+      if local_match
+        detail_href = "/#{fragment}"
+        break
+    for fragment, route of routes
+      global_match = route.match new RegExp("^class:global:#{local_match[1]}:#{local_match[2]}$")
+      if global_match
+        factor_href = "/#{fragment}"
+        break
     <span>
-      <Link style={styles.link} to={"/class/?.*/#{match[1]}"}>{match[1]}</Link>
+      <Link style={styles.link} href={factor_href}>{match[1]}</Link>
       <span>.</span>
-      <Link style={styles.link} to={"/class/?.*/#{match[1]}/#{match[2].replace(/__constructor/, 'constructor')}"}>{match[2].replace(/__constructor/, 'constructor')}</Link>
+      <Link style={styles.link} href={detail_href}>{match[2].replace(/__constructor/, 'constructor')}</Link>
     </span>
 
   render: ->
@@ -31,13 +46,13 @@ class DocDetailTitleComponent extends React.Component
       {
         if @props.current.inheritedFrom?
           <div style={styles.from}>
-            <span><span>{"Inherited from "}</span>{constructLink(@props.current.inheritedFrom.name)}</span>
+            <span><span>{"Inherited from "}</span>{@constructLink(@props.current.inheritedFrom)}</span>
           </div>
       }
       {
         if @props.current.overwrites?
           <div style={styles.from}>
-            <span><span>{"Overwrites "}</span>{constructLink(@props.current.overwrites.name)}</span>
+            <span><span>{"Overwrites "}</span>{@constructLink(@props.current.overwrites)}</span>
           </div>
       }
       <DocFlagtagsComponent flags={@props.current.flags} style={styles.tags} />
