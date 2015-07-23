@@ -41,10 +41,26 @@ docs.getJsonScheduler(3 * 60 * 60, function() {
   return initializeState.gen();
 });
 
+
+/**
+ * API for get doc data
+ * @param  {Object} req express request object
+ * @param  {Object} res express response object
+ * @return {[type]}     [description]
+ */
+
 server.get('/api/class/global/:file_id/:factor_id', function(req, res) {
   console.log(req.originalUrl);
   return res.json(docs.getDocDataById(req.params.file_id, req.params.factor_id));
 });
+
+
+/**
+ * All page view request routing is processed here
+ * generate view by React server-side rendering
+ * @param  {Object} req express request object
+ * @param  {Object} res express response object
+ */
 
 server.get('*', function(req, res) {
   var context, initialStates;
@@ -81,9 +97,22 @@ Promise = require('bluebird');
 DocAction = (function(superClass) {
   extend(DocAction, superClass);
 
+
+  /**
+   * flux action for doc
+   * @return {DocAction}
+   */
+
   function DocAction() {
     DocAction.__super__.constructor.apply(this, arguments);
   }
+
+
+  /**
+   * get and update doc object
+   * @param  {String|Number} file_id   id of child of doc root
+   * @param  {String|Number} factor_id id of grandchild of doc root
+   */
 
   DocAction.prototype.updateDoc = function(file_id, factor_id) {
     return new Promise((function(_this) {
@@ -131,6 +160,12 @@ if (typeof window !== "undefined" && window !== null) {
 RouteAction = (function(superClass) {
   extend(RouteAction, superClass);
 
+
+  /**
+   * flux action for routing
+   * @return {RouteAction}
+   */
+
   function RouteAction() {
     RouteAction.__super__.constructor.apply(this, arguments);
     if ((History != null ? History.Adapter : void 0) != null) {
@@ -148,6 +183,13 @@ RouteAction = (function(superClass) {
     }
   }
 
+
+  /**
+   * route navigation
+   * @param  {String} path    navigation path
+   * @param  {Object} options option.silent is specifyed, only replace location bar and no page transfer
+   */
+
   RouteAction.prototype.navigate = function(path, options) {
     if (path[0] !== '/') {
       path = document.location.pathname + "/" + (this.clearSlashes(path));
@@ -164,6 +206,13 @@ RouteAction = (function(superClass) {
       return location.href = path;
     }
   };
+
+
+  /**
+   * strip slashes
+   * @param  {String} path
+   * @return {String}      slashes striped path
+   */
 
   RouteAction.prototype.clearSlashes = function(path) {
     return path.toString().replace(/\/$/, '').replace(/^\//, '');
@@ -461,11 +510,13 @@ module.exports = Radium(ClassDocComponent);
 
 },{"./doc-container-component":8,"./doc-detail-container-component":10,"./doc-slide-wrapper-component":26,"./list-component":34,"./route-component":38,"radium":undefined,"react":undefined}],7:[function(require,module,exports){
 
-/*
-root[category][situation][grade]
-category: name of category
-situation: (n|r) n is normal(background), r is reverse(font)
-grade: (emphasis|default|moderate|light)
+/**
+ * Color definition for components styles
+ * root[category][situation][grade]
+ * category: name of category
+ * situation: (n|r) n is normal(background), r is reverse(font)
+ * grade: (emphasis|default|moderate|light)
+ * @type {Object}
  */
 module.exports = {
   main: {
@@ -4173,6 +4224,13 @@ DocStore = require('./stores/doc-store');
 Context = (function(superClass) {
   extend(Context, superClass);
 
+
+  /**
+   * construct context for flux
+   * @param  {Object} initialStates initialize state for stores
+   * @return {Context}
+   */
+
   function Context(initialStates) {
     Context.__super__.constructor.apply(this, arguments);
     this.initialStates = initialStates;
@@ -4191,6 +4249,11 @@ module.exports = Context;
 
 
 },{"./actions/doc-action":2,"./actions/route-action":3,"./stores/doc-store":47,"./stores/route-store":48,"material-flux":undefined}],45:[function(require,module,exports){
+
+/**
+ * keys linked to actions
+ * @type {Object}
+ */
 module.exports = {
   route: 'route',
   updateDoc: 'updateDoc'
@@ -4204,6 +4267,13 @@ var Router, objectAssign;
 objectAssign = require('object-assign');
 
 Router = (function() {
+
+  /**
+   * Routing support for flux architecture
+   * @param  {String} root   root path for pushState
+   * @param  {Object} routes object that contains routes corresponed to fragments
+   * @return {Router}
+   */
   function Router(root, routes) {
     root = '/';
     this.routes = {};
@@ -4212,15 +4282,34 @@ Router = (function() {
     this.setRoute(routes);
   }
 
+
+  /**
+   * set root path for pushState
+   * @param {String} root root path for pushState
+   */
+
   Router.prototype.setRoot = function(root) {
     return this.root = (root != null) && root !== '/' ? '/' + this.clearSlashes(root) + '/' : '/';
   };
+
+
+  /**
+   * set object that contains routes corresponed to fragments
+   * @param {Object} routes object that contains routes corresponed to fragments
+   */
 
   Router.prototype.setRoute = function(routes) {
     if (routes != null) {
       return this.routes = routes;
     }
   };
+
+
+  /**
+   * add routes
+   * @param {String|Object} path fragment; if Object is specifyed, object is used as fragment of routes
+   * @param {String?} route      route
+   */
 
   Router.prototype.addRoute = function(path, route) {
     var routes;
@@ -4232,6 +4321,14 @@ Router = (function() {
     }
     return this.routes = objectAssign(this.routes, routes);
   };
+
+
+  /**
+   * set routes for authenticated only
+   * @param {String|Object} route if required and renavigate is not specifyed, object is set as unit of auth
+   * @param {Boolean} required    if true, renavigate when not authorized. if false, renavigate when authorized
+   * @param {String} renavigate   path of renavigation(like redirect)
+   */
 
   Router.prototype.setAuth = function(route, required, renavigate) {
     var auth;
@@ -4246,6 +4343,16 @@ Router = (function() {
     }
     return this.auth = objectAssign(this.auth, auth);
   };
+
+
+  /**
+   * routing process
+   * @param  {String} fragment  fragment of path to route
+   * @param  {Boolean} logined  authenticated or not
+   * @param  {Function} resolve callback function called when routing succeeded
+   * @param  {Function} reject  callback function called when routing failed
+   * @return {Any}              returned from callback function
+   */
 
   Router.prototype.route = function(fragment, logined, resolve, reject) {
     var argu, auth, match, match_, r, r_, re, re_, ref, ref1, res;
@@ -4328,6 +4435,14 @@ merge = require('lodash.merge');
 DocStore = (function(superClass) {
   extend(DocStore, superClass);
 
+
+  /**
+   * flux store for doc
+   * stores doc objects and tree formed structure of doc
+   * @param  {Context} context flux context instance use for initializing state
+   * @return {DocStore}
+   */
+
   function DocStore(context) {
     DocStore.__super__.constructor.call(this, context);
     this.state = {
@@ -4338,6 +4453,12 @@ DocStore = (function(superClass) {
     this.register(keys.updateDoc, this.updateDoc);
   }
 
+
+  /**
+   * update doc objects
+   * @param  {Object} data fragment of doc data
+   */
+
   DocStore.prototype.updateDoc = function(data) {
     var doc_data;
     doc_data = this.state.doc_data;
@@ -4346,6 +4467,12 @@ DocStore = (function(superClass) {
       doc_data: doc_data
     });
   };
+
+
+  /**
+   * getter for component
+   * @return {Object} stored state
+   */
 
   DocStore.prototype.get = function() {
     return this.state;
@@ -4373,6 +4500,14 @@ objectAssign = require('object-assign');
 RouteStore = (function(superClass) {
   extend(RouteStore, superClass);
 
+
+  /**
+   * flux store for routing
+   * stores currnt fragment and route, routes for routing and root for pushState
+   * @param  {Context} context flux context instance use for initializing state
+   * @return {RouteStore}
+   */
+
   function RouteStore(context) {
     RouteStore.__super__.constructor.call(this, context);
     this.state = {
@@ -4388,12 +4523,24 @@ RouteStore = (function(superClass) {
     }
   }
 
+
+  /**
+   * update current fragment and route
+   * @param  {fragment} fragment current fragment
+   */
+
   RouteStore.prototype.route = function(fragment) {
     console.log('route:', this.state.fragment, '->', fragment);
     return this.setState({
       fragment: fragment
     });
   };
+
+
+  /**
+   * getter for component
+   * @return {Object} stored state
+   */
 
   RouteStore.prototype.get = function() {
     return this.state;
@@ -4424,24 +4571,28 @@ request = require('request');
 
 Promise = require('bluebird');
 
-
-/*
-Convert TypeDoc json to Docs object
-
-@param {string} path to json
- */
-
 Docs = (function() {
-  function Docs(path) {
+
+  /**
+   * Convert TypeDoc json to Docs object
+   * @return {Docs}
+   */
+  function Docs() {
     this.json = {};
   }
 
+
+  /**
+   * set periodic interval timer to get json
+   * @param  {Number}   interval timer interval (second)
+   * @param  {Function} cb       callback function called on reseived json
+   */
+
   Docs.prototype.getJsonScheduler = function(interval, cb) {
     if ("production" === 'production') {
-      this.getDocsJson(cb);
+      this.getRemoteJson(cb);
     } else if ("production" === 'development') {
-      this.json = JSON.parse(fs.readFileSync(config.typedoc.path_to_json));
-      cb();
+      this.getLocalJson(cb);
     }
     console.log('got json');
     return setTimeout((function(_this) {
@@ -4451,7 +4602,34 @@ Docs = (function() {
     })(this), interval * 1000);
   };
 
-  Docs.prototype.getDocsJson = function(cb) {
+
+  /**
+   * set external json object
+   * @param {Object} json doc json object
+   */
+
+  Docs.prototype.setJson = function(json) {
+    return this.json = json;
+  };
+
+
+  /**
+   * load json from directory
+   * @param  {Function} cb callback function on loaded
+   */
+
+  Docs.prototype.getLocalJson = function(cb) {
+    this.json = JSON.parse(fs.readFileSync(config.typedoc.path_to_json));
+    return cb();
+  };
+
+
+  /**
+   * request json
+   * @param  {Function} cb callback function on resolved request
+   */
+
+  Docs.prototype.getRemoteJson = function(cb) {
     var options;
     options = {
       url: 'https://raw.githubusercontent.com/jThreeJS/jThree/gh-pages/docs/develop.json',
@@ -4476,12 +4654,11 @@ Docs = (function() {
   };
 
 
-  /*
-  get global class typedoc json as object
-  
-  @param {string|number} id of child of doc root
-  @param {string|number} id of grandchild of doc root
-  @api public
+  /**
+   * get global class(factor) typedoc json as object
+   * @param  {String|Number} file_id   id of child of doc root
+   * @param  {String|Number} factor_id id of grandchild of doc root
+   * @return {Object}                  object of specifyed class(factor) in typedoc
    */
 
   Docs.prototype.getGlobalClassById = function(file_id, factor_id) {
@@ -4494,7 +4671,6 @@ Docs = (function() {
         for (j = 0, len1 = ref1.length; j < len1; j++) {
           gchild = ref1[j];
           if (gchild.id === parseInt(factor_id, 10)) {
-            console.log(gchild.name);
             return gchild;
           }
         }
@@ -4504,11 +4680,10 @@ Docs = (function() {
   };
 
 
-  /*
-  get global file typedoc json as object not including children
-  
-  @param {string|number} id of child of doc root
-  @api public
+  /**
+   * get global file typedoc json as object not including children
+   * @param  {String|Number} file_id id of child of doc root
+   * @return {Object}                object of specifyed file in typedoc
    */
 
   Docs.prototype.getGlobalFileById = function(file_id) {
@@ -4527,12 +4702,11 @@ Docs = (function() {
   };
 
 
-  /*
-  Costruct doc_data object formed for doc store.
-  
-  @param {string|number} id of child of doc root
-  @param {string|number} id of grandchild of doc root
-  @api public
+  /**
+   * Costruct doc_data object formed for doc store
+   * @param  {String|Number} file_id   id of child of doc root
+   * @param  {String|Number} factor_id id of grandchild of doc root
+   * @return {Object}                  object of doc_data specifyed by id of file and factor
    */
 
   Docs.prototype.getDocDataById = function(file_id, factor_id) {
@@ -4570,6 +4744,11 @@ Docs = require('./docs');
 Router = require('../renderer/lib/router');
 
 InitializeState = (function() {
+
+  /**
+   * initialize state for stores in client
+   * @return {InitializeState}
+   */
   function InitializeState(docs) {
     this.docs = docs;
     this.routeGen = new RoutesGen();
@@ -4577,11 +4756,23 @@ InitializeState = (function() {
     this.router = new Router(config.router.root, this.routeGen.routes);
   }
 
+
+  /**
+   * resetup state initializer
+   */
+
   InitializeState.prototype.gen = function() {
     this.routeGen.gen(this.docs.json);
     this.dirTree.gen(this.docs.json);
     return this.router.setRoute(this.routeGen.routes);
   };
+
+
+  /**
+   * initialize state
+   * @param  {Object} req request from express
+   * @return {Object}     initialized state
+   */
 
   InitializeState.prototype.initialize = function(req) {
     var initialState, initial_doc_data;
@@ -4634,8 +4825,6 @@ merge = require('lodash.merge');
 Construt tree formed object by analizing the name of
 the global class in typedoc json.
 
-@param {object} json object converted from typedoc
-
 Construct dir_tree like below.
 
 -- path
@@ -4669,10 +4858,10 @@ DirTree = (function() {
   }
 
 
-  /*
-  construct tree formed object from docs json
-  
-  @api public
+  /**
+   * Construt tree formed object by analizing the name of
+   * the global class in typedoc json.
+   * @param  {Object} json typedoc json
    */
 
   DirTree.prototype.gen = function(json) {
@@ -4680,10 +4869,10 @@ DirTree = (function() {
   };
 
 
-  /*
-  construct tree formed object from docs json
-  
-  @api private
+  /**
+   * construct tree formed object from docs json
+   * @param  {Object} json typedoc json
+   * @return {Object}      tree formed object
    */
 
   constructDirTree = function(json) {
@@ -4702,12 +4891,12 @@ DirTree = (function() {
   };
 
 
-  /*
-  construct no branched tree recursively by array
-  
-  @param {array} construct nested hash by following this
-  @param {any} the top of nested hash
-  @api private
+  /**
+   * construct no branched tree recursively by array
+   * @param  {Array} arr     construct nested hash by following this
+   * @param  {Object} top    the top of nested hash
+   * @param  {Array} def_arr this parameter used in recurrence
+   * @return {Object}        fragment of tree formed object
    */
 
   arrayToDirTree = function(arr, top, def_arr) {
@@ -4755,6 +4944,12 @@ var fs;
 
 fs = require('fs');
 
+
+/**
+ * configuration of stateInitializer
+ * @type {Object}
+ */
+
 module.exports = {
   typedoc: {
     path_to_json: './src/server/doc.json'
@@ -4772,6 +4967,12 @@ var RoutesGen, objectAssign;
 objectAssign = require('object-assign');
 
 RoutesGen = (function() {
+
+  /**
+   * Routes generator
+   * @param  {Object} json typedoc json
+   * @return {RoutesGen}
+   */
   var constructClassRoutes, constructErrorRoutes, constructIndexRoutes;
 
   function RoutesGen(json) {
@@ -4779,9 +4980,23 @@ RoutesGen = (function() {
     this._constructRoutes(json);
   }
 
+
+  /**
+   * regenerate routes
+   * @param  {Object} json typedoc json
+   * @return {Object}      routes
+   */
+
   RoutesGen.prototype.gen = function(json) {
     return this._constructRoutes(json);
   };
+
+
+  /**
+   * construct routes
+   * @param  {Object} json typedoc json
+   * @return {Object}      merged fragment of routes
+   */
 
   RoutesGen.prototype._constructRoutes = function(json) {
     this.routes = {};
@@ -4789,6 +5004,13 @@ RoutesGen = (function() {
     this.routes = objectAssign({}, this.routes, constructIndexRoutes());
     return this.routes = objectAssign({}, this.routes, constructErrorRoutes());
   };
+
+
+  /**
+   * construct class route
+   * @param  {Object} json typedoc json
+   * @return {Object}      fragment of routes
+   */
 
   constructClassRoutes = function(json) {
     var prefix, ref, routes;
@@ -4821,6 +5043,12 @@ RoutesGen = (function() {
     return routes;
   };
 
+
+  /**
+   * construct index route
+   * @return {Object} fragment of routes
+   */
+
   constructIndexRoutes = function() {
     var routes;
     routes = {
@@ -4828,6 +5056,12 @@ RoutesGen = (function() {
     };
     return routes;
   };
+
+
+  /**
+   * construct error routes
+   * @return {Object} fragment of routes
+   */
 
   constructErrorRoutes = function() {
     var routes;
