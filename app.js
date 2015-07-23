@@ -1256,23 +1256,42 @@ colors = require('./colors/color-definition');
  */
 
 DocDetailTitleComponent = (function(superClass) {
-  var constructLink;
-
   extend(DocDetailTitleComponent, superClass);
 
   function DocDetailTitleComponent(props) {
     DocDetailTitleComponent.__super__.constructor.call(this, props);
   }
 
-  constructLink = function(name) {
-    var match;
-    match = name.match(/^(.+)\.(.+)$/);
+  DocDetailTitleComponent.prototype.constructLink = function(current) {
+    var detail_href, factor_href, fragment, global_match, local_match, match, route, routes;
+    routes = this.context.ctx.routeStore.get().routes;
+    match = current.name.match(/^(.+)\.(.+)$/);
+    detail_href = '#';
+    factor_href = '#';
+    local_match = null;
+    global_match = null;
+    for (fragment in routes) {
+      route = routes[fragment];
+      local_match = route.match(new RegExp("^class:local:(.+):(.+):" + current.id + "$"));
+      if (local_match) {
+        detail_href = "/" + fragment;
+        break;
+      }
+    }
+    for (fragment in routes) {
+      route = routes[fragment];
+      global_match = route.match(new RegExp("^class:global:" + local_match[1] + ":" + local_match[2] + "$"));
+      if (global_match) {
+        factor_href = "/" + fragment;
+        break;
+      }
+    }
     return React.createElement("span", null, React.createElement(Link, {
       "style": styles.link,
-      "to": "/class/?.*/" + match[1]
+      "href": factor_href
     }, match[1]), React.createElement("span", null, "."), React.createElement(Link, {
       "style": styles.link,
-      "to": "/class/?.*/" + match[1] + "/" + (match[2].replace(/__constructor/, 'constructor'))
+      "href": detail_href
     }, match[2].replace(/__constructor/, 'constructor')));
   };
 
@@ -1290,9 +1309,9 @@ DocDetailTitleComponent = (function(superClass) {
       "style": Array.prototype.concat.apply([], [styles.base, this.props.style])
     }, (this.props.current.inheritedFrom != null ? React.createElement("div", {
       "style": styles.from
-    }, React.createElement("span", null, React.createElement("span", null, "Inherited from "), constructLink(this.props.current.inheritedFrom.name))) : void 0), (this.props.current.overwrites != null ? React.createElement("div", {
+    }, React.createElement("span", null, React.createElement("span", null, "Inherited from "), this.constructLink(this.props.current.inheritedFrom))) : void 0), (this.props.current.overwrites != null ? React.createElement("div", {
       "style": styles.from
-    }, React.createElement("span", null, React.createElement("span", null, "Overwrites "), constructLink(this.props.current.overwrites.name))) : void 0), React.createElement(DocFlagtagsComponent, {
+    }, React.createElement("span", null, React.createElement("span", null, "Overwrites "), this.constructLink(this.props.current.overwrites))) : void 0), React.createElement(DocFlagtagsComponent, {
       "flags": this.props.current.flags,
       "style": styles.tags
     }), React.createElement(DocDetailSignaturesComponent, {
