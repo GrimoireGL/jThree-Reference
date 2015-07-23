@@ -8,27 +8,49 @@ clone = require 'lodash.clone'
 request = require 'request'
 Promise = require 'bluebird'
 
-###
-Convert TypeDoc json to Docs object
-
-@param {string} path to json
-###
 class Docs
-  constructor: (path)->
+  ###*
+   * Convert TypeDoc json to Docs object
+   * @return {Docs}
+  ###
+  constructor: ->
     @json = {}
 
+  ###*
+   * set periodic interval timer to get json
+   * @param  {Number}   interval timer interval (second)
+   * @param  {Function} cb       callback function called on reseived json
+  ###
   getJsonScheduler: (interval, cb) ->
     if process.env.NODE_ENV == 'production'
-      @getDocsJson cb
+      @getRemoteJson cb
     else if process.env.NODE_ENV == 'development'
-      @json = JSON.parse(fs.readFileSync(config.typedoc.path_to_json))
-      cb()
+      @getLocalJson cb
     console.log 'got json'
     setTimeout =>
       @getJsonScheduler interval, cb
     , interval * 1000
 
-  getDocsJson: (cb) ->
+  ###*
+   * set external json object
+   * @param {Object} json doc json object
+  ###
+  setJson: (json) ->
+    @json = json
+
+  ###*
+   * load json from directory
+   * @param  {Function} cb callback function on loaded
+  ###
+  getLocalJson: (cb) ->
+    @json = JSON.parse(fs.readFileSync(config.typedoc.path_to_json))
+    cb()
+
+  ###*
+   * request json
+   * @param  {Function} cb callback function on resolved request
+  ###
+  getRemoteJson: (cb) ->
     options =
       url: 'https://raw.githubusercontent.com/jThreeJS/jThree/gh-pages/docs/develop.json'
       json: true
@@ -44,27 +66,24 @@ class Docs
     .catch (err) ->
       console.log "get error: #{err}"
 
-  ###
-  get global class typedoc json as object
-
-  @param {string|number} id of child of doc root
-  @param {string|number} id of grandchild of doc root
-  @api public
+  ###*
+   * get global class(factor) typedoc json as object
+   * @param  {String|Number} file_id   id of child of doc root
+   * @param  {String|Number} factor_id id of grandchild of doc root
+   * @return {Object}                  object of specifyed class(factor) in typedoc
   ###
   getGlobalClassById: (file_id, factor_id) ->
     for child in @json.children
       if child.id == parseInt(file_id, 10)
         for gchild in child.children
           if gchild.id == parseInt(factor_id, 10)
-            console.log gchild.name
             return gchild
     return null
 
-  ###
-  get global file typedoc json as object not including children
-
-  @param {string|number} id of child of doc root
-  @api public
+  ###*
+   * get global file typedoc json as object not including children
+   * @param  {String|Number} file_id id of child of doc root
+   * @return {Object}                object of specifyed file in typedoc
   ###
   getGlobalFileById: (file_id) ->
     for child in @json.children
@@ -75,12 +94,11 @@ class Docs
         return c
     return null
 
-  ###
-  Costruct doc_data object formed for doc store.
-
-  @param {string|number} id of child of doc root
-  @param {string|number} id of grandchild of doc root
-  @api public
+  ###*
+   * Costruct doc_data object formed for doc store
+   * @param  {String|Number} file_id   id of child of doc root
+   * @param  {String|Number} factor_id id of grandchild of doc root
+   * @return {Object}                  object of doc_data specifyed by id of file and factor
   ###
   getDocDataById: (file_id, factor_id) ->
     data = @getGlobalClassById(file_id, factor_id)

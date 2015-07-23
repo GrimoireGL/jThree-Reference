@@ -10,8 +10,6 @@ merge = require 'lodash.merge'
 Construt tree formed object by analizing the name of
 the global class in typedoc json.
 
-@param {object} json object converted from typedoc
-
 Construct dir_tree like below.
 
 -- path
@@ -40,18 +38,18 @@ class DirTree
   constructor: (json) ->
     @dir_tree = constructDirTree(json)
 
-  ###
-  construct tree formed object from docs json
-
-  @api public
+  ###*
+   * Construt tree formed object by analizing the name of
+   * the global class in typedoc json.
+   * @param  {Object} json typedoc json
   ###
   gen: (json) ->
     @dir_tree = constructDirTree(json)
 
-  ###
-  construct tree formed object from docs json
-
-  @api private
+  ###*
+   * construct tree formed object from docs json
+   * @param  {Object} json typedoc json
+   * @return {Object}      tree formed object
   ###
   constructDirTree = (json) ->
     dir_tree = {}
@@ -60,12 +58,12 @@ class DirTree
       dir_tree = merge {}, dir_tree, arrayToDirTree(arr, child)
     return dir_tree
 
-  ###
-  construct no branched tree recursively by array
-
-  @param {array} construct nested hash by following this
-  @param {any} the top of nested hash
-  @api private
+  ###*
+   * construct no branched tree recursively by array
+   * @param  {Array} arr     construct nested hash by following this
+   * @param  {Object} top    the top of nested hash
+   * @param  {Array} def_arr this parameter used in recurrence
+   * @return {Object}        fragment of tree formed object
   ###
   arrayToDirTree = (arr, top, def_arr) ->
     res = {}

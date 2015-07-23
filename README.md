@@ -1,5 +1,9 @@
 # jThree-Reference
 
+[![Build Status](https://travis-ci.org/jThreeJS/jThree-Reference.svg?branch=develop)](https://travis-ci.org/jThreeJS/jThree-Reference)
+[![Dependency Status](https://david-dm.org/jThreeJS/jThree-Reference.svg)](https://david-dm.org/jThreeJS/jThree-Reference)
+[![devDependency Status](https://david-dm.org/jThreeJS/jThree-Reference/dev-status.svg)](https://david-dm.org/jThreeJS/jThree-Reference#info=devDependencies)
+
 ## Summary
 
 jThree-Reference is a documentation of jThree core. This is designed to serve not only class references and tutorial but also sharing. It plays the role of connecting users in jThree's community.

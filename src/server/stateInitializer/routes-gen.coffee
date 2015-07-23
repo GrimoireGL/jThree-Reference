@@ -1,19 +1,39 @@
 objectAssign = require 'object-assign'
 
 class RoutesGen
+  ###*
+   * Routes generator
+   * @param  {Object} json typedoc json
+   * @return {RoutesGen}
+  ###
   constructor: (json) ->
     @routes = {}
     @_constructRoutes json
 
+  ###*
+   * regenerate routes
+   * @param  {Object} json typedoc json
+   * @return {Object}      routes
+  ###
   gen: (json) ->
     @_constructRoutes json
 
+  ###*
+   * construct routes
+   * @param  {Object} json typedoc json
+   * @return {Object}      merged fragment of routes
+  ###
   _constructRoutes: (json) ->
     @routes = {}
     @routes = objectAssign {}, @routes, constructClassRoutes(json)
     @routes = objectAssign {}, @routes, constructIndexRoutes()
     @routes = objectAssign {}, @routes, constructErrorRoutes()
 
+  ###*
+   * construct class route
+   * @param  {Object} json typedoc json
+   * @return {Object}      fragment of routes
+  ###
   constructClassRoutes = (json) ->
     prefix = 'class'
     routes = {}
@@ -31,11 +51,19 @@ class RoutesGen
     routes["#{prefix}"] = "#{prefix}"
     return routes
 
+  ###*
+   * construct index route
+   * @return {Object} fragment of routes
+  ###
   constructIndexRoutes = ->
     routes =
       '' : 'index'
     return routes
 
+  ###*
+   * construct error routes
+   * @return {Object} fragment of routes
+  ###
   constructErrorRoutes = ->
     routes =
       '.*' : 'error'

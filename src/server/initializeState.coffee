@@ -5,17 +5,29 @@ Docs = require './docs'
 Router = require '../renderer/lib/router'
 
 class InitializeState
+  ###*
+   * initialize state for stores in client
+   * @return {InitializeState}
+  ###
   constructor: (docs) ->
     @docs = docs
     @routeGen = new RoutesGen()
     @dirTree = new DirTree()
     @router = new Router(config.router.root, @routeGen.routes)
 
+  ###*
+   * resetup state initializer
+  ###
   gen: ->
     @routeGen.gen @docs.json
     @dirTree.gen @docs.json
     @router.setRoute @routeGen.routes
 
+  ###*
+   * initialize state
+   * @param  {Object} req request from express
+   * @return {Object}     initialized state
+  ###
   initialize: (req) ->
     initial_doc_data = {}
     @router.route req.originalUrl, (route, argu) =>

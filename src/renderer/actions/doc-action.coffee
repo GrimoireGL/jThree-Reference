@@ -4,9 +4,18 @@ request = require 'superagent'
 Promise = require 'bluebird'
 
 class DocAction extends Flux.Action
+  ###*
+   * flux action for doc
+   * @return {DocAction}
+  ###
   constructor: ->
     super
 
+  ###*
+   * get and update doc object
+   * @param  {String|Number} file_id   id of child of doc root
+   * @param  {String|Number} factor_id id of grandchild of doc root
+  ###
   updateDoc: (file_id, factor_id) ->
     # console.log 'request', (+new Date()).toString()[-4..-1]
     new Promise (resolve, reject) =>
