@@ -9,6 +9,7 @@ plumber = require 'gulp-plumber'
 rename = require 'gulp-rename'
 gulpif = require 'gulp-if'
 envify = require 'envify/custom'
+mocha = require 'gulp-mocha'
 
 others = [
 ]
@@ -69,3 +70,8 @@ target.forEach (it) ->
         .pipe rename(it.name)
         .pipe gulpif(!(!watching && env_production), sourcemaps.write('./'))
         .pipe gulp.dest(it.dest)
+
+gulp.task 'test', ->
+  gulp
+    .src './test/*test.coffee'
+    .pipe mocha()
