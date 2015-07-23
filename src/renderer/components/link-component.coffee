@@ -17,8 +17,16 @@ If you want to navigate other pages except relative route, normaly use <a> tag.
 Example:
 <Link href='/index'>Index</Link>
 
+-- By specifying path including RegExp
+If @props.to is specified, seach path by using RegExp from RouteStore and give set to component's href attribute.
+Warning: routes are not always up-to-date because @state.routes is not link to
+RouteStore state due to a performance probrem.
+
+Example:
+<Link to='/.* /deeppage'>DeepPage</Link>
+
 -- By specifying unique route
-If uniqRoute is specified, search path from RouteStore and give set to component's
+If @props.uniqRoute is specified, search path by using RegExp from RouteStore and give set to component's
 href attribute.
 Warning: Even if uniqRoute is not unique, path(for exapmle '.*' including regexp
 in the path) is permanently set to href.
@@ -35,7 +43,7 @@ class LinkComponent extends React.Component
     super props
 
   componentWillMount: ->
-    if @props.uniqRoute
+    if @props.uniqRoute || @props.to
       @setState
         routes: @context.ctx.routeStore.get().routes
     @href = '#'
@@ -49,11 +57,16 @@ class LinkComponent extends React.Component
     @href = '#'
     if @props.href
       @href = @props.href
+    else if @props.to
+      for fragment, route of @state.routes
+        if fragment.match new RegExp("^#{@props.to.replace(/^\//, '').replace(/\//g, '\/')}$")
+          @href = "/#{fragment}"
+          break
     else if @props.uniqRoute?
       for fragment, route of @state.routes
-         if route.match new RegExp("^#{@props.uniqRoute}$")
-           @href = "/#{fragment}"
-           break
+        if route.match new RegExp("^#{@props.uniqRoute}$")
+          @href = "/#{fragment}"
+          break
     <a href={@href} onClick={@navigate.bind(@)} style={@props.style}>
       {@props.children}
     </a>
