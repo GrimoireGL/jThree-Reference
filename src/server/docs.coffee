@@ -11,10 +11,9 @@ Promise = require 'bluebird'
 class Docs
   ###*
    * Convert TypeDoc json to Docs object
-   * @param  {String} path path to json
    * @return {Docs}
   ###
-  constructor: (path)->
+  constructor: ->
     @json = {}
 
   ###*
@@ -31,6 +30,13 @@ class Docs
     setTimeout =>
       @getJsonScheduler interval, cb
     , interval * 1000
+
+  ###*
+   * set external json object
+   * @param {Object} json doc json object
+  ###
+  setJson: (json) ->
+    @json = json
 
   ###*
    * load json from directory
