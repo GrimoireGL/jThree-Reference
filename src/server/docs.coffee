@@ -24,20 +24,27 @@ class Docs
   ###
   getJsonScheduler: (interval, cb) ->
     if process.env.NODE_ENV == 'production'
-      @getDocsJson cb
+      @getRemoteJson cb
     else if process.env.NODE_ENV == 'development'
-      @json = JSON.parse(fs.readFileSync(config.typedoc.path_to_json))
-      cb()
+      @getLocalJson cb
     console.log 'got json'
     setTimeout =>
       @getJsonScheduler interval, cb
     , interval * 1000
 
   ###*
+   * load json from directory
+   * @param  {Function} cb callback function on loaded
+  ###
+  getLocalJson: (cb) ->
+    @json = JSON.parse(fs.readFileSync(config.typedoc.path_to_json))
+    cb()
+
+  ###*
    * request json
    * @param  {Function} cb callback function on resolved request
   ###
-  getDocsJson: (cb) ->
+  getRemoteJson: (cb) ->
     options =
       url: 'https://raw.githubusercontent.com/jThreeJS/jThree/gh-pages/docs/develop.json'
       json: true
@@ -64,7 +71,6 @@ class Docs
       if child.id == parseInt(file_id, 10)
         for gchild in child.children
           if gchild.id == parseInt(factor_id, 10)
-            console.log gchild.name
             return gchild
     return null
 
@@ -86,7 +92,7 @@ class Docs
    * Costruct doc_data object formed for doc store
    * @param  {String|Number} file_id   id of child of doc root
    * @param  {String|Number} factor_id id of grandchild of doc root
-   * @return {Object}                  object of doc_data specifyed by id of file and factor                  
+   * @return {Object}                  object of doc_data specifyed by id of file and factor
   ###
   getDocDataById: (file_id, factor_id) ->
     data = @getGlobalClassById(file_id, factor_id)
