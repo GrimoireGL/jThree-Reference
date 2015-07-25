@@ -19,11 +19,11 @@ class DocFlagtagsComponent extends React.Component
       {
         elm = []
         if @props.flags?.isProtected
-          elm.push <span style={styles.tag}>Protected</span>
+          elm.push <span style={styles.tag}><span style={styles.tag_icon} className='icon-unlock-alt'></span><span>Protected</span></span>
         if @props.flags?.isPrivate
-          elm.push <span style={styles.tag}>Private</span>
+          elm.push <span style={styles.tag}><span style={styles.tag_icon} className='icon-lock'></span><span>Private</span></span>
         if @props.flags?.isStatic
-          elm.push <span style={styles.tag}>Static</span>
+          elm.push <span style={styles.tag}><span style={styles.tag_icon} className='icon-thumb-tack'></span><span>Static</span></span>
         elm
       }
     </div>
@@ -45,7 +45,10 @@ styles =
     paddingBottom: 3
     paddingLeft: 12
     paddingRight: 12
-    marginRight: 20
+    marginRight: 16
+
+  tag_icon:
+    marginRight: 5
 
 DocFlagtagsComponent.contextTypes =
   ctx: React.PropTypes.any

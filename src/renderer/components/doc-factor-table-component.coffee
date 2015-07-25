@@ -34,12 +34,16 @@ class DocFactorTableComponent extends React.Component
             table_row.push <Link style={styles.link} uniqRoute={"class:local:.+?:#{@props.current.id}:#{child.id}"}>{child.name}</Link>
             table_row.push <span>
               {
+                flags = []
                 if child.flags.isPrivate
-                  'Private'
+                   flags.push <span style={styles.flag} className='icon-lock'></span>
                 else if child.flags.isProtected
-                  'Protected'
-                else if child.flags.isStatic
-                  'Static'
+                   flags.push <span style={styles.flag} className='icon-unlock-alt'></span>
+                else
+                   flags.push <span style={styles.flag} className='icon-unlock'></span>
+                if child.flags.isStatic
+                   flags.push <span style={styles.flag} className='icon-thumb-tack'></span>
+                flags
               }
             </span>
             table_row.push <span>{child.comment?.shortText || child.signatures?[0].comment?.shortText || child.getSignature?[0].comment?.shortText || child.setSignature?[0].comment?.shortText || alt_text}</span>
@@ -51,6 +55,9 @@ class DocFactorTableComponent extends React.Component
 
 styles =
   base: {}
+
+  flag:
+    marginRight: 10
 
   link:
     color: colors.general.r.emphasis
