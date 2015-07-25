@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('../assets/icomoon/icomoon.eot?w6kdtr');
-	src:url('../assets/icomoon/icomoon.eot?#iefixw6kdtr') format('embedded-opentype'),
-		url('../assets/icomoon/icomoon.ttf?w6kdtr') format('truetype'),
-		url('../assets/icomoon/icomoon.woff?w6kdtr') format('woff'),
-		url('../assets/icomoon/icomoon.svg?w6kdtr#icomoon') format('svg');
+	src:url('../assets/icomoon/icomoon.eot?f1nf8n');
+	src:url('../assets/icomoon/icomoon.eot?#iefixf1nf8n') format('embedded-opentype'),
+		url('../assets/icomoon/icomoon.ttf?f1nf8n') format('truetype'),
+		url('../assets/icomoon/icomoon.woff?f1nf8n') format('woff'),
+		url('../assets/icomoon/icomoon.svg?f1nf8n#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -23,6 +23,18 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.icon-thumb-tack:before {
+	content: "\e608";
+}
+.icon-lock:before {
+	content: "\e605";
+}
+.icon-unlock-alt:before {
+	content: "\e606";
+}
+.icon-unlock:before {
+	content: "\e607";
+}
 .icon-search:before {
 	content: "\e604";
 }
