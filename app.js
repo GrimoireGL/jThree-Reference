@@ -1685,6 +1685,7 @@ DocFactorTableComponent = (function(superClass) {
             "style": styles.link,
             "uniqRoute": "class:local:.+?:" + this.props.current.id + ":" + child.id
           }, child.name));
+          table_row.push(React.createElement("span", null, (child.flags.isPrivate ? 'Private' : child.flags.isProtected ? 'Protected' : child.flags.isStatic ? 'Static' : void 0)));
           table_row.push(React.createElement("span", null, ((ref2 = child.comment) != null ? ref2.shortText : void 0) || ((ref3 = child.signatures) != null ? (ref4 = ref3[0].comment) != null ? ref4.shortText : void 0 : void 0) || ((ref5 = child.getSignature) != null ? (ref6 = ref5[0].comment) != null ? ref6.shortText : void 0 : void 0) || ((ref7 = child.setSignature) != null ? (ref8 = ref7[0].comment) != null ? ref8.shortText : void 0 : void 0) || alt_text));
           table.push(table_row);
         }
