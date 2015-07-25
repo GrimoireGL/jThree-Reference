@@ -1653,7 +1653,7 @@ DocFactorTableComponent = (function(superClass) {
   }
 
   DocFactorTableComponent.prototype.render = function() {
-    var alt_text, c, cellStyles, child, dstyle, i, id, table, table_row;
+    var alt_text, c, cellStyles, child, dstyle, flags, i, id, table, table_row;
     dstyle = {};
     if (this.props.collapsed) {
       dstyle = {
@@ -1685,7 +1685,19 @@ DocFactorTableComponent = (function(superClass) {
             "style": styles.link,
             "uniqRoute": "class:local:.+?:" + this.props.current.id + ":" + child.id
           }, child.name));
-          table_row.push(React.createElement("span", null, (child.flags.isPrivate ? 'Private' : child.flags.isProtected ? 'Protected' : child.flags.isStatic ? 'Static' : void 0)));
+          table_row.push(React.createElement("span", null, (flags = [], child.flags.isPrivate ? flags.push(React.createElement("span", {
+            "style": styles.flag,
+            "className": 'icon-lock'
+          })) : child.flags.isProtected ? flags.push(React.createElement("span", {
+            "style": styles.flag,
+            "className": 'icon-unlock-alt'
+          })) : flags.push(React.createElement("span", {
+            "style": styles.flag,
+            "className": 'icon-unlock'
+          })), child.flags.isStatic ? flags.push(React.createElement("span", {
+            "style": styles.flag,
+            "className": 'icon-thumb-tack'
+          })) : void 0, flags)));
           table_row.push(React.createElement("span", null, ((ref2 = child.comment) != null ? ref2.shortText : void 0) || ((ref3 = child.signatures) != null ? (ref4 = ref3[0].comment) != null ? ref4.shortText : void 0 : void 0) || ((ref5 = child.getSignature) != null ? (ref6 = ref5[0].comment) != null ? ref6.shortText : void 0 : void 0) || ((ref7 = child.setSignature) != null ? (ref8 = ref7[0].comment) != null ? ref8.shortText : void 0 : void 0) || alt_text));
           table.push(table_row);
         }
@@ -1705,6 +1717,9 @@ DocFactorTableComponent = (function(superClass) {
 
 styles = {
   base: {},
+  flag: {
+    marginRight: 10
+  },
   link: {
     color: colors.general.r.emphasis,
     textDecoration: 'none',
@@ -1864,11 +1879,20 @@ DocFlagtagsComponent = (function(superClass) {
       "style": Array.prototype.concat.apply([], [styles.base, this.props.style, dstyle.base])
     }, (elm = [], ((ref3 = this.props.flags) != null ? ref3.isProtected : void 0) ? elm.push(React.createElement("span", {
       "style": styles.tag
-    }, "Protected")) : void 0, ((ref4 = this.props.flags) != null ? ref4.isPrivate : void 0) ? elm.push(React.createElement("span", {
+    }, React.createElement("span", {
+      "style": styles.tag_icon,
+      "className": 'icon-unlock-alt'
+    }), React.createElement("span", null, "Protected"))) : void 0, ((ref4 = this.props.flags) != null ? ref4.isPrivate : void 0) ? elm.push(React.createElement("span", {
       "style": styles.tag
-    }, "Private")) : void 0, ((ref5 = this.props.flags) != null ? ref5.isStatic : void 0) ? elm.push(React.createElement("span", {
+    }, React.createElement("span", {
+      "style": styles.tag_icon,
+      "className": 'icon-lock'
+    }), React.createElement("span", null, "Private"))) : void 0, ((ref5 = this.props.flags) != null ? ref5.isStatic : void 0) ? elm.push(React.createElement("span", {
       "style": styles.tag
-    }, "Static")) : void 0, elm));
+    }, React.createElement("span", {
+      "style": styles.tag_icon,
+      "className": 'icon-thumb-tack'
+    }), React.createElement("span", null, "Static"))) : void 0, elm));
   };
 
   return DocFlagtagsComponent;
@@ -1892,7 +1916,10 @@ styles = {
     paddingBottom: 3,
     paddingLeft: 12,
     paddingRight: 12,
-    marginRight: 20
+    marginRight: 16
+  },
+  tag_icon: {
+    marginRight: 5
   }
 };
 
