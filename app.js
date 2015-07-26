@@ -2999,6 +2999,13 @@ HeaderComponent = (function(superClass) {
       "href": '/',
       "style": styles.link
     }, "Top")), React.createElement("li", {
+      "route": 'forum',
+      "key": 'forum',
+      "style": [styles.li, styles.left_separator]
+    }, React.createElement("a", {
+      "href": '//forum.jthree.io',
+      "style": styles.link
+    }, "Forum")), React.createElement("li", {
       "route": 'overview',
       "key": 'overview',
       "style": [styles.li, styles.left_separator]
