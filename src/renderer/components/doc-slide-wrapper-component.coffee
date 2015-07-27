@@ -50,6 +50,7 @@ class DocSlideWrapperComponent extends React.Component
       dstyle.left =
         boxSizing: 'border-box'
         flexGrow: '0'
+        WebkitFlexGrow: '0'
         width: slide.from
         paddingLeft: 18
         paddingRight: 0
@@ -109,9 +110,13 @@ slide =
 styles =
   base:
     display: 'flex'
+    display: '-webkit-flex'
     flexDirection: 'row'
+    WebkitFlexDirection: 'row'
     flexWrap: 'nowrap'
+    WebkitFlexWrap: 'nowrap'
     flexGrow: '1'
+    WebkitFlexGrow: '1'
     position: 'relative'
 
   left:
@@ -121,9 +126,11 @@ styles =
     paddingBottom: 30
     boxSizing: 'border-box'
     flexGrow: '1'
+    WebkitFlexGrow: '1'
 
   right:
     flexGrow: '1'
+    WebkitFlexGrow: '1'
     position: 'relative'
     overflow: 'hidden'
     boxShadow: '0 0 3px 0 rgba(0, 0, 0, 0.4)'

@@ -107,8 +107,11 @@ styles =
 
   item:
     display: 'flex'
+    display: '-webkit-flex'
     flexDirection: 'row'
+    WebkitFlexDirection: 'row'
     flexWrap: 'nowrap'
+    WebkitFlexWrap: 'nowrap'
 
   icon:
     fontWeight: 'normal'
@@ -119,6 +122,7 @@ styles =
     paddingLeft: 6
     marginRight: 10
     flexGrow: '1'
+    WebkitFlexGrow: '1'
 
 ListComponent.contextTypes =
   ctx: React.PropTypes.any

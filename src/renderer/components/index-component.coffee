@@ -61,6 +61,7 @@ styles =
     top: '50%'
     left: '50%'
     transform: 'translate(-50%, -50%)'
+    WebkitTransform: 'translate(-50%, -50%)'
     paddingBottom: 30
     cursor: 'default'
 
@@ -106,9 +107,13 @@ styles =
     paddingRight: 100
     paddingLeft: 100
     display: 'flex'
+    display: '-webkit-flex'
     flexDirection: 'row'
+    WebkitFlexDirection: 'row'
     flexWrap: 'nowrap'
+    WebkitFlexWrap: 'nowrap'
     justifyContent: 'space-around'
+    WebkitJustifyContent: 'space-around'
 
   link_container:
     boxSizing: 'border-box'

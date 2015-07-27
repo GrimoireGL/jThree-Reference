@@ -50,8 +50,11 @@ class ClassDocComponent extends React.Component
 styles =
   base:
     display: 'flex'
+    display: '-webkit-flex'
     flexDirection: 'row'
+    WebkitFlexDirection: 'row'
     flexWrap: 'nowrap'
+    WebkitFlexWrap: 'nowrap'
 
   list:
     boxSizing: 'border-box'
@@ -72,21 +75,31 @@ styles =
 
   container:
     flexGrow: '1'
+    WebkitFlexGrow: '1'
     display: 'flex'
+    display: '-webkit-flex'
     flexDirection: 'column'
+    WebkitFlexDirection: 'column'
     flexWrap: 'nowrap'
+    WebkitFlexWrap: 'nowrap'
     marginLeft: 360
+    # minWidth: 800
 
   doc_wrapper:
     display: 'flex'
+    display: '-webkit-flex'
     flexDirection: 'row'
+    WebkitFlexDirection: 'row'
     flexWrap: 'nowrap'
+    WebkitFlexWrap: 'nowrap'
     flexGrow: '1'
+    WebkitFlexGrow: '1'
 
   doc_container: {}
 
   doc_detail_container:
     flexGrow: '1'
+    WebkitFlexGrow: '1'
 
 ClassDocComponent.contextTypes =
   ctx: React.PropTypes.any
