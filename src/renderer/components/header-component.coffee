@@ -44,6 +44,7 @@ styles =
     position: 'absolute'
     top: '50%'
     transform: 'translateY(-50%)'
+    WebkitTransform: 'translateY(-50%)'
     left: 40
 
   title:
@@ -61,6 +62,7 @@ styles =
     position: 'absolute'
     top: '50%'
     transform: 'translateY(-50%)'
+    WebkitTransform: 'translateY(-50%)'
     right: 40
 
   active:

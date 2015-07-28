@@ -17,8 +17,10 @@ class AppComponent extends React.Component
 
   updateMainHeight: ->
     # console.log 'main height'
+    minMainHeight = 1000
+    mainHeight = if document.documentElement.clientHeight - 80 >= minMainHeight then document.documentElement.clientHeight - 80 else minMainHeight
     @setState
-      mainHeight: document.documentElement.clientHeight - 80
+      mainHeight: mainHeight
 
   componentWillMount: ->
     @setState
@@ -47,7 +49,9 @@ class AppComponent extends React.Component
     </div>
 
 styles =
-  base: {}
+  base:{
+    minWidth: 1000
+  }
 
   header:
     position: 'fixed'
