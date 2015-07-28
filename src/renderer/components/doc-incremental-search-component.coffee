@@ -26,6 +26,9 @@ class DocIncrementalComponent extends React.Component
       list: list
     @updateSearch('', list)
 
+  componentDidMount: ->
+    @refs.input.getDOMNode().focus()
+
   updateText: (e) ->
     text = e.target.value
     @setState
@@ -76,7 +79,7 @@ class DocIncrementalComponent extends React.Component
   render: ->
     dstyle = [styles.default, styles.emphasis]
     <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
-      <input type="text" value={@state.text} onChange={@updateText.bind(@)}  style={@props.styles.input} placeholder='Search' />
+      <input type="text" value={@state.text} onChange={@updateText.bind(@)}  style={@props.styles.input} placeholder='Search' ref='input' />
       <ul style={@props.styles.ul}>
         {
           return_elm = for md in @state.result[0..14]
