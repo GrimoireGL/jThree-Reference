@@ -261,8 +261,11 @@ AppComponent = (function(superClass) {
   };
 
   AppComponent.prototype.updateMainHeight = function() {
+    var mainHeight, minMainHeight;
+    minMainHeight = 1000;
+    mainHeight = document.documentElement.clientHeight - 80 >= minMainHeight ? document.documentElement.clientHeight - 80 : minMainHeight;
     return this.setState({
-      mainHeight: document.documentElement.clientHeight - 80
+      mainHeight: mainHeight
     });
   };
 
@@ -310,7 +313,9 @@ AppComponent = (function(superClass) {
 })(React.Component);
 
 styles = {
-  base: {},
+  base: {
+    minWidth: 1000
+  },
   header: {
     position: 'fixed',
     zIndex: 100,
@@ -461,8 +466,11 @@ ClassDocComponent = (function(superClass) {
 styles = {
   base: {
     display: 'flex',
+    display: '-webkit-flex',
     flexDirection: 'row',
-    flexWrap: 'nowrap'
+    WebkitFlexDirection: 'row',
+    flexWrap: 'nowrap',
+    WebkitFlexWrap: 'nowrap'
   },
   list: {
     boxSizing: 'border-box',
@@ -483,20 +491,29 @@ styles = {
   },
   container: {
     flexGrow: '1',
+    WebkitFlexGrow: '1',
     display: 'flex',
+    display: '-webkit-flex',
     flexDirection: 'column',
+    WebkitFlexDirection: 'column',
     flexWrap: 'nowrap',
+    WebkitFlexWrap: 'nowrap',
     marginLeft: 360
   },
   doc_wrapper: {
     display: 'flex',
+    display: '-webkit-flex',
     flexDirection: 'row',
+    WebkitFlexDirection: 'row',
     flexWrap: 'nowrap',
-    flexGrow: '1'
+    WebkitFlexWrap: 'nowrap',
+    flexGrow: '1',
+    WebkitFlexGrow: '1'
   },
   doc_container: {},
   doc_detail_container: {
-    flexGrow: '1'
+    flexGrow: '1',
+    WebkitFlexGrow: '1'
   }
 };
 
@@ -1981,6 +1998,10 @@ DocIncrementalComponent = (function(superClass) {
     return this.updateSearch('', list);
   };
 
+  DocIncrementalComponent.prototype.componentDidMount = function() {
+    return this.refs.input.getDOMNode().focus();
+  };
+
   DocIncrementalComponent.prototype.updateText = function(e) {
     var text;
     text = e.target.value;
@@ -2055,7 +2076,8 @@ DocIncrementalComponent = (function(superClass) {
       "value": this.state.text,
       "onChange": this.updateText.bind(this),
       "style": this.props.styles.input,
-      "placeholder": 'Search'
+      "placeholder": 'Search',
+      "ref": 'input'
     }), React.createElement("ul", {
       "style": this.props.styles.ul
     }, (return_elm = (function() {
@@ -2486,6 +2508,7 @@ DocSlideWrapperComponent = (function(superClass) {
       dstyle.left = {
         boxSizing: 'border-box',
         flexGrow: '0',
+        WebkitFlexGrow: '0',
         width: slide.from,
         paddingLeft: 18,
         paddingRight: 0,
@@ -2564,9 +2587,13 @@ slide = {
 styles = {
   base: {
     display: 'flex',
+    display: '-webkit-flex',
     flexDirection: 'row',
+    WebkitFlexDirection: 'row',
     flexWrap: 'nowrap',
+    WebkitFlexWrap: 'nowrap',
     flexGrow: '1',
+    WebkitFlexGrow: '1',
     position: 'relative'
   },
   left: {
@@ -2575,10 +2602,12 @@ styles = {
     paddingTop: 30,
     paddingBottom: 30,
     boxSizing: 'border-box',
-    flexGrow: '1'
+    flexGrow: '1',
+    WebkitFlexGrow: '1'
   },
   right: {
     flexGrow: '1',
+    WebkitFlexGrow: '1',
     position: 'relative',
     overflow: 'hidden',
     boxShadow: '0 0 3px 0 rgba(0, 0, 0, 0.4)',
@@ -3038,6 +3067,7 @@ styles = {
     position: 'absolute',
     top: '50%',
     transform: 'translateY(-50%)',
+    WebkitTransform: 'translateY(-50%)',
     left: 40
   },
   title: {
@@ -3055,6 +3085,7 @@ styles = {
     position: 'absolute',
     top: '50%',
     transform: 'translateY(-50%)',
+    WebkitTransform: 'translateY(-50%)',
     right: 40
   },
   active: {
@@ -3185,6 +3216,7 @@ styles = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
+    WebkitTransform: 'translate(-50%, -50%)',
     paddingBottom: 30,
     cursor: 'default'
   },
@@ -3230,9 +3262,13 @@ styles = {
     paddingRight: 100,
     paddingLeft: 100,
     display: 'flex',
+    display: '-webkit-flex',
     flexDirection: 'row',
+    WebkitFlexDirection: 'row',
     flexWrap: 'nowrap',
-    justifyContent: 'space-around'
+    WebkitFlexWrap: 'nowrap',
+    justifyContent: 'space-around',
+    WebkitJustifyContent: 'space-around'
   },
   link_container: {
     boxSizing: 'border-box',
@@ -3557,8 +3593,11 @@ styles = {
   },
   item: {
     display: 'flex',
+    display: '-webkit-flex',
     flexDirection: 'row',
-    flexWrap: 'nowrap'
+    WebkitFlexDirection: 'row',
+    flexWrap: 'nowrap',
+    WebkitFlexWrap: 'nowrap'
   },
   icon: {
     fontWeight: 'normal',
@@ -3568,7 +3607,8 @@ styles = {
     paddingTop: 5,
     paddingLeft: 6,
     marginRight: 10,
-    flexGrow: '1'
+    flexGrow: '1',
+    WebkitFlexGrow: '1'
   }
 };
 
