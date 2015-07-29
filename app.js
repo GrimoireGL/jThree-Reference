@@ -1704,15 +1704,19 @@ DocFactorTableComponent = (function(superClass) {
           }, child.name));
           table_row.push(React.createElement("span", null, (flags = [], child.flags.isPrivate ? flags.push(React.createElement("span", {
             "style": styles.flag,
+            "title": 'Private',
             "className": 'icon-lock'
           })) : child.flags.isProtected ? flags.push(React.createElement("span", {
             "style": styles.flag,
+            "title": 'Protected',
             "className": 'icon-unlock-alt'
           })) : flags.push(React.createElement("span", {
             "style": styles.flag,
+            "title": 'Public',
             "className": 'icon-unlock'
           })), child.flags.isStatic ? flags.push(React.createElement("span", {
             "style": styles.flag,
+            "title": 'Static',
             "className": 'icon-thumb-tack'
           })) : void 0, flags)));
           table_row.push(React.createElement("span", null, ((ref2 = child.comment) != null ? ref2.shortText : void 0) || ((ref3 = child.signatures) != null ? (ref4 = ref3[0].comment) != null ? ref4.shortText : void 0 : void 0) || ((ref5 = child.getSignature) != null ? (ref6 = ref5[0].comment) != null ? ref6.shortText : void 0 : void 0) || ((ref7 = child.setSignature) != null ? (ref8 = ref7[0].comment) != null ? ref8.shortText : void 0 : void 0) || alt_text));
