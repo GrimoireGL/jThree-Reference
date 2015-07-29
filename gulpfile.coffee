@@ -73,5 +73,5 @@ target.forEach (it) ->
 
 gulp.task 'test', ->
   gulp
-    .src './test/*test.coffee'
+    .src './test/**/*test.coffee'
     .pipe mocha()
