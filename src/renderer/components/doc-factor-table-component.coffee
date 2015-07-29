@@ -36,13 +36,13 @@ class DocFactorTableComponent extends React.Component
               {
                 flags = []
                 if child.flags.isPrivate
-                   flags.push <span style={styles.flag} className='icon-lock'></span>
+                   flags.push <span style={styles.flag} title='Private' className='icon-lock'></span>
                 else if child.flags.isProtected
-                   flags.push <span style={styles.flag} className='icon-unlock-alt'></span>
+                   flags.push <span style={styles.flag} title='Protected' className='icon-unlock-alt'></span>
                 else
-                   flags.push <span style={styles.flag} className='icon-unlock'></span>
+                   flags.push <span style={styles.flag} title='Public' className='icon-unlock'></span>
                 if child.flags.isStatic
-                   flags.push <span style={styles.flag} className='icon-thumb-tack'></span>
+                   flags.push <span style={styles.flag} title='Static' className='icon-thumb-tack'></span>
                 flags
               }
             </span>
