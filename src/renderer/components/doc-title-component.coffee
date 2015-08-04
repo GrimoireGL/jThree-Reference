@@ -2,7 +2,7 @@ React = require 'react'
 Radium = require 'radium'
 Link = require './link-component'
 colors = require './colors/color-definition'
-genKindStringColor = './colors/kindString-color'
+genKindStringColor = require './colors/kindString-color'
 
 ###
 @props.title [required]
