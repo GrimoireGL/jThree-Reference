@@ -15,31 +15,31 @@ describe 'Client/Router', ->
       router.setRoot '/'
       result = router.root
       correct = '/'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
     it '@root should be "/test/" when "test" is given', ->
       router.setRoot 'test'
       result = router.root
       correct = '/test/'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
     it '@root should be "/test/" when "/test" is given', ->
       router.setRoot '/test'
       result = router.root
       correct = '/test/'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
     it '@root should be "/test/" when "test/" is given', ->
       router.setRoot 'test/'
       result = router.root
       correct = '/test/'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
     it '@root should be "/test/" when "/test/" is given', ->
       router.setRoot '/test/'
       result = router.root
       correct = '/test/'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
   describe 'setRoute', ->
     Router = null
@@ -57,7 +57,7 @@ describe 'Client/Router', ->
       result = router.routes
       correct =
         'hello/world' : 'index'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
     it '@route object should be replaced when object is given', ->
       router.setRoute
@@ -67,13 +67,13 @@ describe 'Client/Router', ->
       result = router.routes
       correct =
         'bye/world' : 'end'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
     it '@route should not be changed when no arguments are given', ->
       router.setRoute()
       result = router.routes
       correct = {}
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
   describe 'addRoute', ->
     Router = null
@@ -90,7 +90,7 @@ describe 'Client/Router', ->
       result = router.routes
       correct =
         'hello/world' : 'index'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
     it '@route should be object when path and route are given (multiple)', ->
       router.addRoute 'hello/world', 'index'
@@ -99,7 +99,7 @@ describe 'Client/Router', ->
       correct =
         'hello/world' : 'index'
         'hello/heaven' : 'special'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
     it '@route should be object when object is given', ->
       router.addRoute
@@ -107,7 +107,7 @@ describe 'Client/Router', ->
       result = router.routes
       correct =
         'hello/world' : 'index'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
     it '@route should be object when object is given (multiple)', ->
       router.addRoute
@@ -118,7 +118,7 @@ describe 'Client/Router', ->
       correct =
         'hello/world' : 'index'
         'hello/heaven' : 'special'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
     it '@route should be object when object is given (multiple, once)', ->
       router.addRoute
@@ -128,7 +128,7 @@ describe 'Client/Router', ->
       correct =
         'hello/world' : 'index'
         'hello/heaven' : 'special'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
     it '@route object should be overwrited when object which has existed path is given', ->
       router.addRoute
@@ -138,13 +138,13 @@ describe 'Client/Router', ->
       result = router.routes
       correct =
         'hello/world' : 'overwrited'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
     it '@route should not be changed when no arguments are given', ->
       router.addRoute()
       result = router.routes
       correct = {}
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
   describe 'setAuth', ->
     Router = null
@@ -163,7 +163,7 @@ describe 'Client/Router', ->
         'index' :
           required: true
           renavigate: 'login'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
     it '@auth should be object when route, required and renavigate is given (multiple)', ->
       router.setAuth 'index', true, 'login'
@@ -176,7 +176,7 @@ describe 'Client/Router', ->
         'login' :
           required: false
           renavigate: 'index'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
     it '@auth should be object when object is given', ->
       router.setAuth
@@ -188,7 +188,7 @@ describe 'Client/Router', ->
         'index' :
           required: true
           renavigate: 'login'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
     it '@auth should be object when object is given (multiple)', ->
       router.setAuth
@@ -207,7 +207,7 @@ describe 'Client/Router', ->
         'login' :
           required: false
           renavigate: 'index'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
     it '@auth object should be overwrited when object which has existed route is given', ->
       router.setAuth
@@ -223,13 +223,13 @@ describe 'Client/Router', ->
         'index' :
           required: false
           renavigate: 'overwrited'
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
     it '@auth should not be changed when no arguments are given', ->
       router.setAuth()
       result = router.auth
       correct = {}
-      expect(result).to.deep.equals(correct)
+      expect(result).to.deep.equal(correct)
 
   describe 'route', ->
     Router = null
