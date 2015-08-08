@@ -20,7 +20,18 @@ class DocDescriptionComponent extends React.Component
     <DocItemComponent title='Description' style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       <div style={styles.content}>
         {
-          texts.map (t) -> if t? then <p>{t}</p>
+          texts.map (t) ->
+            if t?
+              <p>
+                {
+                  ret = []
+                  l_arr = t.replace(/\n\n/g, '\n').split('\n')
+                  for l, i in l_arr
+                    ret.push <span>{l}</span>
+                    ret.push <br /> if i != l_arr.length - 1
+                  ret
+                }
+              </p>
         }
       </div>
     </DocItemComponent>

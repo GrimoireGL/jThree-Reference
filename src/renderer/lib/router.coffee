@@ -34,12 +34,13 @@ class Router
    * @param {String?} route      route
   ###
   addRoute: (path, route) ->
-    unless route?
-      routes = path
-    else
-      routes = {}
-      routes[path] = route
-    @routes = objectAssign(@routes, routes)
+    if path?
+      unless route?
+        routes = path
+      else
+        routes = {}
+        routes[path] = route
+      @routes = objectAssign(@routes, routes)
 
   ###*
    * set routes for authenticated only
@@ -48,10 +49,10 @@ class Router
    * @param {String} renavigate   path of renavigation(like redirect)
   ###
   setAuth: (route, required, renavigate) ->
-    unless required? && renavigate?
+    auth = {}
+    if route? && !required? && !renavigate?
       auth = route
-    else
-      auth = {}
+    else if route? && required? && renavigate?
       auth[route] =
         required: required
         renavigate: renavigate
@@ -78,6 +79,8 @@ class Router
       match = fragment.match new RegExp("^#{re}$")
       if match?
         match.shift()
+        delete match.index
+        delete match.input
         argu = {}
         argu.route = r
         argu.route_arr = r.split(':')
@@ -85,13 +88,18 @@ class Router
         argu.fragment_arr = fragment.split('/')
         argu.match = match
         if logined?
-          auth = @auth[r]
+          auth = null
+          for r_, a of @auth
+            if (r_.split(':').every (v, i) -> argu.route_arr[i] == v)
+              auth = a
           if (auth?.required == true && !logined) || (auth?.required == false && logined)
             if auth.renavigate?
               for re_, r_ of @routes
                 match_ = auth.renavigate.match new RegExp("^#{re_}$")
                 if match_?
                   match_.shift()
+                  delete match_.index
+                  delete match_.input
                   argu = {}
                   argu.route = r_
                   argu.route_arr = r_.split(':')
