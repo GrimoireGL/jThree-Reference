@@ -81,7 +81,7 @@ server.listen(process.env.PORT || 5000, process.env.IP);
 
 
 
-},{"./renderer/components/root-component":37,"./renderer/context":44,"./server/docs":49,"./server/initializeState":50,"express":undefined,"fs":undefined,"handlebars":undefined,"react":undefined,"serve-favicon":undefined,"source-map-support":undefined}],2:[function(require,module,exports){
+},{"./renderer/components/root-component":38,"./renderer/context":45,"./server/docs":50,"./server/initializeState":51,"express":undefined,"fs":undefined,"handlebars":undefined,"react":undefined,"serve-favicon":undefined,"source-map-support":undefined}],2:[function(require,module,exports){
 var DocAction, Flux, Promise, keys, request,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -142,7 +142,7 @@ module.exports = DocAction;
 
 
 
-},{"../keys":45,"bluebird":undefined,"material-flux":undefined,"superagent":undefined}],3:[function(require,module,exports){
+},{"../keys":46,"bluebird":undefined,"material-flux":undefined,"superagent":undefined}],3:[function(require,module,exports){
 var Flux, History, RouteAction, keys,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -226,7 +226,7 @@ module.exports = RouteAction;
 
 
 
-},{"../keys":45,"html5-history":undefined,"material-flux":undefined}],4:[function(require,module,exports){
+},{"../keys":46,"html5-history":undefined,"material-flux":undefined}],4:[function(require,module,exports){
 var AppComponent, ClassDocComponent, ErrorComponent, HeaderComponent, IndexComponent, Link, Radium, React, Route, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -336,7 +336,7 @@ module.exports = Radium(AppComponent);
 
 
 
-},{"./classdoc-component":6,"./error-component":30,"./header-component":31,"./index-component":32,"./link-component":33,"./route-component":38,"radium":undefined,"react":undefined}],5:[function(require,module,exports){
+},{"./classdoc-component":6,"./error-component":31,"./header-component":32,"./index-component":33,"./link-component":34,"./route-component":39,"radium":undefined,"react":undefined}],5:[function(require,module,exports){
 var CharIconComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -525,7 +525,7 @@ module.exports = Radium(ClassDocComponent);
 
 
 
-},{"./doc-container-component":8,"./doc-detail-container-component":10,"./doc-slide-wrapper-component":26,"./list-component":34,"./route-component":38,"radium":undefined,"react":undefined}],7:[function(require,module,exports){
+},{"./doc-container-component":9,"./doc-detail-container-component":11,"./doc-slide-wrapper-component":27,"./list-component":35,"./route-component":39,"radium":undefined,"react":undefined}],7:[function(require,module,exports){
 
 /**
  * Color definition for components styles
@@ -576,6 +576,52 @@ module.exports = {
 
 
 },{}],8:[function(require,module,exports){
+
+/**
+ * Generate KindString color
+ * @param  {String} kindString
+ * @return {String}            hex color string
+ */
+module.exports = function(kindString) {
+  var color;
+  color = null;
+  switch (kindString) {
+    case 'Class':
+      color = '#337BFF';
+      break;
+    case 'Constructor':
+      color = '#337BFF';
+      break;
+    case 'Interface':
+      color = '#598213';
+      break;
+    case 'Property':
+      color = '#598213';
+      break;
+    case 'Enumeration':
+      color = '#B17509';
+      break;
+    case 'Enumeration member':
+      color = '#B17509';
+      break;
+    case 'Module':
+      color = '#D04C35';
+      break;
+    case 'Accessor':
+      color = '#D04C35';
+      break;
+    case 'Function':
+      color = '#6E00FF';
+      break;
+    case 'Method':
+      color = '#6E00FF';
+  }
+  return color;
+};
+
+
+
+},{}],9:[function(require,module,exports){
 var DocContainerComponents, DocDescriptionComponent, DocFactorHierarchyComponent, DocFactorImplementsComponent, DocFactorItemComponent, DocFactorTitleComponent, DocSearchContainerComponent, DocTypeparameterComponent, Link, Radium, React, Route, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -709,7 +755,7 @@ module.exports = Radium(DocContainerComponents);
 
 
 
-},{"./doc-description-component":9,"./doc-factor-hierarchy-component":17,"./doc-factor-implements-component":18,"./doc-factor-item-component":19,"./doc-factor-title-component":21,"./doc-search-container-component":25,"./doc-typeparameter-component":29,"./link-component":33,"./route-component":38,"radium":undefined,"react":undefined}],9:[function(require,module,exports){
+},{"./doc-description-component":10,"./doc-factor-hierarchy-component":18,"./doc-factor-implements-component":19,"./doc-factor-item-component":20,"./doc-factor-title-component":22,"./doc-search-container-component":26,"./doc-typeparameter-component":30,"./link-component":34,"./route-component":39,"radium":undefined,"react":undefined}],10:[function(require,module,exports){
 var DocDescriptionComponent, DocItemComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -747,8 +793,21 @@ DocDescriptionComponent = (function(superClass) {
     }, React.createElement("div", {
       "style": styles.content
     }, texts.map(function(t) {
+      var i, l, l_arr, ret;
       if (t != null) {
-        return React.createElement("p", null, t);
+        return React.createElement("p", null, ((function() {
+          var j, len;
+          ret = [];
+          l_arr = t.replace(/\n\n/g, '\n').split('\n');
+          for (i = j = 0, len = l_arr.length; j < len; i = ++j) {
+            l = l_arr[i];
+            ret.push(React.createElement("span", null, l));
+            if (i !== l_arr.length - 1) {
+              ret.push(React.createElement("br", null));
+            }
+          }
+          return ret;
+        })()));
       }
     })));
   };
@@ -772,7 +831,7 @@ module.exports = Radium(DocDescriptionComponent);
 
 
 
-},{"./colors/color-definition":7,"./doc-item-component":24,"radium":undefined,"react":undefined}],10:[function(require,module,exports){
+},{"./colors/color-definition":7,"./doc-item-component":25,"radium":undefined,"react":undefined}],11:[function(require,module,exports){
 var DocDescriptionComponent, DocDetailContainerComponent, DocDetailParametersComponent, DocDetailReturnComponent, DocDetailTitleComponent, DocSlideWrapperComponent, DocTypeparameterComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -867,7 +926,7 @@ module.exports = Radium(DocDetailContainerComponent);
 
 
 
-},{"./doc-description-component":9,"./doc-detail-parameters-component":11,"./doc-detail-return-components":13,"./doc-detail-title-component":16,"./doc-slide-wrapper-component":26,"./doc-typeparameter-component":29,"radium":undefined,"react":undefined}],11:[function(require,module,exports){
+},{"./doc-description-component":10,"./doc-detail-parameters-component":12,"./doc-detail-return-components":14,"./doc-detail-title-component":17,"./doc-slide-wrapper-component":27,"./doc-typeparameter-component":30,"radium":undefined,"react":undefined}],12:[function(require,module,exports){
 var DocDetailParametersComponent, DocDetailParametersTableComponent, DocItemComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -921,7 +980,7 @@ module.exports = Radium(DocDetailParametersComponent);
 
 
 
-},{"./doc-detail-parameters-table-component":12,"./doc-item-component":24,"radium":undefined,"react":undefined}],12:[function(require,module,exports){
+},{"./doc-detail-parameters-table-component":13,"./doc-item-component":25,"radium":undefined,"react":undefined}],13:[function(require,module,exports){
 var DocDetailParameterTableComponent, DocSignaturesTypeComponent, DocTableComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1013,7 +1072,7 @@ module.exports = Radium(DocDetailParameterTableComponent);
 
 
 
-},{"./colors/color-definition":7,"./doc-table-component":27,"./link-component":33,"./signatures/doc-signatures-type-component":42,"radium":undefined,"react":undefined}],13:[function(require,module,exports){
+},{"./colors/color-definition":7,"./doc-table-component":28,"./link-component":34,"./signatures/doc-signatures-type-component":43,"radium":undefined,"react":undefined}],14:[function(require,module,exports){
 var DocDetailReturnComponent, DocDetailReturnTableComponent, DocItemComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1066,7 +1125,7 @@ module.exports = Radium(DocDetailReturnComponent);
 
 
 
-},{"./doc-detail-return-table-component":14,"./doc-item-component":24,"radium":undefined,"react":undefined}],14:[function(require,module,exports){
+},{"./doc-detail-return-table-component":15,"./doc-item-component":25,"radium":undefined,"react":undefined}],15:[function(require,module,exports){
 var DocDetailReturnTableComponent, DocSignaturesTypeComponent, DocTableComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1144,7 +1203,7 @@ module.exports = Radium(DocDetailReturnTableComponent);
 
 
 
-},{"./colors/color-definition":7,"./doc-table-component":27,"./link-component":33,"./signatures/doc-signatures-type-component":42,"radium":undefined,"react":undefined}],15:[function(require,module,exports){
+},{"./colors/color-definition":7,"./doc-table-component":28,"./link-component":34,"./signatures/doc-signatures-type-component":43,"radium":undefined,"react":undefined}],16:[function(require,module,exports){
 var DocDetailSignaturesComponent, DocSignaturesComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1247,7 +1306,7 @@ module.exports = Radium(DocDetailSignaturesComponent);
 
 
 
-},{"./colors/color-definition":7,"./signatures/doc-signatures-component":39,"radium":undefined,"react":undefined}],16:[function(require,module,exports){
+},{"./colors/color-definition":7,"./signatures/doc-signatures-component":40,"radium":undefined,"react":undefined}],17:[function(require,module,exports){
 var DocDetailSignaturesComponent, DocDetailTitleComponent, DocFlagtagsComponent, DocTitleComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1371,7 +1430,7 @@ module.exports = Radium(DocDetailTitleComponent);
 
 
 
-},{"./colors/color-definition":7,"./doc-detail-signatures-component":15,"./doc-flagtags-component":22,"./doc-title-component":28,"./link-component":33,"radium":undefined,"react":undefined}],17:[function(require,module,exports){
+},{"./colors/color-definition":7,"./doc-detail-signatures-component":16,"./doc-flagtags-component":23,"./doc-title-component":29,"./link-component":34,"radium":undefined,"react":undefined}],18:[function(require,module,exports){
 var DocDetailParametersTableComponent, DocItemComponent, DocSignaturesTypeComponent, DocTypeparameterComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1485,7 +1544,7 @@ module.exports = Radium(DocTypeparameterComponent);
 
 
 
-},{"./colors/color-definition":7,"./doc-detail-parameters-table-component":12,"./doc-item-component":24,"./signatures/doc-signatures-type-component":42,"radium":undefined,"react":undefined}],18:[function(require,module,exports){
+},{"./colors/color-definition":7,"./doc-detail-parameters-table-component":13,"./doc-item-component":25,"./signatures/doc-signatures-type-component":43,"radium":undefined,"react":undefined}],19:[function(require,module,exports){
 var DocFactorImplementsComponent, DocItemComponent, DocSignaturesTypeComponent, DocTableComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1566,7 +1625,7 @@ module.exports = Radium(DocFactorImplementsComponent);
 
 
 
-},{"./colors/color-definition":7,"./doc-item-component":24,"./doc-table-component":27,"./signatures/doc-signatures-type-component":42,"radium":undefined,"react":undefined}],19:[function(require,module,exports){
+},{"./colors/color-definition":7,"./doc-item-component":25,"./doc-table-component":28,"./signatures/doc-signatures-type-component":43,"radium":undefined,"react":undefined}],20:[function(require,module,exports){
 var DocFactorItemComponent, DocFactorTableComponent, DocItemComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1639,7 +1698,7 @@ module.exports = Radium(DocFactorItemComponent);
 
 
 
-},{"./doc-factor-table-component":20,"./doc-item-component":24,"radium":undefined,"react":undefined}],20:[function(require,module,exports){
+},{"./doc-factor-table-component":21,"./doc-item-component":25,"radium":undefined,"react":undefined}],21:[function(require,module,exports){
 var DocFactorTableComponent, DocTableComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1759,7 +1818,7 @@ module.exports = Radium(DocFactorTableComponent);
 
 
 
-},{"./colors/color-definition":7,"./doc-table-component":27,"./link-component":33,"radium":undefined,"react":undefined}],21:[function(require,module,exports){
+},{"./colors/color-definition":7,"./doc-table-component":28,"./link-component":34,"radium":undefined,"react":undefined}],22:[function(require,module,exports){
 var DocFactorTitleComponent, DocFlagtagsComponent, DocTitleComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1864,7 +1923,7 @@ module.exports = Radium(DocFactorTitleComponent);
 
 
 
-},{"./colors/color-definition":7,"./doc-flagtags-component":22,"./doc-title-component":28,"./link-component":33,"radium":undefined,"react":undefined}],22:[function(require,module,exports){
+},{"./colors/color-definition":7,"./doc-flagtags-component":23,"./doc-title-component":29,"./link-component":34,"radium":undefined,"react":undefined}],23:[function(require,module,exports){
 var DocFlagtagsComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1952,7 +2011,7 @@ module.exports = Radium(DocFlagtagsComponent);
 
 
 
-},{"./colors/color-definition":7,"radium":undefined,"react":undefined}],23:[function(require,module,exports){
+},{"./colors/color-definition":7,"radium":undefined,"react":undefined}],24:[function(require,module,exports){
 var DocIncrementalComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -2168,7 +2227,7 @@ module.exports = Radium(DocIncrementalComponent);
 
 
 
-},{"./colors/color-definition":7,"./link-component":33,"radium":undefined,"react":undefined}],24:[function(require,module,exports){
+},{"./colors/color-definition":7,"./link-component":34,"radium":undefined,"react":undefined}],25:[function(require,module,exports){
 var DocItemComponent, DocTableComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -2235,8 +2294,8 @@ module.exports = Radium(DocItemComponent);
 
 
 
-},{"./colors/color-definition":7,"./doc-table-component":27,"radium":undefined,"react":undefined}],25:[function(require,module,exports){
-var CharIconComponent, DocIncrementalSearchComponent, DocSearchContainerComponent, Radium, React, colors, find, styles,
+},{"./colors/color-definition":7,"./doc-table-component":28,"radium":undefined,"react":undefined}],26:[function(require,module,exports){
+var CharIconComponent, DocIncrementalSearchComponent, DocSearchContainerComponent, Radium, React, colors, find, genKindStringColor, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -2251,6 +2310,8 @@ DocIncrementalSearchComponent = require('./doc-incremental-search-component');
 CharIconComponent = require('./char-icon-component');
 
 colors = require('./colors/color-definition');
+
+genKindStringColor = require('./colors/kindString-color');
 
 
 /*
@@ -2273,41 +2334,7 @@ DocSearchContainerComponent = (function(superClass) {
 
   DocSearchContainerComponent.prototype.genKindStringStyle = function(kindString) {
     var color, style;
-    color = colors.general.r["default"];
-    switch (kindString) {
-      case 'Class':
-        color = '#337BFF';
-        break;
-      case 'Constructor':
-        color = '#337BFF';
-        break;
-      case 'Interface':
-        color = '#598213';
-        break;
-      case 'Property':
-        color = '#598213';
-        break;
-      case 'Enumeration':
-        color = '#B17509';
-        break;
-      case 'Enumeration member':
-        color = '#B17509';
-        break;
-      case 'Module':
-        color = '#D04C35';
-        break;
-      case 'Accessor':
-        color = '#D04C35';
-        break;
-      case 'Function':
-        color = '#6E00FF';
-        break;
-      case 'Method':
-        color = '#6E00FF';
-        break;
-      default:
-        color = colors.general.r["default"];
-    }
+    color = genKindStringColor(kindString) || colors.general.r["default"];
     return style = {
       color: color,
       borderColor: color
@@ -2436,7 +2463,7 @@ module.exports = Radium(DocSearchContainerComponent);
 
 
 
-},{"./char-icon-component":5,"./colors/color-definition":7,"./doc-incremental-search-component":23,"lodash.find":undefined,"radium":undefined,"react":undefined}],26:[function(require,module,exports){
+},{"./char-icon-component":5,"./colors/color-definition":7,"./colors/kindString-color":8,"./doc-incremental-search-component":24,"lodash.find":undefined,"radium":undefined,"react":undefined}],27:[function(require,module,exports){
 var DocSlideWrapperComponent, Radium, React, clone, colors, objectAssign, slide, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -2673,7 +2700,7 @@ module.exports = Radium(DocSlideWrapperComponent);
 
 
 
-},{"./colors/color-definition":7,"lodash.clone":undefined,"object-assign":undefined,"radium":undefined,"react":undefined}],27:[function(require,module,exports){
+},{"./colors/color-definition":7,"lodash.clone":undefined,"object-assign":undefined,"radium":undefined,"react":undefined}],28:[function(require,module,exports){
 var DocTableComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -2772,8 +2799,8 @@ module.exports = Radium(DocTableComponent);
 
 
 
-},{"./colors/color-definition":7,"radium":undefined,"react":undefined}],28:[function(require,module,exports){
-var DocTitleComponent, Link, Radium, React, colors, styles,
+},{"./colors/color-definition":7,"radium":undefined,"react":undefined}],29:[function(require,module,exports){
+var DocTitleComponent, Link, Radium, React, colors, genKindStringColor, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -2784,6 +2811,8 @@ Radium = require('radium');
 Link = require('./link-component');
 
 colors = require('./colors/color-definition');
+
+genKindStringColor = require('./colors/kindString-color');
 
 
 /*
@@ -2803,41 +2832,7 @@ DocTitleComponent = (function(superClass) {
 
   DocTitleComponent.prototype.genKindStringStyle = function(kindString) {
     var color, style;
-    color = colors.general.r["default"];
-    switch (kindString) {
-      case 'Class':
-        color = '#337BFF';
-        break;
-      case 'Constructor':
-        color = '#337BFF';
-        break;
-      case 'Interface':
-        color = '#598213';
-        break;
-      case 'Property':
-        color = '#598213';
-        break;
-      case 'Enumeration':
-        color = '#B17509';
-        break;
-      case 'Enumeration member':
-        color = '#B17509';
-        break;
-      case 'Module':
-        color = '#D04C35';
-        break;
-      case 'Accessor':
-        color = '#D04C35';
-        break;
-      case 'Function':
-        color = '#6E00FF';
-        break;
-      case 'Method':
-        color = '#6E00FF';
-        break;
-      default:
-        color = colors.general.r["default"];
-    }
+    color = genKindStringColor(kindString) || colors.general.r["default"];
     return style = {
       color: color,
       borderColor: color
@@ -2906,7 +2901,7 @@ module.exports = Radium(DocTitleComponent);
 
 
 
-},{"./colors/color-definition":7,"./link-component":33,"radium":undefined,"react":undefined}],29:[function(require,module,exports){
+},{"./colors/color-definition":7,"./colors/kindString-color":8,"./link-component":34,"radium":undefined,"react":undefined}],30:[function(require,module,exports){
 var DocDetailParametersTableComponent, DocItemComponent, DocTypeparameterComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -2958,7 +2953,7 @@ module.exports = Radium(DocTypeparameterComponent);
 
 
 
-},{"./doc-detail-parameters-table-component":12,"./doc-item-component":24,"radium":undefined,"react":undefined}],30:[function(require,module,exports){
+},{"./doc-detail-parameters-table-component":13,"./doc-item-component":25,"radium":undefined,"react":undefined}],31:[function(require,module,exports){
 var ErrorComponent, React,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -2988,7 +2983,7 @@ module.exports = ErrorComponent;
 
 
 
-},{"react":undefined}],31:[function(require,module,exports){
+},{"react":undefined}],32:[function(require,module,exports){
 var HeaderComponent, Link, Radium, React, Route, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -3127,7 +3122,7 @@ module.exports = Radium(HeaderComponent);
 
 
 
-},{"./colors/color-definition":7,"./link-component":33,"./route-component":38,"radium":undefined,"react":undefined}],32:[function(require,module,exports){
+},{"./colors/color-definition":7,"./link-component":34,"./route-component":39,"radium":undefined,"react":undefined}],33:[function(require,module,exports){
 var IndexComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -3319,7 +3314,7 @@ module.exports = Radium(IndexComponent);
 
 
 
-},{"./colors/color-definition":7,"./link-component":33,"radium":undefined,"react":undefined}],33:[function(require,module,exports){
+},{"./colors/color-definition":7,"./link-component":34,"radium":undefined,"react":undefined}],34:[function(require,module,exports){
 var LinkComponent, Radium, React,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -3430,7 +3425,7 @@ module.exports = Radium(LinkComponent);
 
 
 
-},{"radium":undefined,"react":undefined}],34:[function(require,module,exports){
+},{"radium":undefined,"react":undefined}],35:[function(require,module,exports){
 var CharIconComponent, Link, ListComponent, ListFolderComponent, ListItemComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -3624,7 +3619,7 @@ module.exports = Radium(ListComponent);
 
 
 
-},{"./char-icon-component":5,"./colors/color-definition":7,"./link-component":33,"./list-folder-component":35,"./list-item-component":36,"radium":undefined,"react":undefined}],35:[function(require,module,exports){
+},{"./char-icon-component":5,"./colors/color-definition":7,"./link-component":34,"./list-folder-component":36,"./list-item-component":37,"radium":undefined,"react":undefined}],36:[function(require,module,exports){
 var CharIconComponent, ListFolderComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -3728,7 +3723,7 @@ module.exports = Radium(ListFolderComponent);
 
 
 
-},{"./char-icon-component":5,"./colors/color-definition":7,"radium":undefined,"react":undefined}],36:[function(require,module,exports){
+},{"./char-icon-component":5,"./colors/color-definition":7,"radium":undefined,"react":undefined}],37:[function(require,module,exports){
 var ListItemComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -3793,7 +3788,7 @@ module.exports = Radium(ListItemComponent);
 
 
 
-},{"./colors/color-definition":7,"radium":undefined,"react":undefined}],37:[function(require,module,exports){
+},{"./colors/color-definition":7,"radium":undefined,"react":undefined}],38:[function(require,module,exports){
 var App, React, RootComponent,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -3831,7 +3826,7 @@ module.exports = RootComponent;
 
 
 
-},{"./app-component":4,"react":undefined}],38:[function(require,module,exports){
+},{"./app-component":4,"react":undefined}],39:[function(require,module,exports){
 var Radium, React, RouteComponent, Router,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4004,7 +3999,7 @@ module.exports = Radium(RouteComponent);
 
 
 
-},{"../lib/router":46,"radium":undefined,"react":undefined}],39:[function(require,module,exports){
+},{"../lib/router":47,"radium":undefined,"react":undefined}],40:[function(require,module,exports){
 var DocSignaturesComponent, DocSignaturesNameComponent, DocSignaturesParametersComponent, DocSignaturesTypeComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4069,7 +4064,7 @@ module.exports = Radium(DocSignaturesComponent);
 
 
 
-},{"./doc-signatures-name-component":40,"./doc-signatures-parameters-component":41,"./doc-signatures-type-component":42,"radium":undefined,"react":undefined}],40:[function(require,module,exports){
+},{"./doc-signatures-name-component":41,"./doc-signatures-parameters-component":42,"./doc-signatures-type-component":43,"radium":undefined,"react":undefined}],41:[function(require,module,exports){
 var DocSignaturesNameComponent, DocSignaturesTypeargumentsComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4122,7 +4117,7 @@ module.exports = Radium(DocSignaturesNameComponent);
 
 
 
-},{"./doc-signatures-typearguments-component":43,"radium":undefined,"react":undefined}],41:[function(require,module,exports){
+},{"./doc-signatures-typearguments-component":44,"radium":undefined,"react":undefined}],42:[function(require,module,exports){
 var DocSignaturesNameComponent, DocSignaturesParametersComponent, DocSignaturesTypeComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4189,7 +4184,7 @@ module.exports = Radium(DocSignaturesParametersComponent);
 
 
 
-},{"./doc-signatures-name-component":40,"./doc-signatures-type-component":42,"radium":undefined,"react":undefined}],42:[function(require,module,exports){
+},{"./doc-signatures-name-component":41,"./doc-signatures-type-component":43,"radium":undefined,"react":undefined}],43:[function(require,module,exports){
 var DocSignaturesTypeComponent, DocSignaturesTypeargumentsComponent, Link, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4261,7 +4256,7 @@ module.exports = Radium(DocSignaturesTypeComponent);
 
 
 
-},{"../link-component":33,"./doc-signatures-typearguments-component":43,"radium":undefined,"react":undefined}],43:[function(require,module,exports){
+},{"../link-component":34,"./doc-signatures-typearguments-component":44,"radium":undefined,"react":undefined}],44:[function(require,module,exports){
 var DocSignaturesTypeargumentsComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4321,7 +4316,7 @@ module.exports = Radium(DocSignaturesTypeargumentsComponent);
 
 
 
-},{"radium":undefined,"react":undefined}],44:[function(require,module,exports){
+},{"radium":undefined,"react":undefined}],45:[function(require,module,exports){
 var Context, DocAction, DocStore, Flux, RouteAction, RouteStore,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4363,7 +4358,7 @@ module.exports = Context;
 
 
 
-},{"./actions/doc-action":2,"./actions/route-action":3,"./stores/doc-store":47,"./stores/route-store":48,"material-flux":undefined}],45:[function(require,module,exports){
+},{"./actions/doc-action":2,"./actions/route-action":3,"./stores/doc-store":48,"./stores/route-store":49,"material-flux":undefined}],46:[function(require,module,exports){
 
 /**
  * keys linked to actions
@@ -4376,7 +4371,7 @@ module.exports = {
 
 
 
-},{}],46:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 var Router, objectAssign;
 
 objectAssign = require('object-assign');
@@ -4428,13 +4423,15 @@ Router = (function() {
 
   Router.prototype.addRoute = function(path, route) {
     var routes;
-    if (route == null) {
-      routes = path;
-    } else {
-      routes = {};
-      routes[path] = route;
+    if (path != null) {
+      if (route == null) {
+        routes = path;
+      } else {
+        routes = {};
+        routes[path] = route;
+      }
+      return this.routes = objectAssign(this.routes, routes);
     }
-    return this.routes = objectAssign(this.routes, routes);
   };
 
 
@@ -4447,10 +4444,10 @@ Router = (function() {
 
   Router.prototype.setAuth = function(route, required, renavigate) {
     var auth;
-    if (!((required != null) && (renavigate != null))) {
+    auth = {};
+    if ((route != null) && (required == null) && (renavigate == null)) {
       auth = route;
-    } else {
-      auth = {};
+    } else if ((route != null) && (required != null) && (renavigate != null)) {
       auth[route] = {
         required: required,
         renavigate: renavigate
@@ -4470,7 +4467,7 @@ Router = (function() {
    */
 
   Router.prototype.route = function(fragment, logined, resolve, reject) {
-    var argu, auth, match, match_, r, r_, re, re_, ref, ref1, res;
+    var a, argu, auth, match, match_, r, r_, re, re_, ref, ref1, ref2, res;
     if (typeof logined === 'function' && (reject == null)) {
       reject = resolve;
       resolve = logined;
@@ -4485,6 +4482,8 @@ Router = (function() {
       match = fragment.match(new RegExp("^" + re + "$"));
       if (match != null) {
         match.shift();
+        delete match.index;
+        delete match.input;
         argu = {};
         argu.route = r;
         argu.route_arr = r.split(':');
@@ -4492,15 +4491,26 @@ Router = (function() {
         argu.fragment_arr = fragment.split('/');
         argu.match = match;
         if (logined != null) {
-          auth = this.auth[r];
+          auth = null;
+          ref1 = this.auth;
+          for (r_ in ref1) {
+            a = ref1[r_];
+            if (r_.split(':').every(function(v, i) {
+              return argu.route_arr[i] === v;
+            })) {
+              auth = a;
+            }
+          }
           if (((auth != null ? auth.required : void 0) === true && !logined) || ((auth != null ? auth.required : void 0) === false && logined)) {
             if (auth.renavigate != null) {
-              ref1 = this.routes;
-              for (re_ in ref1) {
-                r_ = ref1[re_];
+              ref2 = this.routes;
+              for (re_ in ref2) {
+                r_ = ref2[re_];
                 match_ = auth.renavigate.match(new RegExp("^" + re_ + "$"));
                 if (match_ != null) {
                   match_.shift();
+                  delete match_.index;
+                  delete match_.input;
                   argu = {};
                   argu.route = r_;
                   argu.route_arr = r_.split(':');
@@ -4534,7 +4544,7 @@ module.exports = Router;
 
 
 
-},{"object-assign":undefined}],47:[function(require,module,exports){
+},{"object-assign":undefined}],48:[function(require,module,exports){
 var DocStore, Flux, keys, merge, objectAssign,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4601,7 +4611,7 @@ module.exports = DocStore;
 
 
 
-},{"../keys":45,"lodash.merge":undefined,"material-flux":undefined,"object-assign":undefined}],48:[function(require,module,exports){
+},{"../keys":46,"lodash.merge":undefined,"material-flux":undefined,"object-assign":undefined}],49:[function(require,module,exports){
 var Flux, RouteStore, keys, objectAssign,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4669,7 +4679,7 @@ module.exports = RouteStore;
 
 
 
-},{"../keys":45,"material-flux":undefined,"object-assign":undefined}],49:[function(require,module,exports){
+},{"../keys":46,"material-flux":undefined,"object-assign":undefined}],50:[function(require,module,exports){
 
 /*
 @providesModule Docs
@@ -4845,7 +4855,7 @@ module.exports = Docs;
 
 
 
-},{"./stateInitializer/initializeStateConfig":52,"bluebird":undefined,"fs":undefined,"lodash.clone":undefined,"request":undefined}],50:[function(require,module,exports){
+},{"./stateInitializer/initializeStateConfig":53,"bluebird":undefined,"fs":undefined,"lodash.clone":undefined,"request":undefined}],51:[function(require,module,exports){
 var DirTree, Docs, InitializeState, Router, RoutesGen, config;
 
 RoutesGen = require('./stateInitializer/routes-gen');
@@ -4924,7 +4934,7 @@ module.exports = InitializeState;
 
 
 
-},{"../renderer/lib/router":46,"./docs":49,"./stateInitializer/dir-tree":51,"./stateInitializer/initializeStateConfig":52,"./stateInitializer/routes-gen":53}],51:[function(require,module,exports){
+},{"../renderer/lib/router":47,"./docs":50,"./stateInitializer/dir-tree":52,"./stateInitializer/initializeStateConfig":53,"./stateInitializer/routes-gen":54}],52:[function(require,module,exports){
 
 /*
 @providesModule DirTree
@@ -5054,7 +5064,7 @@ module.exports = DirTree;
 
 
 
-},{"lodash.merge":undefined,"object-assign":undefined}],52:[function(require,module,exports){
+},{"lodash.merge":undefined,"object-assign":undefined}],53:[function(require,module,exports){
 var fs;
 
 fs = require('fs');
@@ -5076,7 +5086,7 @@ module.exports = {
 
 
 
-},{"fs":undefined}],53:[function(require,module,exports){
+},{"fs":undefined}],54:[function(require,module,exports){
 var RoutesGen, objectAssign;
 
 objectAssign = require('object-assign');
