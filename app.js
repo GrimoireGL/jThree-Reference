@@ -2074,6 +2074,15 @@ DocIncrementalComponent = (function(superClass) {
     return this.updateSearch(text);
   };
 
+  DocIncrementalComponent.prototype.keyDown = function(e) {
+    if (e.key === 'Enter' || e.code === 'Enter' || e.keyCode === 13) {
+      e.preventDefault();
+      if (this.state.result[0] != null) {
+        return this.context.ctx.routeAction.navigate(this.state.result[0].href);
+      }
+    }
+  };
+
   DocIncrementalComponent.prototype.updateSearch = function(text, list) {
     var j, l, len, match, match_all, md_all, md_all_completely, md_all_forward, md_part, ref, regexp, regexp_all, result;
     list || (list = (ref = this.state.list) != null ? ref : []);
@@ -2138,6 +2147,7 @@ DocIncrementalComponent = (function(superClass) {
       "type": "text",
       "value": this.state.text,
       "onChange": this.updateText.bind(this),
+      "onKeyDown": this.keyDown.bind(this),
       "style": this.props.styles.input,
       "placeholder": 'Search',
       "ref": 'input'
