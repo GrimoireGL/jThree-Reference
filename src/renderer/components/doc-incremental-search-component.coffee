@@ -35,6 +35,11 @@ class DocIncrementalComponent extends React.Component
       text: text
     @updateSearch(text)
 
+  keyDown: (e) ->
+    if e.key == 'Enter' || e.code == 'Enter' || e.keyCode == 13
+      e.preventDefault()
+      @context.ctx.routeAction.navigate(@state.result[0].href) if @state.result[0]?
+
   updateSearch: (text, list) ->
     list ||= @state.list ? []
     text = text
@@ -79,7 +84,7 @@ class DocIncrementalComponent extends React.Component
   render: ->
     dstyle = [styles.default, styles.emphasis]
     <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
-      <input type="text" value={@state.text} onChange={@updateText.bind(@)}  style={@props.styles.input} placeholder='Search' ref='input' />
+      <input type="text" value={@state.text} onChange={@updateText.bind(@)} onKeyDown={@keyDown.bind(@)} style={@props.styles.input} placeholder='Search' ref='input' />
       <ul style={@props.styles.ul}>
         {
           return_elm = for md in @state.result[0..14]
