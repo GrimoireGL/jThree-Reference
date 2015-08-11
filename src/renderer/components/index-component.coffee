@@ -25,6 +25,15 @@ class IndexComponent extends React.Component
         </div>
       </div>
       <div style={styles.wrapper}>
+        <div style={styles.link_container} key='github'>
+          <a href='//github.com/jThreeJS/jThree' style={styles.link}>
+            <div style={styles.link_icon_wrap}>
+              <span className='icon-mark-github'></span>
+            </div>
+            <div style={styles.link_label}>Github</div>
+            <div style={styles.link_desc}>jThree is Open Source Project. Your contribution is welcome!</div>
+          </a>
+        </div>
         <div style={styles.link_container} key='overview'>
           <Link href='/overview' style={styles.link}>
             <div style={styles.link_icon_wrap}>
