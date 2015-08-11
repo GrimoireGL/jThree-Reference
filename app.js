@@ -3177,6 +3177,20 @@ IndexComponent = (function(superClass) {
       "style": styles.wrapper
     }, React.createElement("div", {
       "style": styles.link_container,
+      "key": 'github'
+    }, React.createElement("a", {
+      "href": '//github.com/jThreeJS/jThree',
+      "style": styles.link
+    }, React.createElement("div", {
+      "style": styles.link_icon_wrap
+    }, React.createElement("span", {
+      "className": 'icon-mark-github'
+    })), React.createElement("div", {
+      "style": styles.link_label
+    }, "Github"), React.createElement("div", {
+      "style": styles.link_desc
+    }, "jThree is Open Source Project. Your contribution is welcome!"))), React.createElement("div", {
+      "style": styles.link_container,
       "key": 'overview'
     }, React.createElement(Link, {
       "href": '/overview',
