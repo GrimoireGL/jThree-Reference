@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('../assets/icomoon/icomoon.eot?f1nf8n');
-	src:url('../assets/icomoon/icomoon.eot?#iefixf1nf8n') format('embedded-opentype'),
-		url('../assets/icomoon/icomoon.ttf?f1nf8n') format('truetype'),
-		url('../assets/icomoon/icomoon.woff?f1nf8n') format('woff'),
-		url('../assets/icomoon/icomoon.svg?f1nf8n#icomoon') format('svg');
+	src:url('../assets/icomoon/icomoon.eot?-cnvksm');
+	src:url('../assets/icomoon/icomoon.eot?#iefix-cnvksm') format('embedded-opentype'),
+		url('../assets/icomoon/icomoon.ttf?-cnvksm') format('truetype'),
+		url('../assets/icomoon/icomoon.woff?-cnvksm') format('woff'),
+		url('../assets/icomoon/icomoon.svg?-cnvksm#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -23,6 +23,15 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.icon-mark-github:before {
+	content: "\e609";
+}
+.icon-books:before {
+	content: "\e920";
+}
+.icon-earth:before {
+	content: "\e9ca";
+}
 .icon-thumb-tack:before {
 	content: "\e608";
 }
@@ -49,10 +58,4 @@
 }
 .icon-close:before {
 	content: "\e602";
-}
-.icon-books:before {
-	content: "\e920";
-}
-.icon-earth:before {
-	content: "\e9ca";
 }
