@@ -25,8 +25,8 @@ class IndexComponent extends React.Component
         </div>
       </div>
       <div style={styles.wrapper}>
-        <div style={styles.link_container} key='github'>
-          <a href='//github.com/jThreeJS/jThree' style={styles.link}>
+        <div style={styles.link_container}>
+          <a href='//github.com/jThreeJS/jThree' style={styles.link} key='github'>
             <div style={styles.link_icon_wrap}>
               <span className='icon-mark-github'></span>
             </div>
@@ -34,8 +34,8 @@ class IndexComponent extends React.Component
             <div style={styles.link_desc}>jThree is Open Source Project. Your contribution is welcome!</div>
           </a>
         </div>
-        <div style={styles.link_container} key='overview'>
-          <Link href='/overview' style={styles.link}>
+        <div style={styles.link_container}>
+          <Link href='/overview' style={styles.link} key='overview'>
             <div style={styles.link_icon_wrap}>
               <span className='icon-earth'></span>
             </div>
@@ -43,14 +43,23 @@ class IndexComponent extends React.Component
             <div style={styles.link_desc}>Tutorial, tags, tips. You can post sample codes and share.</div>
           </Link>
         </div>
-        <div style={styles.link_container} key='reference'>
-          <Link href='/class' style={styles.link}>
+        <div style={styles.link_container}>
+          <Link href='/class' style={styles.link} key='reference'>
             <div style={styles.link_icon_wrap}>
               <span className='icon-books'></span>
             </div>
             <div style={styles.link_label}>Reference</div>
             <div style={styles.link_desc}>jThree API reference. You can search classes, methods, properties...</div>
           </Link>
+        </div>
+        <div style={styles.link_container}>
+          <a href='//forum.jthree.io' style={styles.link} key='forum'>
+            <div style={styles.link_icon_wrap}>
+              <span className='icon-bubbles'></span>
+            </div>
+            <div style={styles.link_label}>Forum</div>
+            <div style={styles.link_desc}>You can discuss with jThree community members. Official announcement is also here.</div>
+          </a>
         </div>
       </div>
     </div>
