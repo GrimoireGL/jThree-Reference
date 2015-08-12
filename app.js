@@ -3176,11 +3176,11 @@ IndexComponent = (function(superClass) {
     }, React.createElement("span", null, "The more simple, the more Web3D is interesting.")))), React.createElement("div", {
       "style": styles.wrapper
     }, React.createElement("div", {
-      "style": styles.link_container,
-      "key": 'github'
+      "style": styles.link_container
     }, React.createElement("a", {
       "href": '//github.com/jThreeJS/jThree',
-      "style": styles.link
+      "style": styles.link,
+      "key": 'github'
     }, React.createElement("div", {
       "style": styles.link_icon_wrap
     }, React.createElement("span", {
@@ -3190,11 +3190,11 @@ IndexComponent = (function(superClass) {
     }, "Github"), React.createElement("div", {
       "style": styles.link_desc
     }, "jThree is Open Source Project. Your contribution is welcome!"))), React.createElement("div", {
-      "style": styles.link_container,
-      "key": 'overview'
+      "style": styles.link_container
     }, React.createElement(Link, {
       "href": '/overview',
-      "style": styles.link
+      "style": styles.link,
+      "key": 'overview'
     }, React.createElement("div", {
       "style": styles.link_icon_wrap
     }, React.createElement("span", {
@@ -3204,11 +3204,11 @@ IndexComponent = (function(superClass) {
     }, "OverView"), React.createElement("div", {
       "style": styles.link_desc
     }, "Tutorial, tags, tips. You can post sample codes and share."))), React.createElement("div", {
-      "style": styles.link_container,
-      "key": 'reference'
+      "style": styles.link_container
     }, React.createElement(Link, {
       "href": '/class',
-      "style": styles.link
+      "style": styles.link,
+      "key": 'reference'
     }, React.createElement("div", {
       "style": styles.link_icon_wrap
     }, React.createElement("span", {
@@ -3217,7 +3217,21 @@ IndexComponent = (function(superClass) {
       "style": styles.link_label
     }, "Reference"), React.createElement("div", {
       "style": styles.link_desc
-    }, "jThree API reference. You can search classes, methods, properties...")))));
+    }, "jThree API reference. You can search classes, methods, properties..."))), React.createElement("div", {
+      "style": styles.link_container
+    }, React.createElement("a", {
+      "href": '//forum.jthree.io',
+      "style": styles.link,
+      "key": 'forum'
+    }, React.createElement("div", {
+      "style": styles.link_icon_wrap
+    }, React.createElement("span", {
+      "className": 'icon-bubbles'
+    })), React.createElement("div", {
+      "style": styles.link_label
+    }, "Forum"), React.createElement("div", {
+      "style": styles.link_desc
+    }, "You can discuss with jThree community members. Official announcement is also here.")))));
   };
 
   return IndexComponent;
