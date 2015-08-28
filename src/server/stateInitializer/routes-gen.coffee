@@ -27,6 +27,7 @@ class RoutesGen
     @routes = {}
     @routes = objectAssign {}, @routes, constructClassRoutes(json)
     @routes = objectAssign {}, @routes, constructIndexRoutes()
+    @routes = objectAssign {}, @routes, constructOverviewRoutes()
     @routes = objectAssign {}, @routes, constructErrorRoutes()
 
   ###*
@@ -59,6 +60,14 @@ class RoutesGen
     routes =
       '' : 'index'
     return routes
+
+  ###*
+   * construct overview route
+   * @return {Object} fragment of routes
+  ###
+  constructOverviewRoutes = ->
+    return routes = 
+      'overview': 'overview'
 
   ###*
    * construct error routes
