@@ -13,6 +13,7 @@
     "lodash.find": "^3.2.1",
     "lodash.merge": "^3.3.2",
     "material-flux": "^1.2.2",
+    "md2react": "^0.8.8",
     "object-assign": "^3.0.0",
     "radium": "pnlybubbles/radium#64300db7f744eeb7c0b7cacf67eddf3a4bb6735e",
     "react": "^0.13.3",
