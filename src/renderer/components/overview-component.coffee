@@ -9,14 +9,17 @@ class OverviewComponent extends React.Component
   @contextTypes:
     ctx: React.PropTypes.any
 
+  componentWillMount: ->
+    @setState 
+      markdown: @context.ctx.overviewStore.get().markdown
+
   render: ->
     $ = React.createElement
-    markdown = "# Hello md2react\n\n# Hello md2react\n\n# Hello md2react\n\n# Hello md2react\n\n"
-    reactMd = md2react markdown, gfm:true, breaks: true
-    
+    markdown = @state.markdown
+    $reactMd = md2react markdown
+
     $ 'div', className: 'markdown-content',
-      reactMd
+      $reactMd
 
 
 module.exports = Radium OverviewComponent
-

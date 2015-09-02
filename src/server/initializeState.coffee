@@ -3,6 +3,7 @@ config = require './stateInitializer/initializeStateConfig'
 DirTree = require './stateInitializer/dir-tree'
 Docs = require './docs'
 Router = require '../renderer/lib/router'
+readOverview = require './stateInitializer/read-overview'
 
 class InitializeState
   ###*
@@ -43,6 +44,9 @@ class InitializeState
       DocStore:
         dir_tree: @dirTree.dir_tree
         doc_data: initial_doc_data
+      OverviewStore:
+        markdown: readOverview()
+
     return initialState
 
 module.exports = InitializeState

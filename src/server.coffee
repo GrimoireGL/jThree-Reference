@@ -35,6 +35,15 @@ server.get '/api/class/global/:file_id/:factor_id', (req, res) ->
   res.json docs.getDocDataById req.params.file_id, req.params.factor_id
 
 
+server.get '/overview', (req, res) -> 
+  console.log req.originalUrl, "ok"
+  initialStates = initializeState.initialize(req)
+  context = new Context(initialStates)
+  res.send template
+    initialStates: JSON.stringify initialStates
+    markup: React.renderToString React.createElement(Root, {context})
+
+
 ###*
  * All page view request routing is processed here
  * generate view by React server-side rendering
