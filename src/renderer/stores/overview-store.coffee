@@ -13,9 +13,7 @@ class OverviewStore extends Flux.Store
     super context
     @state =
       markdown: ""
-    console.log @state, context.initialStates.OverviewStore
     @state = objectAssign(@state, context.initialStates.OverviewStore)
-    console.log @state
     @register keys.updateOverview, @updateOverview
 
   ###*

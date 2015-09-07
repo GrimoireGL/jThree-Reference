@@ -7,6 +7,7 @@
     "bluebird": "^2.9.34",
     "express": "^4.13.1",
     "handlebars": "^3.0.3",
+    "highlight": "^0.2.3",
     "history.js": "^1.8.0",
     "html5-history": "pnlybubbles/html5-history#b6afc38d13dcbfb6e112c9fdebb6a1b6862b9b17",
     "lodash.clone": "^3.0.2",

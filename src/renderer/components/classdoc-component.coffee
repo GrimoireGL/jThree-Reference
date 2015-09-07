@@ -82,7 +82,7 @@ styles =
     WebkitFlexDirection: 'column'
     flexWrap: 'nowrap'
     WebkitFlexWrap: 'nowrap'
-    marginLeft: 360
+    marginLeft: 120
     # minWidth: 800
 
   doc_wrapper:
