@@ -91,6 +91,19 @@ div.status-bar-left {
   font-family: CamingoCode, Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif, "Hiragino Kaku Gothic ProN", Meiryo;
 }
 
+.markdown-content .string {
+  color: #E59200;
+}
+.markdown-content .comment {
+  color: #78B4D8;
+}
+.markdown-content .number {
+    color: #58A440;
+}
+.markdown-content .keyword {
+  color: #FF6548;
+}
+
 /*
 code {
   background-color: rgba(0, 0, 0, 0.027451);

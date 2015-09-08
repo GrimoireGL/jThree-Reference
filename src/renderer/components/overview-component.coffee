@@ -1,7 +1,9 @@
 global.React = require 'react' # to use md2react
 Radium = require 'radium'
-md2react = require 'md2react'
-hl = require("highlight").Highlight;
+marked = require 'marked' 
+hl = require('highlight').Highlight
+
+$ = React.createElement
 
 class OverviewComponent extends React.Component
   
@@ -13,13 +15,14 @@ class OverviewComponent extends React.Component
       markdown: @context.ctx.overviewStore.get().markdown
 
   render: ->
-    $ = React.createElement
     markdown = @state.markdown
-    $reactMd = md2react markdown
+    marked.setOptions highlight: (code) ->
+      hl(code)
+    html = marked markdown
 
     $ 'div', className: 'markdown-content', style: @props.style,
       $ 'div', style: styles.container,
-        $reactMd
+        dangerouslySetInnerHTML: __html: html
 
 styles =
   container:
