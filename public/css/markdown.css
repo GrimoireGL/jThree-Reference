@@ -91,18 +91,34 @@ div.status-bar-left {
   font-family: CamingoCode, Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif, "Hiragino Kaku Gothic ProN", Meiryo;
 }
 
-.markdown-content .string {
+.markdown-content .hljs-built_in {
+  
+}
+.markdown-content .hljs-string {
   color: #E59200;
 }
-.markdown-content .comment {
+.markdown-content .hljs-comment {
   color: #78B4D8;
 }
-.markdown-content .number {
-    color: #58A440;
+.markdown-content .hljs-number {
+  color: #58A440;
 }
-.markdown-content .keyword {
+.markdown-content .hljs-literal {
+  
+}
+.markdown-content .hljs-keyword {
   color: #FF6548;
 }
+.markdown-content .hljs-function {
+  
+}
+.markdown-content .hljs-title {
+  
+}
+.markdown-content .hljs-params {
+  
+}
+
 
 /*
 code {
