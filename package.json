@@ -13,6 +13,7 @@
     "lodash.clone": "^3.0.2",
     "lodash.find": "^3.2.1",
     "lodash.merge": "^3.3.2",
+    "marked": "^0.3.5",
     "material-flux": "^1.2.2",
     "md2react": "^0.8.8",
     "object-assign": "^3.0.0",
