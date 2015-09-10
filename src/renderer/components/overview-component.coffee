@@ -21,8 +21,7 @@ class OverviewComponent extends React.Component
     html = marked markdown
 
     $ 'div', className: 'markdown-content', style: @props.style,
-      $ 'div', style: styles.container,
-        dangerouslySetInnerHTML: __html: html
+      $ 'div', style: styles.container, dangerouslySetInnerHTML: __html: html
 
 styles =
   container:
