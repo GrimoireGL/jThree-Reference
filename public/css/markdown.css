@@ -92,31 +92,31 @@ div.status-bar-left {
 }
 
 .markdown-content .hljs-built_in {
-  
+  color: #E4594C;
 }
 .markdown-content .hljs-string {
-  color: #E59200;
+  color: #50A14F;
 }
 .markdown-content .hljs-comment {
-  color: #78B4D8;
+  color: #A1A2A8;
 }
 .markdown-content .hljs-number {
-  color: #58A440;
+  color: #986801;
 }
 .markdown-content .hljs-literal {
-  
+  color: #986801;
 }
 .markdown-content .hljs-keyword {
-  color: #FF6548;
+  color: #AA31A8;
 }
-.markdown-content .hljs-function {
-  
+.markdown-content .hljs-function .hljs-keyword {
+  font-style: italic;
 }
 .markdown-content .hljs-title {
-  
+  color: #0184BC;
 }
 .markdown-content .hljs-params {
-  
+  color: #475FD7;
 }
 
 
