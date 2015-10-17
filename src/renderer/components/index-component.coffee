@@ -20,7 +20,7 @@ class IndexComponent extends React.Component
             </div>
           </div>
           <div style={styles.description}>
-            <span>The more simple, the more Web3D is interesting.</span>
+            <span>The simpler Web3D,the more interesting.</span>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@ class IndexComponent extends React.Component
               <span className='icon-mark-github'></span>
             </div>
             <div style={styles.link_label}>Github</div>
-            <div style={styles.link_desc}>jThree is Open Source Project. Your contribution is welcome!</div>
+            <div style={styles.link_desc}>jThree hosts sources in Github.Your any contributions are welcome!</div>
           </a>
         </div>
         <div style={styles.link_container}>
@@ -40,7 +40,7 @@ class IndexComponent extends React.Component
               <span className='icon-earth'></span>
             </div>
             <div style={styles.link_label}>OverView</div>
-            <div style={styles.link_desc}>Tutorial, tags, tips. You can post sample codes and share.</div>
+            <div style={styles.link_desc}>Tutorials, tags, tips. Share your code and stock your idea.</div>
           </Link>
         </div>
         <div style={styles.link_container}>
@@ -49,7 +49,7 @@ class IndexComponent extends React.Component
               <span className='icon-books'></span>
             </div>
             <div style={styles.link_label}>Reference</div>
-            <div style={styles.link_desc}>jThree API reference. You can search classes, methods, properties...</div>
+            <div style={styles.link_desc}>jThree API reference. Search classes, methods, properties...</div>
           </Link>
         </div>
         <div style={styles.link_container}>
@@ -58,7 +58,7 @@ class IndexComponent extends React.Component
               <span className='icon-bubbles'></span>
             </div>
             <div style={styles.link_label}>Forum</div>
-            <div style={styles.link_desc}>You can discuss with jThree community members. Official announcement is also here.</div>
+            <div style={styles.link_desc}>Discuss your problem with jThree community members. Official announcement will be posted here.</div>
           </a>
         </div>
       </div>
