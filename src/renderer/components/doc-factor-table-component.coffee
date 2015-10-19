@@ -29,6 +29,8 @@ class DocFactorTableComponent extends React.Component
             if c.id == id
               child = c
           if child?
+            if child.flags.isPrivate && !@props.privateVisibility
+              continue;
             alt_text = 'no description'
             table_row = []
             table_row.push <Link style={styles.link} uniqRoute={"class:local:.+?:#{@props.current.id}:#{child.id}"}>{child.name}</Link>

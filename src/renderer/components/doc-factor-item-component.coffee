@@ -25,7 +25,7 @@ class DocFactorItemComponent extends React.Component
         content:
           marginTop: 8
     <DocItemComponent title={@props.group.title} style={Array.prototype.concat.apply([], [styles.base, @props.style, dstyle.base])} subtitleStyle={dstyle.subtitle}>
-      <DocFactorTableComponent group={@props.group} current={@props.current} style={[dstyle.content]} collapsed={@props.collapsed} />
+      <DocFactorTableComponent group={@props.group} current={@props.current} style={[dstyle.content]} collapsed={@props.collapsed} privateVisibility={@props.privateVisibility}/>
     </DocItemComponent>
 
 styles =
