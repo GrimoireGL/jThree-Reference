@@ -16,7 +16,7 @@ class DocContainerComponents extends React.Component
   constructor: (props) ->
     super props
     @loadingQueue = []
-    @state = {privateVisibility:if Cookie.get('privateVisibility') then true else false}
+    @state = {privateVisibility:Cookie.get('privateVisibility')=="true"}
 
   close: ->
     if @props.argu.route_arr[1]?.toString() == 'local'
@@ -38,7 +38,7 @@ class DocContainerComponents extends React.Component
                 break
             @loadingQueue.splice splice_index, 1 if splice_index?
             <div>
-              <DocFactorTitleComponent current={current} from={@props.doc_data[file_id].from} collapsed={@props.collapsed} onPrivateVisibilityChanged={@privateVisibilityChanged.bind(this)}/>
+              <DocFactorTitleComponent current={current} from={@props.doc_data[file_id].from} collapsed={@props.collapsed} privateVisibility={@state.privateVisibility} onPrivateVisibilityChanged={@privateVisibilityChanged.bind(this)}/>
               {
                 if !@props.collapsed
                   text = [current.comment?.shortText, current.comment?.text]
@@ -82,8 +82,7 @@ class DocContainerComponents extends React.Component
     </div>
 
   privateVisibilityChanged:(e)->
-      console.log e
-      @setState({privateVisibility:e})
+      @setState({privateVisibility:Cookie.get('privateVisibility')=="true"})
 
 styles =
   base: {}

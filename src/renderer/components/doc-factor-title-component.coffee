@@ -55,7 +55,7 @@ class DocFactorTitleComponent extends React.Component
       }
       {
         unless @props.collapsed
-          <DocTogglePrivateComponent onChanged={@props.onPrivateVisibilityChanged}/>
+          <DocTogglePrivateComponent onChanged={@props.onPrivateVisibilityChanged} visibility={@props.privateVisibility}/>
       }
       {
         unless @props.collapsed

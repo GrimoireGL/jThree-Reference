@@ -14,21 +14,21 @@ Cookie = require 'js-cookie'
 class DocTogglePrivateComponent extends React.Component
   constructor: (props) ->
     super props
-    @state = {visible:if Cookie.get('privateVisibility') then true else false}
 
   render: ->
-    <div style={if @state.visible then styles.visibleToggleBtn else styles.invisibleToggleBtn} onClick={@handleClick.bind(this)}>
+    targetStyle = if @props.visibility then styles.visibleToggleBtn else styles.invisibleToggleBtn;
+    <div style={targetStyle} onClick={@handleClick.bind(this)}>
       Private
     </div>
 
 
   handleClick:->
-    @setState({visible:!@state.visible})
-    Cookie.set('privateVisibility',@state.visible)
-    @props.onChanged(@state.visible)
+    Cookie.set('privateVisibility',(!@props.visibility).toString())
+    @props.onChanged()
+
 
 styles =
-  visibleToggleBtn:
+  invisibleToggleBtn:
     width:80
     marginLeft:"auto"
     borderColor:colors.main.n.default
@@ -38,7 +38,7 @@ styles =
     borderRadius:15
     color:colors.main.n.default
     cursor:"pointer"
-  invisibleToggleBtn:
+  visibleToggleBtn:
     width:80
     marginLeft:"auto"
     borderColor:colors.main.n.default
