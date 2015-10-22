@@ -3,7 +3,7 @@ Radium = require 'radium'
 Link = require './link-component'
 DocTitleComponent = require './doc-title-component'
 DocFlagtagsComponent = require './doc-flagtags-component'
-DocTogglePrivateComponent = require './doc-toggle-private-component'
+DocToggleVisibilityComponent = require './doc-toggle-visibility-component'
 colors = require './colors/color-definition'
 
 ###
@@ -55,7 +55,8 @@ class DocFactorTitleComponent extends React.Component
       }
       {
         unless @props.collapsed
-          <DocTogglePrivateComponent onChanged={@props.onPrivateVisibilityChanged} visibility={@props.privateVisibility}/>
+          <DocToggleVisibilityComponent onChanged={@props.onPrivateVisibilityChanged} visibility={@props.privateVisibility} buttonKey="privateVisibility"/>
+          <DocToggleVisibilityComponent onChanged={@props.onPrivateVisibilityChanged} visibility={@props.protectedVisibility} buttonKey="protectedVisibility"/>
       }
       {
         unless @props.collapsed

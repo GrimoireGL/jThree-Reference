@@ -9,14 +9,12 @@ DocFactorHierarchyComponent = require './doc-factor-hierarchy-component'
 DocFactorImplementsComponent = require './doc-factor-implements-component'
 DocTypeparameterComponent = require './doc-typeparameter-component'
 DocSearchContainerComponent = require './doc-search-container-component'
-Cookie = require 'js-cookie'
-
 
 class DocContainerComponents extends React.Component
   constructor: (props) ->
     super props
     @loadingQueue = []
-    @state = {privateVisibility:Cookie.get('privateVisibility')=="true"}
+    @state = {privateVisibility:false,protectedVisibility:true}
 
   close: ->
     if @props.argu.route_arr[1]?.toString() == 'local'
@@ -38,7 +36,7 @@ class DocContainerComponents extends React.Component
                 break
             @loadingQueue.splice splice_index, 1 if splice_index?
             <div>
-              <DocFactorTitleComponent current={current} from={@props.doc_data[file_id].from} collapsed={@props.collapsed} privateVisibility={@state.privateVisibility} onPrivateVisibilityChanged={@privateVisibilityChanged.bind(this)}/>
+              <DocFactorTitleComponent current={current} from={@props.doc_data[file_id].from} collapsed={@props.collapsed} protectedVisibility={@state.protectedVisibility} privateVisibility={@state.privateVisibility} onPrivateVisibilityChanged={@privateVisibilityChanged.bind(this)}/>
               {
                 if !@props.collapsed
                   text = [current.comment?.shortText, current.comment?.text]
@@ -59,7 +57,7 @@ class DocContainerComponents extends React.Component
               {
                 if current.groups?
                   for group in current.groups
-                    <DocFactorItemComponent key={group.kind} group={group} current={current} collapsed={@props.collapsed} privateVisibility={@state.privateVisibility}/>
+                    <DocFactorItemComponent key={group.kind} group={group} current={current} collapsed={@props.collapsed} privateVisibility={@state.privateVisibility} protectedVisibility={@state.protectedVisibility}/>
               }
             </div>
           else
@@ -81,8 +79,10 @@ class DocContainerComponents extends React.Component
       }
     </div>
 
-  privateVisibilityChanged:(e)->
-      @setState({privateVisibility:Cookie.get('privateVisibility')=="true"})
+  privateVisibilityChanged:(e,key)->
+      state ={}
+      state[key] = e
+      @setState(state)
 
 styles =
   base: {}
