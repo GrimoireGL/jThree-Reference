@@ -43,6 +43,7 @@ class DocFactorTitleComponent extends React.Component
           marginTop: 10
           marginLeft: 0
 
+ 
     <DocTitleComponent title={@props.current.name} kindString={@props.current.kindString} dstyle={dstyle} style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       {
         unless @props.collapsed
