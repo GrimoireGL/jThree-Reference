@@ -43,7 +43,7 @@ class DocFactorTitleComponent extends React.Component
           marginTop: 10
           marginLeft: 0
 
- 
+
     <DocTitleComponent title={@props.current.name} kindString={@props.current.kindString} dstyle={dstyle} style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       {
         unless @props.collapsed
@@ -56,8 +56,10 @@ class DocFactorTitleComponent extends React.Component
       }
       {
         unless @props.collapsed
-          <DocToggleVisibilityComponent onChanged={@props.onPrivateVisibilityChanged} visibility={@props.privateVisibility} buttonKey="privateVisibility"/>
-          <DocToggleVisibilityComponent onChanged={@props.onPrivateVisibilityChanged} visibility={@props.protectedVisibility} buttonKey="protectedVisibility"/>
+          <div style={styles.visibilityContainer}>
+            <DocToggleVisibilityComponent onChanged={@props.onVisibilityChanged} visibility={@props.privateVisibility} displayName="Private" buttonKey="privateVisibility"/>
+            <DocToggleVisibilityComponent onChanged={@props.onVisibilityChanged} visibility={@props.protectedVisibility} displayName="Protected" buttonKey="protectedVisibility"/>
+          </div>
       }
       {
         unless @props.collapsed
@@ -67,6 +69,10 @@ class DocFactorTitleComponent extends React.Component
 
 styles =
   base: {}
+
+  visibilityContainer:
+    marginLeft:"auto"
+    width:"300px"
 
   from:
     marginBottom: 4

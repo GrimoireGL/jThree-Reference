@@ -36,7 +36,7 @@ class DocContainerComponents extends React.Component
                 break
             @loadingQueue.splice splice_index, 1 if splice_index?
             <div>
-              <DocFactorTitleComponent current={current} from={@props.doc_data[file_id].from} collapsed={@props.collapsed} protectedVisibility={@state.protectedVisibility} privateVisibility={@state.privateVisibility} onPrivateVisibilityChanged={@privateVisibilityChanged.bind(this)}/>
+              <DocFactorTitleComponent current={current} from={@props.doc_data[file_id].from} collapsed={@props.collapsed} protectedVisibility={@state.protectedVisibility} privateVisibility={@state.privateVisibility} onVisibilityChanged={@visibilityChanged.bind(this)}/>
               {
                 if !@props.collapsed
                   text = [current.comment?.shortText, current.comment?.text]
@@ -79,7 +79,7 @@ class DocContainerComponents extends React.Component
       }
     </div>
 
-  privateVisibilityChanged:(e,key)->
+  visibilityChanged:(e,key)->
       state ={}
       state[key] = e
       @setState(state)

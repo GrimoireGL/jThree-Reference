@@ -17,7 +17,7 @@ class DocToggleVisibilityComponent extends React.Component
   render: ->
     targetStyle = if @props.visibility then styles.visibleToggleBtn else styles.invisibleToggleBtn;
     <div style={[styles.toggleBtn,targetStyle]} onClick={@handleClick.bind(this)}>
-      Private
+      {@props.displayName}
     </div>
 
 
@@ -34,6 +34,13 @@ styles =
     textAlign:"center"
     borderRadius:15
     cursor:"pointer"
+    display:"inline"
+    paddingTop:5
+    paddingBottom:5
+    paddingLeft:20
+    paddingRight:20
+    marginLeft:10
+    marginRight:10
   invisibleToggleBtn:
     color:colors.main.n.default
   visibleToggleBtn:
