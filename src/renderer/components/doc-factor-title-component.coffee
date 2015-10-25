@@ -56,23 +56,27 @@ class DocFactorTitleComponent extends React.Component
       }
       {
         unless @props.collapsed
-          <div style={styles.visibilityContainer}>
-            <DocToggleVisibilityComponent onChanged={@props.onVisibilityChanged} visibility={@props.privateVisibility} displayName="Private" buttonKey="privateVisibility"/>
-            <DocToggleVisibilityComponent onChanged={@props.onVisibilityChanged} visibility={@props.protectedVisibility} displayName="Protected" buttonKey="protectedVisibility"/>
-          </div>
+          <DocFlagtagsComponent flags={@props.current.flags} style={styles.tags}/>
       }
       {
         unless @props.collapsed
-          <DocFlagtagsComponent flags={@props.current.flags} style={styles.tags}/>
+          <div style={styles.floatWrapper}>
+            <div style={styles.right}>
+              <DocToggleVisibilityComponent onChanged={@props.onVisibilityChanged} visibility={@props.privateVisibility} displayName="Private" buttonKey="privateVisibility"/>
+              <DocToggleVisibilityComponent onChanged={@props.onVisibilityChanged} visibility={@props.protectedVisibility} displayName="Protected" buttonKey="protectedVisibility"/>
+            </div>
+          </div>
       }
     </DocTitleComponent>
 
 styles =
   base: {}
 
-  visibilityContainer:
-    marginLeft:"auto"
-    width:"300px"
+  floatWrapper:
+    overflow: 'hidden'
+
+  right:
+    float: 'right'
 
   from:
     marginBottom: 4

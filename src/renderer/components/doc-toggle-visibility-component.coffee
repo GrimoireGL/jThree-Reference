@@ -26,7 +26,6 @@ class DocToggleVisibilityComponent extends React.Component
 
 styles =
   toggleBtn:
-    width:80
     marginLeft:"auto"
     borderColor:colors.main.n.default
     borderWidth:1
@@ -34,9 +33,10 @@ styles =
     textAlign:"center"
     borderRadius:15
     cursor:"pointer"
-    display:"inline"
+    display:"inline-block"
+    boxSizing: 'border-box'
     paddingTop:5
-    paddingBottom:5
+    paddingBottom:4
     paddingLeft:20
     paddingRight:20
     marginLeft:10
