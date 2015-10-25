@@ -14,7 +14,6 @@ class DocContainerComponents extends React.Component
   constructor: (props) ->
     super props
     @loadingQueue = []
-    @state = {privateVisibility:false,protectedVisibility:true}
 
   close: ->
     if @props.argu.route_arr[1]?.toString() == 'local'
@@ -36,7 +35,7 @@ class DocContainerComponents extends React.Component
                 break
             @loadingQueue.splice splice_index, 1 if splice_index?
             <div>
-              <DocFactorTitleComponent current={current} from={@props.doc_data[file_id].from} collapsed={@props.collapsed} protectedVisibility={@state.protectedVisibility} privateVisibility={@state.privateVisibility} onVisibilityChanged={@visibilityChanged.bind(this)}/>
+              <DocFactorTitleComponent current={current} from={@props.doc_data[file_id].from} collapsed={@props.collapsed} />
               {
                 if !@props.collapsed
                   text = [current.comment?.shortText, current.comment?.text]
@@ -57,7 +56,7 @@ class DocContainerComponents extends React.Component
               {
                 if current.groups?
                   for group in current.groups
-                    <DocFactorItemComponent key={group.kind} group={group} current={current} collapsed={@props.collapsed} privateVisibility={@state.privateVisibility} protectedVisibility={@state.protectedVisibility}/>
+                    <DocFactorItemComponent key={group.kind} group={group} current={current} collapsed={@props.collapsed} />
               }
             </div>
           else
@@ -78,11 +77,6 @@ class DocContainerComponents extends React.Component
           <DocSearchContainerComponent />
       }
     </div>
-
-  visibilityChanged:(e,key)->
-      state ={}
-      state[key] = e
-      @setState(state)
 
 styles =
   base: {}

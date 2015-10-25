@@ -14,15 +14,27 @@ class DocToggleVisibilityComponent extends React.Component
   constructor: (props) ->
     super props
 
+  componentWillMount: ->
+    @store = @context.ctx.toggleVisibilityStore
+    @setState
+      visibility: @store.get().visibility[@props.buttonKey]
+
+  componentDidMount: ->
+    @store.onChange =>
+      @setState
+        visibility: @store.get().visibility[@props.buttonKey]
+
+  componentWillUnmount: ->
+    @store.removeAllChangeListeners()
+
   render: ->
-    targetStyle = if @props.visibility then styles.visibleToggleBtn else styles.invisibleToggleBtn;
-    <div style={[styles.toggleBtn,targetStyle]} onClick={@handleClick.bind(this)}>
+    targetStyle = if @state.visibility then styles.visibleToggleBtn else styles.invisibleToggleBtn
+    <div style={[styles.toggleBtn, targetStyle]} onClick={@visibilityChanged.bind(@)}>
       {@props.displayName}
     </div>
 
-
-  handleClick:->
-    @props.onChanged(!@props.visibility,@props.buttonKey)
+  visibilityChanged:->
+    @context.ctx.toggleVisibilityAction.toggleVisibility !@state.visibility, @props.buttonKey
 
 styles =
   toggleBtn:

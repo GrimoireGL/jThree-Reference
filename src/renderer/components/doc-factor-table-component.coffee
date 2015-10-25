@@ -14,6 +14,17 @@ class DocFactorTableComponent extends React.Component
   constructor: (props) ->
     super props
 
+  componentWillMount: ->
+    @store = @context.ctx.toggleVisibilityStore
+    @setState @store.get()
+
+  componentDidMount: ->
+    @store.onChange =>
+      @setState @store.get()
+
+  componentWillUnmount: ->
+    @store.removeAllChangeListeners()
+
   render: ->
     dstyle = {}
     if @props.collapsed
@@ -29,9 +40,9 @@ class DocFactorTableComponent extends React.Component
             if c.id == id
               child = c
           if child?
-            if child.flags.isPrivate && !@props.privateVisibility
+            if child.flags.isPrivate && !@state.visibility.privateVisibility
               continue
-            if child.flags.isProtected && !@props.protectedVisibility
+            if child.flags.isProtected && !@state.visibility.protectedVisibility
               continue
             alt_text = 'no description'
             table_row = []

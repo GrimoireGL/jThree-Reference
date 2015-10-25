@@ -62,8 +62,8 @@ class DocFactorTitleComponent extends React.Component
         unless @props.collapsed
           <div style={styles.floatWrapper}>
             <div style={styles.right}>
-              <DocToggleVisibilityComponent onChanged={@props.onVisibilityChanged} visibility={@props.privateVisibility} displayName="Private" buttonKey="privateVisibility"/>
-              <DocToggleVisibilityComponent onChanged={@props.onVisibilityChanged} visibility={@props.protectedVisibility} displayName="Protected" buttonKey="protectedVisibility"/>
+              <DocToggleVisibilityComponent displayName="Private" buttonKey="privateVisibility"/>
+              <DocToggleVisibilityComponent displayName="Protected" buttonKey="protectedVisibility"/>
             </div>
           </div>
       }
