@@ -4,6 +4,7 @@ DirTree = require './stateInitializer/dir-tree'
 Docs = require './docs'
 Router = require '../renderer/lib/router'
 readOverview = require './stateInitializer/read-overview'
+Overviews = require './overviews'
 
 class InitializeState
   ###*
@@ -15,6 +16,7 @@ class InitializeState
     @routeGen = new RoutesGen()
     @dirTree = new DirTree()
     @router = new Router(config.router.root, @routeGen.routes)
+    @overviews = new Overviews()
 
   ###*
    * resetup state initializer
@@ -45,7 +47,9 @@ class InitializeState
         dir_tree: @dirTree.dir_tree
         doc_data: initial_doc_data
       OverviewStore:
-        markdown: readOverview()
+        markdown: readOverview() #@overviews.getMdDataById(1) #readOverview() ここ
+        # structure: @overviews.getTitleStructure()
+
 
     return initialState
 

@@ -8,20 +8,37 @@ OverviewSidebarSubtitleComponent = require './overview-sidebar-subtitle-componen
 $ = React.createElement
 
 class OverviewSidebarComponent extends React.Component
-  
+
   constructor: (props) ->
     super props
 
   render: ->
     $ 'div', style: [].concat.apply([], [styles.sidebar, @props.style]), [0..15].map (v, i) ->
       $ OverviewSidebarItemComponent, {},
-        $ OverviewSidebarTitleComponent, {}, 
-          "タイトル" + i
-        [0..3].map (v2, i2) ->
-          $ OverviewSidebarSubtitleComponent, {},
-            "サブタイトル" + i2
+        # 1
+        test() # ここ?
+        # $ OverviewSidebarTitleComponent, {},
+        #   "タイトル" + i
+        # $ OverviewSidebarSubtitleComponent, {},
+        #   "サブタイトル" + i2
 
-styles = 
+  test = ->
+    datas = [{
+      title: "hello"
+      level: 1
+    }, {
+      title: "hello"
+      level: 2
+    }, {
+      title: "hello"
+      level: 3
+    }]
+    datas.map (data) ->
+      $ OverviewSidebarTitleComponent, level: data.level,
+        data.title
+
+
+styles =
   sidebar: {}
 
 

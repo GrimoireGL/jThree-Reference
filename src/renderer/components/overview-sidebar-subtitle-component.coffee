@@ -1,5 +1,6 @@
 React = require 'react'
 Radium = require 'radium'
+Link = require './link-component'
 
 $ = React.createElement
 
@@ -10,7 +11,8 @@ class OverviewSidebarSubtitleComponent extends React.Component
 
   render: ->
     $ 'div', style: [].concat.apply([], [styles.base, @props.style]),
-      @props.children
+      $ Link, style: {}, href: "",
+        @props.children
 
 
 styles = 

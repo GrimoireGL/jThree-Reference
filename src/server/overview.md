@@ -1,210 +1,259 @@
-# Questions  
-## 問1 - 型と変数と演算子 -  
+# title1
+## subtitle1-1
+## subtitle1-2
+## subtitle1-3
+## subtitle1-4
+## subtitle1-5
 
-  * 次の実行結果を理由をつけて答えよ：  
+# title2
+## subtitle2-1
+## subtitle2-2
+## subtitle2-3
+## subtitle2-4
+## subtitle2-5
+## subtitle2-6
+## subtitle2-7
 
-  ```javascript  
-    console.log('hello' + " world"); // (i)  
-    console.log(1 + 2 + "3" + 4); // (ii)  
-    console.log(1 + 2 == 3);      // (iii)  
-    console.log(1 + "2" == "12"); // (v)  
-    console.log(1 + "2" == 12);   // (vi)  
-    console.log(1 + "2" === 12);  // (v)  
-    console.log(true === 1 + 2 * 8 < 6 / 3 / 2 + 2 * 2 * 4); // (vii)  
-    var x = 0;  
-    var y = 4;  
-    console.log(x == 2 || y == 4);// (viii)  
-    console.log(x == 0 && false); // (ix)  
-    console.log(x == y);          // (x)  
-    console.log(x = y = 8);       // (xi)  
-    x = 0;  
-    console.log(1 < x < 9);       // (xii)  
-    console.log(z);               // (xiii)  
-  ```  
+```javascript
+var rps = (function () {
+    'use strict';
 
-## 問2 - 配列とfunction式 -  
+    var Rational = (function () {
 
-  * 次の実行結果を理由をつけて答えよ：  
+        function Rational(n, d) {
+            function gcd(x, y) {
+                if (y === 0) {
+                    return Math.abs(x);
+                }
+                return gcd(y, x % y);
+            }
+            var g = gcd(n, d);
 
-  ```javascript  
-    var ary = [ 1,4,2,1,6,8,4 ];  
-    console.log(ary[3]);         // (i)  
-    console.log(ary.length);     // (ii)  
-    ary[71] = 789;  
-    console.log(ary.length);     // (iii)  
+            this.n = n / g;
+            this.d = d / g;
+        }
 
-    function add7(num) {  
-        return num + 7;  
-    }  
-    var square = function(x) {  
-        return x * x;  
-    };  
-    console.log(square(add7(3))); // (iv)  
+        Rational.prototype.negative = function () { 
+            return new Rational(-this.n, this.d);
+        };
+        Rational.prototype.inverse = function () {
+            return new Rational(this.d, this.n);
+        };
 
-    function minus(a) {  
-        return function (b) {  
-            return a - b;  
-        };  
-    }  
-    console.log(minus(3)(7));     // (v)  
-    
-    (function () {  
-        var x = 3;  
-    }());  
-    console.log(x);               // (vi)  
-  ```  
+        Rational.prototype.plus = function (rational) {
+            return new Rational(
+                this.n * rational.d + rational.n * this.d,
+                this.d * rational.d
+            );
+        };
+        Rational.prototype.minus = function (rational) {
+            return this.plus(rational.negative());
+        };
+        Rational.prototype.multiply = function (rational) {
+            return new Rational(
+                this.n * rational.n,
+                this.d * rational.d
+            );
+        };
+        Rational.prototype.div = function (rational) {
+            return this.multiply(rational.inverse());
+        };
 
-## 問3 - 制御構文 -  
+        Rational.prototype.equals = function (rational) {
+            return this.toNumber() === rational.toNumber();
+        };
 
-  1. 1,2,...,50 の数値に対して、"3の倍数" または "3のつく数字" の時だけアホになって出力するプログラムを作りなさい。  
-  1. n!(=n*(n-1)*...*2*1)を求めるプログラムを、(i)for文で (ii)再帰的定義で 作成しなさい  
-  1. [ 4,7,2,4,9,0,3 ] のような配列を、値の小さい順に並び変えるプログラムを作成しなさい  
-  1. 上の問題で作成したある1文を変えることによって、ランダムな順序の配列を返すプログラムを作成しなさい  
-  1. 以下のアルゴリズムで小さい順にソートをするクソプログラムを作成しなさい：  
-    I. ある配列が小さい順になってるかどうか確認する  
-    II. 小さい順になっていたら処理終了、なっていなかったらその配列をランダムにして I. へ戻る  
-  1. for文を用いて、以下のように出力するようなプログラムを作成しなさい：  
+        Rational.prototype.toString = function () {
+            return this.n + '/' + this.d;
+        };
+        Rational.prototype.toNumber = function () {
+            return this.n / this.d;
+        };
 
-    i.  
-    
-      ```  
-      1 1 1 1 0 0 0 0  
-      1 1 1 1 0 0 0 0  
-      1 1 1 1 0 0 0 0  
-      1 1 1 1 0 0 0 0  
-      0 0 0 0 1 1 1 1  
-      0 0 0 0 1 1 1 1  
-      0 0 0 0 1 1 1 1  
-      0 0 0 0 1 1 1 1  
-      ```  
-    ii.  
-    
-      ```  
-      1 1 0 0 0 0 0 0  
-      1 1 1 0 0 0 0 0  
-      0 1 1 1 0 0 0 0  
-      0 0 1 1 1 0 0 0  
-      0 0 0 1 1 1 0 0  
-      0 0 0 0 1 1 1 0  
-      0 0 0 0 0 1 1 1  
-      0 0 0 0 0 0 1 1  
-      ```  
-    iii.  
-    
-      ```  
-      1 0 1 0 1 0 1 0  
-      0 1 0 1 0 1 0 1  
-      1 0 1 0 1 0 1 0  
-      0 1 0 1 0 1 0 1  
-      1 0 1 0 1 0 1 0  
-      0 1 0 1 0 1 0 1  
-      1 0 1 0 1 0 1 0  
-      0 1 0 1 0 1 0 1  
-      ```  
-      
-    iv.  
-    
-      ```  
-      1 1 1 1 1 1 1 1  
-      0 0 0 0 0 0 0 1  
-      1 1 1 1 1 1 0 1  
-      1 0 0 0 0 1 0 1  
-      1 0 1 1 0 1 0 1  
-      1 0 1 1 1 1 0 1  
-      1 0 0 0 0 0 0 1  
-      1 1 1 1 1 1 1 1  
-      ```  
+        Rational.zero = new Rational(0, 1);
+        Rational.one = new Rational(1, 1);
 
-## 問4 - 単純な関数の作成練習 -  
-  お前らちゃんとreturnしてくれよー  
+        return Rational;
+    })();
 
-  1. 以下を仕様とする関数を作りなさい  
+    var Table = (function () {
+        function Table() {
+            var self = this;
+            keys.forEach(function (key) {
+                self[key] = Rational.zero;
+            });
+        }
 
-    仕様▼  
-    関数名:printSubtraction  
-    引数:num1,num2  
-    返り値:無し  
-    説明:num1とnum2の引き算した値を表示する関数  
+        Table.prototype.plus = function (table) {
+            var self = this, result = new Table();
+            keys.forEach(function (key) {
+                result[key] = self[key].plus(table[key]);
+            });
+            return result;
+        };
+        Table.prototype.sum = function () {
+            var self = this, sum = Rational.zero;
+            keys.forEach(function (key) {
+                sum = sum.plus(self[key]);
+            });
+            return sum;
+        };
+        Table.prototype.normalize = function () {
+            var self = this, sum = self.sum();
+            if (sum.equals(Rational.zero)) { return self; }
+            keys.forEach(function (key) {
+                self[key] = self[key].div(sum);
+            });
+            return self;
+        };
 
-  1. 以下を仕様とする関数を作りなさい  
+        Table.prototype.toString = function () {
+            var self = this, result = '';
+            keys.forEach(function (key) {
+                result += key + ': ' + self[key] + ', ';
+            });
+            return result.slice(0, -2);
+        };
 
-    仕様▼  
-    関数名:nthTableOfMultiplication  
-    引数:整数n (表示させる段の番号)  
-    返り値:配列table  
-    説明:掛け算の表のうち、n段目のものを配列で返す関数  
+        return Table;
+    })();
 
-  1. 以下を仕様とする関数を作りなさい  
+    var keys = ['rock', 'paper', 'scissors'],
+        history, counter;
 
-    仕様▼  
-    関数名:f  
-    引数:実数x  
-    返り値:実数fx  
-    説明: `fx = x*x*x - 3*x`とし、計算してfxを返す関数  
+    function last(n) {
+        if (n === 0) { return ''; }
+        return history.slice(-n);
+    }
+    function count(str) {
+        if (str === '') { return 0; }
+        return history.split(str).length - 1;
+    }
 
-  1. 以下を仕様とする関数を作りなさい  
+    function esc(table) {
+        var result = new Table(), hlen = keys.length,
+            len = history.length, count = 0, p;
+        table.normalize();
 
-    仕様▼  
-    関数名:isEven  
-    引数:整数num  
-    返り値:true/false  
-    説明:numが偶数かを判定し、偶数ならtrueを、奇数ならfalseを返す関数  
-    
+        keys.forEach(function (key) {
+            if (!counter[key].equals(Rational.zero)) { count++; }
+        });
+        if (count === hlen) { return table; }
 
-## 問5 - オブジェクト -  
+        p = new Rational(count + 2, 2 * (len + 1));
+        keys.forEach(function (key) {
+            if (!table[key].equals(Rational.zero)) {
+                result[key] = table[key].multiply(Rational.one.minus(p));
+            } else {
+                result[key] = p.multiply(new Rational(1, hlen - count));
+            }
+        });
+        return result;
+    }
+    function predict(order) {
+        var result = new Table(), table = new Table(), i;
+        if (order === 0) { order = Infinity; }
+        else if (!order) { order = 4; }
 
-  以下のコードは『分数を表すオブジェクト』を、分子分母を引数として生成する関数である。
+        for (i = 0; i < order; i++) {
+            keys.forEach(function (key) {
+                table[key] = new Rational(count(last(i) + key[0]), 1);
+            });
 
-  1. 実行結果を答えよ
+            if (table.sum().equals(Rational.zero)) { break; }
+            result = result.plus(table.normalize());
+        }
 
-  ```javascript  
-    function fraction(child, mother) {  
-        // ①  
-        return {  
-            child: child,  
-            mother: mother,  
-            plus: function (other) { return fraction(other.child*this.mother + this.child*other.mother, this.mother*other.mother); },  
-            minus: function (other) { return this.plus(other.flipSign()); },  
-            flipSign: function () { return fraction(-child, mother); }  
-        };  
-    }  
-    function printFraction(frac) {  
-        console.log(frac.child + " / " + frac.mother);  
-    }  
+        return esc(result);
+    }
 
-    var a = fraction(1, 2);  
-    var b = fraction(3, 4);  
-    printFraction(a.minus(b));    // 表示されるものを答えよ  
-  ```  
+    function toString(order) {
+        return '"' + history + '"\n' + predict(order);
+    }
+    function log() {
+        print(toString());
+    }
+    function push(key) {
+        if (key in counter) {
+            history += key[0];
+            counter[key] = counter[key].plus(Rational.one);
+        }
+        log();
+    }
 
-  1. 上のコードに、以下のメソッド(オブジェクトが持つ関数のこと)を追加せよ:  
+    function init() {
+        history = '';
+        counter = new Table();
+        log();
+    }
+    init();
 
-    i. * (.multiply(other))  
-    ii. 逆数を求めるメソッド (.flipFracVal())  
-    iii. / (.divide(other))  
-    iv. 分子と分母の最大公約数を求める関数 (gcd(child, mother))  
-      ただし、この関数は上の①の位置に書きなさい。  
-      可能なら、ユークリッドの互除法を使いなさい (p = mq + r のpとqの最大公約数 == qとrの最大公約数 (両辺をqで割ったとき、p/qとmが整数だからr/qも整数だよね？って原理))  
-    v. 約分を行うメソッド (.reduction())  
+    return (function (rps) {
+        rps.predict = function () { return predict(); };
+        rps.toString = function () { return toString(); };
 
-## 問6 - ゲーム制作 -  
+        Object.defineProperty(rps, 'init', {
+            get: function () {
+                init();
+                return rps;
+            },
+            enumerable: true
+        });
 
-  * 12*2枚で行う神経衰弱を作ろう。以下のものを作れば多分完成する：  
+        keys.forEach(function (key) {
+            Object.defineProperty(rps, key, {
+                get: function () {
+                    push(key);
+                    return rps;
+                },
+                enumerable: true
+            });
+        });
 
-    1. 24枚のカードを格納する配列をランダムで自動生成する関数をつくる (例:[2,1,12,5,5,10,8,6,9,10,11,4,1,2,6,3,3,9,12,7,8,4,7,11])  
-    
-    1. プレイヤーのターンについて記述する。一つ目に引いた数と二つ目のが一致してるか確認したり、選んだカードを表示させたりする。  ただし、神経衰弱のカードを全て表示するときは、以下のように表示すること：  
-    
-    ```  
-      全て見えてるとき：  
-      2  1  12 5  5  10 8  6  
-      9  10 11 4  1  2  6  3  
-      3  9  12 7  8  4  7  11  
-      
-      全て隠しているとき：  
-      *  *  *  *  *  *  *  *  
-      *  *  *  *  *  *  *  *  
-      *  *  *  *  *  *  *  *  
-    ```  
-    
-    1. 最終的に自分のカードが多い者の勝利とする  
+        return rps;
+    })(function rps() { return rps; });
+
+})();
+
+// グー, パー, グー の次まで予測
+rps.rock().paper().rock();
+
+// 初期化
+rps.init();
+
+// 括弧要らない
+rps.rock.paper.rock;
+```
+
+# title3
+## subtitle3-1
+## subtitle3-2
+## subtitle3-3
+
+# title4
+## subtitle4-1
+## subtitle4-2
+## subtitle4-3
+## subtitle4-4
+## subtitle4-5
+
+# title5
+## subtitle5-1
+## subtitle5-2
+## subtitle5-3
+## subtitle5-4
+## subtitle5-5
+
+# title6
+## subtitle6-1
+## subtitle6-2
+## subtitle6-3
+## subtitle6-4
+## subtitle6-5
+
+# title7
+## subtitle7-1
+## subtitle7-2
+## subtitle7-3
+## subtitle7-4
+## subtitle7-5
