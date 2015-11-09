@@ -3,7 +3,9 @@ RouteAction = require './actions/route-action'
 RouteStore = require './stores/route-store'
 DocAction = require './actions/doc-action'
 DocStore = require './stores/doc-store'
+OverviewAction = require './actions/overview-action'
 OverviewStore = require './stores/overview-store'
+
 
 class Context extends Flux.Context
   ###*
@@ -19,5 +21,6 @@ class Context extends Flux.Context
     @docAction = new DocAction(@)
     @docStore = new DocStore(@)
     @overviewStore = new OverviewStore(@)
+    @overviewAction = new OverviewAction(@)
 
 module.exports = Context

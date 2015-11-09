@@ -12,31 +12,19 @@ class OverviewSidebarComponent extends React.Component
   constructor: (props) ->
     super props
 
+  componentWillMount: ->
+    @context.ctx.overviewAction.updateOverview(1)
+    @setState
+      # markdown: @context.ctx.overviewStore.get().markdown
+      structure: @context.ctx.overviewStore.get().structure
+
   render: ->
-    $ 'div', style: [].concat.apply([], [styles.sidebar, @props.style]), [0..15].map (v, i) ->
+    structure = @state.structure
+    $ 'div', style: [].concat.apply([], [styles.sidebar, @props.style]),
       $ OverviewSidebarItemComponent, {},
-        # 1
-        test() # ここ?
-        # $ OverviewSidebarTitleComponent, {},
-        #   "タイトル" + i
-        # $ OverviewSidebarSubtitleComponent, {},
-        #   "サブタイトル" + i2
-
-  test = ->
-    datas = [{
-      title: "hello"
-      level: 1
-    }, {
-      title: "hello"
-      level: 2
-    }, {
-      title: "hello"
-      level: 3
-    }]
-    datas.map (data) ->
-      $ OverviewSidebarTitleComponent, level: data.level,
-        data.title
-
+        structure.map (data) ->
+          $ OverviewSidebarTitleComponent, level: data.level,
+            data.title
 
 styles =
   sidebar: {}

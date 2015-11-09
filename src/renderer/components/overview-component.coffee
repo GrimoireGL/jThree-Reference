@@ -7,29 +7,30 @@ Route = require './route-component'
 $ = React.createElement
 
 class OverviewComponent extends React.Component
-  
+
   constructor: (props) ->
     super props
+    console.log @props.argu.route_arr
 
   render: ->
-    $ 'div', style: Array.prototype.concat.apply([], [styles.base, @props.style]), 
+    $ 'div', style: Array.prototype.concat.apply([], [styles.base, @props.style]),
       $ 'div', style: styles.sidebar,
-        $ Route, {}, 
+        $ Route, {},
           $ OverviewSidebarComponent
       $ 'div', style: styles.contents,
-        $ Route, {}, 
+        $ Route, {},
           $ OverviewMarkdownComponent
 
-styles = 
+styles =
 
-  base: 
+  base:
     display: '-webkit-flex'
     display: 'flex'
     WebkitFlexDirection: 'row'
     flexDirection: 'row'
     width: '100%'
 
-  sidebar: 
+  sidebar:
     boxSizing: 'border-box'
     paddingLeft: 10
     paddingTop: 10
@@ -41,7 +42,7 @@ styles =
     overflowY: 'scroll'
     overflowX: 'hidden'
     zIndex: 10
-    backgroundColor: '#fff'  
+    backgroundColor: '#fff'
 
   contents:
     boxSizing: 'border-box'

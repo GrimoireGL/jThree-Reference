@@ -33,6 +33,7 @@ class InitializeState
   ###
   initialize: (req) ->
     initial_doc_data = {}
+
     @router.route req.originalUrl, (route, argu) =>
       file_id = argu.route_arr[2]?.toString()
       factor_id = argu.route_arr[3]?.toString()
@@ -47,8 +48,8 @@ class InitializeState
         dir_tree: @dirTree.dir_tree
         doc_data: initial_doc_data
       OverviewStore:
-        markdown: readOverview() #@overviews.getMdDataById(1) #readOverview() ここ
-        # structure: @overviews.getTitleStructure()
+        markdown: @overviews.getMarkdownById(1) # readOverview() ここ
+        structure: @overviews.getTitleStructure()
 
 
     return initialState
