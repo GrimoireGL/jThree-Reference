@@ -4,23 +4,31 @@ marked = require 'marked'
 
 $ = React.createElement
 
-class OverviewMarkdownComponent extends React.Component
+class OverviewMarkupComponent extends React.Component
 
   constructor: (props) ->
     super props
 
   componentWillMount: ->
     @setState
-      markdown: @props.markdown
+      markup: @props.markup
 
-  render: ->
-    markdown = @state.markdown
+  md2html: (markup) ->
+    markup = @state.markup
     marked.setOptions highlight: (code) ->
       require('highlight.js').highlightAuto(code).value
-    html = marked markdown
+    html = marked markup
+
+  shouldComponentUpdate: (nextProps, nextState) ->
+    nextProps.markup != @props.marked
+
+  getMd: ->
+    @props.markup
+
+  render: ->
 
     $ 'div', className: 'markdown-component', style: @props.style,
-      $ 'div', style: styles.container, dangerouslySetInnerHTML: __html: html
+      $ 'div', style: styles.container, dangerouslySetInnerHTML: __html: @props.markup
 
 styles =
   container: {}
@@ -36,7 +44,7 @@ styles =
 #     marginRight: 120
 
 
-OverviewMarkdownComponent.contextTypes =
+OverviewMarkupComponent.contextTypes =
   ctx: React.PropTypes.any
 
-module.exports = Radium OverviewMarkdownComponent
+module.exports = Radium OverviewMarkupComponent

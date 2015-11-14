@@ -1,6 +1,6 @@
 React = require 'react'
 Radium = require 'radium'
-OverviewMarkdownComponent = require './overview-markdown-component'
+OverviewMarkupComponent = require './overview-markup-component'
 OverviewSidebarComponent = require './overview-sidebar-component'
 Route = require './route-component'
 Promise = require 'superagent'
@@ -30,14 +30,14 @@ class OverviewComponent extends React.Component
     @store.removeChangeListener(@_onChange.bind(@))
 
   render: ->
-    console.log @state.structure, @state.markdown
+    console.log @state.structure, @state.markup
     $ 'div', style: Array.prototype.concat.apply([], [styles.base, @props.style]),
       $ 'div', style: styles.sidebar,
         $ Route, {},
           $ OverviewSidebarComponent, structure: @state.structure
       $ 'div', style: styles.contents,
         $ Route, {},
-          $ OverviewMarkdownComponent, markdown: @state.markdown
+          $ OverviewMarkupComponent, markup: @state.markup
 
 styles =
 

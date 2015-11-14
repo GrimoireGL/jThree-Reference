@@ -7,6 +7,8 @@ config = require './stateInitializer/initializeStateConfig'
 clone = require 'lodash.clone'
 request = require 'request'
 Promise = require 'bluebird'
+marked = require 'marked'
+
 
 class Overviews
   ###*
@@ -80,6 +82,12 @@ class Overviews
       # console.log txt, len, lineNumber
     # console.log texts
     texts[title_id]
+
+  getOverviewHtml: (title_id) ->
+    markdown = @getMarkdownById title_id
+    marked.setOptions highlight: (code) ->
+      require('highlight.js').highlightAuto(code).value
+    html = marked markdown
 
   getMdDataByLineNumber: (titleLineNumber) -> # 次に見つかる大見出しまたはEOFを見つける
     startLine = titleLineNumber

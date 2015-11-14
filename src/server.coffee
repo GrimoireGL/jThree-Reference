@@ -40,7 +40,7 @@ server.get '/api/class/global/:file_id/:factor_id', (req, res) ->
 server.get '/overviewtexts/:title_id', (req, res) ->
   console.log req.originalUrl
   res.json
-    markdown: overviews.getMarkdownById(req.params.title_id)
+    markup: overviews.getOverviewHtml(req.params.title_id)
     structure: overviews.getTitleStructure()
 
 ###*

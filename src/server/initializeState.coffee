@@ -48,7 +48,7 @@ class InitializeState
         dir_tree: @dirTree.dir_tree
         doc_data: initial_doc_data
       OverviewStore:
-        markdown: @overviews.getMarkdownById(1) # readOverview() ここ
+        markup: @overviews.getOverviewHtml(1) # readOverview() ここ
         structure: @overviews.getTitleStructure()
 
 
