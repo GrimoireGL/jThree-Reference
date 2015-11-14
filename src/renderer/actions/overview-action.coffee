@@ -23,5 +23,7 @@ class OverviewAction extends Flux.Action
           resolve res.body
     .then (res) =>
       @dispatch(keys.updateOverview, res)
+    .catch (err) ->
+      console.error err
 
 module.exports = OverviewAction

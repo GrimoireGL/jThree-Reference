@@ -18,11 +18,12 @@ class OverviewStore extends Flux.Store
     @register keys.updateOverview, @updateOverview
 
   ###*
-   * update overview's markdown
-   * @param  {String} markdown
+   * update overview's markdown,structure
+   * @param data.markdown {string}
   ###
   updateOverview: (data) ->
-    @setState data
+    @setState objectAssign(@state, data)
+    console.log @state
 
   ###*
    * getter for component

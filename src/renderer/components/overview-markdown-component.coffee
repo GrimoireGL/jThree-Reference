@@ -10,12 +10,8 @@ class OverviewMarkdownComponent extends React.Component
     super props
 
   componentWillMount: ->
-    titleId = @props.argu.route_arr
-    console.log titleId
-    @context.ctx.overviewAction.updateOverview(1)
     @setState
-      markdown: @context.ctx.overviewStore.get().markdown
-    console.log @state
+      markdown: @props.markdown
 
   render: ->
     markdown = @state.markdown

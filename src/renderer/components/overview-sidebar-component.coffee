@@ -13,10 +13,8 @@ class OverviewSidebarComponent extends React.Component
     super props
 
   componentWillMount: ->
-    @context.ctx.overviewAction.updateOverview(1)
     @setState
-      # markdown: @context.ctx.overviewStore.get().markdown
-      structure: @context.ctx.overviewStore.get().structure
+      structure: @props.structure
 
   render: ->
     structure = @state.structure

@@ -41,7 +41,7 @@ server.get '/overviewtexts/:title_id', (req, res) ->
   console.log req.originalUrl
   res.json
     markdown: overviews.getMarkdownById(req.params.title_id)
-    structure: overviews.getTitleStructure
+    structure: overviews.getTitleStructure()
 
 ###*
  * All page view request routing is processed here

@@ -45,6 +45,12 @@ class Overviews
     # console.log structData
     structData
 
+  getTitleCount: ->
+    @getTitleStructure()
+      .filter (o) ->
+        o.level == 1
+      .length
+
   _getTitleData = (line, lineNumber) -> # 行数は0から数えるものとする
     titleRegex = /^\s*#+\s*(.+)/g
     levelRegex = /^\s*(#+)\s*/g
