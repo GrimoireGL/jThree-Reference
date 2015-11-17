@@ -43,7 +43,7 @@ class InitializeState
           if file_id? && factor_id?
             initial_doc_data = @docs.getDocDataById file_id, factor_id
         when "overview"
-          title_id = argu.route_arr[1].toString()
+          title_id = argu.route_arr[1] || 0
           initial_overview_markup = @overviews.getOverviewHtml(title_id)
 
 
