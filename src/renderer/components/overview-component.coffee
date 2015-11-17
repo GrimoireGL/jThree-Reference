@@ -11,10 +11,11 @@ class OverviewComponent extends React.Component
 
   constructor: (props) ->
     super props
-    console.log @props.argu.route_arr
 
   _onChange: ->
     @setState @store.get()
+    titleId = Number(@props.argu.route_arr[1]) || 0
+    @context.ctx.overviewAction.updateOverview(titleId)
 
   componentWillMount: ->
     titleId = Number(@props.argu.route_arr[1]) || 0
@@ -25,6 +26,10 @@ class OverviewComponent extends React.Component
 
   componentDidMount: ->
     @store.onChange @_onChange.bind(@)
+
+  shouldComponentUpdate: (nextProps, nextState) ->
+    @props.argu.route == nextProps.argu.route
+    # @state.markup != nextState.markup
 
   componentWillUnmount: ->
     @store.removeChangeListener(@_onChange.bind(@))
