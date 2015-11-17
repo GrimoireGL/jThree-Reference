@@ -33,12 +33,20 @@ class InitializeState
   ###
   initialize: (req) ->
     initial_doc_data = {}
-
+    initial_overview_markup = ""
     @router.route req.originalUrl, (route, argu) =>
-      file_id = argu.route_arr[2]?.toString()
-      factor_id = argu.route_arr[3]?.toString()
-      if file_id? && factor_id?
-        initial_doc_data = @docs.getDocDataById file_id, factor_id
+      # console.log argu.route_arr
+      switch argu.route_arr[0]
+        when "class"
+          file_id = argu.route_arr[2]?.toString()
+          factor_id = argu.route_arr[3]?.toString()
+          if file_id? && factor_id?
+            initial_doc_data = @docs.getDocDataById file_id, factor_id
+        when "overview"
+          title_id = argu.route_arr[1].toString()
+          initial_overview_markup = @overviews.getOverviewHtml(title_id)
+
+
     initialState =
       RouteStore:
         fragment: req.originalUrl
@@ -48,7 +56,7 @@ class InitializeState
         dir_tree: @dirTree.dir_tree
         doc_data: initial_doc_data
       OverviewStore:
-        markup: @overviews.getOverviewHtml(1) # readOverview() ここ
+        markup: initial_overview_markup
         structure: @overviews.getTitleStructure()
 
 

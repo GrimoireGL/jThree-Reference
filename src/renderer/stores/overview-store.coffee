@@ -23,7 +23,6 @@ class OverviewStore extends Flux.Store
   ###
   updateOverview: (data) ->
     @setState objectAssign(@state, data)
-    console.log @state
 
   ###*
    * getter for component

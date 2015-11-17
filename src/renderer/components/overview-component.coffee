@@ -14,28 +14,32 @@ class OverviewComponent extends React.Component
 
   _onChange: ->
     @setState @store.get()
-    titleId = Number(@props.argu.route_arr[1]) || 0
-    @context.ctx.overviewAction.updateOverview(titleId)
 
   componentWillMount: ->
-    titleId = Number(@props.argu.route_arr[1]) || 0
+    @titleId = Number(@props.argu.route_arr[1]) || 0
     # @context.ctx.overviewAction.updateOverview(titleId)
     @store = @context.ctx.overviewStore
     @setState @store.get()
-    @context.ctx.overviewAction.updateOverview(titleId)
+    @context.ctx.overviewAction.updateOverview(@titleId)
+
+  componentWillReceiveProps: (nextProps) ->
+    nextTitleId = Number(nextProps.argu.route_arr[1]) || 0
+    if @titleId != nextTitleId
+      @titleId = nextTitleId
+      @context.ctx.overviewAction.updateOverview(@titleId)
+
 
   componentDidMount: ->
     @store.onChange @_onChange.bind(@)
 
-  shouldComponentUpdate: (nextProps, nextState) ->
-    @props.argu.route == nextProps.argu.route
-    # @state.markup != nextState.markup
+  # shouldComponentUpdate: (nextProps, nextState) ->
+  #   @props.argu.route != nextProps.argu.route
+  #   # @state.markup != nextState.markup
 
   componentWillUnmount: ->
     @store.removeChangeListener(@_onChange.bind(@))
 
   render: ->
-    console.log @state.structure, @state.markup
     $ 'div', style: Array.prototype.concat.apply([], [styles.base, @props.style]),
       $ 'div', style: styles.sidebar,
         $ Route, {},

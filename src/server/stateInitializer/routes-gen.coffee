@@ -68,7 +68,6 @@ class RoutesGen
   constructOverviewRoutes = (titles) ->
     routes =
       'overview': 'overview'
-    console.log titles
     titles.forEach (title, i) ->
       routes["overview/#{title}"] = "overview:#{i}"
     return routes
