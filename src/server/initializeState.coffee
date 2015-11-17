@@ -22,7 +22,7 @@ class InitializeState
    * resetup state initializer
   ###
   gen: ->
-    @routeGen.gen @docs.json, @overviews.getTitleCount()
+    @routeGen.gen @docs.json, @overviews.getUrls()
     @dirTree.gen @docs.json
     @router.setRoute @routeGen.routes
 

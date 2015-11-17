@@ -37,7 +37,7 @@ server.get '/api/class/global/:file_id/:factor_id', (req, res) ->
   console.log req.originalUrl
   res.json docs.getDocDataById req.params.file_id, req.params.factor_id
 
-server.get '/overviewtexts/:title_id', (req, res) ->
+server.get '/api/overview/:title_id', (req, res) ->
   console.log req.originalUrl
   res.json
     markup: overviews.getOverviewHtml(req.params.title_id)

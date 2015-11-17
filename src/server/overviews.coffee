@@ -47,11 +47,18 @@ class Overviews
     # console.log structData
     structData
 
-  getTitleCount: ->
+  getTitles: ->
     @getTitleStructure()
-      .filter (o) ->
-        o.level == 1
-      .length
+      .filter (o) -> o.level == 1
+      .map    (o) -> o.title
+
+  getUrls: ->
+    @getTitles()
+      .map (title) ->
+        title
+          .replace /^\s+/, ""
+          .replace /\s+$/, ""
+          .replace /\s/, "-"
 
   _getTitleData = (line, lineNumber) -> # 行数は0から数えるものとする
     titleRegex = /^\s*#+\s*(.+)/g

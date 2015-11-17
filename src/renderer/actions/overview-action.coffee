@@ -18,7 +18,7 @@ class OverviewAction extends Flux.Action
   updateOverview: (title_id) ->
     new Promise (resolve, reject) =>
       request
-        .get "http://localhost:5000/overviewtexts/#{title_id}"
+        .get "http://localhost:5000/api/overview/#{title_id}"
         .end (err, res) ->
           resolve res.body
     .then (res) =>
