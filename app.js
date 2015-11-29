@@ -6287,7 +6287,7 @@ DocCoverage = (function() {
     var coverage;
     coverage = [];
     children.forEach(function(child, i) {
-      var all, child_cov, children_cov, children_covs, covered, j, len, t, target;
+      var all, child_cov, children_cov, children_covs, covered, j, len, ref, t, target;
       children_covs = {};
       target = ['children', 'signatures', 'parameters', 'typeParameter'];
       target.forEach(function(t) {
@@ -6297,11 +6297,11 @@ DocCoverage = (function() {
       });
       all = 0;
       covered = 0;
-      if (child.comment) {
+      if ((children_covs.signatures == null) && child.kindString !== 'External module') {
         all += 1;
-        if (child.comment.shortText) {
-          covered += 1;
-        }
+      }
+      if (child != null ? (ref = child.comment) != null ? ref.shortText : void 0 : void 0) {
+        covered += 1;
       }
       coverage[i] = {
         name: child.name
