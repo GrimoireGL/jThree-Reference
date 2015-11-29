@@ -13,7 +13,7 @@ class IndexComponent extends React.Component
         <div style={styles.logo_wrapper}>
           <div style={styles.logo}>
             <div style={styles.logo_icon}>
-              <span className='icon-cube'></span>
+              <object style={styles.logo_svg} data='/static/img/jthree-logo.svg' type='image/svg+xml'></object>
             </div>
             <div style={styles.logo_text}>
               <span style={styles.logo_jthree}>jThree</span><span style={styles.logo_v3}>v3</span>
@@ -105,10 +105,13 @@ styles =
 
   logo_icon:
     textAlign: 'center'
-    fontSize: 180
     height: 210
-    color: colors.main.r.emphasis
-    textShadow: '0 0 2px rgba(0, 0, 0, 0.5)'
+
+  logo_svg:
+    width: 200
+    opacity: 0.8
+    WebkitFilter: 'drop-shadow(0 0 2px rgba(0, 0, 0, 0.5))'
+    filter: 'drop-shadow(0 0 2px rgba(0, 0, 0, 0.5))'
 
   logo_text:
     textAlign: 'center'
@@ -125,7 +128,6 @@ styles =
     paddingRight: 100
     paddingLeft: 100
     display: 'flex'
-    display: '-webkit-flex'
     flexDirection: 'row'
     WebkitFlexDirection: 'row'
     flexWrap: 'nowrap'
