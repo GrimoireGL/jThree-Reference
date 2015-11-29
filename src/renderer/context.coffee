@@ -3,10 +3,12 @@ RouteAction = require './actions/route-action'
 RouteStore = require './stores/route-store'
 DocAction = require './actions/doc-action'
 DocStore = require './stores/doc-store'
+DocCoverageAction = require './actions/doc-coverage-action'
+DocCoverageStore = require './stores/doc-coverage-store'
 OverviewAction = require './actions/overview-action'
+OverviewStore = require './stores/overview-store'
 ToggleVisibilityStore = require './stores/toggle-visibility-store'
 ToggleVisibilityAction = require './actions/toggle-visibility-action'
-OverviewStore = require './stores/overview-store'
 
 
 class Context extends Flux.Context
@@ -24,6 +26,8 @@ class Context extends Flux.Context
     @docStore = new DocStore(@)
     @toggleVisibilityStore = new ToggleVisibilityStore(@)
     @toggleVisibilityAction = new ToggleVisibilityAction(@)
+    @docCoverageStore = new DocCoverageStore(@)
+    @docCoverageAction = new DocCoverageAction(@)
     @overviewStore = new OverviewStore(@)
     @overviewAction = new OverviewAction(@)
 

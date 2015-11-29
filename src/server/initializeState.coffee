@@ -1,6 +1,7 @@
 RoutesGen = require './stateInitializer/routes-gen'
 config = require './stateInitializer/initializeStateConfig'
 DirTree = require './stateInitializer/dir-tree'
+DocCoverage = require './stateInitializer/doc-coverage'
 Docs = require './docs'
 Router = require '../renderer/lib/router'
 readOverview = require './stateInitializer/read-overview'
@@ -15,6 +16,7 @@ class InitializeState
     @docs = docs
     @routeGen = new RoutesGen()
     @dirTree = new DirTree()
+    @doc_coverage = new DocCoverage()
     @router = new Router(config.router.root, @routeGen.routes)
     @overviews = new Overviews()
 
@@ -24,6 +26,7 @@ class InitializeState
   gen: ->
     @routeGen.gen @docs.json, @overviews.getTitleCount()
     @dirTree.gen @docs.json
+    @doc_coverage.gen @docs.json
     @router.setRoute @routeGen.routes
 
   ###*
@@ -50,6 +53,8 @@ class InitializeState
       OverviewStore:
         markdown: @overviews.getMarkdownById(1) # readOverview() ここ
         structure: @overviews.getTitleStructure()
+      DocCoverageStore:
+        coverage: @doc_coverage.coverage
 
 
     return initialState
