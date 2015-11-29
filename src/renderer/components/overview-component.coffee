@@ -42,7 +42,6 @@ class OverviewComponent extends React.Component
 styles =
 
   base:
-    display: '-webkit-flex'
     display: 'flex'
     WebkitFlexDirection: 'row'
     flexDirection: 'row'
@@ -69,7 +68,6 @@ styles =
     flexGrow: '1'
     WebkitFlexGrow: '1'
     display: 'flex'
-    display: '-webkit-flex'
     flexDirection: 'column'
     WebkitFlexDirection: 'column'
     flexWrap: 'nowrap'

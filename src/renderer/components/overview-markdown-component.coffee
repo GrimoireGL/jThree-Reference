@@ -27,7 +27,6 @@ styles =
 #     flexGrow: '1'
 #     WebkitFlexGrow: '1'
 #     display: 'flex'
-#     display: '-webkit-flex'
 #     flexDirection: 'column'
 #     WebkitFlexDirection: 'column'
 #     flexWrap: 'nowrap'

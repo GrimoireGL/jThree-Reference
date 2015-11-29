@@ -50,7 +50,6 @@ class ClassDocComponent extends React.Component
 styles =
   base:
     display: 'flex'
-    display: '-webkit-flex'
     flexDirection: 'row'
     WebkitFlexDirection: 'row'
     flexWrap: 'nowrap'
@@ -77,7 +76,6 @@ styles =
     flexGrow: '1'
     WebkitFlexGrow: '1'
     display: 'flex'
-    display: '-webkit-flex'
     flexDirection: 'column'
     WebkitFlexDirection: 'column'
     flexWrap: 'nowrap'
@@ -87,7 +85,6 @@ styles =
 
   doc_wrapper:
     display: 'flex'
-    display: '-webkit-flex'
     flexDirection: 'row'
     WebkitFlexDirection: 'row'
     flexWrap: 'nowrap'
