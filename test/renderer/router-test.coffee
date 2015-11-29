@@ -101,6 +101,16 @@ describe 'Client/Router', ->
         'hello/heaven' : 'special'
       expect(result).to.deep.equal(correct)
 
+    it '@route should be object when path and route are given (multiple, once)', ->
+      router.addRoute
+        'hello/world' : 'index'
+        'hello/heaven' : 'special'
+      result = router.routes
+      correct =
+        'hello/world' : 'index'
+        'hello/heaven' : 'special'
+      expect(result).to.deep.equal(correct)
+
     it '@route should be object when object is given', ->
       router.addRoute
         'hello/world' : 'index'

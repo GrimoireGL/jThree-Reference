@@ -8,6 +8,7 @@ Context = require './renderer/context'
 Root = require './renderer/components/root-component'
 InitializeState = require './server/initializeState'
 Docs = require './server/docs'
+Overviews = require './server/overviews'
 
 console.log "environment: #{process.env.NODE_ENV}"
 
@@ -19,6 +20,8 @@ server.use favicon("#{fs.realpathSync('./')}/public/assets/favicon/favicon.ico")
 template = Handlebars.compile fs.readFileSync("#{fs.realpathSync('./')}/view/index.hbs").toString()
 
 docs = new Docs()
+overviews = new Overviews()
+
 initializeState = new InitializeState(docs)
 docs.getJsonScheduler 3 * 60 * 60, ->
   initializeState.gen()
@@ -34,6 +37,11 @@ server.get '/api/class/global/:file_id/:factor_id', (req, res) ->
   console.log req.originalUrl
   res.json docs.getDocDataById req.params.file_id, req.params.factor_id
 
+server.get '/overviewtexts/:title_id', (req, res) ->
+  console.log req.originalUrl
+  res.json
+    markdown: overviews.getMarkdownById(req.params.title_id)
+    structure: overviews.getTitleStructure()
 
 ###*
  * All page view request routing is processed here

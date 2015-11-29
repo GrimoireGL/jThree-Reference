@@ -3,6 +3,7 @@ Radium = require 'radium'
 Link = require './link-component'
 DocTitleComponent = require './doc-title-component'
 DocFlagtagsComponent = require './doc-flagtags-component'
+DocToggleVisibilityComponent = require './doc-toggle-visibility-component'
 colors = require './colors/color-definition'
 
 ###
@@ -42,6 +43,7 @@ class DocFactorTitleComponent extends React.Component
           marginTop: 10
           marginLeft: 0
 
+
     <DocTitleComponent title={@props.current.name} kindString={@props.current.kindString} dstyle={dstyle} style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       {
         unless @props.collapsed
@@ -54,12 +56,27 @@ class DocFactorTitleComponent extends React.Component
       }
       {
         unless @props.collapsed
-          <DocFlagtagsComponent flags={@props.current.flags} style={styles.tags} />
+          <DocFlagtagsComponent flags={@props.current.flags} style={styles.tags}/>
+      }
+      {
+        unless @props.collapsed
+          <div style={styles.floatWrapper}>
+            <div style={styles.right}>
+              <DocToggleVisibilityComponent displayName="Private" buttonKey="privateVisibility"/>
+              <DocToggleVisibilityComponent displayName="Protected" buttonKey="protectedVisibility"/>
+            </div>
+          </div>
       }
     </DocTitleComponent>
 
 styles =
   base: {}
+
+  floatWrapper:
+    overflow: 'hidden'
+
+  right:
+    float: 'right'
 
   from:
     marginBottom: 4

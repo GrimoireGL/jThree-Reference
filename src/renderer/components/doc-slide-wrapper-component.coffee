@@ -110,7 +110,6 @@ slide =
 styles =
   base:
     display: 'flex'
-    display: '-webkit-flex'
     flexDirection: 'row'
     WebkitFlexDirection: 'row'
     flexWrap: 'nowrap'

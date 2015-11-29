@@ -5,3 +5,5 @@
 module.exports =
   route: 'route'
   updateDoc: 'updateDoc'
+  updateOverview: 'updateOverview'
+  toggleVisibility: 'toggleVisibility'

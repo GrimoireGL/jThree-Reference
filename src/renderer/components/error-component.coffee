@@ -1,6 +1,7 @@
 React = require 'react'
 
 class ErrorComponent extends React.Component
+  
   constructor: (props) ->
     super props
 

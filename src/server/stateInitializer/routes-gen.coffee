@@ -15,18 +15,19 @@ class RoutesGen
    * @param  {Object} json typedoc json
    * @return {Object}      routes
   ###
-  gen: (json) ->
-    @_constructRoutes json
+  gen: (classJson, overviewCount) ->
+    @_constructRoutes classJson, overviewCount
 
   ###*
    * construct routes
    * @param  {Object} json typedoc json
    * @return {Object}      merged fragment of routes
   ###
-  _constructRoutes: (json) ->
+  _constructRoutes: (classJson, overviewCount) ->
     @routes = {}
-    @routes = objectAssign {}, @routes, constructClassRoutes(json)
+    @routes = objectAssign {}, @routes, constructClassRoutes(classJson)
     @routes = objectAssign {}, @routes, constructIndexRoutes()
+    @routes = objectAssign {}, @routes, constructOverviewRoutes(overviewCount)
     @routes = objectAssign {}, @routes, constructErrorRoutes()
 
   ###*
@@ -58,6 +59,17 @@ class RoutesGen
   constructIndexRoutes = ->
     routes =
       '' : 'index'
+    return routes
+
+  ###*
+   * construct overview route
+   * @return {Object} fragment of routes
+  ###
+  constructOverviewRoutes = (count) ->
+    routes =
+      'overview': 'overview'
+    [0..count].forEach (v) ->
+      routes["overview/#{v}"] = "overview:#{v}"
     return routes
 
   ###*

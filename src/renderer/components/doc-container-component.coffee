@@ -9,8 +9,9 @@ DocFactorHierarchyComponent = require './doc-factor-hierarchy-component'
 DocFactorImplementsComponent = require './doc-factor-implements-component'
 DocTypeparameterComponent = require './doc-typeparameter-component'
 DocSearchContainerComponent = require './doc-search-container-component'
+DocCoverageComponent = require './doc-coverage-component'
 
-class DocContainerComponents extends React.Component
+class DocContainerComponent extends React.Component
   constructor: (props) ->
     super props
     @loadingQueue = []
@@ -74,14 +75,19 @@ class DocContainerComponents extends React.Component
               # TODO: show activity indicator while loading docs
             <span>Loading...</span>
         else
-          <DocSearchContainerComponent />
+          <div>
+            <DocSearchContainerComponent />
+            <DocCoverageComponent />
+          </div>
       }
     </div>
 
 styles =
   base: {}
 
-DocContainerComponents.contextTypes =
+
+
+DocContainerComponent.contextTypes =
   ctx: React.PropTypes.any
 
-module.exports = Radium DocContainerComponents
+module.exports = Radium DocContainerComponent

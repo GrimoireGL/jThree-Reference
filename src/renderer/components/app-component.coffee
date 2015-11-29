@@ -5,6 +5,7 @@ Link = require './link-component'
 IndexComponent = require './index-component'
 ErrorComponent = require './error-component'
 ClassDocComponent = require './classdoc-component'
+OverviewComponent = require './overview-component'
 HeaderComponent = require './header-component'
 
 class AppComponent extends React.Component
@@ -18,7 +19,7 @@ class AppComponent extends React.Component
   updateMainHeight: ->
     # console.log 'main height'
     minMainHeight = 1000
-    mainHeight = if document.documentElement.clientHeight - 80 >= minMainHeight then document.documentElement.clientHeight - 80 else minMainHeight
+    mainHeight = Math.max document.documentElement.clientHeight - 80, minMainHeight
     @setState
       mainHeight: mainHeight
 
@@ -45,6 +46,7 @@ class AppComponent extends React.Component
         <IndexComponent route='index' />
         <ClassDocComponent route='class' style={[styles.main, dstyle.main]} />
         <ErrorComponent route='error' style={[styles.main, dstyle.main]} />
+        <OverviewComponent route='overview' style={[styles.main, dstyle.main]} />
       </Route>
     </div>
 
