@@ -45,10 +45,9 @@ class DocCoverage
           children_covs[t] = calcurateCoverageChildren child[t]
       all = 0
       covered = 0
-      if child.comment
-        all += 1
-        if child.comment.shortText
-          covered += 1
+      all += 1 if !children_covs.signatures? && child.kindString != 'External module'
+      if child?.comment?.shortText
+        covered += 1
       coverage[i] =
         name: child.name
       for t, children_cov of children_covs
