@@ -21,14 +21,20 @@ describe 'Server/Docs', ->
         id: 2
         name: 'class1'
         kindString: 'Class'
+        comment:
+          shortText: "sample comment"
         children:　[
             id: 3
             name: 'method1'
             kindString: 'Method'
+            comment:
+              shortText: "sample comment"
           ,
             id: 4
             name: 'prop1'
             kindString: 'Property'
+            comment:
+              shortText: "sample comment"
         ]
         groups: [
             title: 'Methods'
@@ -47,14 +53,20 @@ describe 'Server/Docs', ->
         id: 2
         name: 'class1'
         kindString: 'Class'
+        comment:
+          shortText: "sample comment"
         children:　[
             id: 3
             name: 'method1'
             kindString: 'Method'
+            comment:
+              shortText: "sample comment"
           ,
             id: 4
             name: 'prop1'
             kindString: 'Property'
+            comment:
+              shortText: "sample comment"
         ]
         groups: [
             title: 'Methods'
@@ -127,14 +139,20 @@ describe 'Server/Docs', ->
             id: 2
             name: 'class1'
             kindString: 'Class'
+            comment:
+              shortText: "sample comment"
             children:　[
                 id: 3
                 name: 'method1'
                 kindString: 'Method'
+                comment:
+                  shortText: "sample comment"
               ,
                 id: 4
                 name: 'prop1'
                 kindString: 'Property'
+                comment:
+                  shortText: "sample comment"
             ]
             groups: [
                 title: 'Methods'
@@ -159,14 +177,20 @@ describe 'Server/Docs', ->
             id: 2
             name: 'class1'
             kindString: 'Class'
+            comment:
+              shortText: "sample comment"
             children:　[
                 id: 3
                 name: 'method1'
                 kindString: 'Method'
+                comment:
+                  shortText: "sample comment"
               ,
                 id: 4
                 name: 'prop1'
                 kindString: 'Property'
+                comment:
+                  shortText: "sample comment"
             ]
             groups: [
                 title: 'Methods'
