@@ -9,16 +9,6 @@ class OverviewMarkupComponent extends React.Component
   constructor: (props) ->
     super props
 
-  componentWillMount: ->
-    @setState
-      markup: @props.markup
-
-  md2html: (markup) ->
-    markup = @state.markup
-    marked.setOptions highlight: (code) ->
-      require('highlight.js').highlightAuto(code).value
-    html = marked markup
-
   shouldComponentUpdate: (nextProps, nextState) ->
     nextProps.markup != @props.marked
 
@@ -26,7 +16,6 @@ class OverviewMarkupComponent extends React.Component
     @props.markup
 
   render: ->
-
     $ 'div', className: 'markdown-component', style: @props.style,
       $ 'div', style: styles.container, dangerouslySetInnerHTML: __html: @props.markup
 

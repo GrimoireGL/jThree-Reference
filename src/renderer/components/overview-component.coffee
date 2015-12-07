@@ -32,10 +32,6 @@ class OverviewComponent extends React.Component
   componentDidMount: ->
     @store.onChange @_onChange.bind(@)
 
-  # shouldComponentUpdate: (nextProps, nextState) ->
-  #   @props.argu.route != nextProps.argu.route
-  #   # @state.markup != nextState.markup
-
   componentWillUnmount: ->
     @store.removeChangeListener(@_onChange.bind(@))
 
