@@ -17,8 +17,12 @@ class OverviewSidebarTitleComponent extends React.Component
 
   render: ->
     $ 'div', style: [].concat([], styles.base, @props.style),
-      $ Link, style: styles["title"+@props.level], href: "/overview/#{@titleToUrl(@props.children)}",
-        @props.children
+      if @props.level == 1
+        $ Link, style: styles["title1"], href: "/overview/#{@titleToUrl(@props.children)}",
+          @props.children
+      else
+        $ Link, style: styles["title#{@props.level}"], href: "/overview/#{@titleToUrl(@props.root)}##{@props.children}",
+          @props.children
 
 styles =
   title1: # title

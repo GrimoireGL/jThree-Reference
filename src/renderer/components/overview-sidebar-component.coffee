@@ -20,8 +20,11 @@ class OverviewSidebarComponent extends React.Component
     structure = @state.structure
     $ 'div', style: [].concat.apply([], [styles.sidebar, @props.style]),
       $ OverviewSidebarItemComponent, {},
+        rootTitle = ""
         structure.map (data) ->
-          $ OverviewSidebarTitleComponent, level: data.level,
+          if data.level == 1
+            rootTitle = data.title
+          $ OverviewSidebarTitleComponent, level: data.level, root: rootTitle,
             data.title
 
 styles =
