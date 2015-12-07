@@ -5,8 +5,6 @@ OverviewSidebarComponent = require './overview-sidebar-component'
 Route = require './route-component'
 Promise = require 'superagent'
 
-$ = React.createElement
-
 class OverviewComponent extends React.Component
 
   constructor: (props) ->
@@ -36,13 +34,18 @@ class OverviewComponent extends React.Component
     @store.removeChangeListener(@_onChange.bind(@))
 
   render: ->
-    $ 'div', style: Array.prototype.concat.apply([], [styles.base, @props.style]),
-      $ 'div', style: styles.sidebar,
-        $ Route, {},
-          $ OverviewSidebarComponent, structure: @state.structure
-      $ 'div', style: styles.contents,
-        $ Route, {},
-          $ OverviewMarkupComponent, markup: @state.markup
+    <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
+      <div style={styles.sidebar}>
+        <Route>
+          <OverviewSidebarComponent structure={@state.structure} />
+        </Route>
+      </div>
+      <div style={styles.contents}>
+        <Route>
+          <OverviewMarkupComponent markup={@state.markup} />
+        </Route>
+      </div>
+    </div>
 
 styles =
 

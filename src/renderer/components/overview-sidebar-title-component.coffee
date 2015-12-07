@@ -2,8 +2,6 @@ React = require 'react'
 Radium = require 'radium'
 Link = require './link-component'
 
-$ = React.createElement
-
 class OverviewSidebarTitleComponent extends React.Component
 
   constructor: (props) ->
@@ -16,13 +14,18 @@ class OverviewSidebarTitleComponent extends React.Component
       .replace /\s/, "-"
 
   render: ->
-    $ 'div', style: [].concat([], styles.base, @props.style),
-      if @props.level == 1
-        $ Link, style: styles["title1"], href: "/overview/#{@titleToUrl(@props.children)}",
-          @props.children
-      else
-        $ Link, style: styles["title#{@props.level}"], href: "/overview/#{@titleToUrl(@props.root)}##{@titleToUrl(@props.children)}",
-          @props.children
+    <div style={[].concat([], styles.base, @props.style)}>
+      {
+        if @props.level == 1
+          <Link style={styles["title1"]} href={"/overview/#{@titleToUrl(@props.children)}"}>
+            {@props.children}
+          </Link>
+        else
+          <Link style={styles["title#{@props.level}"]} href={"/overview/#{@titleToUrl(@props.root)}##{@titleToUrl(@props.children)}"}>
+            {@props.children}
+          </Link>
+      }
+    </div>
 
 styles =
   title1: # title

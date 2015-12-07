@@ -1,16 +1,17 @@
 React = require 'react'
 Radium = require 'radium'
 
-$ = React.createElement
-
 class OverviewSidebarItemComponent extends React.Component
 
   constructor: (props) ->
     super props
 
   render: ->
-    $ 'div', style: styles['level' + @props.level],
-      @props.children
+    <div style={styles['level' + @props.level]}>
+      {
+        @props.children
+      }
+    </div>
 
 styles =
 
