@@ -14,27 +14,46 @@ class OverviewSidebarTitleComponent extends React.Component
       .replace /\s/, "-"
 
   render: ->
-    <div style={[].concat([], styles.base, @props.style)}>
+    <div style={[].concat([], styles.titleBox[@props.level-1], @props.style)}>
       {
         if @props.level == 1
-          <Link style={styles["title1"]} href={"/overview/#{@titleToUrl(@props.children)}"}>
+          <Link style={styles.titleText[1]} href={"/overview/#{@titleToUrl(@props.children)}"}>
             {@props.children}
           </Link>
         else
-          <Link style={styles["title#{@props.level}"]} href={"/overview/#{@titleToUrl(@props.root)}##{@titleToUrl(@props.children)}"}>
+          <Link style={styles.titleText[@props.level-1]} href={"/overview/#{@titleToUrl(@props.root)}##{@titleToUrl(@props.children)}"}>
             {@props.children}
           </Link>
       }
     </div>
 
 styles =
-  title1: # title
-    fontSize: 24
-  title2: # subtite
-    fontSize: 20
-  title3: # subsubtitle
-    fontSize: 16
-
+  titleText: [
+    {
+      fontSize: 24
+    },
+    {
+      fontSize: 20
+    },
+    {
+      fontSize: 16
+    }
+  ]
+  titleBox: [
+    {
+      # borderTop: "1px solid #999"
+      # borderBottom: "1px solid #999"
+      marginTop: 20
+      background: "#f2f2f2"
+      padding: "10px 15px"
+    },
+    {
+      paddingLeft: "22px"
+    },
+    {
+      paddingLeft: "30px"
+    }
+  ]
 
 OverviewSidebarTitleComponent.contextTypes =
   ctx: React.PropTypes.any
