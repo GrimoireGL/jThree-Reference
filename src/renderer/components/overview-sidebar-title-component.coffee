@@ -21,9 +21,9 @@ class OverviewSidebarTitleComponent extends React.Component
             {@props.children}
           </Link>
         else
-          <Link style={styles.titleText[@props.level-1]} href={"/overview/#{@titleToUrl(@props.root)}##{@titleToUrl(@props.children)}"}>
+          <a style={styles.titleText[@props.level-1]} href={"/overview/#{@titleToUrl(@props.root)}##{@titleToUrl(@props.children)}"}>
             {@props.children}
-          </Link>
+          </a>
       }
     </div>
 
