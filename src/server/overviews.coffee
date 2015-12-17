@@ -56,9 +56,10 @@ class Overviews
     @getTitles()
       .map (title) ->
         title
-          .replace /^\s+/, ""
-          .replace /\s+$/, ""
-          .replace /\s/, "-"
+          .replace /^\s+/g, ""
+          .replace /\s+$/g, ""
+          .replace /\s/g, "-"
+          .toLowerCase()
 
   _getTitleData = (line, lineNumber) -> # 行数は0から数えるものとする
     titleRegex = /^\s*#+\s*(.+)/g

@@ -4,7 +4,8 @@
   letter-spacing: 0.08em;
 }
 .markdown-component h1 {
-  margin: 50px 0 25px 0;
+  margin-bottom: 25px;
+  padding-top: 110px !important;
 }
 .markdown-component h2 {
   border-bottom: 4px solid #ddd;
@@ -23,9 +24,8 @@
 .markdown-component h4,
 .markdown-component h5,
 .markdown-component h6 {
-  padding-top: 90px;
-  margin-top: -90px; /* アンカーのため */
-
+  padding-top: 95px;
+  margin-top: -95px; /* アンカーのため */
 }
 .markdown-component p {
 }

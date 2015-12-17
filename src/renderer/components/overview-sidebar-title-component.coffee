@@ -9,21 +9,24 @@ class OverviewSidebarTitleComponent extends React.Component
 
   titleToUrl: (title) ->
     title
-      .replace /^\s+/, ""
-      .replace /\s+$/, ""
-      .replace /\s/, "-"
+      .replace /^\s+/g, ""
+      .replace /\s+$/g, ""
+      .replace /\s/g, "-"
+      .toLowerCase()
 
   render: ->
     <div style={[].concat([], styles.titleBox[@props.level-1], @props.style)}>
       {
+        url = "/overview/#{@titleToUrl(@props.root)}"
         if @props.level == 1
-          <Link style={styles.titleText[1]} href={"/overview/#{@titleToUrl(@props.children)}"}>
-            {@props.children}
-          </Link>
+          # if @props.argu.fragment.match "#"
+          #   url += "#"
         else
-          <a style={styles.titleText[@props.level-1]} href={"/overview/#{@titleToUrl(@props.root)}##{@titleToUrl(@props.children)}"}>
-            {@props.children}
-          </a>
+          url += "#" + @titleToUrl(@props.children)
+        <a style={styles.titleText[@props.level-1]} href={url}>
+          {@props.children}
+        </a>
+
       }
     </div>
 

@@ -2,6 +2,7 @@ React = require 'react'
 Radium = require 'radium'
 OverviewSidebarItemComponent = require './overview-sidebar-item-component'
 OverviewSidebarTitleComponent = require './overview-sidebar-title-component'
+Route = require './route-component'
 
 class OverviewSidebarComponent extends React.Component
 
@@ -21,9 +22,11 @@ class OverviewSidebarComponent extends React.Component
           structure.map (data) ->
             if data.level == 1
               rootTitle = data.title
-            <OverviewSidebarTitleComponent level={data.level} root={rootTitle}>
-              {data.title}
-            </OverviewSidebarTitleComponent>
+            <Route>
+              <OverviewSidebarTitleComponent level={data.level} root={rootTitle}>
+                {data.title}
+              </OverviewSidebarTitleComponent>
+            </Route>
         }
       </OverviewSidebarItemComponent>
     </div>
