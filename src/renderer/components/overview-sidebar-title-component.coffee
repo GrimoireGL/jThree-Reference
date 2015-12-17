@@ -33,13 +33,19 @@ class OverviewSidebarTitleComponent extends React.Component
 styles =
   titleText: [
     {
+      textDecoration: "none"
+      color: "#000"
       fontSize: 24
     },
     {
-      fontSize: 20
+      textDecoration: "none"
+      color: "#000"
+      fontSize: 18
     },
     {
-      fontSize: 16
+      textDecoration: "none"
+      color: "#000"
+      fontSize: 14
     }
   ]
   titleBox: [
