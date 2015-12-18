@@ -34,11 +34,20 @@ class DocFactorTableComponent extends React.Component
     <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       {
         table = []
+        children = []
         for id, i in @props.group.children
           child = null
           for c in @props.current.children
             if c.id == id
-              child = c
+              children.push c
+        children.sort (a, b) ->
+          if a.inheritedFrom && b.inheritedFrom
+            return 0
+          else if a.inheritedFrom && !b.inheritedFrom
+            return 1;
+          else if !a.inheritedFrom && b.inheritedFrom
+            return -1;
+        for child, i in children
           if child?
             if child.flags.isPrivate && !@state.visibility.privateVisibility
               continue
