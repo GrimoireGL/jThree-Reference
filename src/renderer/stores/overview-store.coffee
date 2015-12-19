@@ -5,25 +5,24 @@ objectAssign = require 'object-assign'
 class OverviewStore extends Flux.Store
   ###*
    * flux store for overview
-   * stores markdown for overview page
+   * stores markup for overview page
    * @param  {Context} context flux context instance use for initializing state
    * @return {OverviewStore}
   ###
   constructor: (context) ->
     super context
     @state =
-      markdown: ""
+      markup: ""
       structure: []
     @state = objectAssign(@state, context.initialStates.OverviewStore)
     @register keys.updateOverview, @updateOverview
 
   ###*
-   * update overview's markdown,structure
-   * @param data.markdown {string}
+   * update overview's markup,structure
+   * @param data.markup {string}
   ###
   updateOverview: (data) ->
     @setState objectAssign(@state, data)
-    console.log @state
 
   ###*
    * getter for component

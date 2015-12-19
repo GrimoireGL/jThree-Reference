@@ -2,10 +2,7 @@ React = require 'react'
 Radium = require 'radium'
 OverviewSidebarItemComponent = require './overview-sidebar-item-component'
 OverviewSidebarTitleComponent = require './overview-sidebar-title-component'
-OverviewSidebarSubtitleComponent = require './overview-sidebar-subtitle-component'
-
-
-$ = React.createElement
+Route = require './route-component'
 
 class OverviewSidebarComponent extends React.Component
 
@@ -18,11 +15,21 @@ class OverviewSidebarComponent extends React.Component
 
   render: ->
     structure = @state.structure
-    $ 'div', style: [].concat.apply([], [styles.sidebar, @props.style]),
-      $ OverviewSidebarItemComponent, {},
-        structure.map (data) ->
-          $ OverviewSidebarTitleComponent, level: data.level,
-            data.title
+    <div style={[].concat.apply([], [styles.sidebar, @props.style])}>
+      <OverviewSidebarItemComponent>
+        {
+          rootTitle = ""
+          structure.map (data) ->
+            if data.level == 1
+              rootTitle = data.title
+            <Route>
+              <OverviewSidebarTitleComponent level={data.level} root={rootTitle}>
+                {data.title}
+              </OverviewSidebarTitleComponent>
+            </Route>
+        }
+      </OverviewSidebarItemComponent>
+    </div>
 
 styles =
   sidebar: {}

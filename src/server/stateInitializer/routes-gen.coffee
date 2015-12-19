@@ -8,26 +8,26 @@ class RoutesGen
   ###
   constructor: (json) ->
     @routes = {}
-    @_constructRoutes json
+    # @_constructRoutes json
 
   ###*
    * regenerate routes
    * @param  {Object} json typedoc json
    * @return {Object}      routes
   ###
-  gen: (classJson, overviewCount) ->
-    @_constructRoutes classJson, overviewCount
+  gen: (classJson, overviewTitles) ->
+    @_constructRoutes classJson, overviewTitles
 
   ###*
    * construct routes
    * @param  {Object} json typedoc json
    * @return {Object}      merged fragment of routes
   ###
-  _constructRoutes: (classJson, overviewCount) ->
+  _constructRoutes: (classJson, overviewTitles) ->
     @routes = {}
     @routes = objectAssign {}, @routes, constructClassRoutes(classJson)
     @routes = objectAssign {}, @routes, constructIndexRoutes()
-    @routes = objectAssign {}, @routes, constructOverviewRoutes(overviewCount)
+    @routes = objectAssign {}, @routes, constructOverviewRoutes(overviewTitles)
     @routes = objectAssign {}, @routes, constructErrorRoutes()
 
   ###*
@@ -65,11 +65,11 @@ class RoutesGen
    * construct overview route
    * @return {Object} fragment of routes
   ###
-  constructOverviewRoutes = (count) ->
+  constructOverviewRoutes = (titles) ->
     routes =
       'overview': 'overview'
-    [0..count].forEach (v) ->
-      routes["overview/#{v}"] = "overview:#{v}"
+    titles.forEach (title, i) ->
+      routes["overview/#{title}"] = "overview:#{i}"
     return routes
 
   ###*
