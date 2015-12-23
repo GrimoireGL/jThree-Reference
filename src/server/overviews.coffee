@@ -7,6 +7,8 @@ config = require './stateInitializer/initializeStateConfig'
 clone = require 'lodash.clone'
 request = require 'request'
 Promise = require 'bluebird'
+marked = require 'marked'
+
 
 class Overviews
   ###*
@@ -45,11 +47,19 @@ class Overviews
     # console.log structData
     structData
 
-  getTitleCount: ->
+  getTitles: ->
     @getTitleStructure()
-      .filter (o) ->
-        o.level == 1
-      .length
+      .filter (o) -> o.level == 1
+      .map    (o) -> o.title
+
+  getUrls: ->
+    @getTitles()
+      .map (title) ->
+        title
+          .replace /^\s+/g, ""
+          .replace /\s+$/g, ""
+          .replace /\s/g, "-"
+          .toLowerCase()
 
   _getTitleData = (line, lineNumber) -> # 行数は0から数えるものとする
     titleRegex = /^\s*#+\s*(.+)/g
@@ -80,6 +90,12 @@ class Overviews
       # console.log txt, len, lineNumber
     # console.log texts
     texts[title_id]
+
+  getOverviewHtml: (title_id) ->
+    markdown = @getMarkdownById title_id
+    marked.setOptions highlight: (code) ->
+      require('highlight.js').highlightAuto(code).value
+    html = marked markdown
 
   getMdDataByLineNumber: (titleLineNumber) -> # 次に見つかる大見出しまたはEOFを見つける
     startLine = titleLineNumber

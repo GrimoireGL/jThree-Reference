@@ -1,27 +1,31 @@
 React = require 'react'
 Radium = require 'radium'
-OverviewMarkdownComponent = require './overview-markdown-component'
+OverviewMarkupComponent = require './overview-markup-component'
 OverviewSidebarComponent = require './overview-sidebar-component'
 Route = require './route-component'
 Promise = require 'superagent'
-
-$ = React.createElement
 
 class OverviewComponent extends React.Component
 
   constructor: (props) ->
     super props
-    console.log @props.argu.route_arr
 
   _onChange: ->
     @setState @store.get()
 
   componentWillMount: ->
-    titleId = Number(@props.argu.route_arr[1]) || 0
+    @titleId = Number(@props.argu.route_arr[1]) || 0
     # @context.ctx.overviewAction.updateOverview(titleId)
     @store = @context.ctx.overviewStore
     @setState @store.get()
-    @context.ctx.overviewAction.updateOverview(titleId)
+    @context.ctx.overviewAction.updateOverview(@titleId)
+
+  componentWillReceiveProps: (nextProps) ->
+    nextTitleId = Number(nextProps.argu.route_arr[1]) || 0
+    if @titleId != nextTitleId
+      @titleId = nextTitleId
+      @context.ctx.overviewAction.updateOverview(@titleId)
+
 
   componentDidMount: ->
     @store.onChange @_onChange.bind(@)
@@ -30,14 +34,18 @@ class OverviewComponent extends React.Component
     @store.removeChangeListener(@_onChange.bind(@))
 
   render: ->
-    console.log @state.structure, @state.markdown
-    $ 'div', style: Array.prototype.concat.apply([], [styles.base, @props.style]),
-      $ 'div', style: styles.sidebar,
-        $ Route, {},
-          $ OverviewSidebarComponent, structure: @state.structure
-      $ 'div', style: styles.contents,
-        $ Route, {},
-          $ OverviewMarkdownComponent, markdown: @state.markdown
+    <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
+      <div style={styles.sidebar}>
+        <Route>
+          <OverviewSidebarComponent structure={@state.structure} />
+        </Route>
+      </div>
+      <div style={styles.contents}>
+        <Route>
+          <OverviewMarkupComponent markup={@state.markup} />
+        </Route>
+      </div>
+    </div>
 
 styles =
 

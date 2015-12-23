@@ -13,7 +13,7 @@ describe 'Server/DocCoverage', ->
 
     it 'should return object which has tree layered hash', ->
       correct = {
-        "all": 5,
+        "all": 7,
         "covered": 5,
         "children": [
           {
@@ -37,7 +37,7 @@ describe 'Server/DocCoverage', ->
                 "covered": 3
               }
             ],
-            "all": 3,
+            "all": 4,
             "covered": 3
           },
           {
@@ -56,7 +56,7 @@ describe 'Server/DocCoverage', ->
                 "covered": 2
               }
             ],
-            "all": 2,
+            "all": 3,
             "covered": 2
           }
         ]
