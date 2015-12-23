@@ -58,10 +58,10 @@ server.get('/api/class/global/:file_id/:factor_id', function(req, res) {
   return res.json(docs.getDocDataById(req.params.file_id, req.params.factor_id));
 });
 
-server.get('/overviewtexts/:title_id', function(req, res) {
+server.get('/api/overview/:title_id', function(req, res) {
   console.log(req.originalUrl);
   return res.json({
-    markdown: overviews.getMarkdownById(req.params.title_id),
+    markup: overviews.getOverviewHtml(req.params.title_id),
     structure: overviews.getTitleStructure()
   });
 });
@@ -93,7 +93,7 @@ server.listen(process.env.PORT || 5000, process.env.IP);
 
 
 
-},{"./renderer/components/root-component":50,"./renderer/context":57,"./server/docs":65,"./server/initializeState":66,"./server/overviews":67,"express":undefined,"fs":undefined,"handlebars":undefined,"react":undefined,"serve-favicon":undefined,"source-map-support":undefined}],2:[function(require,module,exports){
+},{"./renderer/components/root-component":49,"./renderer/context":56,"./server/docs":64,"./server/initializeState":65,"./server/overviews":66,"express":undefined,"fs":undefined,"handlebars":undefined,"react":undefined,"serve-favicon":undefined,"source-map-support":undefined}],2:[function(require,module,exports){
 var DocAction, Flux, Promise, keys, request,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -154,7 +154,7 @@ module.exports = DocAction;
 
 
 
-},{"../keys":58,"bluebird":undefined,"material-flux":undefined,"superagent":undefined}],3:[function(require,module,exports){
+},{"../keys":57,"bluebird":undefined,"material-flux":undefined,"superagent":undefined}],3:[function(require,module,exports){
 var DocAction, Flux, keys,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -184,7 +184,7 @@ module.exports = DocAction;
 
 
 
-},{"../keys":58,"material-flux":undefined}],4:[function(require,module,exports){
+},{"../keys":57,"material-flux":undefined}],4:[function(require,module,exports){
 var Flux, OverviewAction, Promise, keys, request,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -219,9 +219,7 @@ OverviewAction = (function(superClass) {
   OverviewAction.prototype.updateOverview = function(title_id) {
     return new Promise((function(_this) {
       return function(resolve, reject) {
-        return request.get("http://localhost:5000/overviewtexts/" + title_id).end(function(err, res) {
-          return resolve(res.body);
-        });
+        return request.get("/api/overview/" + title_id).end(function(err, res) {});
       };
     })(this)).then((function(_this) {
       return function(res) {
@@ -240,7 +238,7 @@ module.exports = OverviewAction;
 
 
 
-},{"../keys":58,"bluebird":undefined,"material-flux":undefined,"superagent":undefined}],5:[function(require,module,exports){
+},{"../keys":57,"bluebird":undefined,"material-flux":undefined,"superagent":undefined}],5:[function(require,module,exports){
 var Flux, History, RouteAction, keys,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -324,7 +322,7 @@ module.exports = RouteAction;
 
 
 
-},{"../keys":58,"html5-history":undefined,"material-flux":undefined}],6:[function(require,module,exports){
+},{"../keys":57,"html5-history":undefined,"material-flux":undefined}],6:[function(require,module,exports){
 var Flux, ToggleVisibilityAction, keys,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -352,7 +350,7 @@ module.exports = ToggleVisibilityAction;
 
 
 
-},{"../keys":58,"material-flux":undefined}],7:[function(require,module,exports){
+},{"../keys":57,"material-flux":undefined}],7:[function(require,module,exports){
 var AppComponent, ClassDocComponent, ErrorComponent, HeaderComponent, IndexComponent, Link, OverviewComponent, Radium, React, Route, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -467,7 +465,7 @@ module.exports = Radium(AppComponent);
 
 
 
-},{"./classdoc-component":9,"./error-component":36,"./header-component":37,"./index-component":38,"./link-component":39,"./overview-component":43,"./route-component":51,"radium":undefined,"react":undefined}],8:[function(require,module,exports){
+},{"./classdoc-component":9,"./error-component":36,"./header-component":37,"./index-component":38,"./link-component":39,"./overview-component":43,"./route-component":50,"radium":undefined,"react":undefined}],8:[function(require,module,exports){
 var CharIconComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -653,7 +651,7 @@ module.exports = Radium(ClassDocComponent);
 
 
 
-},{"./doc-container-component":12,"./doc-detail-container-component":15,"./doc-slide-wrapper-component":31,"./list-component":40,"./route-component":51,"radium":undefined,"react":undefined}],10:[function(require,module,exports){
+},{"./doc-container-component":12,"./doc-detail-container-component":15,"./doc-slide-wrapper-component":31,"./list-component":40,"./route-component":50,"radium":undefined,"react":undefined}],10:[function(require,module,exports){
 
 /**
  * Color definition for components styles
@@ -885,7 +883,7 @@ module.exports = Radium(DocContainerComponent);
 
 
 
-},{"./doc-coverage-component":13,"./doc-description-component":14,"./doc-factor-hierarchy-component":22,"./doc-factor-implements-component":23,"./doc-factor-item-component":24,"./doc-factor-title-component":26,"./doc-search-container-component":30,"./doc-typeparameter-component":35,"./link-component":39,"./route-component":51,"radium":undefined,"react":undefined}],13:[function(require,module,exports){
+},{"./doc-coverage-component":13,"./doc-description-component":14,"./doc-factor-hierarchy-component":22,"./doc-factor-implements-component":23,"./doc-factor-item-component":24,"./doc-factor-title-component":26,"./doc-search-container-component":30,"./doc-typeparameter-component":35,"./link-component":39,"./route-component":50,"radium":undefined,"react":undefined}],13:[function(require,module,exports){
 var DocCoverageComponent, Link, ProgressbarComponent, Radium, React, Route, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -948,7 +946,7 @@ module.exports = Radium(DocCoverageComponent);
 
 
 
-},{"./link-component":39,"./progressbar-component":49,"./route-component":51,"radium":undefined,"react":undefined}],14:[function(require,module,exports){
+},{"./link-component":39,"./progressbar-component":48,"./route-component":50,"radium":undefined,"react":undefined}],14:[function(require,module,exports){
 var DocDescriptionComponent, DocItemComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1265,7 +1263,7 @@ module.exports = Radium(DocDetailParameterTableComponent);
 
 
 
-},{"./colors/color-definition":10,"./doc-table-component":32,"./link-component":39,"./signatures/doc-signatures-type-component":55,"radium":undefined,"react":undefined}],18:[function(require,module,exports){
+},{"./colors/color-definition":10,"./doc-table-component":32,"./link-component":39,"./signatures/doc-signatures-type-component":54,"radium":undefined,"react":undefined}],18:[function(require,module,exports){
 var DocDetailReturnComponent, DocDetailReturnTableComponent, DocItemComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1396,7 +1394,7 @@ module.exports = Radium(DocDetailReturnTableComponent);
 
 
 
-},{"./colors/color-definition":10,"./doc-table-component":32,"./link-component":39,"./signatures/doc-signatures-type-component":55,"radium":undefined,"react":undefined}],20:[function(require,module,exports){
+},{"./colors/color-definition":10,"./doc-table-component":32,"./link-component":39,"./signatures/doc-signatures-type-component":54,"radium":undefined,"react":undefined}],20:[function(require,module,exports){
 var DocDetailSignaturesComponent, DocSignaturesComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1499,7 +1497,7 @@ module.exports = Radium(DocDetailSignaturesComponent);
 
 
 
-},{"./colors/color-definition":10,"./signatures/doc-signatures-component":52,"radium":undefined,"react":undefined}],21:[function(require,module,exports){
+},{"./colors/color-definition":10,"./signatures/doc-signatures-component":51,"radium":undefined,"react":undefined}],21:[function(require,module,exports){
 var DocDetailSignaturesComponent, DocDetailTitleComponent, DocFlagtagsComponent, DocTitleComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1737,7 +1735,7 @@ module.exports = Radium(DocTypeparameterComponent);
 
 
 
-},{"./colors/color-definition":10,"./doc-detail-parameters-table-component":17,"./doc-item-component":29,"./signatures/doc-signatures-type-component":55,"radium":undefined,"react":undefined}],23:[function(require,module,exports){
+},{"./colors/color-definition":10,"./doc-detail-parameters-table-component":17,"./doc-item-component":29,"./signatures/doc-signatures-type-component":54,"radium":undefined,"react":undefined}],23:[function(require,module,exports){
 var DocFactorImplementsComponent, DocItemComponent, DocSignaturesTypeComponent, DocTableComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1818,7 +1816,7 @@ module.exports = Radium(DocFactorImplementsComponent);
 
 
 
-},{"./colors/color-definition":10,"./doc-item-component":29,"./doc-table-component":32,"./signatures/doc-signatures-type-component":55,"radium":undefined,"react":undefined}],24:[function(require,module,exports){
+},{"./colors/color-definition":10,"./doc-item-component":29,"./doc-table-component":32,"./signatures/doc-signatures-type-component":54,"radium":undefined,"react":undefined}],24:[function(require,module,exports){
 var DocFactorItemComponent, DocFactorTableComponent, DocItemComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1939,7 +1937,7 @@ DocFactorTableComponent = (function(superClass) {
   };
 
   DocFactorTableComponent.prototype.render = function() {
-    var alt_text, c, cellStyles, child, dstyle, flags, i, id, table, table_row;
+    var alt_text, c, cellStyles, child, children, dstyle, flags, i, id, table, table_row;
     dstyle = {};
     if (this.props.collapsed) {
       dstyle = {
@@ -1951,8 +1949,9 @@ DocFactorTableComponent = (function(superClass) {
     return React.createElement("div", {
       "style": Array.prototype.concat.apply([], [styles.base, this.props.style])
     }, ((function() {
-      var j, k, len, len1, ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7, ref8;
+      var j, k, l, len, len1, len2, ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7, ref8;
       table = [];
+      children = [];
       ref = this.props.group.children;
       for (i = j = 0, len = ref.length; j < len; i = ++j) {
         id = ref[i];
@@ -1961,9 +1960,21 @@ DocFactorTableComponent = (function(superClass) {
         for (k = 0, len1 = ref1.length; k < len1; k++) {
           c = ref1[k];
           if (c.id === id) {
-            child = c;
+            children.push(c);
           }
         }
+      }
+      children.sort(function(a, b) {
+        if (a.inheritedFrom && b.inheritedFrom) {
+          return 0;
+        } else if (a.inheritedFrom && !b.inheritedFrom) {
+          return 1;
+        } else if (!a.inheritedFrom && b.inheritedFrom) {
+          return -1;
+        }
+      });
+      for (i = l = 0, len2 = children.length; l < len2; i = ++l) {
+        child = children[i];
         if (child != null) {
           if (child.flags.isPrivate && !this.state.visibility.privateVisibility) {
             continue;
@@ -3470,7 +3481,7 @@ module.exports = Radium(HeaderComponent);
 
 
 
-},{"./colors/color-definition":10,"./link-component":39,"./route-component":51,"radium":undefined,"react":undefined}],38:[function(require,module,exports){
+},{"./colors/color-definition":10,"./link-component":39,"./route-component":50,"radium":undefined,"react":undefined}],38:[function(require,module,exports){
 var IndexComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4168,7 +4179,7 @@ module.exports = Radium(ListItemComponent);
 
 
 },{"./colors/color-definition":10,"radium":undefined,"react":undefined}],43:[function(require,module,exports){
-var $, OverviewComponent, OverviewMarkdownComponent, OverviewSidebarComponent, Promise, Radium, React, Route, styles,
+var OverviewComponent, OverviewMarkupComponent, OverviewSidebarComponent, Promise, Radium, React, Route, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -4176,7 +4187,7 @@ React = require('react');
 
 Radium = require('radium');
 
-OverviewMarkdownComponent = require('./overview-markdown-component');
+OverviewMarkupComponent = require('./overview-markup-component');
 
 OverviewSidebarComponent = require('./overview-sidebar-component');
 
@@ -4184,14 +4195,11 @@ Route = require('./route-component');
 
 Promise = require('superagent');
 
-$ = React.createElement;
-
 OverviewComponent = (function(superClass) {
   extend(OverviewComponent, superClass);
 
   function OverviewComponent(props) {
     OverviewComponent.__super__.constructor.call(this, props);
-    console.log(this.props.argu.route_arr);
   }
 
   OverviewComponent.prototype._onChange = function() {
@@ -4199,11 +4207,19 @@ OverviewComponent = (function(superClass) {
   };
 
   OverviewComponent.prototype.componentWillMount = function() {
-    var titleId;
-    titleId = Number(this.props.argu.route_arr[1]) || 0;
+    this.titleId = Number(this.props.argu.route_arr[1]) || 0;
     this.store = this.context.ctx.overviewStore;
     this.setState(this.store.get());
-    return this.context.ctx.overviewAction.updateOverview(titleId);
+    return this.context.ctx.overviewAction.updateOverview(this.titleId);
+  };
+
+  OverviewComponent.prototype.componentWillReceiveProps = function(nextProps) {
+    var nextTitleId;
+    nextTitleId = Number(nextProps.argu.route_arr[1]) || 0;
+    if (this.titleId !== nextTitleId) {
+      this.titleId = nextTitleId;
+      return this.context.ctx.overviewAction.updateOverview(this.titleId);
+    }
   };
 
   OverviewComponent.prototype.componentDidMount = function() {
@@ -4215,17 +4231,16 @@ OverviewComponent = (function(superClass) {
   };
 
   OverviewComponent.prototype.render = function() {
-    console.log(this.state.structure, this.state.markdown);
-    return $('div', {
-      style: Array.prototype.concat.apply([], [styles.base, this.props.style])
-    }, $('div', {
-      style: styles.sidebar
-    }, $(Route, {}, $(OverviewSidebarComponent, {
-      structure: this.state.structure
-    }))), $('div', {
-      style: styles.contents
-    }, $(Route, {}, $(OverviewMarkdownComponent, {
-      markdown: this.state.markdown
+    return React.createElement("div", {
+      "style": Array.prototype.concat.apply([], [styles.base, this.props.style])
+    }, React.createElement("div", {
+      "style": styles.sidebar
+    }, React.createElement(Route, null, React.createElement(OverviewSidebarComponent, {
+      "structure": this.state.structure
+    }))), React.createElement("div", {
+      "style": styles.contents
+    }, React.createElement(Route, null, React.createElement(OverviewMarkupComponent, {
+      "markup": this.state.markup
     }))));
   };
 
@@ -4277,8 +4292,8 @@ module.exports = Radium(OverviewComponent);
 
 
 
-},{"./overview-markdown-component":44,"./overview-sidebar-component":45,"./route-component":51,"radium":undefined,"react":undefined,"superagent":undefined}],44:[function(require,module,exports){
-var $, OverviewMarkdownComponent, Radium, React, marked, styles,
+},{"./overview-markup-component":44,"./overview-sidebar-component":45,"./route-component":50,"radium":undefined,"react":undefined,"superagent":undefined}],44:[function(require,module,exports){
+var OverviewMarkupComponent, Radium, React, marked, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -4288,42 +4303,34 @@ Radium = require('radium');
 
 marked = require('marked');
 
-$ = React.createElement;
+OverviewMarkupComponent = (function(superClass) {
+  extend(OverviewMarkupComponent, superClass);
 
-OverviewMarkdownComponent = (function(superClass) {
-  extend(OverviewMarkdownComponent, superClass);
-
-  function OverviewMarkdownComponent(props) {
-    OverviewMarkdownComponent.__super__.constructor.call(this, props);
+  function OverviewMarkupComponent(props) {
+    OverviewMarkupComponent.__super__.constructor.call(this, props);
   }
 
-  OverviewMarkdownComponent.prototype.componentWillMount = function() {
-    return this.setState({
-      markdown: this.props.markdown
-    });
+  OverviewMarkupComponent.prototype.shouldComponentUpdate = function(nextProps, nextState) {
+    return nextProps.markup !== this.props.marked;
   };
 
-  OverviewMarkdownComponent.prototype.render = function() {
-    var html, markdown;
-    markdown = this.state.markdown;
-    marked.setOptions({
-      highlight: function(code) {
-        return require('highlight.js').highlightAuto(code).value;
-      }
-    });
-    html = marked(markdown);
-    return $('div', {
-      className: 'markdown-component',
-      style: this.props.style
-    }, $('div', {
-      style: styles.container,
-      dangerouslySetInnerHTML: {
-        __html: html
+  OverviewMarkupComponent.prototype.getMd = function() {
+    return this.props.markup;
+  };
+
+  OverviewMarkupComponent.prototype.render = function() {
+    return React.createElement("div", {
+      "className": 'markdown-component',
+      "style": this.props.style
+    }, React.createElement("div", {
+      "style": styles.container,
+      "dangerouslySetInnerHTML": {
+        __html: this.props.markup
       }
     }));
   };
 
-  return OverviewMarkdownComponent;
+  return OverviewMarkupComponent;
 
 })(React.Component);
 
@@ -4331,16 +4338,16 @@ styles = {
   container: {}
 };
 
-OverviewMarkdownComponent.contextTypes = {
+OverviewMarkupComponent.contextTypes = {
   ctx: React.PropTypes.any
 };
 
-module.exports = Radium(OverviewMarkdownComponent);
+module.exports = Radium(OverviewMarkupComponent);
 
 
 
-},{"highlight.js":undefined,"marked":undefined,"radium":undefined,"react":undefined}],45:[function(require,module,exports){
-var $, OverviewSidebarComponent, OverviewSidebarItemComponent, OverviewSidebarSubtitleComponent, OverviewSidebarTitleComponent, Radium, React, styles,
+},{"marked":undefined,"radium":undefined,"react":undefined}],45:[function(require,module,exports){
+var OverviewSidebarComponent, OverviewSidebarItemComponent, OverviewSidebarTitleComponent, Radium, React, Route, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -4352,9 +4359,7 @@ OverviewSidebarItemComponent = require('./overview-sidebar-item-component');
 
 OverviewSidebarTitleComponent = require('./overview-sidebar-title-component');
 
-OverviewSidebarSubtitleComponent = require('./overview-sidebar-subtitle-component');
-
-$ = React.createElement;
+Route = require('./route-component');
 
 OverviewSidebarComponent = (function(superClass) {
   extend(OverviewSidebarComponent, superClass);
@@ -4370,15 +4375,19 @@ OverviewSidebarComponent = (function(superClass) {
   };
 
   OverviewSidebarComponent.prototype.render = function() {
-    var structure;
+    var rootTitle, structure;
     structure = this.state.structure;
-    return $('div', {
-      style: [].concat.apply([], [styles.sidebar, this.props.style])
-    }, $(OverviewSidebarItemComponent, {}, structure.map(function(data) {
-      return $(OverviewSidebarTitleComponent, {
-        level: data.level
-      }, data.title);
-    })));
+    return React.createElement("div", {
+      "style": [].concat.apply([], [styles.sidebar, this.props.style])
+    }, React.createElement(OverviewSidebarItemComponent, null, (rootTitle = "", structure.map(function(data) {
+      if (data.level === 1) {
+        rootTitle = data.title;
+      }
+      return React.createElement(Route, null, React.createElement(OverviewSidebarTitleComponent, {
+        "level": data.level,
+        "root": rootTitle
+      }, data.title));
+    }))));
   };
 
   return OverviewSidebarComponent;
@@ -4397,16 +4406,14 @@ module.exports = Radium(OverviewSidebarComponent);
 
 
 
-},{"./overview-sidebar-item-component":46,"./overview-sidebar-subtitle-component":47,"./overview-sidebar-title-component":48,"radium":undefined,"react":undefined}],46:[function(require,module,exports){
-var $, OverviewSidebarItemComponent, Radium, React, styles,
+},{"./overview-sidebar-item-component":46,"./overview-sidebar-title-component":47,"./route-component":50,"radium":undefined,"react":undefined}],46:[function(require,module,exports){
+var OverviewSidebarItemComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
 React = require('react');
 
 Radium = require('radium');
-
-$ = React.createElement;
 
 OverviewSidebarItemComponent = (function(superClass) {
   extend(OverviewSidebarItemComponent, superClass);
@@ -4416,8 +4423,8 @@ OverviewSidebarItemComponent = (function(superClass) {
   }
 
   OverviewSidebarItemComponent.prototype.render = function() {
-    return $('div', {
-      style: styles['level' + this.props.level]
+    return React.createElement("div", {
+      "style": styles['level' + this.props.level]
     }, this.props.children);
   };
 
@@ -4461,7 +4468,7 @@ module.exports = Radium(OverviewSidebarItemComponent);
 
 
 },{"radium":undefined,"react":undefined}],47:[function(require,module,exports){
-var $, Link, OverviewSidebarSubtitleComponent, Radium, React, styles,
+var Link, OverviewSidebarTitleComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -4470,55 +4477,6 @@ React = require('react');
 Radium = require('radium');
 
 Link = require('./link-component');
-
-$ = React.createElement;
-
-OverviewSidebarSubtitleComponent = (function(superClass) {
-  extend(OverviewSidebarSubtitleComponent, superClass);
-
-  function OverviewSidebarSubtitleComponent(props) {
-    OverviewSidebarSubtitleComponent.__super__.constructor.call(this, props);
-  }
-
-  OverviewSidebarSubtitleComponent.prototype.render = function() {
-    return $('div', {
-      style: [].concat.apply([], [styles.base, this.props.style])
-    }, $(Link, {
-      style: {},
-      href: ""
-    }, this.props.children));
-  };
-
-  return OverviewSidebarSubtitleComponent;
-
-})(React.Component);
-
-styles = {
-  base: {
-    paddingLeft: 10
-  }
-};
-
-OverviewSidebarSubtitleComponent.contextTypes = {
-  ctx: React.PropTypes.any
-};
-
-module.exports = Radium(OverviewSidebarSubtitleComponent);
-
-
-
-},{"./link-component":39,"radium":undefined,"react":undefined}],48:[function(require,module,exports){
-var $, Link, OverviewSidebarTitleComponent, Radium, React, styles,
-  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-  hasProp = {}.hasOwnProperty;
-
-React = require('react');
-
-Radium = require('radium');
-
-Link = require('./link-component');
-
-$ = React.createElement;
 
 OverviewSidebarTitleComponent = (function(superClass) {
   extend(OverviewSidebarTitleComponent, superClass);
@@ -4527,13 +4485,18 @@ OverviewSidebarTitleComponent = (function(superClass) {
     OverviewSidebarTitleComponent.__super__.constructor.call(this, props);
   }
 
+  OverviewSidebarTitleComponent.prototype.titleToUrl = function(title) {
+    return title.replace(/^\s+/g, "").replace(/\s+$/g, "").replace(/\s/g, "-").toLowerCase();
+  };
+
   OverviewSidebarTitleComponent.prototype.render = function() {
-    return $('div', {
-      style: [].concat([], styles.base, this.props.style)
-    }, $(Link, {
-      style: styles["title" + this.props.level],
-      href: ""
-    }, this.props.children));
+    var url;
+    return React.createElement("div", {
+      "style": [].concat([], styles.titleBox[this.props.level - 1], this.props.style)
+    }, (url = "/overview/" + (this.titleToUrl(this.props.root)), this.props.level === 1 ? void 0 : url += "#" + this.titleToUrl(this.props.children), React.createElement("a", {
+      "style": styles.titleText[this.props.level - 1],
+      "href": url
+    }, this.props.children)));
   };
 
   return OverviewSidebarTitleComponent;
@@ -4541,15 +4504,35 @@ OverviewSidebarTitleComponent = (function(superClass) {
 })(React.Component);
 
 styles = {
-  title1: {
-    fontSize: 24
-  },
-  title2: {
-    fontSize: 20
-  },
-  title3: {
-    fontSize: 16
-  }
+  titleText: [
+    {
+      textDecoration: "none",
+      color: "#000",
+      fontSize: 24
+    }, {
+      textDecoration: "none",
+      color: "#000",
+      fontSize: 18
+    }, {
+      textDecoration: "none",
+      color: "#000",
+      fontSize: 14
+    }
+  ],
+  titleBox: [
+    {
+      marginTop: 15,
+      marginBottom: 5,
+      background: "#f2f2f2",
+      padding: "10px 15px"
+    }, {
+      paddingLeft: "22px",
+      paddingTop: 5,
+      paddingBottom: 5
+    }, {
+      paddingLeft: "30px"
+    }
+  ]
 };
 
 OverviewSidebarTitleComponent.contextTypes = {
@@ -4560,7 +4543,7 @@ module.exports = Radium(OverviewSidebarTitleComponent);
 
 
 
-},{"./link-component":39,"radium":undefined,"react":undefined}],49:[function(require,module,exports){
+},{"./link-component":39,"radium":undefined,"react":undefined}],48:[function(require,module,exports){
 var Link, ProgressbarComponent, Radium, React, Route, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4645,7 +4628,7 @@ module.exports = Radium(ProgressbarComponent);
 
 
 
-},{"./colors/color-definition":10,"./link-component":39,"./route-component":51,"radium":undefined,"react":undefined}],50:[function(require,module,exports){
+},{"./colors/color-definition":10,"./link-component":39,"./route-component":50,"radium":undefined,"react":undefined}],49:[function(require,module,exports){
 var App, React, RootComponent,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4683,7 +4666,7 @@ module.exports = RootComponent;
 
 
 
-},{"./app-component":7,"react":undefined}],51:[function(require,module,exports){
+},{"./app-component":7,"react":undefined}],50:[function(require,module,exports){
 var Radium, React, RouteComponent, Router,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4856,7 +4839,7 @@ module.exports = Radium(RouteComponent);
 
 
 
-},{"../lib/router":59,"radium":undefined,"react":undefined}],52:[function(require,module,exports){
+},{"../lib/router":58,"radium":undefined,"react":undefined}],51:[function(require,module,exports){
 var DocSignaturesComponent, DocSignaturesNameComponent, DocSignaturesParametersComponent, DocSignaturesTypeComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4921,7 +4904,7 @@ module.exports = Radium(DocSignaturesComponent);
 
 
 
-},{"./doc-signatures-name-component":53,"./doc-signatures-parameters-component":54,"./doc-signatures-type-component":55,"radium":undefined,"react":undefined}],53:[function(require,module,exports){
+},{"./doc-signatures-name-component":52,"./doc-signatures-parameters-component":53,"./doc-signatures-type-component":54,"radium":undefined,"react":undefined}],52:[function(require,module,exports){
 var DocSignaturesNameComponent, DocSignaturesTypeargumentsComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4974,7 +4957,7 @@ module.exports = Radium(DocSignaturesNameComponent);
 
 
 
-},{"./doc-signatures-typearguments-component":56,"radium":undefined,"react":undefined}],54:[function(require,module,exports){
+},{"./doc-signatures-typearguments-component":55,"radium":undefined,"react":undefined}],53:[function(require,module,exports){
 var DocSignaturesNameComponent, DocSignaturesParametersComponent, DocSignaturesTypeComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5041,7 +5024,7 @@ module.exports = Radium(DocSignaturesParametersComponent);
 
 
 
-},{"./doc-signatures-name-component":53,"./doc-signatures-type-component":55,"radium":undefined,"react":undefined}],55:[function(require,module,exports){
+},{"./doc-signatures-name-component":52,"./doc-signatures-type-component":54,"radium":undefined,"react":undefined}],54:[function(require,module,exports){
 var DocSignaturesTypeComponent, DocSignaturesTypeargumentsComponent, Link, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5113,7 +5096,7 @@ module.exports = Radium(DocSignaturesTypeComponent);
 
 
 
-},{"../link-component":39,"./doc-signatures-typearguments-component":56,"radium":undefined,"react":undefined}],56:[function(require,module,exports){
+},{"../link-component":39,"./doc-signatures-typearguments-component":55,"radium":undefined,"react":undefined}],55:[function(require,module,exports){
 var DocSignaturesTypeargumentsComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5173,7 +5156,7 @@ module.exports = Radium(DocSignaturesTypeargumentsComponent);
 
 
 
-},{"radium":undefined,"react":undefined}],57:[function(require,module,exports){
+},{"radium":undefined,"react":undefined}],56:[function(require,module,exports){
 var Context, DocAction, DocCoverageAction, DocCoverageStore, DocStore, Flux, OverviewAction, OverviewStore, RouteAction, RouteStore, ToggleVisibilityAction, ToggleVisibilityStore,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5233,7 +5216,7 @@ module.exports = Context;
 
 
 
-},{"./actions/doc-action":2,"./actions/doc-coverage-action":3,"./actions/overview-action":4,"./actions/route-action":5,"./actions/toggle-visibility-action":6,"./stores/doc-coverage-store":60,"./stores/doc-store":61,"./stores/overview-store":62,"./stores/route-store":63,"./stores/toggle-visibility-store":64,"material-flux":undefined}],58:[function(require,module,exports){
+},{"./actions/doc-action":2,"./actions/doc-coverage-action":3,"./actions/overview-action":4,"./actions/route-action":5,"./actions/toggle-visibility-action":6,"./stores/doc-coverage-store":59,"./stores/doc-store":60,"./stores/overview-store":61,"./stores/route-store":62,"./stores/toggle-visibility-store":63,"material-flux":undefined}],57:[function(require,module,exports){
 
 /**
  * keys linked to actions
@@ -5248,7 +5231,7 @@ module.exports = {
 
 
 
-},{}],59:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 var Router, objectAssign;
 
 objectAssign = require('object-assign');
@@ -5421,7 +5404,7 @@ module.exports = Router;
 
 
 
-},{"object-assign":undefined}],60:[function(require,module,exports){
+},{"object-assign":undefined}],59:[function(require,module,exports){
 var DocCoverageStore, Flux, keys, objectAssign,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5468,7 +5451,7 @@ module.exports = DocCoverageStore;
 
 
 
-},{"../keys":58,"material-flux":undefined,"object-assign":undefined}],61:[function(require,module,exports){
+},{"../keys":57,"material-flux":undefined,"object-assign":undefined}],60:[function(require,module,exports){
 var DocStore, Flux, keys, merge, objectAssign,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5535,7 +5518,7 @@ module.exports = DocStore;
 
 
 
-},{"../keys":58,"lodash.merge":undefined,"material-flux":undefined,"object-assign":undefined}],62:[function(require,module,exports){
+},{"../keys":57,"lodash.merge":undefined,"material-flux":undefined,"object-assign":undefined}],61:[function(require,module,exports){
 var Flux, OverviewStore, keys, objectAssign,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5552,7 +5535,7 @@ OverviewStore = (function(superClass) {
 
   /**
    * flux store for overview
-   * stores markdown for overview page
+   * stores markup for overview page
    * @param  {Context} context flux context instance use for initializing state
    * @return {OverviewStore}
    */
@@ -5560,7 +5543,7 @@ OverviewStore = (function(superClass) {
   function OverviewStore(context) {
     OverviewStore.__super__.constructor.call(this, context);
     this.state = {
-      markdown: "",
+      markup: "",
       structure: []
     };
     this.state = objectAssign(this.state, context.initialStates.OverviewStore);
@@ -5569,13 +5552,12 @@ OverviewStore = (function(superClass) {
 
 
   /**
-   * update overview's markdown,structure
-   * @param data.markdown {string}
+   * update overview's markup,structure
+   * @param data.markup {string}
    */
 
   OverviewStore.prototype.updateOverview = function(data) {
-    this.setState(objectAssign(this.state, data));
-    return console.log(this.state);
+    return this.setState(objectAssign(this.state, data));
   };
 
 
@@ -5596,7 +5578,7 @@ module.exports = OverviewStore;
 
 
 
-},{"../keys":58,"material-flux":undefined,"object-assign":undefined}],63:[function(require,module,exports){
+},{"../keys":57,"material-flux":undefined,"object-assign":undefined}],62:[function(require,module,exports){
 var Flux, RouteStore, keys, objectAssign,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5664,7 +5646,7 @@ module.exports = RouteStore;
 
 
 
-},{"../keys":58,"material-flux":undefined,"object-assign":undefined}],64:[function(require,module,exports){
+},{"../keys":57,"material-flux":undefined,"object-assign":undefined}],63:[function(require,module,exports){
 var Flux, ToggleVisibilityStore, keys, objectAssign,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5711,7 +5693,7 @@ module.exports = ToggleVisibilityStore;
 
 
 
-},{"../keys":58,"material-flux":undefined,"object-assign":undefined}],65:[function(require,module,exports){
+},{"../keys":57,"material-flux":undefined,"object-assign":undefined}],64:[function(require,module,exports){
 
 /*
 @providesModule Docs
@@ -5887,7 +5869,7 @@ module.exports = Docs;
 
 
 
-},{"./stateInitializer/initializeStateConfig":70,"bluebird":undefined,"fs":undefined,"lodash.clone":undefined,"request":undefined}],66:[function(require,module,exports){
+},{"./stateInitializer/initializeStateConfig":69,"bluebird":undefined,"fs":undefined,"lodash.clone":undefined,"request":undefined}],65:[function(require,module,exports){
 var DirTree, DocCoverage, Docs, InitializeState, Overviews, Router, RoutesGen, config, readOverview;
 
 RoutesGen = require('./stateInitializer/routes-gen');
@@ -5927,7 +5909,7 @@ InitializeState = (function() {
    */
 
   InitializeState.prototype.gen = function() {
-    this.routeGen.gen(this.docs.json, this.overviews.getTitleCount());
+    this.routeGen.gen(this.docs.json, this.overviews.getUrls());
     this.dirTree.gen(this.docs.json);
     this.doc_coverage.gen(this.docs.json);
     return this.router.setRoute(this.routeGen.routes);
@@ -5941,15 +5923,23 @@ InitializeState = (function() {
    */
 
   InitializeState.prototype.initialize = function(req) {
-    var initialState, initial_doc_data;
+    var initialState, initial_doc_data, initial_overview_markup;
     initial_doc_data = {};
+    initial_overview_markup = "";
     this.router.route(req.originalUrl, (function(_this) {
       return function(route, argu) {
-        var factor_id, file_id, ref, ref1;
-        file_id = (ref = argu.route_arr[2]) != null ? ref.toString() : void 0;
-        factor_id = (ref1 = argu.route_arr[3]) != null ? ref1.toString() : void 0;
-        if ((file_id != null) && (factor_id != null)) {
-          return initial_doc_data = _this.docs.getDocDataById(file_id, factor_id);
+        var factor_id, file_id, ref, ref1, title_id;
+        switch (argu.route_arr[0]) {
+          case "class":
+            file_id = (ref = argu.route_arr[2]) != null ? ref.toString() : void 0;
+            factor_id = (ref1 = argu.route_arr[3]) != null ? ref1.toString() : void 0;
+            if ((file_id != null) && (factor_id != null)) {
+              return initial_doc_data = _this.docs.getDocDataById(file_id, factor_id);
+            }
+            break;
+          case "overview":
+            title_id = argu.route_arr[1] || 0;
+            return initial_overview_markup = _this.overviews.getOverviewHtml(title_id);
         }
       };
     })(this));
@@ -5964,7 +5954,7 @@ InitializeState = (function() {
         doc_data: initial_doc_data
       },
       OverviewStore: {
-        markdown: this.overviews.getMarkdownById(1),
+        markup: initial_overview_markup,
         structure: this.overviews.getTitleStructure()
       },
       DocCoverageStore: {
@@ -5982,12 +5972,12 @@ module.exports = InitializeState;
 
 
 
-},{"../renderer/lib/router":59,"./docs":65,"./overviews":67,"./stateInitializer/dir-tree":68,"./stateInitializer/doc-coverage":69,"./stateInitializer/initializeStateConfig":70,"./stateInitializer/read-overview":71,"./stateInitializer/routes-gen":72}],67:[function(require,module,exports){
+},{"../renderer/lib/router":58,"./docs":64,"./overviews":66,"./stateInitializer/dir-tree":67,"./stateInitializer/doc-coverage":68,"./stateInitializer/initializeStateConfig":69,"./stateInitializer/read-overview":70,"./stateInitializer/routes-gen":71}],66:[function(require,module,exports){
 
 /*
 @providesModule Docs
  */
-var Overviews, Promise, clone, config, fs, request;
+var Overviews, Promise, clone, config, fs, marked, request;
 
 fs = require('fs');
 
@@ -5998,6 +5988,8 @@ clone = require('lodash.clone');
 request = require('request');
 
 Promise = require('bluebird');
+
+marked = require('marked');
 
 Overviews = (function() {
 
@@ -6038,10 +6030,18 @@ Overviews = (function() {
     return structData;
   };
 
-  Overviews.prototype.getTitleCount = function() {
+  Overviews.prototype.getTitles = function() {
     return this.getTitleStructure().filter(function(o) {
       return o.level === 1;
-    }).length;
+    }).map(function(o) {
+      return o.title;
+    });
+  };
+
+  Overviews.prototype.getUrls = function() {
+    return this.getTitles().map(function(title) {
+      return title.replace(/^\s+/g, "").replace(/\s+$/g, "").replace(/\s/g, "-").toLowerCase();
+    });
   };
 
   _getTitleData = function(line, lineNumber) {
@@ -6077,6 +6077,17 @@ Overviews = (function() {
     return texts[title_id];
   };
 
+  Overviews.prototype.getOverviewHtml = function(title_id) {
+    var html, markdown;
+    markdown = this.getMarkdownById(title_id);
+    marked.setOptions({
+      highlight: function(code) {
+        return require('highlight.js').highlightAuto(code).value;
+      }
+    });
+    return html = marked(markdown);
+  };
+
   Overviews.prototype.getMdDataByLineNumber = function(titleLineNumber) {
     var endLine, nextLine, resultMd, startLine;
     startLine = titleLineNumber;
@@ -6099,7 +6110,7 @@ module.exports = Overviews;
 
 
 
-},{"./stateInitializer/initializeStateConfig":70,"bluebird":undefined,"fs":undefined,"lodash.clone":undefined,"request":undefined}],68:[function(require,module,exports){
+},{"./stateInitializer/initializeStateConfig":69,"bluebird":undefined,"fs":undefined,"highlight.js":undefined,"lodash.clone":undefined,"marked":undefined,"request":undefined}],67:[function(require,module,exports){
 
 /*
 @providesModule DirTree
@@ -6229,7 +6240,7 @@ module.exports = DirTree;
 
 
 
-},{"lodash.merge":undefined,"object-assign":undefined}],69:[function(require,module,exports){
+},{"lodash.merge":undefined,"object-assign":undefined}],68:[function(require,module,exports){
 
 /*
 @providesModule DocCoverage
@@ -6331,7 +6342,7 @@ module.exports = DocCoverage;
 
 
 
-},{"lodash.merge":undefined,"object-assign":undefined}],70:[function(require,module,exports){
+},{"lodash.merge":undefined,"object-assign":undefined}],69:[function(require,module,exports){
 var fs;
 
 fs = require('fs');
@@ -6356,7 +6367,7 @@ module.exports = {
 
 
 
-},{"fs":undefined}],71:[function(require,module,exports){
+},{"fs":undefined}],70:[function(require,module,exports){
 var conf, fs;
 
 fs = require('fs');
@@ -6369,7 +6380,7 @@ module.exports = function() {
 
 
 
-},{"./initializeStateConfig":70,"fs":undefined}],72:[function(require,module,exports){
+},{"./initializeStateConfig":69,"fs":undefined}],71:[function(require,module,exports){
 var RoutesGen, objectAssign;
 
 objectAssign = require('object-assign');
@@ -6385,7 +6396,6 @@ RoutesGen = (function() {
 
   function RoutesGen(json) {
     this.routes = {};
-    this._constructRoutes(json);
   }
 
 
@@ -6395,8 +6405,8 @@ RoutesGen = (function() {
    * @return {Object}      routes
    */
 
-  RoutesGen.prototype.gen = function(classJson, overviewCount) {
-    return this._constructRoutes(classJson, overviewCount);
+  RoutesGen.prototype.gen = function(classJson, overviewTitles) {
+    return this._constructRoutes(classJson, overviewTitles);
   };
 
 
@@ -6406,11 +6416,11 @@ RoutesGen = (function() {
    * @return {Object}      merged fragment of routes
    */
 
-  RoutesGen.prototype._constructRoutes = function(classJson, overviewCount) {
+  RoutesGen.prototype._constructRoutes = function(classJson, overviewTitles) {
     this.routes = {};
     this.routes = objectAssign({}, this.routes, constructClassRoutes(classJson));
     this.routes = objectAssign({}, this.routes, constructIndexRoutes());
-    this.routes = objectAssign({}, this.routes, constructOverviewRoutes(overviewCount));
+    this.routes = objectAssign({}, this.routes, constructOverviewRoutes(overviewTitles));
     return this.routes = objectAssign({}, this.routes, constructErrorRoutes());
   };
 
@@ -6472,17 +6482,13 @@ RoutesGen = (function() {
    * @return {Object} fragment of routes
    */
 
-  constructOverviewRoutes = function(count) {
-    var k, results, routes;
+  constructOverviewRoutes = function(titles) {
+    var routes;
     routes = {
       'overview': 'overview'
     };
-    (function() {
-      results = [];
-      for (var k = 0; 0 <= count ? k <= count : k >= count; 0 <= count ? k++ : k--){ results.push(k); }
-      return results;
-    }).apply(this).forEach(function(v) {
-      return routes["overview/" + v] = "overview:" + v;
+    titles.forEach(function(title, i) {
+      return routes["overview/" + title] = "overview:" + i;
     });
     return routes;
   };
