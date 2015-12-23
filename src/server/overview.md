@@ -1,111 +1,69 @@
-# Meteor
+# Quick Start
 
-Meteor is an ultra-simple environment for building modern web
-applications.
+## Installation
 
-With Meteor you write apps:
+Install `j3.js` in root directory and just insert `script` tag into html document.
 
-* in pure JavaScript
-* that send data over the wire, rather than HTML
-* using your choice of popular open-source libraries
-
-Documentation is available at http://docs.meteor.com/.
-
-Try the getting started [tutorial](https://www.meteor.com/try).
-
-## Quick Start
-
-Install Meteor:
-
-```bash
-curl https://install.meteor.com | /bin/sh
+```html
+<script type="text/javascript" src="j3.js"></script>
 ```
 
-Create a project:
+> *Note:*
+>
+> jThree is under development. So built file has not supplied yet. Check out how to build.
 
-```bash
-meteor create try-meteor
+
+## How to build
+
+Run command below.
+
+```
+npm install
+npm run build
 ```
 
-Run it:
+If build is succeeded, built files are outputed inside `/jThree/bin/product`.
 
-```bash
-cd try-meteor
-meteor
+
+# Guide
+
+## Getting Started
+
+Look at this simple example.
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/goml">
+    <goml>
+      <resources>
+        <cube name="cube" />
+      </resources>
+      <canvases>
+        <canvas clearColor="purple" frame=".canvasContainer">
+          <viewport cam="CAM1" id="main" width="640" height="480" name="MAIN"/>
+        </canvas>
+      </canvases>
+      <scenes>
+        <scene name="mainScene">
+          <object rotation="y(30d)">
+            <camera id="maincam" aspect="1" far="20" fovy="1/2p" name="CAM1" near="0.1" position="(0,8,10)" rotation="x(-30d)"></camera>
+          </object>
+          <scenelight color="#FFF" intensity="1"  top="40"  far="50" right="50" position="-10,-10,10"/>
+          <mesh id="cube" geo="cube" mat="red"/>
+        </scene>
+      </scenes>
+    </goml>
+  </script>
+</head>
+<body>
+</body>
+</html>
 ```
 
-Deploy it to the world, for free:
+Comming soon...
 
-```bash
-meteor deploy try-meteor.meteor.com
-```
+# Tips
 
-## Slow Start for developers
-
-If you want to run on the bleeding edge, or help develop Meteor, you
-can run Meteor directly from a git checkout.
-
-```bash
-git clone git://github.com/meteor/meteor.git
-cd meteor
-```
-
-If you're the sort of person who likes to build everything from scratch,
-you can build all the Meteor dependencies (node.js, npm, mongodb, etc)
-with the provided script. This requires git, a C and C++ compiler,
-autotools, and scons. If you do not run this script, Meteor will
-automatically download pre-compiled binaries when you first run it.
-
-```bash
- # OPTIONAL
-./scripts/generate-dev-bundle.sh
-```
-
-Now you can run meteor directly from the checkout (if you did not
-build the dependency bundle above, this will take a few moments to
-download a pre-build version).
-
-```bash
-./meteor --help
-```
-
-From your checkout, you can read the docs locally. The `/docs` directory is a
-meteor application, so simply change into the `/docs` directory and launch
-the app:
-
-```bash
-cd docs/
-../meteor
-```
-
-You'll then be able to read the docs locally in your browser at
-`http://localhost:3000/`.
-
-Note that if you run Meteor from a git checkout, you cannot pin apps to specific
-Meteor releases or run using different Meteor releases using `--release`.
-
-## Uninstalling Meteor
-
-Aside from a short launcher shell script, Meteor installs itself inside your
-home directory. To uninstall Meteor, run:
-
-```bash
-rm -rf ~/.meteor/
-sudo rm /usr/local/bin/meteor
-```
-
-## Developer Resources
-
-Building an application with Meteor?
-
-* Announcement list: sign up at http://www.meteor.com/
-* Ask a question: http://stackoverflow.com/questions/tagged/meteor
-* Discussion forums: https://forums.meteor.com/
-
-Interested in contributing to Meteor?
-
-* Issue tracker: https://github.com/meteor/meteor/issues
-* Contribution guidelines: https://github.com/meteor/meteor/tree/devel/Contributing.md
-
-We are hiring!  Visit https://www.meteor.com/jobs to
-learn more about working full-time on the Meteor project.
+Comming soon...
