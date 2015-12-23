@@ -52,12 +52,15 @@ styles =
     {
       # borderTop: "1px solid #999"
       # borderBottom: "1px solid #999"
-      marginTop: 20
+      marginTop: 15
+      marginBottom: 5
       background: "#f2f2f2"
       padding: "10px 15px"
     },
     {
       paddingLeft: "22px"
+      paddingTop: 5
+      paddingBottom: 5
     },
     {
       paddingLeft: "30px"

@@ -7,7 +7,6 @@
     "bluebird": "^3.1.1",
     "express": "^4.13.1",
     "handlebars": "^4.0.5",
-    "highlight": "^0.2.3",
     "highlight.js": "^9.0.0",
     "history.js": "^1.8.0",
     "html5-history": "pnlybubbles/html5-history#b6afc38d13dcbfb6e112c9fdebb6a1b6862b9b17",
@@ -26,6 +25,7 @@
     "superagent": "^1.2.0"
   },
   "devDependencies": {
+    "browserify": "^9.0.7",
     "chai": "^3.2.0",
     "coffee-reactify": "^4.0.0",
     "coffee-script": "^1.9.2",
