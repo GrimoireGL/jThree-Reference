@@ -22,7 +22,7 @@ class OverviewAction extends Flux.Action
         .end (err, res) ->
           # resolve res.body
     .then (res) =>
-      @dispatch(keys.updateOverview, res)
+      @dispatch(keys.updateOverview, title_id, res)
     .catch (err) ->
       console.error err
 

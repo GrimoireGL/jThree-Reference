@@ -10,39 +10,14 @@ class OverviewComponent extends React.Component
   constructor: (props) ->
     super props
 
-  _onChange: ->
-    @setState @store.get()
-
-  componentWillMount: ->
-    @titleId = Number(@props.argu.route_arr[1]) || 0
-    # @context.ctx.overviewAction.updateOverview(titleId)
-    @store = @context.ctx.overviewStore
-    @setState @store.get()
-    @context.ctx.overviewAction.updateOverview(@titleId)
-
-  componentWillReceiveProps: (nextProps) ->
-    nextTitleId = Number(nextProps.argu.route_arr[1]) || 0
-    if @titleId != nextTitleId
-      @titleId = nextTitleId
-      @context.ctx.overviewAction.updateOverview(@titleId)
-
-
-  componentDidMount: ->
-    @store.onChange @_onChange.bind(@)
-
-  componentWillUnmount: ->
-    @store.removeChangeListener(@_onChange.bind(@))
-
   render: ->
     <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       <div style={styles.sidebar}>
-        <Route>
-          <OverviewSidebarComponent structure={@state.structure} />
-        </Route>
+        <OverviewSidebarComponent />
       </div>
       <div style={styles.contents}>
         <Route>
-          <OverviewMarkupComponent markup={@state.markup} />
+          <OverviewMarkupComponent />
         </Route>
       </div>
     </div>

@@ -9,24 +9,31 @@ class OverviewSidebarComponent extends React.Component
   constructor: (props) ->
     super props
 
+  _onChange: ->
+    @setState @store.get()
+
   componentWillMount: ->
-    @setState
-      structure: @props.structure
+    @store = @context.ctx.overviewStore
+    @setState @store.get()
+
+  componentDidMount: ->
+    @store.onChange @_onChange.bind(@)
+
+  componentWillUnmount: ->
+    @store.removeChangeListener(@_onChange.bind(@))
 
   render: ->
     structure = @state.structure
     <div style={[].concat.apply([], [styles.sidebar, @props.style])}>
       <OverviewSidebarItemComponent>
         {
-          rootTitle = ""
+          itemTitle = ""
           structure.map (data) ->
             if data.level == 1
-              rootTitle = data.title
-            <Route>
-              <OverviewSidebarTitleComponent level={data.level} root={rootTitle}>
-                {data.title}
-              </OverviewSidebarTitleComponent>
-            </Route>
+              itemTitle = data.title
+            <OverviewSidebarTitleComponent level={data.level} itemTitle={itemTitle}>
+              {data.title}
+            </OverviewSidebarTitleComponent>
         }
       </OverviewSidebarItemComponent>
     </div>

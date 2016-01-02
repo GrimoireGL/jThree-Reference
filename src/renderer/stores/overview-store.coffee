@@ -12,7 +12,7 @@ class OverviewStore extends Flux.Store
   constructor: (context) ->
     super context
     @state =
-      markup: ""
+      markup: {}
       structure: []
     @state = objectAssign(@state, context.initialStates.OverviewStore)
     @register keys.updateOverview, @updateOverview
@@ -21,8 +21,11 @@ class OverviewStore extends Flux.Store
    * update overview's markup,structure
    * @param data.markup {string}
   ###
-  updateOverview: (data) ->
-    @setState objectAssign(@state, data)
+  updateOverview: (title_id, data) ->
+    state = {}
+    state.markup[title_id] = data.markup
+    state.structure = data.structure
+    @setState objectAssign(@state, state)
 
   ###*
    * getter for component

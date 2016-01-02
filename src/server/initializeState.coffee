@@ -24,7 +24,8 @@ class InitializeState
    * resetup state initializer
   ###
   gen: ->
-    @routeGen.gen @docs.json, @overviews.getUrls()
+    console.log @overviews.getTitleArray()
+    @routeGen.gen @docs.json, @overviews.getTitleArray()
     @dirTree.gen @docs.json
     @doc_coverage.gen @docs.json
     @router.setRoute @routeGen.routes

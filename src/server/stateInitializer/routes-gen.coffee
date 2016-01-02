@@ -15,19 +15,19 @@ class RoutesGen
    * @param  {Object} json typedoc json
    * @return {Object}      routes
   ###
-  gen: (classJson, overviewTitles) ->
-    @_constructRoutes classJson, overviewTitles
+  gen: (classJson, overviewStructure) ->
+    @_constructRoutes classJson, overviewStructure
 
   ###*
    * construct routes
    * @param  {Object} json typedoc json
    * @return {Object}      merged fragment of routes
   ###
-  _constructRoutes: (classJson, overviewTitles) ->
+  _constructRoutes: (classJson, overviewStructure) ->
     @routes = {}
     @routes = objectAssign {}, @routes, constructClassRoutes(classJson)
     @routes = objectAssign {}, @routes, constructIndexRoutes()
-    @routes = objectAssign {}, @routes, constructOverviewRoutes(overviewTitles)
+    @routes = objectAssign {}, @routes, constructOverviewRoutes(overviewStructure)
     @routes = objectAssign {}, @routes, constructErrorRoutes()
 
   ###*
@@ -65,11 +65,18 @@ class RoutesGen
    * construct overview route
    * @return {Object} fragment of routes
   ###
-  constructOverviewRoutes = (titles) ->
+  constructOverviewRoutes = (structure) ->
     routes =
       'overview': 'overview'
-    titles.forEach (title, i) ->
-      routes["overview/#{title}"] = "overview:#{i}"
+    # todo: 後でリファクタリング
+    structure.forEach (node, i) ->
+      routes["overview/#{node.title}"] = "overview:#{i}"
+      if node.children?
+        node.children.forEach (node2, j) ->
+          routes["overview/#{node.title}/#{node2.title}"] = "overview:#{i}:#{j}"
+          if node2.children
+            node2.children.forEach (node3, k) ->
+              routes["overview/#{node.title}/#{node2.title}/#{node3.title}"] = "overview:#{i}:#{j}:#{k}"
     return routes
 
   ###*

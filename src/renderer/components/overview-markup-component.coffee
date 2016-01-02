@@ -2,20 +2,37 @@ React = require 'react'
 Radium = require 'radium'
 marked = require 'marked'
 
+Route = require './route-component'
+
 class OverviewMarkupComponent extends React.Component
 
   constructor: (props) ->
     super props
 
-  shouldComponentUpdate: (nextProps, nextState) ->
-    nextProps.markup != @props.marked
+  _onChange: ->
+    @setState @store.get()
+
+  componentWillMount: ->
+    @store = @context.ctx.overviewStore
+    @setState @store.get()
+
+  componentDidMount: ->
+    @store.onChange @_onChange.bind(@)
+
+  componentWillUnmount: ->
+    @store.removeChangeListener(@_onChange.bind(@))
+
+  # shouldComponentUpdate: (nextProps, nextState) ->
+  #   nextProps.markup != @props.marked
 
   getMd: ->
     @props.markup
 
   render: ->
     <div className={'markdown-component'} style={@props.style}>
-      <div style={styles.container} dangerouslySetInnerHTML={__html: @props.markup}></div>
+      <Route>
+        <div style={styles.container} dangerouslySetInnerHTML={__html: @state.markup}></div>
+      </Route>
     </div>
 
 styles =

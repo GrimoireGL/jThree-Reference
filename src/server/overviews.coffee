@@ -8,6 +8,7 @@ clone = require 'lodash.clone'
 request = require 'request'
 Promise = require 'bluebird'
 marked = require 'marked'
+objectAssign = require 'object-assign'
 
 
 class Overviews
@@ -19,6 +20,7 @@ class Overviews
     @markdown = fs.readFileSync config.overview.markdown, 'utf8'
     @lines = @markdown.split "\n"
 
+    console.log @getTitleArray()
     # @markdown = ""
     # @lines = []
     # _getLocalMarkdown()
@@ -47,19 +49,51 @@ class Overviews
     # console.log structData
     structData
 
+  getTitleArray: ->
+    self = @
+
+    structure = @getTitleStructure()
+    prev =
+      parent: null
+      children: []
+      level: 0
+      title: null
+    root = prev.children
+    structure.forEach (o, i) ->
+      relativeDepth = prev.level - o.level + 1  # p = 0, o = 1 -> 0
+      target = prev
+      [0...(relativeDepth)].forEach (j) ->
+        target = target.parent
+      o =
+        parent: target
+        children: []
+        level: o.level
+        title: self.toUrl(o.title)
+      target.children.push o
+      prev = o
+    console.log "tree: ", root
+    root
+
   getTitles: ->
     @getTitleStructure()
       .filter (o) -> o.level == 1
       .map    (o) -> o.title
 
-  getUrls: ->
-    @getTitles()
-      .map (title) ->
-        title
-          .replace /^\s+/g, ""
-          .replace /\s+$/g, ""
-          .replace /\s/g, "-"
-          .toLowerCase()
+  toUrl: (str) ->
+    str
+      .replace /^\s+/g, ""
+      .replace /\s+$/g, ""
+      .replace /\s/g, "-"
+      .toLowerCase()
+
+  # getUrls: ->
+  #   @getTitles()
+  #     .map (title) ->
+  #       title
+  #         .replace /^\s+/g, ""
+  #         .replace /\s+$/g, ""
+  #         .replace /\s/g, "-"
+  #         .toLowerCase()
 
   _getTitleData = (line, lineNumber) -> # 行数は0から数えるものとする
     titleRegex = /^\s*#+\s*(.+)/g
@@ -77,6 +111,8 @@ class Overviews
       level: titleLevel
       lineNumber: lineNumber
     }
+
+
 
   getMarkdownById: (title_id) ->
     lineNumber = 0

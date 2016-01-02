@@ -17,15 +17,15 @@ class OverviewSidebarTitleComponent extends React.Component
   render: ->
     <div style={[].concat([], styles.titleBox[@props.level-1], @props.style)}>
       {
-        url = "/overview/#{@titleToUrl(@props.root)}"
+        url = "/overview/#{@titleToUrl(@props.itemTitle)}"
         if @props.level == 1
           # if @props.argu.fragment.match "#"
           #   url += "#"
         else
-          url += "#" + @titleToUrl(@props.children)
-        <a style={styles.titleText[@props.level-1]} href={url}>
+          url += "/" + @titleToUrl(@props.children)
+        <Link style={styles.titleText[@props.level-1]} href={url}>
           {@props.children}
-        </a>
+        </Link>
 
       }
     </div>
