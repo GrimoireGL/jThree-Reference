@@ -17,133 +17,173 @@ class Overviews
    * @return {Overviews}
   ###
   constructor: ->
-    @markdown = fs.readFileSync config.overview.markdown, 'utf8'
-    @lines = @markdown.split "\n"
+    @json = JSON.parse fs.readFileSync config.overview.path_to_json, 'utf8'
+    @structure = @getStructure()
+    @routes = @getRoutes()
+    # @markdown = fs.readFileSync config.overview.markdown, 'utf8'
+    # @lines = @markdown.split "\n"
 
-    console.log @getTitleArray()
-    # @markdown = ""
-    # @lines = []
-    # _getLocalMarkdown()
+  getStructure: ->
+    dir = @json
+    return @parseStructure _recursionSearch dir
 
-  ###*
-   * set external markdown text
-   * @param {Object} overview markdown text
-  ###
-  # setMarkdown: (md) ->
-  #   @markdown = md
+  getRoutes: ->
+    dir = @json
+    routes = {}
+    _recursionSearch(dir).forEach (title) =>
+      fragment = @titleToUrl title
+      route = fragment.replace /\//g, ':'
+      routes[fragment] = route
+    console.log routes
+    return routes
 
-  ###*
-   * load markdown from this server
-  ###
-  _getLocalMarkdown = ->
-    @markdown = fs.readFileSync config.overview.markdown, 'utf8'
-    @lines = @markdown.split "\n"
-
-  getTitleStructure: ->
-    # console.log @lines
-    structData = @lines
-      .map (line, i) ->
-        _getTitleData line, i
-      .filter (o) ->
-        (!!o.level) && (!!o.title)
-    # console.log structData
-    structData
-
-  getTitleArray: ->
-    self = @
-
-    structure = @getTitleStructure()
-    prev =
-      parent: null
-      children: []
-      level: 0
-      title: null
-    root = prev.children
-    structure.forEach (o, i) ->
-      relativeDepth = prev.level - o.level + 1  # p = 0, o = 1 -> 0
-      target = prev
-      [0...(relativeDepth)].forEach (j) ->
-        target = target.parent
-      o =
-        parent: target
-        children: []
-        level: o.level
-        title: self.toUrl(o.title)
-      target.children.push o
-      prev = o
-    console.log "tree: ", root
-    root
-
-  getTitles: ->
-    @getTitleStructure()
-      .filter (o) -> o.level == 1
-      .map    (o) -> o.title
-
-  toUrl: (str) ->
-    str
+  titleToUrl: (title) ->
+    title
       .replace /^\s+/g, ""
       .replace /\s+$/g, ""
       .replace /\s/g, "-"
       .toLowerCase()
 
-  # getUrls: ->
-  #   @getTitles()
-  #     .map (title) ->
-  #       title
-  #         .replace /^\s+/g, ""
-  #         .replace /\s+$/g, ""
-  #         .replace /\s/g, "-"
-  #         .toLowerCase()
+  parseStructure: (routesAry) =>
+    routesAry.map (pwd) =>
+      size = pwd.split('/').length
+      title: pwd.split('/')[size - 1]
+      url: "/#{@titleToUrl(pwd)}"
+      level: size - 1
 
-  _getTitleData = (line, lineNumber) -> # 行数は0から数えるものとする
-    titleRegex = /^\s*#+\s*(.+)/g
-    levelRegex = /^\s*(#+)\s*/g
-    title = (
-      titleRegex.exec(line) ||
-      1: null
-    )[1]
-    titleLevel = (
-      levelRegex.exec(line) ||
-      1: length: 0
-    )[1].length # execにはマッチする「#」達が入るからそのlengthがタイトルのレベル
-    return {
-      title: title
-      level: titleLevel
-      lineNumber: lineNumber
-    }
+  _recursionSearch = (directory, pwd) ->
+    pwd = pwd || ""
+    routesAry = []
+    directory.children.forEach (o) ->
+      switch o.type
+        when "file"
+          routesAry.push("overview#{pwd}/#{o.file}")
+        when "directory"
+          routesAry = routesAry.concat(_recursionSearch(o, "#{pwd}/#{o.name}"))
+    routesAry
 
 
 
-  getMarkdownById: (title_id) ->
-    lineNumber = 0
-    texts = []
-    len = undefined
-    while len != 0
-      txt = @getMdDataByLineNumber(lineNumber)
-      texts.push txt
-      len = txt.split("\n").length - 1
-      lineNumber += len + 1
-      # console.log txt, len, lineNumber
-    # console.log texts
-    texts[title_id]
 
-  getOverviewHtml: (title_id) ->
-    markdown = @getMarkdownById title_id
-    marked.setOptions highlight: (code) ->
-      require('highlight.js').highlightAuto(code).value
-    html = marked markdown
 
-  getMdDataByLineNumber: (titleLineNumber) -> # 次に見つかる大見出しまたはEOFを見つける
-    startLine = titleLineNumber
-    nextLine = startLine + 1
-    while !(@lines[nextLine] == undefined || _getTitleData(@lines[nextLine], nextLine).level == 1)
-      nextLine++
-    endLine = nextLine - 1
-    resultMd = @lines
-      .filter (s, i) ->
-        startLine <= i && i <= endLine
-      .join "\n"
-    resultMd
+
+
+
+
+
+
+  # ###*
+  #  * set external markdown text
+  #  * @param {Object} overview markdown text
+  # ###
+  # # setMarkdown: (md) ->
+  # #   @markdown = md
+  #
+  # getTitleStructure: ->
+  #   # console.log @lines
+  #   structData = @lines
+  #     .map (line, i) ->
+  #       _getTitleData line, i
+  #     .filter (o) ->
+  #       (!!o.level) && (!!o.title)
+  #   # console.log structData
+  #   structData
+  #
+  # getTitleArray: ->
+  #   self = @
+  #
+  #   structure = @getTitleStructure()
+  #   prev =
+  #     parent: null
+  #     children: []
+  #     level: 0
+  #     title: null
+  #   root = prev.children
+  #   structure.forEach (o, i) ->
+  #     relativeDepth = prev.level - o.level + 1  # p = 0, o = 1 -> 0
+  #     target = prev
+  #     [0...(relativeDepth)].forEach (j) ->
+  #       target = target.parent
+  #     o =
+  #       parent: target
+  #       children: []
+  #       level: o.level
+  #       title: self.toUrl(o.title)
+  #     target.children.push o
+  #     prev = o
+  #   # console.log "tree: ", root
+  #   root
+  #
+  # getTitles: ->
+  #   @getTitleStructure()
+  #     .filter (o) -> o.level == 1
+  #     .map    (o) -> o.title
+  #
+  # toUrl: (str) ->
+  #   str
+  #     .replace /^\s+/g, ""
+  #     .replace /\s+$/g, ""
+  #     .replace /\s/g, "-"
+  #     .toLowerCase()
+  #
+  # # getUrls: ->
+  # #   @getTitles()
+  # #     .map (title) ->
+  # #       title
+  # #         .replace /^\s+/g, ""
+  # #         .replace /\s+$/g, ""
+  # #         .replace /\s/g, "-"
+  # #         .toLowerCase()
+  #
+  # _getTitleData = (line, lineNumber) -> # 行数は0から数えるものとする
+  #   titleRegex = /^\s*#+\s*(.+)/g
+  #   levelRegex = /^\s*(#+)\s*/g
+  #   title = (
+  #     titleRegex.exec(line) ||
+  #     1: null
+  #   )[1]
+  #   titleLevel = (
+  #     levelRegex.exec(line) ||
+  #     1: length: 0
+  #   )[1].length # execにはマッチする「#」達が入るからそのlengthがタイトルのレベル
+  #   return {
+  #     title: title
+  #     level: titleLevel
+  #     lineNumber: lineNumber
+  #   }
+  #
+  #
+  #
+  # getMarkdownById: (title_id) ->
+  #   lineNumber = 0
+  #   texts = []
+  #   len = undefined
+  #   while len != 0
+  #     txt = @getMdDataByLineNumber(lineNumber)
+  #     texts.push txt
+  #     len = txt.split("\n").length - 1
+  #     lineNumber += len + 1
+  #     # console.log txt, len, lineNumber
+  #   # console.log texts
+  #   texts[title_id]
+  #
+  # getOverviewHtml: (title_id) ->
+  #   markdown = @getMarkdownById title_id
+  #   marked.setOptions highlight: (code) ->
+  #     require('highlight.js').highlightAuto(code).value
+  #   html = marked markdown
+  #
+  # getMdDataByLineNumber: (titleLineNumber) -> # 次に見つかる大見出しまたはEOFを見つける
+  #   startLine = titleLineNumber
+  #   nextLine = startLine + 1
+  #   while !(@lines[nextLine] == undefined || _getTitleData(@lines[nextLine], nextLine).level == 1)
+  #     nextLine++
+  #   endLine = nextLine - 1
+  #   resultMd = @lines
+  #     .filter (s, i) ->
+  #       startLine <= i && i <= endLine
+  #     .join "\n"
+  #   resultMd
 
 
 module.exports = Overviews

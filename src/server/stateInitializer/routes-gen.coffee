@@ -66,18 +66,32 @@ class RoutesGen
    * @return {Object} fragment of routes
   ###
   constructOverviewRoutes = (structure) ->
-    routes =
-      'overview': 'overview'
-    # todo: 後でリファクタリング
-    structure.forEach (node, i) ->
-      routes["overview/#{node.title}"] = "overview:#{i}"
-      if node.children?
-        node.children.forEach (node2, j) ->
-          routes["overview/#{node.title}/#{node2.title}"] = "overview:#{i}:#{j}"
-          if node2.children
-            node2.children.forEach (node3, k) ->
-              routes["overview/#{node.title}/#{node2.title}/#{node3.title}"] = "overview:#{i}:#{j}:#{k}"
+    routes = structure
+    routes["overview"] = "overview"
+    # console.log routes
     return routes
+
+  _recursionSearch = (directory, pwd) ->
+    pwd = pwd || ""
+    routes = {}
+    directory.children.forEach (o) ->
+      switch o.type
+        when "file"
+          routes["overview#{pwd}/#{o.file}"] = "overview#{pwd.replace /\//g, ':'}:#{o.file}"
+        when "directory"
+          routes = objectAssign(routes, _recursionSearch(o, "#{pwd}/#{o.name}"))
+    routes
+
+    # # todo: 後でリファクタリング
+    # structure.forEach (node, i) ->
+    #   routes["overview/#{node.title}"] = "overview:#{i}"
+    #   if node.children?
+    #     node.children.forEach (node2, j) ->
+    #       routes["overview/#{node.title}/#{node2.title}"] = "overview:#{i}:#{j}"
+    #       if node2.children
+    #         node2.children.forEach (node3, k) ->
+    #           routes["overview/#{node.title}/#{node2.title}/#{node3.title}"] = "overview:#{i}:#{j}:#{k}"
+    # return routes
 
   ###*
    * construct error routes

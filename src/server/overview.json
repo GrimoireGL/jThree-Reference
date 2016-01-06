@@ -1,0 +1,283 @@
+{
+  "type": "directory",
+  "name": "markdowns",
+  "children": [
+    {
+      "type": "file",
+      "file": "text1",
+      "content": "# title\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+    },
+    {
+      "type": "file",
+      "file": "text2",
+      "content": "# title\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+    },
+    {
+      "type": "directory",
+      "name": "content1",
+      "children": [
+        {
+          "type": "file",
+          "file": "anotherFileExtensionTest",
+          "content": "# anotherFileExtensionTest"
+        },
+        {
+          "type": "file",
+          "file": "hyphen-test",
+          "content": "# hyphen-test"
+        },
+        {
+          "type": "file",
+          "file": "space test",
+          "content": "# space test"
+        },
+        {
+          "type": "file",
+          "file": "subtext1",
+          "content": "# subtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+        },
+        {
+          "type": "file",
+          "file": "subtext2",
+          "content": "# subtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+        },
+        {
+          "type": "file",
+          "file": "subtext3",
+          "content": "# subtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+        },
+        {
+          "type": "directory",
+          "name": "subcontent1",
+          "children": [
+            {
+              "type": "file",
+              "file": "subsubtext1",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext2",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext3",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "subcontent2",
+          "children": [
+            {
+              "type": "file",
+              "file": "subsubtext1",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext2",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext3",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "subcontent3",
+          "children": [
+            {
+              "type": "file",
+              "file": "subsubtext1",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext2",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext3",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "directory",
+      "name": "content2",
+      "children": [
+        {
+          "type": "file",
+          "file": "subtext1",
+          "content": "# subtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+        },
+        {
+          "type": "file",
+          "file": "subtext2",
+          "content": "# subtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+        },
+        {
+          "type": "file",
+          "file": "subtext3",
+          "content": "# subtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+        },
+        {
+          "type": "directory",
+          "name": "subcontent1",
+          "children": [
+            {
+              "type": "file",
+              "file": "subsubtext1",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext2",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext3",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "subcontent2",
+          "children": [
+            {
+              "type": "file",
+              "file": "subsubtext1",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext2",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext3",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "subcontent3",
+          "children": [
+            {
+              "type": "file",
+              "file": "subsubtext1",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext2",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext3",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "directory",
+      "name": "content3",
+      "children": [
+        {
+          "type": "file",
+          "file": "subtext1",
+          "content": "# subtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+        },
+        {
+          "type": "file",
+          "file": "subtext2",
+          "content": "# subtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+        },
+        {
+          "type": "file",
+          "file": "subtext3",
+          "content": "# subtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+        },
+        {
+          "type": "directory",
+          "name": "subcontent1",
+          "children": [
+            {
+              "type": "file",
+              "file": "subsubtext1",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext2",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext3",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "subcontent2",
+          "children": [
+            {
+              "type": "file",
+              "file": "subsubtext1",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext2",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext3",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            }
+          ]
+        },
+        {
+          "type": "directory",
+          "name": "subcontent3",
+          "children": [
+            {
+              "type": "file",
+              "file": "subsubtext1",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext2",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            },
+            {
+              "type": "file",
+              "file": "subsubtext3",
+              "content": "# subsubtitle\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

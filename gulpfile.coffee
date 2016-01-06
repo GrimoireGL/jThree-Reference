@@ -10,6 +10,8 @@ rename = require 'gulp-rename'
 gulpif = require 'gulp-if'
 envify = require 'envify/custom'
 mocha = require 'gulp-mocha'
+fs = require 'fs'
+path = require 'path'
 
 others = [
 ]
@@ -17,14 +19,14 @@ others = [
 env_production = false
 gulp.task 'default', ['build']
 gulp.task 'enable-build-production-mode', -> env_production = true
-gulp.task 'build', ['enable-build-production-mode', 'build:others', 'browserify']
-gulp.task 'build-dev', ['build:others', 'browserify']
+gulp.task 'build', ['enable-build-production-mode', 'build:others', 'browserify', 'bundle-overview-files']
+gulp.task 'build-dev', ['build:others', 'browserify', 'bundle-overview-files']
 gulp.task 'build:others', ("build:#{it.suffix}" for it in others)
 
 watching = false
 gulp.task 'enable-watch-mode', -> watching = true
 gulp.task 'watch-prd', ['enable-build-production-mode', 'watch']
-gulp.task 'watch', ['build:others', 'enable-watch-mode', 'browserify'], ->
+gulp.task 'watch', ['build:others', 'enable-watch-mode', 'browserify', 'bundle-overview-files'], ->
   for it in others
     gulp.watch it.src, ["build:#{it.suffix}"]
 
@@ -75,3 +77,58 @@ gulp.task 'test', ->
   gulp
     .src './test/**/*test.coffee'
     .pipe mocha()
+
+gulp.task 'bundle-overview-files', ->
+  targetDir = "#{fs.realpathSync('./')}/clones/jThree-Overview/markdowns"
+  walk = (p, callback) ->
+    results = []
+    fs.readdir p, (err, files) ->
+      if err
+        throw err
+      pending = files.length
+      if !pending
+        return callback(null, results)
+      #全てのファイル取得が終わったらコールバックを呼び出す
+      files.map((file) ->
+        #リスト取得
+        path.join p, file
+      ).filter((file) ->
+        if fs.statSync(file).isDirectory()
+          walk file, (err, res) ->
+            #ディレクトリだったら再帰
+            results.push
+              type: "directory"
+              name: path.basename(file)
+              children: res
+            #子ディレクトリをchildrenインデックス配下に保存
+            if !--pending
+              callback null, results
+            return
+        fs.statSync(file).isFile()
+      ).forEach (file) ->
+        #ファイル名を保存
+        # stat = fs.statSync(file)
+        content = fs.readFileSync(file, "utf-8")
+        fileName = (temp = path.basename(file).match(/(.*)(?:\.([^.]+$))/))[1]
+        fileExtension = temp[2]
+        if fileExtension == "md" || fileExtension == "markdown"
+          results.push
+            type: "file"
+            file: fileName
+            content: content
+        if !--pending
+          callback null, results
+        return
+      return
+    return
+  walk targetDir, (err, results) ->
+    if err
+      throw err
+    data =
+      type: "directory"
+      name: 'markdowns'
+      children: results
+    outputTarget = "#{fs.realpathSync('./')}/src/server/overview.json"
+    fs.writeFile outputTarget, JSON.stringify(data, "", "  ")
+    #一覧出力
+    return

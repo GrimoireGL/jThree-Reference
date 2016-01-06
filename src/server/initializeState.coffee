@@ -24,8 +24,8 @@ class InitializeState
    * resetup state initializer
   ###
   gen: ->
-    console.log @overviews.getTitleArray()
-    @routeGen.gen @docs.json, @overviews.getTitleArray()
+    # console.log @overviews.getTitleArray()
+    @routeGen.gen @docs.json, @overviews.routes
     @dirTree.gen @docs.json
     @doc_coverage.gen @docs.json
     @router.setRoute @routeGen.routes
@@ -38,6 +38,7 @@ class InitializeState
   initialize: (req) ->
     initial_doc_data = {}
     initial_overview_markup = ""
+    initial_overview_structure = []
     @router.route req.originalUrl, (route, argu) =>
       # console.log argu.route_arr
       switch argu.route_arr[0]
@@ -48,7 +49,8 @@ class InitializeState
             initial_doc_data = @docs.getDocDataById file_id, factor_id
         when "overview"
           title_id = argu.route_arr[1] || 0
-          initial_overview_markup = @overviews.getOverviewHtml(title_id)
+          initial_overview_markup = ""#@overviews.getOverviewHtml(title_id)
+          initial_overview_structure = @overviews.structure
 
 
     initialState =
@@ -61,7 +63,7 @@ class InitializeState
         doc_data: initial_doc_data
       OverviewStore:
         markup: initial_overview_markup
-        structure: @overviews.getTitleStructure()
+        structure: initial_overview_structure
       DocCoverageStore:
         coverage: @doc_coverage.coverage
 

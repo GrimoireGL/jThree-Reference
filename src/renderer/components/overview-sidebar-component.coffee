@@ -27,11 +27,8 @@ class OverviewSidebarComponent extends React.Component
     <div style={[].concat.apply([], [styles.sidebar, @props.style])}>
       <OverviewSidebarItemComponent>
         {
-          itemTitle = ""
           structure.map (data) ->
-            if data.level == 1
-              itemTitle = data.title
-            <OverviewSidebarTitleComponent level={data.level} itemTitle={itemTitle}>
+            <OverviewSidebarTitleComponent level={data.level} url={data.url}>
               {data.title}
             </OverviewSidebarTitleComponent>
         }
