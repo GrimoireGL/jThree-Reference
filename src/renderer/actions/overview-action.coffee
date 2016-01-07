@@ -15,14 +15,18 @@ class OverviewAction extends Flux.Action
    * get and update overview object
    * @param  {String|Number} title_id   id of child of overview root
   ###
-  updateOverview: (title_id) ->
+  updateOverview: (path) ->
+    path = path.split("/").filter((_, i) -> i >= 2).join(":::")
     new Promise (resolve, reject) =>
       request
-        .get "/api/overview/#{title_id}"
+        .get "http://localhost:5000/api/overview/#{path}"
         .end (err, res) ->
-          # resolve res.body
+          # console.log "connect to: ", "/api/overview/#{path}"
+          # console.log "res.body: ", res.body
+          # console.log err
+          resolve res.body
     .then (res) =>
-      @dispatch(keys.updateOverview, title_id, res)
+      @dispatch(keys.updateOverview, path, res)
     .catch (err) ->
       console.error err
 

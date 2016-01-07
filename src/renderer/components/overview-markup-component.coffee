@@ -14,16 +14,22 @@ class OverviewMarkupComponent extends React.Component
 
   componentWillMount: ->
     @store = @context.ctx.overviewStore
+    @context.ctx.overviewAction.updateOverview "/#{@props.argu.fragment}"
     @setState @store.get()
 
   componentDidMount: ->
     @store.onChange @_onChange.bind(@)
+    @setState @store.get()
+
 
   componentWillUnmount: ->
     @store.removeChangeListener(@_onChange.bind(@))
+    @setState @store.get()
 
   # shouldComponentUpdate: (nextProps, nextState) ->
+  #   true
   #   nextProps.markup != @props.marked
+
 
   getMd: ->
     @props.markup
@@ -31,7 +37,11 @@ class OverviewMarkupComponent extends React.Component
   render: ->
     <div className={'markdown-component'} style={@props.style}>
       <Route>
-        <div style={styles.container} dangerouslySetInnerHTML={__html: @state.markup}></div>
+        {
+          console.log "markdowns:", @state.markup
+          path = @props.argu.fragment_arr.filter((s, i)-> i >= 1).join("/")
+          <div style={styles.container} dangerouslySetInnerHTML={__html: @state.markup[path]}></div>
+        }
       </Route>
     </div>
 

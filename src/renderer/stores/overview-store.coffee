@@ -21,10 +21,11 @@ class OverviewStore extends Flux.Store
    * update overview's markup,structure
    * @param data.markup {string}
   ###
-  updateOverview: (title_id, data) ->
-    state = {}
-    state.markup[title_id] = data.markup
+  updateOverview: (path, data) ->
+    state = markup:{}
+    state.markup[path.replace(/:::/g, "/")] = data.markup
     state.structure = data.structure
+    console.log state
     @setState objectAssign(@state, state)
 
   ###*

@@ -5,12 +5,12 @@
     {
       "type": "file",
       "file": "text1",
-      "content": "# title\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+      "content": "# this is text1 \nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
     },
     {
       "type": "file",
       "file": "text2",
-      "content": "# title\nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
+      "content": "# this is text2 \nedfghjkl;regsfhjkl;dgfhjkl;\nahjsjdhalksjkd;asf\njahsfkdhsakjfhksdjahfjjjsconetent\n"
     },
     {
       "type": "directory",
@@ -132,7 +132,7 @@
         },
         {
           "type": "directory",
-          "name": "subcontent1",
+          "name": "subcontent2",
           "children": [
             {
               "type": "file",
@@ -153,7 +153,7 @@
         },
         {
           "type": "directory",
-          "name": "subcontent2",
+          "name": "subcontent1",
           "children": [
             {
               "type": "file",
@@ -216,7 +216,7 @@
         },
         {
           "type": "directory",
-          "name": "subcontent1",
+          "name": "subcontent3",
           "children": [
             {
               "type": "file",
@@ -258,7 +258,7 @@
         },
         {
           "type": "directory",
-          "name": "subcontent3",
+          "name": "subcontent1",
           "children": [
             {
               "type": "file",

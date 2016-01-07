@@ -62,11 +62,30 @@ class Overviews
           routesAry = routesAry.concat(_recursionSearch(o, "#{pwd}/#{o.name}"))
     routesAry
 
+  getMarkupByPath: (path) ->
+    # path is splitted by :::
+    pathAry = path.split ":::"
+    # console.log @md2Html @findMarkdown(@json, pathAry)
+    return @md2Html @findMarkdown(@json, pathAry)
 
+  findMarkdown: (dir, pathAry) =>
+    # console.log pathAry
+    if pathAry.length # 検索するものが残ってる->ディレクトリ
+      findedDir = dir.children.filter((o) =>
+        @titleToUrl(o.file||"") == pathAry[0] ||
+        @titleToUrl(o.name||"") == pathAry[0]
+      )[0]
+      pathAry.shift()
+      # console.log findedDir
+      return @findMarkdown findedDir, pathAry
+    # 残ってない->ファイル
+    # console.log dir.content
+    return dir.content
 
-
-
-
+  md2Html: (markdown) ->
+    marked.setOptions highlight: (code) ->
+      require('highlight.js').highlightAuto(code).value
+    return html = marked markdown
 
 
 
