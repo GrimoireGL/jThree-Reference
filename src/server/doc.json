@@ -1,0 +1,8465 @@
+{
+	"id": 0,
+	"name": "typedoc",
+	"kind": 0,
+	"flags": {},
+	"children": [
+		{
+			"id": 1,
+			"name": "\"access\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/Users/pnlybubbles/Devs/typedoc/examples/basic/src/access.ts",
+			"children": [
+				{
+					"id": 15,
+					"name": "PrivateModule",
+					"kind": 2,
+					"kindString": "Module",
+					"flags": {
+						"isPrivate": true,
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "A module that is documented as being private."
+					},
+					"children": [
+						{
+							"id": 16,
+							"name": "functionInsidePrivateModule",
+							"kind": 64,
+							"kindString": "Function",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 17,
+									"name": "functionInsidePrivateModule",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Functions",
+							"kind": 64,
+							"children": [
+								16
+							]
+						}
+					]
+				},
+				{
+					"id": 2,
+					"name": "PrivateClass",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {
+						"isPrivate": true,
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "A class that is documented as being private."
+					},
+					"children": [
+						{
+							"id": 3,
+							"name": "fakePrivateVariable",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPrivate": true,
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "A variable that is made private via comment."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							}
+						},
+						{
+							"id": 4,
+							"name": "fakeProtectedVariable",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isProtected": true
+							},
+							"comment": {
+								"shortText": "A variable that is made protected via comment."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							}
+						},
+						{
+							"id": 5,
+							"name": "fakePrivateFunction",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isPrivate": true,
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 6,
+									"name": "fakePrivateFunction",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {
+										"isPrivate": true
+									},
+									"comment": {
+										"shortText": "A function that is made private via comment."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 7,
+							"name": "fakeProtectedFunction",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true,
+								"isProtected": true
+							},
+							"signatures": [
+								{
+									"id": 8,
+									"name": "fakeProtectedFunction",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {
+										"isProtected": true
+									},
+									"comment": {
+										"shortText": "A function that is made protected via comment."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								3,
+								4
+							]
+						},
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								5,
+								7
+							]
+						}
+					]
+				},
+				{
+					"id": 9,
+					"name": "fakePrivateVariable",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isPrivate": true,
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "A variable that is made private via comment."
+					},
+					"type": {
+						"type": "instrinct",
+						"name": "string"
+					},
+					"defaultValue": "\"test\""
+				},
+				{
+					"id": 10,
+					"name": "fakeProtectedVariable",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isExported": true,
+						"isProtected": true
+					},
+					"comment": {
+						"shortText": "A variable that is made protected via comment."
+					},
+					"type": {
+						"type": "instrinct",
+						"name": "string"
+					},
+					"defaultValue": "\"test\""
+				},
+				{
+					"id": 11,
+					"name": "fakePrivateFunction",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isPrivate": true,
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 12,
+							"name": "fakePrivateFunction",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isPrivate": true
+							},
+							"comment": {
+								"shortText": "A function that is made private via comment."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					]
+				},
+				{
+					"id": 13,
+					"name": "fakeProtectedFunction",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true,
+						"isProtected": true
+					},
+					"signatures": [
+						{
+							"id": 14,
+							"name": "fakeProtectedFunction",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isProtected": true
+							},
+							"comment": {
+								"shortText": "A function that is made protected via comment."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Modules",
+					"kind": 2,
+					"children": [
+						15
+					]
+				},
+				{
+					"title": "Classes",
+					"kind": 128,
+					"children": [
+						2
+					]
+				},
+				{
+					"title": "Variables",
+					"kind": 32,
+					"children": [
+						9,
+						10
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						11,
+						13
+					]
+				}
+			]
+		},
+		{
+			"id": 18,
+			"name": "\"classes\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/Users/pnlybubbles/Devs/typedoc/examples/basic/src/classes.ts",
+			"children": [
+				{
+					"id": 36,
+					"name": "BaseClass",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "This is a simple base class.",
+						"text": "[[include:class-example.md]]\n"
+					},
+					"children": [
+						{
+							"id": 42,
+							"name": "constructor",
+							"kind": 512,
+							"kindString": "Constructor",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 43,
+									"name": "new BaseClass",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 44,
+											"name": "name",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "BaseClass",
+										"id": 36
+									}
+								},
+								{
+									"id": 45,
+									"name": "new BaseClass",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 46,
+											"name": "source",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "BaseClass",
+												"id": 36
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "BaseClass",
+										"id": 36
+									}
+								}
+							]
+						},
+						{
+							"id": 41,
+							"name": "internalClass",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPrivate": true,
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "This is an instance member of an internal class."
+							},
+							"type": {
+								"type": "reference",
+								"name": "InternalClass",
+								"id": 68
+							}
+						},
+						{
+							"id": 38,
+							"name": "kind",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isProtected": true
+							},
+							"comment": {
+								"shortText": "This is a simple protected member."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "number"
+							}
+						},
+						{
+							"id": 37,
+							"name": "name",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"comment": {
+								"shortText": "This is a simple public member."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							},
+							"implementationOf": {
+								"type": "reference",
+								"name": "INameInterface.name",
+								"id": 20
+							}
+						},
+						{
+							"id": 39,
+							"name": "instance",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isStatic": true,
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "This is a static member.",
+								"text": "Static members should not be inherited.\n"
+							},
+							"type": {
+								"type": "reference",
+								"name": "BaseClass",
+								"id": 36
+							}
+						},
+						{
+							"id": 40,
+							"name": "instances",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isStatic": true,
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"isArray": true,
+								"name": "BaseClass",
+								"id": 36
+							}
+						},
+						{
+							"id": 54,
+							"name": "arrowFunction",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"comment": {
+								"shortText": "This is a simple fat arrow function.",
+								"tags": [
+									{
+										"tag": "see",
+										"text": "https://github.com/sebastian-lenz/typedoc/issues/37\n"
+									}
+								]
+							},
+							"signatures": [
+								{
+									"id": 55,
+									"name": "arrowFunction",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a simple fat arrow function."
+									},
+									"parameters": [
+										{
+											"id": 56,
+											"name": "param2",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "The second parameter needed by this function."
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										},
+										{
+											"id": 57,
+											"name": "param1",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "The first parameter needed by this function."
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 58,
+							"name": "checkName",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isPrivate": true,
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 59,
+									"name": "checkName",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a private function."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "boolean"
+									}
+								}
+							]
+						},
+						{
+							"id": 47,
+							"name": "getName",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 48,
+									"name": "getName",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a simple member function.",
+										"text": "It should be inherited by all subclasses. This class has a static\nmember with the same name, both should be documented.\n",
+										"returns": "Return the name.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									},
+									"implementationOf": {
+										"type": "reference",
+										"name": "INameInterface.getName",
+										"id": 22
+									}
+								}
+							],
+							"implementationOf": {
+								"type": "reference",
+								"name": "INameInterface.getName",
+								"id": 21
+							}
+						},
+						{
+							"id": 51,
+							"name": "setName",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 52,
+									"name": "setName",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a simple member function.",
+										"text": "It should be inherited by all subclasses.\n"
+									},
+									"parameters": [
+										{
+											"id": 53,
+											"name": "name",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"text": "The new name.\n"
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 62,
+							"name": "caTest",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true,
+								"isExported": true,
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 63,
+									"name": "caTest",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"tags": [
+											{
+												"tag": "see",
+												"text": "https://github.com/sebastian-lenz/typedoc/issues/42\n"
+											}
+										]
+									},
+									"parameters": [
+										{
+											"id": 64,
+											"name": "originalValues",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "BaseClass",
+												"id": 36
+											}
+										},
+										{
+											"id": 65,
+											"name": "newRecord",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										},
+										{
+											"id": 66,
+											"name": "fieldNames",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"isArray": true,
+												"name": "string"
+											}
+										},
+										{
+											"id": 67,
+											"name": "mandatoryFields",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"isArray": true,
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								}
+							]
+						},
+						{
+							"id": 60,
+							"name": "getInstance",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true,
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 61,
+									"name": "getInstance",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a static function.",
+										"text": "Static functions should not be inherited.\n",
+										"returns": "An instance of BaseClass.\n"
+									},
+									"type": {
+										"type": "reference",
+										"name": "BaseClass",
+										"id": 36
+									}
+								}
+							]
+						},
+						{
+							"id": 49,
+							"name": "getName",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true,
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 50,
+									"name": "getName",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a simple static member function.",
+										"text": "Static functions should not be inherited. This class has a\nmember with the same name, both should be documented.\n",
+										"returns": "Return the name.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"kind": 512,
+							"children": [
+								42
+							]
+						},
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								41,
+								38,
+								37,
+								39,
+								40
+							]
+						},
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								54,
+								58,
+								47,
+								51,
+								62,
+								60,
+								49
+							]
+						}
+					],
+					"extendedBy": [
+						{
+							"type": "reference",
+							"name": "SubClassA",
+							"id": 74
+						},
+						{
+							"type": "reference",
+							"name": "SubClassB",
+							"id": 117
+						}
+					],
+					"implementedTypes": [
+						{
+							"type": "reference",
+							"name": "INameInterface",
+							"id": 19
+						}
+					]
+				},
+				{
+					"id": 147,
+					"name": "GenericClass",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "This is a generic class."
+					},
+					"typeParameter": [
+						{
+							"id": 148,
+							"name": "T",
+							"kind": 131072,
+							"kindString": "Type parameter",
+							"flags": {},
+							"comment": {
+								"shortText": "This a type parameter.\n"
+							},
+							"type": {
+								"type": "reference",
+								"name": "BaseClass",
+								"id": 36
+							}
+						}
+					],
+					"children": [
+						{
+							"id": 150,
+							"name": "constructor",
+							"kind": 512,
+							"kindString": "Constructor",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "Constructor short text."
+							},
+							"signatures": [
+								{
+									"id": 154,
+									"name": "new GenericClass",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Constructor short text."
+									},
+									"parameters": [
+										{
+											"id": 155,
+											"name": "p1",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "Constructor param"
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										},
+										{
+											"id": 156,
+											"name": "p2",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "Private string property"
+											},
+											"type": {
+												"type": "typeParameter",
+												"name": "T",
+												"constraint": {
+													"type": "reference",
+													"name": "BaseClass",
+													"id": 36
+												}
+											}
+										},
+										{
+											"id": 157,
+											"name": "p3",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "Public number property"
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "number"
+											}
+										},
+										{
+											"id": 158,
+											"name": "p4",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "Public implicit any property\n"
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "GenericClass",
+										"id": 147
+									}
+								}
+							]
+						},
+						{
+							"id": 151,
+							"name": "p2",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isConstructorProperty": true,
+								"isExported": true,
+								"isProtected": true
+							},
+							"comment": {
+								"shortText": "Private string property"
+							},
+							"type": {
+								"type": "typeParameter",
+								"name": "T",
+								"constraint": {
+									"type": "reference",
+									"name": "BaseClass",
+									"id": 36
+								}
+							}
+						},
+						{
+							"id": 152,
+							"name": "p3",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isConstructorProperty": true,
+								"isExported": true,
+								"isPublic": true
+							},
+							"comment": {
+								"shortText": "Public number property"
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "number"
+							}
+						},
+						{
+							"id": 153,
+							"name": "p4",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPrivate": true,
+								"isConstructorProperty": true,
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "Public implicit any property"
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "number"
+							}
+						},
+						{
+							"id": 149,
+							"name": "value",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"type": {
+								"type": "typeParameter",
+								"name": "T",
+								"constraint": {
+									"type": "reference",
+									"name": "BaseClass",
+									"id": 36
+								}
+							}
+						},
+						{
+							"id": 162,
+							"name": "getValue",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 163,
+									"name": "getValue",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "typeParameter",
+										"name": "T",
+										"constraint": {
+											"type": "reference",
+											"name": "BaseClass",
+											"id": 36
+										}
+									}
+								}
+							]
+						},
+						{
+							"id": 159,
+							"name": "setValue",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 160,
+									"name": "setValue",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {},
+									"parameters": [
+										{
+											"id": 161,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"text": "[[getValue]] is the counterpart.\n"
+											},
+											"type": {
+												"type": "typeParameter",
+												"name": "T",
+												"constraint": {
+													"type": "reference",
+													"name": "BaseClass",
+													"id": 36
+												}
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"kind": 512,
+							"children": [
+								150
+							]
+						},
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								151,
+								152,
+								153,
+								149
+							]
+						},
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								162,
+								159
+							]
+						}
+					],
+					"extendedBy": [
+						{
+							"type": "reference",
+							"name": "NonGenericClass",
+							"id": 164
+						}
+					]
+				},
+				{
+					"id": 68,
+					"name": "InternalClass",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {},
+					"comment": {
+						"shortText": "This is an internal class, it is not exported."
+					},
+					"children": [
+						{
+							"id": 69,
+							"name": "constructor",
+							"kind": 512,
+							"kindString": "Constructor",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 70,
+									"name": "new InternalClass",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 71,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reflection",
+												"declaration": {
+													"id": 72,
+													"name": "__type",
+													"kind": 65536,
+													"kindString": "Type literal",
+													"flags": {},
+													"children": [
+														{
+															"id": 73,
+															"name": "name",
+															"kind": 32,
+															"kindString": "Variable",
+															"flags": {},
+															"type": {
+																"type": "instrinct",
+																"name": "string"
+															}
+														}
+													],
+													"groups": [
+														{
+															"title": "Variables",
+															"kind": 32,
+															"children": [
+																73
+															]
+														}
+													]
+												}
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "InternalClass",
+										"id": 68
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"kind": 512,
+							"children": [
+								69
+							]
+						}
+					]
+				},
+				{
+					"id": 164,
+					"name": "NonGenericClass",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "This a non generic class derived from a [[GenericClass|generic class]]."
+					},
+					"children": [
+						{
+							"id": 166,
+							"name": "constructor",
+							"kind": 512,
+							"kindString": "Constructor",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "Constructor short text."
+							},
+							"signatures": [
+								{
+									"id": 169,
+									"name": "new NonGenericClass",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Constructor short text."
+									},
+									"parameters": [
+										{
+											"id": 170,
+											"name": "p1",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "Constructor param"
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										},
+										{
+											"id": 171,
+											"name": "p2",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "Private string property"
+											},
+											"type": {
+												"type": "reference",
+												"name": "SubClassB",
+												"id": 117
+											}
+										},
+										{
+											"id": 172,
+											"name": "p3",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "Public number property"
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "number"
+											}
+										},
+										{
+											"id": 173,
+											"name": "p4",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "Public implicit any property\n"
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "NonGenericClass",
+										"id": 164
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "GenericClass.__constructor",
+										"id": 150
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "GenericClass.__constructor",
+								"id": 150
+							}
+						},
+						{
+							"id": 167,
+							"name": "p2",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isConstructorProperty": true,
+								"isExported": true,
+								"isProtected": true
+							},
+							"comment": {
+								"shortText": "Private string property"
+							},
+							"type": {
+								"type": "reference",
+								"name": "SubClassB",
+								"id": 117
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "GenericClass.p2",
+								"id": 151
+							}
+						},
+						{
+							"id": 168,
+							"name": "p3",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isConstructorProperty": true,
+								"isExported": true,
+								"isPublic": true
+							},
+							"comment": {
+								"shortText": "Public number property"
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "number"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "GenericClass.p3",
+								"id": 152
+							}
+						},
+						{
+							"id": 165,
+							"name": "value",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "SubClassB",
+								"id": 117
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "GenericClass.value",
+								"id": 149
+							}
+						},
+						{
+							"id": 177,
+							"name": "getValue",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 178,
+									"name": "getValue",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "SubClassB",
+										"id": 117
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "GenericClass.getValue",
+										"id": 162
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "GenericClass.getValue",
+								"id": 162
+							}
+						},
+						{
+							"id": 174,
+							"name": "setValue",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 175,
+									"name": "setValue",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {},
+									"parameters": [
+										{
+											"id": 176,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"text": "[[getValue]] is the counterpart.\n"
+											},
+											"type": {
+												"type": "reference",
+												"name": "SubClassB",
+												"id": 117
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "GenericClass.setValue",
+										"id": 159
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "GenericClass.setValue",
+								"id": 159
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"kind": 512,
+							"children": [
+								166
+							]
+						},
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								167,
+								168,
+								165
+							]
+						},
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								177,
+								174
+							]
+						}
+					],
+					"extendedTypes": [
+						{
+							"type": "reference",
+							"name": "GenericClass",
+							"id": 147,
+							"typeArguments": [
+								{
+									"type": "reference",
+									"name": "SubClassB",
+									"id": 117
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": 74,
+					"name": "SubClassA",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "This is a class that extends another class.",
+						"text": "This class has no own constructor, so its constructor should be inherited\nfrom BaseClass.\n"
+					},
+					"children": [
+						{
+							"id": 93,
+							"name": "constructor",
+							"kind": 512,
+							"kindString": "Constructor",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 94,
+									"name": "new SubClassA",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 95,
+											"name": "name",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "SubClassA",
+										"id": 74
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "BaseClass.__constructor",
+										"id": 42
+									}
+								},
+								{
+									"id": 96,
+									"name": "new SubClassA",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 97,
+											"name": "source",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "BaseClass",
+												"id": 36
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "SubClassA",
+										"id": 74
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "BaseClass.__constructor",
+										"id": 42
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.__constructor",
+								"id": 42
+							}
+						},
+						{
+							"id": 90,
+							"name": "kind",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isProtected": true
+							},
+							"comment": {
+								"shortText": "This is a simple protected member."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "number"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.kind",
+								"id": 38
+							}
+						},
+						{
+							"id": 89,
+							"name": "name",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"comment": {
+								"shortText": "This is a simple public member."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.name",
+								"id": 37
+							},
+							"implementationOf": {
+								"type": "reference",
+								"name": "IPrintNameInterface.name",
+								"id": 30
+							}
+						},
+						{
+							"id": 91,
+							"name": "instance",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isStatic": true,
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "This is a static member.",
+								"text": "Static members should not be inherited.\n"
+							},
+							"type": {
+								"type": "reference",
+								"name": "BaseClass",
+								"id": 36
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.instance",
+								"id": 39
+							}
+						},
+						{
+							"id": 92,
+							"name": "instances",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isStatic": true,
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"isArray": true,
+								"name": "BaseClass",
+								"id": 36
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.instances",
+								"id": 40
+							}
+						},
+						{
+							"id": 80,
+							"name": "nameProperty",
+							"kind": 262144,
+							"kindString": "Accessor",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"comment": {
+								"shortText": "Returns the name. See [[BaseClass.name]].\nSets the name. See [[BaseClass.name]].",
+								"returns": "The return value.\n"
+							},
+							"getSignature": [
+								{
+									"id": 81,
+									"name": "__get",
+									"kind": 524288,
+									"kindString": "Get signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns the name. See [[BaseClass.name]].",
+										"returns": "The return value.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								}
+							],
+							"setSignature": [
+								{
+									"id": 82,
+									"name": "__set",
+									"kind": 1048576,
+									"kindString": "Set signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Sets the name. See [[BaseClass.name]].",
+										"returns": "The return value.\n"
+									},
+									"parameters": [
+										{
+											"id": 83,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "The new name."
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 84,
+							"name": "readOnlyNameProperty",
+							"kind": 262144,
+							"kindString": "Accessor",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"comment": {
+								"shortText": "Returns the name. See [[BaseClass.name]].",
+								"returns": "The return value.\n"
+							},
+							"getSignature": [
+								{
+									"id": 85,
+									"name": "__get",
+									"kind": 524288,
+									"kindString": "Get signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns the name. See [[BaseClass.name]].",
+										"returns": "The return value.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								}
+							]
+						},
+						{
+							"id": 86,
+							"name": "writeOnlyNameProperty",
+							"kind": 262144,
+							"kindString": "Accessor",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"comment": {
+								"shortText": "Sets the name. See [[BaseClass.name]].",
+								"returns": "The return value.\n"
+							},
+							"setSignature": [
+								{
+									"id": 87,
+									"name": "__set",
+									"kind": 1048576,
+									"kindString": "Set signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Sets the name. See [[BaseClass.name]].",
+										"returns": "The return value.\n"
+									},
+									"parameters": [
+										{
+											"id": 88,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "The new name."
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 105,
+							"name": "arrowFunction",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"comment": {
+								"shortText": "This is a simple fat arrow function.",
+								"tags": [
+									{
+										"tag": "see",
+										"text": "https://github.com/sebastian-lenz/typedoc/issues/37\n"
+									}
+								]
+							},
+							"signatures": [
+								{
+									"id": 106,
+									"name": "arrowFunction",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a simple fat arrow function."
+									},
+									"parameters": [
+										{
+											"id": 107,
+											"name": "param2",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "The second parameter needed by this function."
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										},
+										{
+											"id": 108,
+											"name": "param1",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "The first parameter needed by this function."
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "__function",
+										"id": 55
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.arrowFunction",
+								"id": 54
+							}
+						},
+						{
+							"id": 98,
+							"name": "getName",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 99,
+									"name": "getName",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a simple member function.",
+										"text": "It should be inherited by all subclasses. This class has a static\nmember with the same name, both should be documented.\n",
+										"returns": "Return the name.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "BaseClass.getName",
+										"id": 47
+									},
+									"implementationOf": {
+										"type": "reference",
+										"name": "IPrintNameInterface.getName",
+										"id": 32
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.getName",
+								"id": 47
+							},
+							"implementationOf": {
+								"type": "reference",
+								"name": "IPrintNameInterface.getName",
+								"id": 31
+							}
+						},
+						{
+							"id": 75,
+							"name": "print",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 76,
+									"name": "print",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a simple interface function."
+									},
+									"parameters": [
+										{
+											"id": 77,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									},
+									"implementationOf": {
+										"type": "reference",
+										"name": "IPrintNameInterface.print",
+										"id": 34
+									}
+								}
+							],
+							"implementationOf": {
+								"type": "reference",
+								"name": "IPrintNameInterface.print",
+								"id": 33
+							}
+						},
+						{
+							"id": 78,
+							"name": "printName",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 79,
+									"name": "printName",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a interface function of IPrintNameInterface"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									},
+									"implementationOf": {
+										"type": "reference",
+										"name": "IPrintNameInterface.printName",
+										"id": 29
+									}
+								}
+							],
+							"implementationOf": {
+								"type": "reference",
+								"name": "IPrintNameInterface.printName",
+								"id": 28
+							}
+						},
+						{
+							"id": 102,
+							"name": "setName",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 103,
+									"name": "setName",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a simple member function.",
+										"text": "It should be inherited by all subclasses.\n"
+									},
+									"parameters": [
+										{
+											"id": 104,
+											"name": "name",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"text": "The new name.\n"
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "BaseClass.setName",
+										"id": 51
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.setName",
+								"id": 51
+							}
+						},
+						{
+							"id": 111,
+							"name": "caTest",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true,
+								"isExported": true,
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 112,
+									"name": "caTest",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"tags": [
+											{
+												"tag": "see",
+												"text": "https://github.com/sebastian-lenz/typedoc/issues/42\n"
+											}
+										]
+									},
+									"parameters": [
+										{
+											"id": 113,
+											"name": "originalValues",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "BaseClass",
+												"id": 36
+											}
+										},
+										{
+											"id": 114,
+											"name": "newRecord",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										},
+										{
+											"id": 115,
+											"name": "fieldNames",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"isArray": true,
+												"name": "string"
+											}
+										},
+										{
+											"id": 116,
+											"name": "mandatoryFields",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"isArray": true,
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "BaseClass.caTest",
+										"id": 62
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.caTest",
+								"id": 62
+							}
+						},
+						{
+							"id": 109,
+							"name": "getInstance",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true,
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 110,
+									"name": "getInstance",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a static function.",
+										"text": "Static functions should not be inherited.\n",
+										"returns": "An instance of BaseClass.\n"
+									},
+									"type": {
+										"type": "reference",
+										"name": "BaseClass",
+										"id": 36
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "BaseClass.getInstance",
+										"id": 60
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.getInstance",
+								"id": 60
+							}
+						},
+						{
+							"id": 100,
+							"name": "getName",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true,
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 101,
+									"name": "getName",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a simple static member function.",
+										"text": "Static functions should not be inherited. This class has a\nmember with the same name, both should be documented.\n",
+										"returns": "Return the name.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "BaseClass.getName",
+										"id": 49
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.getName",
+								"id": 49
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"kind": 512,
+							"children": [
+								93
+							]
+						},
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								90,
+								89,
+								91,
+								92
+							]
+						},
+						{
+							"title": "Accessors",
+							"kind": 262144,
+							"children": [
+								80,
+								84,
+								86
+							]
+						},
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								105,
+								98,
+								75,
+								78,
+								102,
+								111,
+								109,
+								100
+							]
+						}
+					],
+					"extendedTypes": [
+						{
+							"type": "reference",
+							"name": "BaseClass",
+							"id": 36
+						}
+					],
+					"implementedTypes": [
+						{
+							"type": "reference",
+							"name": "INameInterface",
+							"id": 19
+						},
+						{
+							"type": "reference",
+							"name": "IPrintNameInterface",
+							"id": 27
+						}
+					]
+				},
+				{
+					"id": 117,
+					"name": "SubClassB",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "This is a class that extends another class.",
+						"text": "The constructor of the original class should be overwritten.\n"
+					},
+					"children": [
+						{
+							"id": 118,
+							"name": "constructor",
+							"kind": 512,
+							"kindString": "Constructor",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 119,
+									"name": "new SubClassB",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 120,
+											"name": "name",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "SubClassB",
+										"id": 117
+									},
+									"overwrites": {
+										"type": "reference",
+										"name": "BaseClass.__constructor",
+										"id": 42
+									}
+								}
+							],
+							"overwrites": {
+								"type": "reference",
+								"name": "BaseClass.__constructor",
+								"id": 42
+							}
+						},
+						{
+							"id": 125,
+							"name": "kind",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isProtected": true
+							},
+							"comment": {
+								"shortText": "This is a simple protected member."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "number"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.kind",
+								"id": 38
+							}
+						},
+						{
+							"id": 124,
+							"name": "name",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"comment": {
+								"shortText": "This is a simple public member."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.name",
+								"id": 37
+							},
+							"implementationOf": {
+								"type": "reference",
+								"name": "INameInterface.name",
+								"id": 20
+							}
+						},
+						{
+							"id": 126,
+							"name": "instance",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isStatic": true,
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "This is a static member.",
+								"text": "Static members should not be inherited.\n"
+							},
+							"type": {
+								"type": "reference",
+								"name": "BaseClass",
+								"id": 36
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.instance",
+								"id": 39
+							}
+						},
+						{
+							"id": 127,
+							"name": "instances",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isStatic": true,
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"isArray": true,
+								"name": "BaseClass",
+								"id": 36
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.instances",
+								"id": 40
+							}
+						},
+						{
+							"id": 135,
+							"name": "arrowFunction",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"comment": {
+								"shortText": "This is a simple fat arrow function.",
+								"tags": [
+									{
+										"tag": "see",
+										"text": "https://github.com/sebastian-lenz/typedoc/issues/37\n"
+									}
+								]
+							},
+							"signatures": [
+								{
+									"id": 136,
+									"name": "arrowFunction",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a simple fat arrow function."
+									},
+									"parameters": [
+										{
+											"id": 137,
+											"name": "param2",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "The second parameter needed by this function."
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										},
+										{
+											"id": 138,
+											"name": "param1",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "The first parameter needed by this function."
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "__function",
+										"id": 55
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.arrowFunction",
+								"id": 54
+							}
+						},
+						{
+							"id": 121,
+							"name": "doSomething",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 122,
+									"name": "doSomething",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 123,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "tuple",
+												"elements": [
+													{
+														"type": "instrinct",
+														"name": "string"
+													},
+													{
+														"type": "reference",
+														"name": "SubClassA",
+														"id": 74
+													},
+													{
+														"type": "reference",
+														"name": "SubClassB",
+														"id": 117
+													}
+												]
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 128,
+							"name": "getName",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 129,
+									"name": "getName",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a simple member function.",
+										"text": "It should be inherited by all subclasses. This class has a static\nmember with the same name, both should be documented.\n",
+										"returns": "Return the name.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "BaseClass.getName",
+										"id": 47
+									},
+									"implementationOf": {
+										"type": "reference",
+										"name": "INameInterface.getName",
+										"id": 22
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.getName",
+								"id": 47
+							},
+							"implementationOf": {
+								"type": "reference",
+								"name": "INameInterface.getName",
+								"id": 21
+							}
+						},
+						{
+							"id": 132,
+							"name": "setName",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 133,
+									"name": "setName",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a simple member function.",
+										"text": "It should be inherited by all subclasses.\n"
+									},
+									"parameters": [
+										{
+											"id": 134,
+											"name": "name",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"text": "The new name.\n"
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "BaseClass.setName",
+										"id": 51
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.setName",
+								"id": 51
+							}
+						},
+						{
+							"id": 141,
+							"name": "caTest",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true,
+								"isExported": true,
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 142,
+									"name": "caTest",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"tags": [
+											{
+												"tag": "see",
+												"text": "https://github.com/sebastian-lenz/typedoc/issues/42\n"
+											}
+										]
+									},
+									"parameters": [
+										{
+											"id": 143,
+											"name": "originalValues",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "BaseClass",
+												"id": 36
+											}
+										},
+										{
+											"id": 144,
+											"name": "newRecord",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										},
+										{
+											"id": 145,
+											"name": "fieldNames",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"isArray": true,
+												"name": "string"
+											}
+										},
+										{
+											"id": 146,
+											"name": "mandatoryFields",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"isArray": true,
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "BaseClass.caTest",
+										"id": 62
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.caTest",
+								"id": 62
+							}
+						},
+						{
+							"id": 139,
+							"name": "getInstance",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true,
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 140,
+									"name": "getInstance",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a static function.",
+										"text": "Static functions should not be inherited.\n",
+										"returns": "An instance of BaseClass.\n"
+									},
+									"type": {
+										"type": "reference",
+										"name": "BaseClass",
+										"id": 36
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "BaseClass.getInstance",
+										"id": 60
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.getInstance",
+								"id": 60
+							}
+						},
+						{
+							"id": 130,
+							"name": "getName",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true,
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 131,
+									"name": "getName",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a simple static member function.",
+										"text": "Static functions should not be inherited. This class has a\nmember with the same name, both should be documented.\n",
+										"returns": "Return the name.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "BaseClass.getName",
+										"id": 49
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "BaseClass.getName",
+								"id": 49
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"kind": 512,
+							"children": [
+								118
+							]
+						},
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								125,
+								124,
+								126,
+								127
+							]
+						},
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								135,
+								121,
+								128,
+								132,
+								141,
+								139,
+								130
+							]
+						}
+					],
+					"extendedTypes": [
+						{
+							"type": "reference",
+							"name": "BaseClass",
+							"id": 36
+						}
+					],
+					"implementedTypes": [
+						{
+							"type": "reference",
+							"name": "INameInterface",
+							"id": 19
+						}
+					]
+				},
+				{
+					"id": 19,
+					"name": "INameInterface",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "This is a simple interface."
+					},
+					"children": [
+						{
+							"id": 20,
+							"name": "name",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "This is a interface member of INameInterface.",
+								"text": "It should be inherited by all subinterfaces.\n"
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							}
+						},
+						{
+							"id": 21,
+							"name": "getName",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 22,
+									"name": "getName",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a interface function of INameInterface.",
+										"text": "It should be inherited by all subinterfaces.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								20
+							]
+						},
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								21
+							]
+						}
+					],
+					"extendedBy": [
+						{
+							"type": "reference",
+							"name": "IPrintNameInterface",
+							"id": 27
+						}
+					],
+					"implementedBy": [
+						{
+							"type": "reference",
+							"name": "BaseClass",
+							"id": 36
+						},
+						{
+							"type": "reference",
+							"name": "SubClassA",
+							"id": 74
+						},
+						{
+							"type": "reference",
+							"name": "SubClassB",
+							"id": 117
+						}
+					]
+				},
+				{
+					"id": 23,
+					"name": "IPrintInterface",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "This is a simple interface."
+					},
+					"children": [
+						{
+							"id": 24,
+							"name": "print",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 25,
+									"name": "print",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a interface function of IPrintInterface",
+										"text": "It should be inherited by all subinterfaces.\n"
+									},
+									"parameters": [
+										{
+											"id": 26,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								24
+							]
+						}
+					],
+					"extendedBy": [
+						{
+							"type": "reference",
+							"name": "IPrintNameInterface",
+							"id": 27
+						}
+					]
+				},
+				{
+					"id": 27,
+					"name": "IPrintNameInterface",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "This is a interface inheriting from two other interfaces."
+					},
+					"children": [
+						{
+							"id": 30,
+							"name": "name",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "This is a interface member of INameInterface.",
+								"text": "It should be inherited by all subinterfaces.\n"
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "INameInterface.name",
+								"id": 20
+							}
+						},
+						{
+							"id": 31,
+							"name": "getName",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 32,
+									"name": "getName",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a interface function of INameInterface.",
+										"text": "It should be inherited by all subinterfaces.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "INameInterface.getName",
+										"id": 21
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "INameInterface.getName",
+								"id": 21
+							}
+						},
+						{
+							"id": 33,
+							"name": "print",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 34,
+									"name": "print",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a interface function of IPrintInterface",
+										"text": "It should be inherited by all subinterfaces.\n"
+									},
+									"parameters": [
+										{
+											"id": 35,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "IPrintInterface.print",
+										"id": 24
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "IPrintInterface.print",
+								"id": 24
+							}
+						},
+						{
+							"id": 28,
+							"name": "printName",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 29,
+									"name": "printName",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a interface function of IPrintNameInterface"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								30
+							]
+						},
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								31,
+								33,
+								28
+							]
+						}
+					],
+					"extendedTypes": [
+						{
+							"type": "reference",
+							"name": "INameInterface",
+							"id": 19
+						},
+						{
+							"type": "reference",
+							"name": "IPrintInterface",
+							"id": 23
+						}
+					],
+					"implementedBy": [
+						{
+							"type": "reference",
+							"name": "SubClassA",
+							"id": 74
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Classes",
+					"kind": 128,
+					"children": [
+						36,
+						147,
+						68,
+						164,
+						74,
+						117
+					]
+				},
+				{
+					"title": "Interfaces",
+					"kind": 256,
+					"children": [
+						19,
+						23,
+						27
+					]
+				}
+			]
+		},
+		{
+			"id": 179,
+			"name": "\"enumerations\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/Users/pnlybubbles/Devs/typedoc/examples/basic/src/enumerations.ts",
+			"children": [
+				{
+					"id": 180,
+					"name": "Directions",
+					"kind": 4,
+					"kindString": "Enumeration",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "This is a simple Enumeration."
+					},
+					"children": [
+						{
+							"id": 183,
+							"name": "Bottom",
+							"kind": 16,
+							"kindString": "Enumeration member",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "A simple enum member."
+							}
+						},
+						{
+							"id": 184,
+							"name": "Left",
+							"kind": 16,
+							"kindString": "Enumeration member",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "A simple enum member."
+							}
+						},
+						{
+							"id": 182,
+							"name": "Right",
+							"kind": 16,
+							"kindString": "Enumeration member",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "A simple enum member."
+							}
+						},
+						{
+							"id": 181,
+							"name": "Top",
+							"kind": 16,
+							"kindString": "Enumeration member",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "A simple enum member."
+							}
+						},
+						{
+							"id": 185,
+							"name": "TopLeft",
+							"kind": 16,
+							"kindString": "Enumeration member",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "A composite enum member."
+							},
+							"defaultValue": " Top | Left"
+						},
+						{
+							"id": 186,
+							"name": "TopRight",
+							"kind": 16,
+							"kindString": "Enumeration member",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "A composite enum member."
+							},
+							"defaultValue": " Top | Right"
+						}
+					],
+					"groups": [
+						{
+							"title": "Enumeration members",
+							"kind": 16,
+							"children": [
+								183,
+								184,
+								182,
+								181,
+								185,
+								186
+							]
+						}
+					]
+				},
+				{
+					"id": 187,
+					"name": "Size",
+					"kind": 4,
+					"kindString": "Enumeration",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "This is a enumeration extended by a module.\nThis comment is ignored, as the enumeration is already defined.",
+						"text": "You should see both the enum members and the module members.\n"
+					},
+					"children": [
+						{
+							"id": 190,
+							"name": "Large",
+							"kind": 16,
+							"kindString": "Enumeration member",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "A simple enum member."
+							}
+						},
+						{
+							"id": 189,
+							"name": "Medium",
+							"kind": 16,
+							"kindString": "Enumeration member",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "A simple enum member."
+							}
+						},
+						{
+							"id": 188,
+							"name": "Small",
+							"kind": 16,
+							"kindString": "Enumeration member",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "A simple enum member."
+							}
+						},
+						{
+							"id": 191,
+							"name": "defaultSize",
+							"kind": 32,
+							"kindString": "Variable",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "A variable that is attached to an enumeration."
+							},
+							"type": {
+								"type": "reference",
+								"name": "Size",
+								"id": 187
+							},
+							"defaultValue": " Size.Medium"
+						},
+						{
+							"id": 192,
+							"name": "isSmall",
+							"kind": 64,
+							"kindString": "Function",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 193,
+									"name": "isSmall",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A function that is attached to an enumeration.",
+										"returns": "TRUE when the given value equals Size.Small.\n"
+									},
+									"parameters": [
+										{
+											"id": 194,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"text": "The value that should be tested."
+											},
+											"type": {
+												"type": "reference",
+												"name": "Size",
+												"id": 187
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "boolean"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Enumeration members",
+							"kind": 16,
+							"children": [
+								190,
+								189,
+								188
+							]
+						},
+						{
+							"title": "Variables",
+							"kind": 32,
+							"children": [
+								191
+							]
+						},
+						{
+							"title": "Functions",
+							"kind": 64,
+							"children": [
+								192
+							]
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Enumerations",
+					"kind": 4,
+					"children": [
+						180,
+						187
+					]
+				}
+			]
+		},
+		{
+			"id": 195,
+			"name": "\"flattened\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/Users/pnlybubbles/Devs/typedoc/examples/basic/src/flattened.ts",
+			"children": [
+				{
+					"id": 196,
+					"name": "flattenedClass",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {},
+					"comment": {
+						"shortText": "A class that contains members with flattened properties."
+					},
+					"children": [
+						{
+							"id": 222,
+							"name": "constructor",
+							"kind": 512,
+							"kindString": "Constructor",
+							"flags": {},
+							"comment": {
+								"shortText": "A constructor that accepts an option object defined inline."
+							},
+							"signatures": [
+								{
+									"id": 223,
+									"name": "new flattenedClass",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A constructor that accepts an option object defined inline."
+									},
+									"parameters": [
+										{
+											"id": 224,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "The inline typed options object."
+											},
+											"type": {
+												"type": "reflection",
+												"declaration": {
+													"id": 225,
+													"name": "__type",
+													"kind": 65536,
+													"kindString": "Type literal",
+													"flags": {},
+													"children": [
+														{
+															"id": 227,
+															"name": "anotherValue",
+															"kind": 32,
+															"kindString": "Variable",
+															"flags": {
+																"isOptional": true
+															},
+															"comment": {
+																"text": "Another value on the options object parameter."
+															},
+															"type": {
+																"type": "instrinct",
+																"name": "string"
+															}
+														},
+														{
+															"id": 228,
+															"name": "moreOptions",
+															"kind": 32,
+															"kindString": "Variable",
+															"flags": {
+																"isOptional": true
+															},
+															"comment": {
+																"text": "A typed child object of the options object."
+															},
+															"type": {
+																"type": "reflection",
+																"declaration": {
+																	"id": 229,
+																	"name": "__type",
+																	"kind": 65536,
+																	"kindString": "Type literal",
+																	"flags": {},
+																	"children": [
+																		{
+																			"id": 230,
+																			"name": "moreValues",
+																			"kind": 32,
+																			"kindString": "Variable",
+																			"flags": {},
+																			"comment": {
+																				"text": "A value of the typed child object.\n"
+																			},
+																			"type": {
+																				"type": "instrinct",
+																				"name": "number"
+																			}
+																		}
+																	],
+																	"groups": [
+																		{
+																			"title": "Variables",
+																			"kind": 32,
+																			"children": [
+																				230
+																			]
+																		}
+																	]
+																}
+															}
+														},
+														{
+															"id": 226,
+															"name": "value",
+															"kind": 32,
+															"kindString": "Variable",
+															"flags": {
+																"isOptional": true
+															},
+															"comment": {
+																"text": "A value on the options object parameter."
+															},
+															"type": {
+																"type": "instrinct",
+																"name": "string"
+															}
+														}
+													],
+													"groups": [
+														{
+															"title": "Variables",
+															"kind": 32,
+															"children": [
+																227,
+																228,
+																226
+															]
+														}
+													]
+												}
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "flattenedClass",
+										"id": 196
+									}
+								}
+							]
+						},
+						{
+							"id": 204,
+							"name": "callback",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"comment": {
+								"shortText": "A member that holds a callback that requires a typed function signature."
+							},
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 205,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"signatures": [
+										{
+											"id": 206,
+											"name": "__call",
+											"kind": 4096,
+											"kindString": "Call signature",
+											"flags": {},
+											"parameters": [
+												{
+													"id": 207,
+													"name": "param",
+													"kind": 32768,
+													"kindString": "Parameter",
+													"flags": {},
+													"comment": {
+														"text": "A parameter of the typed function callback."
+													},
+													"type": {
+														"type": "instrinct",
+														"name": "number"
+													}
+												},
+												{
+													"id": 208,
+													"name": "optionalParam",
+													"kind": 32768,
+													"kindString": "Parameter",
+													"flags": {
+														"isOptional": true
+													},
+													"comment": {
+														"text": "An optional parameter of the typed function callback.\n"
+													},
+													"type": {
+														"type": "instrinct",
+														"name": "string"
+													}
+												}
+											],
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										}
+									]
+								}
+							}
+						},
+						{
+							"id": 209,
+							"name": "indexed",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"comment": {
+								"shortText": "A member that holds an index signature."
+							},
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 210,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"indexSignature": [
+										{
+											"id": 211,
+											"name": "__index",
+											"kind": 8192,
+											"kindString": "Index signature",
+											"flags": {},
+											"parameters": [
+												{
+													"id": 212,
+													"name": "index",
+													"kind": 32768,
+													"kindString": "Parameter",
+													"flags": {},
+													"comment": {
+														"text": "The index property comment."
+													},
+													"type": {
+														"type": "instrinct",
+														"name": "number"
+													}
+												}
+											],
+											"type": {
+												"type": "reflection",
+												"declaration": {
+													"id": 213,
+													"name": "__type",
+													"kind": 65536,
+													"kindString": "Type literal",
+													"flags": {},
+													"children": [
+														{
+															"id": 214,
+															"name": "name",
+															"kind": 32,
+															"kindString": "Variable",
+															"flags": {},
+															"type": {
+																"type": "instrinct",
+																"name": "string"
+															}
+														},
+														{
+															"id": 215,
+															"name": "value",
+															"kind": 32,
+															"kindString": "Variable",
+															"flags": {
+																"isOptional": true
+															},
+															"type": {
+																"type": "instrinct",
+																"name": "number"
+															}
+														}
+													],
+													"groups": [
+														{
+															"title": "Variables",
+															"kind": 32,
+															"children": [
+																214,
+																215
+															]
+														}
+													]
+												}
+											}
+										}
+									],
+									"children": [
+										{
+											"id": 216,
+											"name": "test",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {},
+											"comment": {
+												"text": "A property of the index signature instance.\n"
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Variables",
+											"kind": 32,
+											"children": [
+												216
+											]
+										}
+									]
+								}
+							}
+						},
+						{
+							"id": 217,
+							"name": "multipleCallSignatures",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPublic": true
+							},
+							"comment": {
+								"shortText": "An object with multiple call signatures.",
+								"tags": [
+									{
+										"tag": "see",
+										"text": "https://github.com/sebastian-lenz/typedoc/issues/27\n"
+									}
+								]
+							},
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 218,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"signatures": [
+										{
+											"id": 219,
+											"name": "__call",
+											"kind": 4096,
+											"kindString": "Call signature",
+											"flags": {},
+											"comment": {
+												"shortText": "Simple call signature.",
+												"returns": "The current value.\n"
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "number"
+											}
+										},
+										{
+											"id": 220,
+											"name": "__call",
+											"kind": 4096,
+											"kindString": "Call signature",
+											"flags": {},
+											"comment": {
+												"shortText": "Call signature with parameters.",
+												"returns": "The calling Foo.\n"
+											},
+											"parameters": [
+												{
+													"id": 221,
+													"name": "value",
+													"kind": 32768,
+													"kindString": "Parameter",
+													"flags": {},
+													"comment": {
+														"text": "The desired value."
+													},
+													"type": {
+														"type": "instrinct",
+														"name": "number"
+													}
+												}
+											],
+											"type": {
+												"type": "reference",
+												"name": "flattenedClass",
+												"id": 196
+											}
+										}
+									]
+								}
+							}
+						},
+						{
+							"id": 197,
+							"name": "options",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"comment": {
+								"shortText": "A member that accepts an option object defined inline."
+							},
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 198,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 200,
+											"name": "anotherValue",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"text": "Another value on the options object parameter."
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										},
+										{
+											"id": 201,
+											"name": "moreOptions",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"text": "A typed child object of the options object."
+											},
+											"type": {
+												"type": "reflection",
+												"declaration": {
+													"id": 202,
+													"name": "__type",
+													"kind": 65536,
+													"kindString": "Type literal",
+													"flags": {},
+													"children": [
+														{
+															"id": 203,
+															"name": "moreValues",
+															"kind": 32,
+															"kindString": "Variable",
+															"flags": {},
+															"comment": {
+																"text": "A value of the typed child object.\n"
+															},
+															"type": {
+																"type": "instrinct",
+																"name": "number"
+															}
+														}
+													],
+													"groups": [
+														{
+															"title": "Variables",
+															"kind": 32,
+															"children": [
+																203
+															]
+														}
+													]
+												}
+											}
+										},
+										{
+											"id": 199,
+											"name": "value",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"text": "A value on the options object parameter."
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Variables",
+											"kind": 32,
+											"children": [
+												200,
+												201,
+												199
+											]
+										}
+									]
+								}
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"kind": 512,
+							"children": [
+								222
+							]
+						},
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								204,
+								209,
+								217,
+								197
+							]
+						}
+					]
+				},
+				{
+					"id": 231,
+					"name": "flattenedCallback",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 232,
+							"name": "flattenedCallback",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "A function that has a parameter that requires a typed function callback."
+							},
+							"parameters": [
+								{
+									"id": 233,
+									"name": "callback",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The typed function callback."
+									},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 234,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"signatures": [
+												{
+													"id": 235,
+													"name": "__call",
+													"kind": 4096,
+													"kindString": "Call signature",
+													"flags": {},
+													"parameters": [
+														{
+															"id": 236,
+															"name": "param",
+															"kind": 32768,
+															"kindString": "Parameter",
+															"flags": {},
+															"comment": {
+																"text": "A parameter of the typed function callback."
+															},
+															"type": {
+																"type": "instrinct",
+																"name": "number"
+															}
+														},
+														{
+															"id": 237,
+															"name": "optionalParam",
+															"kind": 32768,
+															"kindString": "Parameter",
+															"flags": {
+																"isOptional": true
+															},
+															"comment": {
+																"text": "An optional parameter of the typed function callback.\n"
+															},
+															"type": {
+																"type": "instrinct",
+																"name": "string"
+															}
+														}
+													],
+													"type": {
+														"type": "instrinct",
+														"name": "string"
+													}
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					]
+				},
+				{
+					"id": 249,
+					"name": "flattenedIndexSignature",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 250,
+							"name": "flattenedIndexSignature",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "A function that accepts an index signature parameter."
+							},
+							"parameters": [
+								{
+									"id": 251,
+									"name": "indexed",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The index signature parameter."
+									},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 252,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"indexSignature": [
+												{
+													"id": 253,
+													"name": "__index",
+													"kind": 8192,
+													"kindString": "Index signature",
+													"flags": {},
+													"parameters": [
+														{
+															"id": 254,
+															"name": "index",
+															"kind": 32768,
+															"kindString": "Parameter",
+															"flags": {},
+															"comment": {
+																"text": "The index property comment."
+															},
+															"type": {
+																"type": "instrinct",
+																"name": "number"
+															}
+														}
+													],
+													"type": {
+														"type": "reflection",
+														"declaration": {
+															"id": 255,
+															"name": "__type",
+															"kind": 65536,
+															"kindString": "Type literal",
+															"flags": {},
+															"children": [
+																{
+																	"id": 256,
+																	"name": "name",
+																	"kind": 32,
+																	"kindString": "Variable",
+																	"flags": {},
+																	"type": {
+																		"type": "instrinct",
+																		"name": "string"
+																	}
+																},
+																{
+																	"id": 257,
+																	"name": "value",
+																	"kind": 32,
+																	"kindString": "Variable",
+																	"flags": {
+																		"isOptional": true
+																	},
+																	"type": {
+																		"type": "instrinct",
+																		"name": "number"
+																	}
+																}
+															],
+															"groups": [
+																{
+																	"title": "Variables",
+																	"kind": 32,
+																	"children": [
+																		256,
+																		257
+																	]
+																}
+															]
+														}
+													}
+												}
+											],
+											"children": [
+												{
+													"id": 258,
+													"name": "test",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"comment": {
+														"text": "A property of the index signature instance.\n"
+													},
+													"type": {
+														"type": "instrinct",
+														"name": "string"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														258
+													]
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					]
+				},
+				{
+					"id": 238,
+					"name": "flattenedParameter",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 239,
+							"name": "flattenedParameter",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "A function that accepts an option object defined inline."
+							},
+							"parameters": [
+								{
+									"id": 240,
+									"name": "options",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The inline typed options object."
+									},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 241,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"indexSignature": [
+												{
+													"id": 242,
+													"name": "__index",
+													"kind": 8192,
+													"kindString": "Index signature",
+													"flags": {},
+													"parameters": [
+														{
+															"id": 243,
+															"name": "name",
+															"kind": 32768,
+															"kindString": "Parameter",
+															"flags": {},
+															"type": {
+																"type": "instrinct",
+																"name": "string"
+															}
+														}
+													],
+													"type": {
+														"type": "instrinct",
+														"name": "any"
+													}
+												}
+											],
+											"children": [
+												{
+													"id": 245,
+													"name": "anotherValue",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isOptional": true
+													},
+													"comment": {
+														"text": "Another value on the options object parameter."
+													},
+													"type": {
+														"type": "instrinct",
+														"name": "string"
+													}
+												},
+												{
+													"id": 246,
+													"name": "moreOptions",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isOptional": true
+													},
+													"comment": {
+														"text": "A typed child object of the options object."
+													},
+													"type": {
+														"type": "reflection",
+														"declaration": {
+															"id": 247,
+															"name": "__type",
+															"kind": 65536,
+															"kindString": "Type literal",
+															"flags": {},
+															"children": [
+																{
+																	"id": 248,
+																	"name": "moreValues",
+																	"kind": 32,
+																	"kindString": "Variable",
+																	"flags": {},
+																	"comment": {
+																		"text": "A value of the typed child object.\n"
+																	},
+																	"type": {
+																		"type": "instrinct",
+																		"name": "number"
+																	}
+																}
+															],
+															"groups": [
+																{
+																	"title": "Variables",
+																	"kind": 32,
+																	"children": [
+																		248
+																	]
+																}
+															]
+														}
+													}
+												},
+												{
+													"id": 244,
+													"name": "value",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isOptional": true
+													},
+													"comment": {
+														"text": "A value on the options object parameter."
+													},
+													"type": {
+														"type": "instrinct",
+														"name": "string"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														245,
+														246,
+														244
+													]
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Classes",
+					"kind": 128,
+					"children": [
+						196
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						231,
+						249,
+						238
+					]
+				}
+			]
+		},
+		{
+			"id": 259,
+			"name": "\"functions\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/Users/pnlybubbles/Devs/typedoc/examples/basic/src/functions.ts",
+			"children": [
+				{
+					"id": 299,
+					"name": "moduleFunction",
+					"kind": 2,
+					"kindString": "Module",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "This is the module extending the function moduleFunction()."
+					},
+					"signatures": [
+						{
+							"id": 300,
+							"name": "moduleFunction",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "This is a function that is extended by a module."
+							},
+							"parameters": [
+								{
+									"id": 301,
+									"name": "arg",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "An argument.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							}
+						}
+					],
+					"children": [
+						{
+							"id": 302,
+							"name": "functionVariable",
+							"kind": 32,
+							"kindString": "Variable",
+							"flags": {},
+							"comment": {
+								"shortText": "This variable is appended to a function."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							}
+						},
+						{
+							"id": 303,
+							"name": "append",
+							"kind": 64,
+							"kindString": "Function",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 304,
+									"name": "append",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This function is appended to another function."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 305,
+							"name": "prepend",
+							"kind": 64,
+							"kindString": "Function",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 306,
+									"name": "prepend",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This function is appended to another function."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Variables",
+							"kind": 32,
+							"children": [
+								302
+							]
+						},
+						{
+							"title": "Functions",
+							"kind": 64,
+							"children": [
+								303,
+								305
+							]
+						}
+					]
+				},
+				{
+					"id": 307,
+					"name": "createSomething",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 308,
+							"name": "createSomething",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "A function that returns an object.\nAlso no type information is given, the object should be correctly reflected."
+							},
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 309,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 310,
+											"name": "foo",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											},
+											"defaultValue": "\"bar\""
+										},
+										{
+											"id": 314,
+											"name": "doAnotherThing",
+											"kind": 64,
+											"kindString": "Function",
+											"flags": {},
+											"signatures": [
+												{
+													"id": 315,
+													"name": "doAnotherThing",
+													"kind": 4096,
+													"kindString": "Call signature",
+													"flags": {},
+													"type": {
+														"type": "instrinct",
+														"name": "void"
+													}
+												}
+											]
+										},
+										{
+											"id": 311,
+											"name": "doSomething",
+											"kind": 64,
+											"kindString": "Function",
+											"flags": {},
+											"signatures": [
+												{
+													"id": 312,
+													"name": "doSomething",
+													"kind": 4096,
+													"kindString": "Call signature",
+													"flags": {},
+													"parameters": [
+														{
+															"id": 313,
+															"name": "a",
+															"kind": 32768,
+															"kindString": "Parameter",
+															"flags": {},
+															"type": {
+																"type": "instrinct",
+																"name": "number"
+															}
+														}
+													],
+													"type": {
+														"type": "instrinct",
+														"name": "number"
+													}
+												}
+											]
+										}
+									],
+									"groups": [
+										{
+											"title": "Variables",
+											"kind": 32,
+											"children": [
+												310
+											]
+										},
+										{
+											"title": "Functions",
+											"kind": 64,
+											"children": [
+												314,
+												311
+											]
+										}
+									]
+								}
+							}
+						}
+					]
+				},
+				{
+					"id": 262,
+					"name": "exportedFunction",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 263,
+							"name": "exportedFunction",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "This is a simple exported function."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					]
+				},
+				{
+					"id": 269,
+					"name": "functionWithArguments",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 270,
+							"name": "functionWithArguments",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "This is a function with multiple arguments and a return value."
+							},
+							"parameters": [
+								{
+									"id": 271,
+									"name": "paramZ",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "This is a string parameter."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								},
+								{
+									"id": 272,
+									"name": "paramG",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "This is a parameter flagged with any.\n    This sentence is placed in the next line.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"id": 273,
+									"name": "paramA",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "\nThis is a **parameter** pointing to an interface.\n\n~~~\nvar value:BaseClass = new BaseClass('test');\nfunctionWithArguments('arg', 0, value);\n~~~\n\n"
+									},
+									"type": {
+										"type": "reference",
+										"name": "INameInterface",
+										"id": 19
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "number"
+							}
+						}
+					]
+				},
+				{
+					"id": 278,
+					"name": "functionWithDefaults",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 279,
+							"name": "functionWithDefaults",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "This is a function with a parameter that has a default value.",
+								"returns": "The input value or the default value.\n"
+							},
+							"parameters": [
+								{
+									"id": 280,
+									"name": "valueA",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									},
+									"defaultValue": "\"defaultValue\""
+								},
+								{
+									"id": 281,
+									"name": "valueB",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "number"
+									},
+									"defaultValue": "100"
+								},
+								{
+									"id": 282,
+									"name": "valueC",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "number"
+									},
+									"defaultValue": " Number.NaN"
+								},
+								{
+									"id": 283,
+									"name": "valueD",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "boolean"
+									},
+									"defaultValue": "true"
+								},
+								{
+									"id": 284,
+									"name": "valueE",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "boolean"
+									},
+									"defaultValue": "false"
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							}
+						}
+					]
+				},
+				{
+					"id": 316,
+					"name": "functionWithDocLink",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 317,
+							"name": "functionWithDocLink",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "See {@linkcode INameInterface} and [INameInterface's name property]{@link INameInterface.name}.\nAlso, check out {@link http://www.google.com|Google} and\n{@link https://github.com GitHub}.",
+								"text": "Taken from http://usejsdoc.org/tags-inline-link.html.\n"
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					]
+				},
+				{
+					"id": 274,
+					"name": "functionWithOptionalValue",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 275,
+							"name": "functionWithOptionalValue",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "This is a function with a parameter that is optional."
+							},
+							"parameters": [
+								{
+									"id": 276,
+									"name": "requiredParam",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "A normal parameter."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								},
+								{
+									"id": 277,
+									"name": "optionalParam",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "An optional parameter.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					]
+				},
+				{
+					"id": 285,
+					"name": "functionWithRest",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 286,
+							"name": "functionWithRest",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "This is a function with rest parameter.",
+								"returns": "The combined string.\n"
+							},
+							"parameters": [
+								{
+									"id": 287,
+									"name": "rest",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isRest": true
+									},
+									"comment": {
+										"text": "Multiple strings."
+									},
+									"type": {
+										"type": "instrinct",
+										"isArray": true,
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							}
+						}
+					]
+				},
+				{
+					"id": 295,
+					"name": "genericFunction",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 296,
+							"name": "genericFunction",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "This is a generic function.",
+								"returns": "Returns the typed value.\n"
+							},
+							"typeParameter": [
+								{
+									"id": 297,
+									"name": "T",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {},
+									"comment": {
+										"text": "The type parameter."
+									}
+								}
+							],
+							"parameters": [
+								{
+									"id": 298,
+									"name": "value",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The typed value."
+									},
+									"type": {
+										"type": "typeParameter",
+										"name": "T"
+									}
+								}
+							],
+							"type": {
+								"type": "typeParameter",
+								"name": "T"
+							}
+						}
+					]
+				},
+				{
+					"id": 260,
+					"name": "internalFunction",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 261,
+							"name": "internalFunction",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "This is an internal function."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					]
+				},
+				{
+					"id": 288,
+					"name": "multipleSignatures",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "This is the actual implementation, this comment will not be visible\nin the generated documentation."
+					},
+					"signatures": [
+						{
+							"id": 289,
+							"name": "multipleSignatures",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "This is the first signature of a function with multiple signatures."
+							},
+							"parameters": [
+								{
+									"id": 290,
+									"name": "value",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The name value.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							}
+						},
+						{
+							"id": 291,
+							"name": "multipleSignatures",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "This is the second signature of a function with multiple signatures."
+							},
+							"parameters": [
+								{
+									"id": 292,
+									"name": "value",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "An object containing the name value."
+									},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 293,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 294,
+													"name": "name",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"comment": {
+														"text": "A value of the object.\n"
+													},
+													"type": {
+														"type": "instrinct",
+														"name": "string"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														294
+													]
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							}
+						}
+					]
+				},
+				{
+					"id": 264,
+					"name": "variableFunction",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"comment": {
+						"shortText": "This is a function with multiple arguments and a return value."
+					},
+					"signatures": [
+						{
+							"id": 265,
+							"name": "variableFunction",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "This is a function with multiple arguments and a return value."
+							},
+							"parameters": [
+								{
+									"id": 266,
+									"name": "paramZ",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a string parameter."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								},
+								{
+									"id": 267,
+									"name": "paramG",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"shortText": "This is a parameter flagged with any.\n    This sentence is placed in the next line.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"id": 268,
+									"name": "paramA",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"shortText": "\nThis is a **parameter** pointing to an interface.\n\n~~~\nvar value:BaseClass = new BaseClass('test');\nfunctionWithArguments('arg', 0, value);\n~~~\n\n"
+									},
+									"type": {
+										"type": "reference",
+										"name": "INameInterface",
+										"id": 19
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "number"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Modules",
+					"kind": 2,
+					"children": [
+						299
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						307,
+						262,
+						269,
+						278,
+						316,
+						274,
+						285,
+						295,
+						260,
+						288,
+						264
+					]
+				}
+			]
+		},
+		{
+			"id": 318,
+			"name": "\"generics\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/Users/pnlybubbles/Devs/typedoc/examples/basic/src/generics.ts",
+			"children": [
+				{
+					"id": 319,
+					"name": "A",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "A generic interface."
+					},
+					"typeParameter": [
+						{
+							"id": 320,
+							"name": "T",
+							"kind": 131072,
+							"kindString": "Type parameter",
+							"flags": {},
+							"comment": {
+								"shortText": "The generic type parameter.\n"
+							}
+						}
+					],
+					"children": [
+						{
+							"id": 321,
+							"name": "getT",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 322,
+									"name": "getT",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A generic member function.",
+										"returns": "A generic return value.\n"
+									},
+									"type": {
+										"type": "typeParameter",
+										"name": "T"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								321
+							]
+						}
+					],
+					"extendedBy": [
+						{
+							"type": "reference",
+							"name": "AB",
+							"id": 331
+						}
+					]
+				},
+				{
+					"id": 331,
+					"name": "AB",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "A generic interface extending two other generic interfaces\nand setting one of the type parameters."
+					},
+					"typeParameter": [
+						{
+							"id": 332,
+							"name": "T",
+							"kind": 131072,
+							"kindString": "Type parameter",
+							"flags": {},
+							"comment": {
+								"shortText": "The leftover generic type parameter.\n"
+							}
+						}
+					],
+					"children": [
+						{
+							"id": 338,
+							"name": "getC",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 339,
+									"name": "getC",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A generic member function.",
+										"returns": "A generic return value.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "boolean"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "B.getC",
+										"id": 329
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "B.getC",
+								"id": 329
+							}
+						},
+						{
+							"id": 333,
+							"name": "getT",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 334,
+									"name": "getT",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A generic member function.",
+										"returns": "A generic return value.\n"
+									},
+									"type": {
+										"type": "typeParameter",
+										"name": "T"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "A.getT",
+										"id": 321
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "A.getT",
+								"id": 321
+							}
+						},
+						{
+							"id": 335,
+							"name": "setT",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 336,
+									"name": "setT",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A generic member function."
+									},
+									"parameters": [
+										{
+											"id": 337,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"text": "A generic parameter.\n"
+											},
+											"type": {
+												"type": "typeParameter",
+												"name": "T"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "B.setT",
+										"id": 326
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "B.setT",
+								"id": 326
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								338,
+								333,
+								335
+							]
+						}
+					],
+					"extendedTypes": [
+						{
+							"type": "reference",
+							"name": "A",
+							"id": 319,
+							"typeArguments": [
+								{
+									"type": "typeParameter",
+									"name": "T"
+								}
+							]
+						},
+						{
+							"type": "reference",
+							"name": "B",
+							"id": 323,
+							"typeArguments": [
+								{
+									"type": "typeParameter",
+									"name": "T"
+								},
+								{
+									"type": "instrinct",
+									"name": "boolean"
+								}
+							]
+						}
+					],
+					"extendedBy": [
+						{
+							"type": "reference",
+							"name": "ABString",
+							"id": 340
+						},
+						{
+							"type": "reference",
+							"name": "ABNumber",
+							"id": 348
+						}
+					]
+				},
+				{
+					"id": 348,
+					"name": "ABNumber",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "An interface extending a generic interface and setting its type parameter."
+					},
+					"children": [
+						{
+							"id": 354,
+							"name": "getC",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 355,
+									"name": "getC",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A generic member function.",
+										"returns": "A generic return value.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "boolean"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "B.getC",
+										"id": 329
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "B.getC",
+								"id": 329
+							}
+						},
+						{
+							"id": 349,
+							"name": "getT",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 350,
+									"name": "getT",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A generic member function.",
+										"returns": "A generic return value.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "number"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "A.getT",
+										"id": 321
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "A.getT",
+								"id": 321
+							}
+						},
+						{
+							"id": 351,
+							"name": "setT",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 352,
+									"name": "setT",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A generic member function."
+									},
+									"parameters": [
+										{
+											"id": 353,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"text": "A generic parameter.\n"
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "B.setT",
+										"id": 326
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "B.setT",
+								"id": 326
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								354,
+								349,
+								351
+							]
+						}
+					],
+					"extendedTypes": [
+						{
+							"type": "reference",
+							"name": "AB",
+							"id": 331,
+							"typeArguments": [
+								{
+									"type": "instrinct",
+									"name": "number"
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": 340,
+					"name": "ABString",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "An interface extending a generic interface and setting its type parameter."
+					},
+					"children": [
+						{
+							"id": 346,
+							"name": "getC",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 347,
+									"name": "getC",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A generic member function.",
+										"returns": "A generic return value.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "boolean"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "B.getC",
+										"id": 329
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "B.getC",
+								"id": 329
+							}
+						},
+						{
+							"id": 341,
+							"name": "getT",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 342,
+									"name": "getT",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A generic member function.",
+										"returns": "A generic return value.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "A.getT",
+										"id": 321
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "A.getT",
+								"id": 321
+							}
+						},
+						{
+							"id": 343,
+							"name": "setT",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 344,
+									"name": "setT",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A generic member function."
+									},
+									"parameters": [
+										{
+											"id": 345,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"text": "A generic parameter.\n"
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "B.setT",
+										"id": 326
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "B.setT",
+								"id": 326
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								346,
+								341,
+								343
+							]
+						}
+					],
+					"extendedTypes": [
+						{
+							"type": "reference",
+							"name": "AB",
+							"id": 331,
+							"typeArguments": [
+								{
+									"type": "instrinct",
+									"name": "string"
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": 323,
+					"name": "B",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "A generic interface with two type parameters."
+					},
+					"typeParameter": [
+						{
+							"id": 324,
+							"name": "T",
+							"kind": 131072,
+							"kindString": "Type parameter",
+							"flags": {},
+							"comment": {
+								"shortText": "The first generic type parameter."
+							}
+						},
+						{
+							"id": 325,
+							"name": "C",
+							"kind": 131072,
+							"kindString": "Type parameter",
+							"flags": {},
+							"comment": {
+								"shortText": "The second generic type parameter.\n"
+							}
+						}
+					],
+					"children": [
+						{
+							"id": 329,
+							"name": "getC",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 330,
+									"name": "getC",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A generic member function.",
+										"returns": "A generic return value.\n"
+									},
+									"type": {
+										"type": "typeParameter",
+										"name": "C"
+									}
+								}
+							]
+						},
+						{
+							"id": 326,
+							"name": "setT",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 327,
+									"name": "setT",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A generic member function."
+									},
+									"parameters": [
+										{
+											"id": 328,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"text": "A generic parameter.\n"
+											},
+											"type": {
+												"type": "typeParameter",
+												"name": "T"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								329,
+								326
+							]
+						}
+					],
+					"extendedBy": [
+						{
+							"type": "reference",
+							"name": "AB",
+							"id": 331
+						}
+					]
+				},
+				{
+					"id": 360,
+					"name": "getGenericArray",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 361,
+							"name": "getGenericArray",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "A function returning a generic array with type parameters.",
+								"returns": "The return value with type arguments.\n"
+							},
+							"type": {
+								"type": "reference",
+								"name": "Array",
+								"typeArguments": [
+									{
+										"type": "instrinct",
+										"name": "string"
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"id": 356,
+					"name": "test",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 357,
+							"name": "test",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "A generic function",
+								"returns": "A generic return value.\n"
+							},
+							"typeParameter": [
+								{
+									"id": 358,
+									"name": "T",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {},
+									"comment": {
+										"text": "The generic type parameter."
+									}
+								}
+							],
+							"parameters": [
+								{
+									"id": 359,
+									"name": "value",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "A generic parameter."
+									},
+									"type": {
+										"type": "typeParameter",
+										"name": "T"
+									}
+								}
+							],
+							"type": {
+								"type": "typeParameter",
+								"name": "T"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Interfaces",
+					"kind": 256,
+					"children": [
+						319,
+						331,
+						348,
+						340,
+						323
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						360,
+						356
+					]
+				}
+			]
+		},
+		{
+			"id": 362,
+			"name": "\"modules\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/Users/pnlybubbles/Devs/typedoc/examples/basic/src/modules.ts",
+			"comment": {
+				"shortText": "..."
+			},
+			"children": [
+				{
+					"id": 363,
+					"name": "MyModule",
+					"kind": 2,
+					"kindString": "Module",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "This is a module."
+					},
+					"children": [
+						{
+							"id": 369,
+							"name": "MySubmodule",
+							"kind": 2,
+							"kindString": "Module",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "This is a submodule with the preferred comment."
+							},
+							"children": [
+								{
+									"id": 370,
+									"name": "a",
+									"kind": 32,
+									"kindString": "Variable",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								},
+								{
+									"id": 374,
+									"name": "b",
+									"kind": 32,
+									"kindString": "Variable",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								}
+							],
+							"groups": [
+								{
+									"title": "Variables",
+									"kind": 32,
+									"children": [
+										370,
+										374
+									]
+								}
+							]
+						},
+						{
+							"id": 371,
+							"name": "exportedModuleVariable",
+							"kind": 32,
+							"kindString": "Variable",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							},
+							"defaultValue": "\"foo\""
+						},
+						{
+							"id": 372,
+							"name": "moduleVariable",
+							"kind": 32,
+							"kindString": "Variable",
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"name": "Array",
+								"typeArguments": [
+									{
+										"type": "instrinct",
+										"name": "number"
+									}
+								]
+							},
+							"defaultValue": " [100, 200]"
+						},
+						{
+							"id": 373,
+							"name": "moduleVariable2",
+							"kind": 32,
+							"kindString": "Variable",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"isArray": true,
+								"name": "number"
+							}
+						},
+						{
+							"id": 364,
+							"name": "object",
+							"kind": 2097152,
+							"kindString": "Object literal",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "This is an object literal."
+							},
+							"children": [
+								{
+									"id": 365,
+									"name": "name",
+									"kind": 32,
+									"kindString": "Variable",
+									"flags": {
+										"isExported": true
+									},
+									"comment": {
+										"shortText": "An object literal value."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									},
+									"defaultValue": "\"Test\""
+								},
+								{
+									"id": 366,
+									"name": "print",
+									"kind": 64,
+									"kindString": "Function",
+									"flags": {
+										"isExported": true
+									},
+									"comment": {
+										"shortText": "An object literal function."
+									},
+									"signatures": [
+										{
+											"id": 367,
+											"name": "print",
+											"kind": 4096,
+											"kindString": "Call signature",
+											"flags": {},
+											"comment": {
+												"shortText": "An object literal function."
+											},
+											"parameters": [
+												{
+													"id": 368,
+													"name": "value",
+													"kind": 32768,
+													"kindString": "Parameter",
+													"flags": {},
+													"type": {
+														"type": "instrinct",
+														"name": "string"
+													}
+												}
+											],
+											"type": {
+												"type": "instrinct",
+												"name": "void"
+											}
+										}
+									]
+								}
+							],
+							"groups": [
+								{
+									"title": "Variables",
+									"kind": 32,
+									"children": [
+										365
+									]
+								},
+								{
+									"title": "Functions",
+									"kind": 64,
+									"children": [
+										366
+									]
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "object"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Modules",
+							"kind": 2,
+							"children": [
+								369
+							]
+						},
+						{
+							"title": "Variables",
+							"kind": 32,
+							"children": [
+								371,
+								372,
+								373
+							]
+						},
+						{
+							"title": "Object literals",
+							"kind": 2097152,
+							"children": [
+								364
+							]
+						}
+					]
+				},
+				{
+					"id": 375,
+					"name": "exportedGlobalVariable",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "An exported global variable."
+					},
+					"type": {
+						"type": "instrinct",
+						"name": "string"
+					},
+					"defaultValue": "\"foo\""
+				},
+				{
+					"id": 376,
+					"name": "globalVariable",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {},
+					"comment": {
+						"shortText": "A non-exported global variable."
+					},
+					"type": {
+						"type": "instrinct",
+						"name": "string"
+					},
+					"defaultValue": "\"foo\""
+				},
+				{
+					"id": 392,
+					"name": "typeLiteral",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {},
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 393,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 394,
+									"name": "__call",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								}
+							],
+							"children": [
+								{
+									"id": 410,
+									"name": "valueA",
+									"kind": 32,
+									"kindString": "Variable",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "number"
+									}
+								},
+								{
+									"id": 411,
+									"name": "valueB",
+									"kind": 32,
+									"kindString": "Variable",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "boolean"
+									}
+								},
+								{
+									"id": 399,
+									"name": "valueX",
+									"kind": 32,
+									"kindString": "Variable",
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 400,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 409,
+													"name": "valueA",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"type": {
+														"type": "instrinct",
+														"isArray": true,
+														"name": "number"
+													}
+												},
+												{
+													"id": 402,
+													"name": "valueY",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"type": {
+														"type": "reflection",
+														"declaration": {
+															"id": 403,
+															"name": "__type",
+															"kind": 65536,
+															"kindString": "Type literal",
+															"flags": {},
+															"signatures": [
+																{
+																	"id": 404,
+																	"name": "__call",
+																	"kind": 4096,
+																	"kindString": "Call signature",
+																	"flags": {},
+																	"parameters": [
+																		{
+																			"id": 405,
+																			"name": "z",
+																			"kind": 32768,
+																			"kindString": "Parameter",
+																			"flags": {},
+																			"type": {
+																				"type": "instrinct",
+																				"name": "string"
+																			}
+																		}
+																	],
+																	"type": {
+																		"type": "reflection",
+																		"declaration": {
+																			"id": 406,
+																			"name": "__type",
+																			"kind": 65536,
+																			"kindString": "Type literal",
+																			"flags": {},
+																			"children": [
+																				{
+																					"id": 407,
+																					"name": "a",
+																					"kind": 32,
+																					"kindString": "Variable",
+																					"flags": {},
+																					"type": {
+																						"type": "instrinct",
+																						"name": "string"
+																					}
+																				},
+																				{
+																					"id": 408,
+																					"name": "b",
+																					"kind": 32,
+																					"kindString": "Variable",
+																					"flags": {},
+																					"type": {
+																						"type": "instrinct",
+																						"name": "string"
+																					}
+																				}
+																			],
+																			"groups": [
+																				{
+																					"title": "Variables",
+																					"kind": 32,
+																					"children": [
+																						407,
+																						408
+																					]
+																				}
+																			]
+																		}
+																	}
+																}
+															]
+														}
+													}
+												},
+												{
+													"id": 401,
+													"name": "valueZ",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"type": {
+														"type": "instrinct",
+														"name": "string"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														409,
+														402,
+														401
+													]
+												}
+											]
+										}
+									}
+								},
+								{
+									"id": 396,
+									"name": "valueY",
+									"kind": 32,
+									"kindString": "Variable",
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 397,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"signatures": [
+												{
+													"id": 398,
+													"name": "__call",
+													"kind": 4096,
+													"kindString": "Call signature",
+													"flags": {},
+													"type": {
+														"type": "instrinct",
+														"name": "string"
+													}
+												}
+											]
+										}
+									}
+								},
+								{
+									"id": 395,
+									"name": "valueZ",
+									"kind": 32,
+									"kindString": "Variable",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								}
+							],
+							"groups": [
+								{
+									"title": "Variables",
+									"kind": 32,
+									"children": [
+										410,
+										411,
+										399,
+										396,
+										395
+									]
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 377,
+					"name": "objectLiteral",
+					"kind": 2097152,
+					"kindString": "Object literal",
+					"flags": {},
+					"comment": {
+						"shortText": "An object literal."
+					},
+					"children": [
+						{
+							"id": 390,
+							"name": "valueA",
+							"kind": 32,
+							"kindString": "Variable",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "number"
+							},
+							"defaultValue": "100"
+						},
+						{
+							"id": 391,
+							"name": "valueB",
+							"kind": 32,
+							"kindString": "Variable",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "boolean"
+							},
+							"defaultValue": "true"
+						},
+						{
+							"id": 378,
+							"name": "valueZ",
+							"kind": 32,
+							"kindString": "Variable",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							},
+							"defaultValue": "\"foo\""
+						},
+						{
+							"id": 379,
+							"name": "valueY",
+							"kind": 64,
+							"kindString": "Function",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 380,
+									"name": "valueY",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								}
+							]
+						},
+						{
+							"id": 381,
+							"name": "valueX",
+							"kind": 2097152,
+							"kindString": "Object literal",
+							"flags": {},
+							"children": [
+								{
+									"id": 389,
+									"name": "valueA",
+									"kind": 32,
+									"kindString": "Variable",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "Array",
+										"typeArguments": [
+											{
+												"type": "instrinct",
+												"name": "number"
+											}
+										]
+									},
+									"defaultValue": " [100, 200, 300]"
+								},
+								{
+									"id": 382,
+									"name": "valueZ",
+									"kind": 32,
+									"kindString": "Variable",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									},
+									"defaultValue": "\"foo\""
+								},
+								{
+									"id": 383,
+									"name": "valueY",
+									"kind": 64,
+									"kindString": "Function",
+									"flags": {},
+									"signatures": [
+										{
+											"id": 384,
+											"name": "valueY",
+											"kind": 4096,
+											"kindString": "Call signature",
+											"flags": {},
+											"parameters": [
+												{
+													"id": 385,
+													"name": "z",
+													"kind": 32768,
+													"kindString": "Parameter",
+													"flags": {},
+													"type": {
+														"type": "instrinct",
+														"name": "string"
+													}
+												}
+											],
+											"type": {
+												"type": "reflection",
+												"declaration": {
+													"id": 386,
+													"name": "__type",
+													"kind": 65536,
+													"kindString": "Type literal",
+													"flags": {},
+													"children": [
+														{
+															"id": 387,
+															"name": "a",
+															"kind": 32,
+															"kindString": "Variable",
+															"flags": {},
+															"type": {
+																"type": "instrinct",
+																"name": "string"
+															},
+															"defaultValue": "\"test\""
+														},
+														{
+															"id": 388,
+															"name": "b",
+															"kind": 32,
+															"kindString": "Variable",
+															"flags": {},
+															"type": {
+																"type": "instrinct",
+																"name": "string"
+															},
+															"defaultValue": "z"
+														}
+													],
+													"groups": [
+														{
+															"title": "Variables",
+															"kind": 32,
+															"children": [
+																387,
+																388
+															]
+														}
+													]
+												}
+											}
+										}
+									]
+								}
+							],
+							"groups": [
+								{
+									"title": "Variables",
+									"kind": 32,
+									"children": [
+										389,
+										382
+									]
+								},
+								{
+									"title": "Functions",
+									"kind": 64,
+									"children": [
+										383
+									]
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "object"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Variables",
+							"kind": 32,
+							"children": [
+								390,
+								391,
+								378
+							]
+						},
+						{
+							"title": "Functions",
+							"kind": 64,
+							"children": [
+								379
+							]
+						},
+						{
+							"title": "Object literals",
+							"kind": 2097152,
+							"children": [
+								381
+							]
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "object"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Modules",
+					"kind": 2,
+					"children": [
+						363
+					]
+				},
+				{
+					"title": "Variables",
+					"kind": 32,
+					"children": [
+						375,
+						376,
+						392
+					]
+				},
+				{
+					"title": "Object literals",
+					"kind": 2097152,
+					"children": [
+						377
+					]
+				}
+			]
+		},
+		{
+			"id": 412,
+			"name": "\"single-export\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/Users/pnlybubbles/Devs/typedoc/examples/basic/src/single-export.ts",
+			"children": [
+				{
+					"id": 413,
+					"name": "NotExportedClass",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {},
+					"comment": {
+						"shortText": "This class is not exported."
+					},
+					"children": [
+						{
+							"id": 415,
+							"name": "constructor",
+							"kind": 512,
+							"kindString": "Constructor",
+							"flags": {},
+							"comment": {
+								"shortText": "This is the constructor of the not exported class."
+							},
+							"signatures": [
+								{
+									"id": 416,
+									"name": "new NotExportedClass",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is the constructor of the not exported class."
+									},
+									"type": {
+										"type": "reference",
+										"name": "NotExportedClass",
+										"id": 413
+									}
+								}
+							]
+						},
+						{
+							"id": 414,
+							"name": "notExportedProperty",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPublic": true
+							},
+							"comment": {
+								"shortText": "Property of not exported class."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							}
+						},
+						{
+							"id": 417,
+							"name": "getNotExportedProperty",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 418,
+									"name": "getNotExportedProperty",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Method of not exported class."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"kind": 512,
+							"children": [
+								415
+							]
+						},
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								414
+							]
+						},
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								417
+							]
+						}
+					]
+				},
+				{
+					"id": 419,
+					"name": "SingleExportedClass",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {
+						"isExported": true,
+						"hasExportAssignment": true
+					},
+					"comment": {
+						"shortText": "This class is exported by being assigned to ´export´.",
+						"text": "~~~\nexport = SingleExportedClass;\n~~~\n"
+					},
+					"children": [
+						{
+							"id": 421,
+							"name": "constructor",
+							"kind": 512,
+							"kindString": "Constructor",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "This is the constructor of the exported class."
+							},
+							"signatures": [
+								{
+									"id": 422,
+									"name": "new SingleExportedClass",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"comment": {
+										"shortText": "This is the constructor of the exported class."
+									},
+									"type": {
+										"type": "reference",
+										"name": "SingleExportedClass",
+										"id": 419
+									}
+								}
+							]
+						},
+						{
+							"id": 420,
+							"name": "exportedProperty",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"comment": {
+								"shortText": "Property of exported class."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							}
+						},
+						{
+							"id": 423,
+							"name": "getExportedProperty",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true,
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 424,
+									"name": "getExportedProperty",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Method of exported class."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"kind": 512,
+							"children": [
+								421
+							]
+						},
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								420
+							]
+						},
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								423
+							]
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Classes",
+					"kind": 128,
+					"children": [
+						413,
+						419
+					]
+				}
+			]
+		},
+		{
+			"id": 425,
+			"name": "\"typescript-1.3\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/Users/pnlybubbles/Devs/typedoc/examples/basic/src/typescript-1.3.ts",
+			"children": [
+				{
+					"id": 426,
+					"name": "ClassWithProtectedMembers",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {},
+					"comment": {
+						"shortText": "A class with protected members."
+					},
+					"children": [
+						{
+							"id": 429,
+							"name": "privateProperty",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPrivate": true
+							},
+							"comment": {
+								"shortText": "A private property."
+							},
+							"type": {
+								"type": "tuple",
+								"elements": [
+									{
+										"type": "instrinct",
+										"name": "boolean"
+									},
+									{
+										"type": "instrinct",
+										"name": "string"
+									},
+									{
+										"type": "instrinct",
+										"name": "string"
+									}
+								]
+							}
+						},
+						{
+							"id": 428,
+							"name": "protectedProperty",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isProtected": true
+							},
+							"comment": {
+								"shortText": "A protected property."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							}
+						},
+						{
+							"id": 427,
+							"name": "publicProperty",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPublic": true
+							},
+							"comment": {
+								"shortText": "A public property."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							}
+						},
+						{
+							"id": 434,
+							"name": "privateMethod",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isPrivate": true
+							},
+							"signatures": [
+								{
+									"id": 435,
+									"name": "privateMethod",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A private property."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 432,
+							"name": "protectedMethod",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isProtected": true
+							},
+							"signatures": [
+								{
+									"id": 433,
+									"name": "protectedMethod",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A protected property."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 430,
+							"name": "publicMethod",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 431,
+									"name": "publicMethod",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A public property."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								429,
+								428,
+								427
+							]
+						},
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								434,
+								432,
+								430
+							]
+						}
+					],
+					"extendedBy": [
+						{
+							"type": "reference",
+							"name": "SubclassWithProtectedMembers",
+							"id": 436
+						}
+					]
+				},
+				{
+					"id": 436,
+					"name": "SubclassWithProtectedMembers",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {},
+					"comment": {
+						"shortText": "A subclass with inherited protected members."
+					},
+					"children": [
+						{
+							"id": 438,
+							"name": "protectedProperty",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isProtected": true
+							},
+							"comment": {
+								"shortText": "A protected property."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "ClassWithProtectedMembers.protectedProperty",
+								"id": 428
+							}
+						},
+						{
+							"id": 437,
+							"name": "publicProperty",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPublic": true
+							},
+							"comment": {
+								"shortText": "A public property."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "ClassWithProtectedMembers.publicProperty",
+								"id": 427
+							}
+						},
+						{
+							"id": 441,
+							"name": "protectedMethod",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isProtected": true
+							},
+							"signatures": [
+								{
+									"id": 442,
+									"name": "protectedMethod",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A protected property."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "ClassWithProtectedMembers.protectedMethod",
+										"id": 432
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "ClassWithProtectedMembers.protectedMethod",
+								"id": 432
+							}
+						},
+						{
+							"id": 439,
+							"name": "publicMethod",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 440,
+									"name": "publicMethod",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A public property."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"name": "ClassWithProtectedMembers.publicMethod",
+										"id": 430
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "ClassWithProtectedMembers.publicMethod",
+								"id": 430
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								438,
+								437
+							]
+						},
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								441,
+								439
+							]
+						}
+					],
+					"extendedTypes": [
+						{
+							"type": "reference",
+							"name": "ClassWithProtectedMembers",
+							"id": 426
+						}
+					]
+				},
+				{
+					"id": 443,
+					"name": "tupleType",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {},
+					"comment": {
+						"shortText": "A variable with a tuple type."
+					},
+					"type": {
+						"type": "tuple",
+						"elements": [
+							{
+								"type": "instrinct",
+								"name": "string"
+							},
+							{
+								"type": "reference",
+								"name": "ClassWithProtectedMembers",
+								"id": 426
+							}
+						]
+					},
+					"defaultValue": " ['test', new ClassWithProtectedMembers()]"
+				}
+			],
+			"groups": [
+				{
+					"title": "Classes",
+					"kind": 128,
+					"children": [
+						426,
+						436
+					]
+				},
+				{
+					"title": "Variables",
+					"kind": 32,
+					"children": [
+						443
+					]
+				}
+			]
+		},
+		{
+			"id": 444,
+			"name": "\"typescript-1.4\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/Users/pnlybubbles/Devs/typedoc/examples/basic/src/typescript-1.4.ts",
+			"comment": {
+				"shortText": "Examples of features added in TypeScript 1.4.",
+				"tags": [
+					{
+						"tag": "see",
+						"text": "http://blogs.msdn.com/b/typescript/archive/2014/11/18/what-s-new-in-the-typescript-type-system.aspx\n"
+					}
+				]
+			},
+			"children": [
+				{
+					"id": 448,
+					"name": "SimpleClass",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {},
+					"comment": {
+						"shortText": "A simple text class."
+					},
+					"children": [
+						{
+							"id": 449,
+							"name": "someFunction",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isPublic": true
+							},
+							"signatures": [
+								{
+									"id": 450,
+									"name": "someFunction",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "A generic function using a generic type alias.",
+										"text": "Uses [[GenericCallback]] instead of [[Callback]].\n",
+										"returns": "Some return value.\n"
+									},
+									"typeParameter": [
+										{
+											"id": 451,
+											"name": "T",
+											"kind": 131072,
+											"kindString": "Type parameter",
+											"flags": {},
+											"comment": {
+												"text": "Some type argument."
+											}
+										}
+									],
+									"parameters": [
+										{
+											"id": 452,
+											"name": "arr",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"text": "A generic array."
+											},
+											"type": {
+												"type": "reference",
+												"name": "Array",
+												"typeArguments": [
+													{
+														"type": "typeParameter",
+														"name": "T"
+													}
+												]
+											}
+										},
+										{
+											"id": 453,
+											"name": "callback",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"text": "Some generic type alias callback."
+											},
+											"type": {
+												"type": "reference",
+												"name": "GenericCallback",
+												"id": 461
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								449
+							]
+						}
+					]
+				},
+				{
+					"id": 445,
+					"name": "RunOptions",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "A simple interface holding a member with an union type."
+					},
+					"children": [
+						{
+							"id": 447,
+							"name": "commandline",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "instrinct",
+										"isArray": true,
+										"name": "string"
+									},
+									{
+										"type": "instrinct",
+										"name": "string"
+									}
+								]
+							}
+						},
+						{
+							"id": 446,
+							"name": "program",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								447,
+								446
+							]
+						}
+					]
+				},
+				{
+					"id": 457,
+					"name": "Callback",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"comment": {
+						"shortText": "A type alias of for a callback function."
+					},
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 458,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 459,
+									"name": "__call",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 460,
+											"name": "parameters",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {
+												"isRest": true
+											},
+											"comment": {
+												"text": "The rest parameter.\n"
+											},
+											"type": {
+												"type": "instrinct",
+												"isArray": true,
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 461,
+					"name": "GenericCallback",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "A type alias of for a generic callback function.",
+						"tags": [
+							{
+								"tag": "returns",
+								"text": "Some return value.\n"
+							}
+						]
+					},
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 462,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 463,
+									"name": "__call",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"typeParameter": [
+										{
+											"id": 464,
+											"name": "T",
+											"kind": 131072,
+											"kindString": "Type parameter",
+											"flags": {},
+											"comment": {
+												"text": "Some type argument."
+											}
+										}
+									],
+									"parameters": [
+										{
+											"id": 465,
+											"name": "val",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"text": "Some generic value."
+											},
+											"type": {
+												"type": "typeParameter",
+												"name": "T"
+											}
+										},
+										{
+											"id": 466,
+											"name": "index",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"text": "Some index value."
+											},
+											"type": {
+												"type": "instrinct",
+												"name": "number"
+											}
+										},
+										{
+											"id": 467,
+											"name": "arr",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"text": "A generic array."
+											},
+											"type": {
+												"type": "reference",
+												"name": "Array",
+												"typeArguments": [
+													{
+														"type": "typeParameter",
+														"name": "T"
+													}
+												]
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 455,
+					"name": "MyNumber",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"comment": {
+						"shortText": "A type alias describing a primitive value."
+					},
+					"type": {
+						"type": "instrinct",
+						"name": "number"
+					}
+				},
+				{
+					"id": 456,
+					"name": "MyRunOptions",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"comment": {
+						"shortText": "A type alias describing a reference type."
+					},
+					"type": {
+						"type": "reference",
+						"name": "RunOptions",
+						"id": 445
+					}
+				},
+				{
+					"id": 454,
+					"name": "PrimitiveArray",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"comment": {
+						"shortText": "A type alias describing an array."
+					},
+					"type": {
+						"type": "reference",
+						"name": "Array",
+						"typeArguments": [
+							{
+								"type": "union",
+								"types": [
+									{
+										"type": "instrinct",
+										"name": "string"
+									},
+									{
+										"type": "instrinct",
+										"name": "number"
+									},
+									{
+										"type": "instrinct",
+										"name": "boolean"
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"id": 469,
+					"name": "callback",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {},
+					"comment": {
+						"shortText": "A variable pointing to a type alias."
+					},
+					"type": {
+						"type": "reference",
+						"name": "Callback",
+						"id": 457
+					}
+				},
+				{
+					"id": 468,
+					"name": "interfaceOrString",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {},
+					"comment": {
+						"shortText": "A variable defined using an union type."
+					},
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "reference",
+								"name": "RunOptions",
+								"id": 445
+							},
+							{
+								"type": "instrinct",
+								"name": "string"
+							}
+						]
+					}
+				},
+				{
+					"id": 470,
+					"name": "functionUsingTypes",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 471,
+							"name": "functionUsingTypes",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "A function that has parameters pointing to type aliases and returns a type alias."
+							},
+							"parameters": [
+								{
+									"id": 472,
+									"name": "aliasData",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "PrimitiveArray",
+										"id": 454
+									}
+								},
+								{
+									"id": 473,
+									"name": "callback",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "Callback",
+										"id": 457
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "MyNumber",
+								"id": 455
+							}
+						}
+					]
+				},
+				{
+					"id": 474,
+					"name": "functionWithGenericCallback",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 475,
+							"name": "functionWithGenericCallback",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "A generic function using a generic type alias.",
+								"returns": "Some return value.\n"
+							},
+							"typeParameter": [
+								{
+									"id": 476,
+									"name": "T",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {},
+									"comment": {
+										"text": "Some type argument."
+									}
+								}
+							],
+							"parameters": [
+								{
+									"id": 477,
+									"name": "arr",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "A generic array."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Array",
+										"typeArguments": [
+											{
+												"type": "typeParameter",
+												"name": "T"
+											}
+										]
+									}
+								},
+								{
+									"id": 478,
+									"name": "callback",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "Some generic type alias callback."
+									},
+									"type": {
+										"type": "reference",
+										"name": "GenericCallback",
+										"id": 461
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Classes",
+					"kind": 128,
+					"children": [
+						448
+					]
+				},
+				{
+					"title": "Interfaces",
+					"kind": 256,
+					"children": [
+						445
+					]
+				},
+				{
+					"title": "Type aliases",
+					"kind": 4194304,
+					"children": [
+						457,
+						461,
+						455,
+						456,
+						454
+					]
+				},
+				{
+					"title": "Variables",
+					"kind": 32,
+					"children": [
+						469,
+						468
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						470,
+						474
+					]
+				}
+			]
+		},
+		{
+			"id": 479,
+			"name": "\"typescript-1.5\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/Users/pnlybubbles/Devs/typedoc/examples/basic/src/typescript-1.5.ts",
+			"children": [
+				{
+					"id": 483,
+					"name": "destructArrayA",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {},
+					"type": {
+						"type": "instrinct",
+						"name": "number"
+					}
+				},
+				{
+					"id": 484,
+					"name": "destructArrayB",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {},
+					"type": {
+						"type": "instrinct",
+						"name": "string"
+					}
+				},
+				{
+					"id": 485,
+					"name": "destructArrayC",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {},
+					"type": {
+						"type": "instrinct",
+						"name": "number"
+					},
+					"defaultValue": "10"
+				},
+				{
+					"id": 489,
+					"name": "destructArrayWithIgnoresA",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {},
+					"type": {
+						"type": "instrinct",
+						"name": "number"
+					}
+				},
+				{
+					"id": 490,
+					"name": "destructArrayWithIgnoresRest",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {},
+					"type": {
+						"type": "reference",
+						"name": "Array",
+						"typeArguments": [
+							{
+								"type": "instrinct",
+								"name": "number"
+							}
+						]
+					}
+				},
+				{
+					"id": 488,
+					"name": "destructArrayWithRest",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {},
+					"type": {
+						"type": "reference",
+						"name": "Array",
+						"typeArguments": [
+							{
+								"type": "instrinct",
+								"name": "number"
+							}
+						]
+					}
+				},
+				{
+					"id": 486,
+					"name": "destructArrayWithRestA",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {},
+					"type": {
+						"type": "instrinct",
+						"name": "number"
+					}
+				},
+				{
+					"id": 487,
+					"name": "destructArrayWithRestB",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {},
+					"type": {
+						"type": "instrinct",
+						"name": "number"
+					}
+				},
+				{
+					"id": 480,
+					"name": "destructObjectA",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {},
+					"type": {
+						"type": "instrinct",
+						"name": "number"
+					}
+				},
+				{
+					"id": 481,
+					"name": "destructObjectB",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {},
+					"type": {
+						"type": "instrinct",
+						"name": "string"
+					}
+				},
+				{
+					"id": 482,
+					"name": "destructObjectC",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {},
+					"type": {
+						"type": "instrinct",
+						"name": "number"
+					}
+				},
+				{
+					"id": 491,
+					"name": "drawText",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 492,
+							"name": "drawText",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Destructuring function parameters."
+							},
+							"parameters": [
+								{
+									"id": 493,
+									"name": "__namedParameters",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"originalName": "__0",
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 494,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 497,
+													"name": "bold",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"type": {
+														"type": "instrinct",
+														"name": "boolean"
+													},
+													"defaultValue": "false"
+												},
+												{
+													"id": 496,
+													"name": "location",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"type": {
+														"type": "tuple",
+														"elements": [
+															{
+																"type": "instrinct",
+																"name": "number"
+															},
+															{
+																"type": "instrinct",
+																"name": "number"
+															}
+														]
+													},
+													"defaultValue": " [0, 0]"
+												},
+												{
+													"id": 495,
+													"name": "text",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"type": {
+														"type": "instrinct",
+														"name": "string"
+													},
+													"defaultValue": "\"\""
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														497,
+														496,
+														495
+													]
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Variables",
+					"kind": 32,
+					"children": [
+						483,
+						484,
+						485,
+						489,
+						490,
+						488,
+						486,
+						487,
+						480,
+						481,
+						482
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						491
+					]
+				}
+			]
+		}
+	],
+	"groups": [
+		{
+			"title": "External modules",
+			"kind": 1,
+			"children": [
+				1,
+				18,
+				179,
+				195,
+				259,
+				318,
+				362,
+				412,
+				425,
+				444,
+				479
+			]
+		}
+	]
+}
