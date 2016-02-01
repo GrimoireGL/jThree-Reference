@@ -39,9 +39,14 @@ server.get '/api/class/global/:file_id/:factor_id', (req, res) ->
 
 server.get '/api/overview/:path', (req, res) ->
   console.log "server: ", req.originalUrl
-  res.json
-    markup: overviews.getMarkupByPath req.params.path #overviews.getOverviewHtml(req.params.path)
-    structure: overviews.structure
+  pathAry = req.params.path.split(":::")
+  if pathAry[0] != "root"
+    res.status(404).send()
+  else
+    path = pathAry[1..].join(":::")
+    res.json
+      markup: overviews.getMarkupByPath path #overviews.getOverviewHtml(req.params.path)
+      structure: overviews.structure # TODO sato: thiw will be separated..
 
 ###*
  * All page view request routing is processed here

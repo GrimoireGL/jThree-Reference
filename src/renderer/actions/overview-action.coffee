@@ -19,13 +19,14 @@ class OverviewAction extends Flux.Action
     path = path.split("/").filter((_, i) -> i >= 2).join(":::")
     new Promise (resolve, reject) =>
       request
-        .get "http://localhost:5000/api/overview/#{path}"
+        .get "/api/overview/root:::#{path}"
         .end (err, res) ->
           # console.log "connect to: ", "/api/overview/#{path}"
           # console.log "res.body: ", res.body
           # console.log err
           resolve res.body
     .then (res) =>
+      debugger
       @dispatch(keys.updateOverview, path, res)
     .catch (err) ->
       console.error err

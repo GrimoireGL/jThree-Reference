@@ -49,7 +49,7 @@ class InitializeState
             initial_doc_data = @docs.getDocDataById file_id, factor_id
         when "overview"
           title_id = argu.route_arr[1] || 0
-          initial_overview_markup = ""#@overviews.getOverviewHtml(title_id)
+          initial_overview_markup = {}
           initial_overview_structure = @overviews.structure
 
 

@@ -8,41 +8,41 @@ class OverviewMarkupComponent extends React.Component
 
   constructor: (props) ->
     super props
+    @loadingQueue = []
 
   _onChange: ->
     @setState @store.get()
 
   componentWillMount: ->
     @store = @context.ctx.overviewStore
-    @context.ctx.overviewAction.updateOverview "/#{@props.argu.fragment}"
     @setState @store.get()
 
   componentDidMount: ->
     @store.onChange @_onChange.bind(@)
-    @setState @store.get()
-
 
   componentWillUnmount: ->
     @store.removeChangeListener(@_onChange.bind(@))
-    @setState @store.get()
 
-  # shouldComponentUpdate: (nextProps, nextState) ->
-  #   true
-  #   nextProps.markup != @props.marked
-
-
-  getMd: ->
-    @props.markup
-
-  render: ->
+  render: ->    
     <div className={'markdown-component'} style={@props.style}>
-      <Route>
-        {
-          console.log "markdowns:", @state.markup
-          path = @props.argu.fragment_arr.filter((s, i)-> i >= 1).join("/")
+      {
+        console.log "markdowns:", @state.markup
+        path = @props.argu.fragment_arr.filter((s, i)-> i >= 1).join('/')
+        if @state.markup[path]
+          splice_index = null
+          for q, i in @loadingQueue
+            if q == path
+              splice_index = i
+              break
+          @loadingQueue.splice splice_index, 1 if splice_index?
           <div style={styles.container} dangerouslySetInnerHTML={__html: @state.markup[path]}></div>
-        }
-      </Route>
+        else
+          if window?
+            if !@loadingQueue.some((p) -> p == path)
+              @loadingQueue.push path
+              @context.ctx.overviewAction.updateOverview "#{path}"
+          <span>loading...</span>
+      }
     </div>
 
 styles =
