@@ -108,6 +108,7 @@ Object.keys(config).forEach (suffix) ->
         .pipe gulpif(!watching && env_production, gulpif(c.minify, uglify()))
         .pipe sourcemaps.write('./')
         .pipe gulpif(!(!watching && env_production), sourcemaps.write('./'))
+        .pipe gulp.dest(c.dest)
     if watching
       b.on 'update', bundle
     bundle()
