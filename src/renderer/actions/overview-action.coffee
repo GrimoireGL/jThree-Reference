@@ -16,7 +16,7 @@ class OverviewAction extends Flux.Action
    * @param  {String|Number} title_id   id of child of overview root
   ###
   updateOverview: (path) ->
-    path = path.split("/").filter((_, i) -> i >= 2).join(":::")
+    path = path.split("/").join(":::")
     new Promise (resolve, reject) =>
       request
         .get "/api/overview/root:::#{path}"
@@ -26,7 +26,8 @@ class OverviewAction extends Flux.Action
           # console.log err
           resolve res.body
     .then (res) =>
-      debugger
+      # debugger
+      # console.log "path: ", path, "res: ", res
       @dispatch(keys.updateOverview, path, res)
     .catch (err) ->
       console.error err

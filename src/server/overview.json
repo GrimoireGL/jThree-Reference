@@ -69,7 +69,7 @@
         },
         {
           "type": "directory",
-          "name": "subcontent3",
+          "name": "subcontent2",
           "children": [
             {
               "type": "file",
@@ -90,7 +90,7 @@
         },
         {
           "type": "directory",
-          "name": "subcontent2",
+          "name": "subcontent3",
           "children": [
             {
               "type": "file",

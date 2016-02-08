@@ -40,6 +40,7 @@ class OverviewMarkupComponent extends React.Component
           if window?
             if !@loadingQueue.some((p) -> p == path)
               @loadingQueue.push path
+              # console.log "path:", path
               @context.ctx.overviewAction.updateOverview "#{path}"
           <span>loading...</span>
       }
