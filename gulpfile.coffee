@@ -19,14 +19,14 @@ others = [
 env_production = false
 gulp.task 'default', ['build']
 gulp.task 'enable-build-production-mode', -> env_production = true
-gulp.task 'build', ['enable-build-production-mode', 'build:others', 'browserify', 'bundle-overview-files']
-gulp.task 'build-dev', ['build:others', 'browserify', 'bundle-overview-files']
+gulp.task 'build', ['enable-build-production-mode', 'build:others', 'browserify', 'bundle-example-files']
+gulp.task 'build-dev', ['build:others', 'browserify', 'bundle-example-files']
 gulp.task 'build:others', ("build:#{it.suffix}" for it in others)
 
 watching = false
 gulp.task 'enable-watch-mode', -> watching = true
 gulp.task 'watch-prd', ['enable-build-production-mode', 'watch']
-gulp.task 'watch', ['build:others', 'enable-watch-mode', 'browserify', 'bundle-overview-files'], ->
+gulp.task 'watch', ['build:others', 'enable-watch-mode', 'browserify', 'bundle-example-files'], ->
   for it in others
     gulp.watch it.src, ["build:#{it.suffix}"]
 
@@ -78,8 +78,8 @@ gulp.task 'test', ->
     .src './test/**/*test.coffee'
     .pipe mocha()
 
-gulp.task 'bundle-overview-files', ->
-  targetDir = "#{fs.realpathSync('./')}/clones/jThree-Overview/markdowns"
+gulp.task 'bundle-example-files', ->
+  targetDir = "#{fs.realpathSync('./')}/clones/jThree-Example/markdowns"
   walk = (p, callback) ->
     results = []
     fs.readdir p, (err, files) ->
@@ -128,7 +128,7 @@ gulp.task 'bundle-overview-files', ->
       type: "directory"
       name: 'markdowns'
       children: results
-    outputTarget = "#{fs.realpathSync('./')}/src/server/overview.json"
+    outputTarget = "#{fs.realpathSync('./')}/src/server/example.json"
     fs.writeFile outputTarget, JSON.stringify(data, "", "  ")
     #一覧出力
     return

@@ -2,7 +2,7 @@
 // var request = require('request');
 //
 //
-// var address = "https://api.github.com/repos/jThreeJS/jThree-Overview";
+// var address = "https://api.github.com/repos/jThreeJS/jThree-Example";
 //
 // var co = require('co');
 // co(function *() {

@@ -2,7 +2,7 @@ React = require 'react'
 Radium = require 'radium'
 Link = require './link-component'
 
-class OverviewSidebarTitleComponent extends React.Component
+class ExampleSidebarTitleComponent extends React.Component
 
   constructor: (props) ->
     super props
@@ -13,7 +13,7 @@ class OverviewSidebarTitleComponent extends React.Component
         <Link style={styles.titleText[@props.level-1]} href={@props.url}>
           {@props.children}
         </Link>
-        #   url = "/overview/#{@titleToUrl(@props.itemTitle)}"
+        #   url = "/example/#{@titleToUrl(@props.itemTitle)}"
         #   if @props.level == 1
         #     # if @props.argu.fragment.match "#"
         #     #   url += "#"
@@ -63,7 +63,7 @@ styles =
     }
   ]
 
-OverviewSidebarTitleComponent.contextTypes =
+ExampleSidebarTitleComponent.contextTypes =
   ctx: React.PropTypes.any
 
-module.exports = Radium OverviewSidebarTitleComponent
+module.exports = Radium ExampleSidebarTitleComponent

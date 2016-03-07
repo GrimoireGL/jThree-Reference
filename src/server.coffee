@@ -8,7 +8,7 @@ Context = require './renderer/context'
 Root = require './renderer/components/root-component'
 InitializeState = require './server/initializeState'
 Docs = require './server/docs'
-Overviews = require './server/overviews'
+Examples = require './server/examples'
 
 console.log "environment: #{process.env.NODE_ENV}"
 
@@ -20,7 +20,7 @@ server.use favicon("#{fs.realpathSync('./')}/public/assets/favicon/favicon.ico")
 template = Handlebars.compile fs.readFileSync("#{fs.realpathSync('./')}/view/index.hbs").toString()
 
 docs = new Docs()
-overviews = new Overviews()
+examples = new Examples()
 
 initializeState = new InitializeState(docs)
 docs.getJsonScheduler 3 * 60 * 60, ->
@@ -37,7 +37,7 @@ server.get '/api/class/global/:file_id/:factor_id', (req, res) ->
   console.log req.originalUrl
   res.json docs.getDocDataById req.params.file_id, req.params.factor_id
 
-server.get '/api/overview/:path', (req, res) ->
+server.get '/api/example/:path', (req, res) ->
   console.log "server: ", req.originalUrl
   pathAry = req.params.path.split(":::")
   if pathAry[0] != "root"
@@ -45,8 +45,8 @@ server.get '/api/overview/:path', (req, res) ->
   else
     path = pathAry[1..].join(":::")
     res.json
-      markup: overviews.getMarkupByPath path #overviews.getOverviewHtml(req.params.path)
-      structure: overviews.structure # TODO sato: thiw will be separated..
+      markup: examples.getMarkupByPath path #examples.getExampleHtml(req.params.path)
+      structure: examples.structure # TODO sato: thiw will be separated..
 
 ###*
  * All page view request routing is processed here

@@ -40,7 +40,7 @@ class IndexComponent extends React.Component
           </a>
         </div>
         <div style={styles.link_container}>
-          <Link href='/examples' style={styles.link} key='examples'>
+          <Link href='/example' style={styles.link} key='example'>
             <div style={styles.link_icon_wrap}>
               <span className='icon-earth'></span>
             </div>
@@ -146,7 +146,7 @@ class IndexComponent extends React.Component
           </Tbody>
         </Table>
         <P>(simple web server supported LiveReload)</P>
-        <H3>Overview</H3>
+        <H3>Example</H3>
 
         <P>Look at this simple example.</P>
 

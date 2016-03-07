@@ -11,16 +11,16 @@ marked = require 'marked'
 objectAssign = require 'object-assign'
 
 
-class Overviews
+class Examples
   ###*
-   * Convert Overviews object from markdown text
-   * @return {Overviews}
+   * Convert Examples object from markdown text
+   * @return {Examples}
   ###
   constructor: ->
-    @json = JSON.parse fs.readFileSync config.overview.path_to_json, 'utf8'
+    @json = JSON.parse fs.readFileSync config.examples.path_to_json, 'utf8'
     @structure = @getStructure()
     @routes = @getRoutes()
-    # @markdown = fs.readFileSync config.overview.markdown, 'utf8'
+    # @markdown = fs.readFileSync config.example.markdown, 'utf8'
     # @lines = @markdown.split "\n"
 
   getStructure: ->
@@ -57,7 +57,7 @@ class Overviews
     directory.children.forEach (o) ->
       switch o.type
         when "file"
-          routesAry.push("overview#{pwd}/#{o.file}")
+          routesAry.push("example#{pwd}/#{o.file}")
         when "directory"
           routesAry = routesAry.concat(_recursionSearch(o, "#{pwd}/#{o.name}"))
     routesAry
@@ -93,7 +93,7 @@ class Overviews
 
   # ###*
   #  * set external markdown text
-  #  * @param {Object} overview markdown text
+  #  * @param {Object} example markdown text
   # ###
   # # setMarkdown: (md) ->
   # #   @markdown = md
@@ -186,7 +186,7 @@ class Overviews
   #   # console.log texts
   #   texts[title_id]
   #
-  # getOverviewHtml: (title_id) ->
+  # getExampleHtml: (title_id) ->
   #   markdown = @getMarkdownById title_id
   #   marked.setOptions highlight: (code) ->
   #     require('highlight.js').highlightAuto(code).value
@@ -205,4 +205,4 @@ class Overviews
   #   resultMd
 
 
-module.exports = Overviews
+module.exports = Examples

@@ -2,26 +2,26 @@ Flux = require 'material-flux'
 keys = require '../keys'
 objectAssign = require 'object-assign'
 
-class OverviewStore extends Flux.Store
+class ExampleStore extends Flux.Store
   ###*
-   * flux store for overview
-   * stores markup for overview page
+   * flux store for example
+   * stores markup for example page
    * @param  {Context} context flux context instance use for initializing state
-   * @return {OverviewStore}
+   * @return {ExampleStore}
   ###
   constructor: (context) ->
     super context
     @state =
       markup: {}
       structure: []
-    @state = objectAssign(@state, context.initialStates.OverviewStore)
-    @register keys.updateOverview, @updateOverview
+    @state = objectAssign(@state, context.initialStates.ExampleStore)
+    @register keys.updateExample, @updateExample
 
   ###*
-   * update overview's markup,structure
+   * update example's markup,structure
    * @param data.markup {string}
   ###
-  updateOverview: (path, data) ->
+  updateExample: (path, data) ->
     state = markup:{}
     state.markup[path.replace(/:::/g, "/")] = data.markup
     state.structure = data.structure
@@ -35,4 +35,4 @@ class OverviewStore extends Flux.Store
   get: ->
     @state
 
-module.exports = OverviewStore
+module.exports = ExampleStore

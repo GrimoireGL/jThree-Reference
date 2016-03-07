@@ -3,33 +3,33 @@ keys = require '../keys'
 request = require 'superagent'
 Promise = require 'bluebird'
 
-class OverviewAction extends Flux.Action
+class ExampleAction extends Flux.Action
   ###*
-   * flux action for overview
-   * @return {OverviewAction}
+   * flux action for example
+   * @return {ExampleAction}
   ###
   constructor: ->
     super
 
   ###*
-   * get and update overview object
-   * @param  {String|Number} title_id   id of child of overview root
+   * get and update example object
+   * @param  {String|Number} title_id   id of child of example root
   ###
-  updateOverview: (path) ->
+  updateExample: (path) ->
     path = path.split("/").join(":::")
     new Promise (resolve, reject) =>
       request
-        .get "/api/overview/root:::#{path}"
+        .get "/api/example/root:::#{path}"
         .end (err, res) ->
-          # console.log "connect to: ", "/api/overview/#{path}"
+          # console.log "connect to: ", "/api/example/#{path}"
           # console.log "res.body: ", res.body
           # console.log err
           resolve res.body
     .then (res) =>
       # debugger
       # console.log "path: ", path, "res: ", res
-      @dispatch(keys.updateOverview, path, res)
+      @dispatch(keys.updateExample, path, res)
     .catch (err) ->
       console.error err
 
-module.exports = OverviewAction
+module.exports = ExampleAction

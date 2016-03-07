@@ -1,11 +1,11 @@
 React = require 'react'
 Radium = require 'radium'
-OverviewMarkupComponent = require './overview-markup-component'
-OverviewSidebarComponent = require './overview-sidebar-component'
+ExampleMarkupComponent = require './example-markup-component'
+ExampleSidebarComponent = require './example-sidebar-component'
 Route = require './route-component'
 Promise = require 'superagent'
 
-class OverviewComponent extends React.Component
+class ExampleComponent extends React.Component
 
   constructor: (props) ->
     super props
@@ -13,11 +13,11 @@ class OverviewComponent extends React.Component
   render: ->
     <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       <div style={styles.sidebar}>
-        <OverviewSidebarComponent />
+        <ExampleSidebarComponent />
       </div>
       <div style={styles.contents}>
         <Route>
-          <OverviewMarkupComponent />
+          <ExampleMarkupComponent />
         </Route>
       </div>
     </div>
@@ -58,7 +58,7 @@ styles =
     marginLeft: 360
 
 
-OverviewComponent.contextTypes =
+ExampleComponent.contextTypes =
   ctx: React.PropTypes.any
 
-module.exports = Radium OverviewComponent
+module.exports = Radium ExampleComponent

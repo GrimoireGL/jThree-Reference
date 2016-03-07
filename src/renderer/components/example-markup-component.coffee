@@ -4,7 +4,7 @@ marked = require 'marked'
 
 Route = require './route-component'
 
-class OverviewMarkupComponent extends React.Component
+class ExampleMarkupComponent extends React.Component
 
   constructor: (props) ->
     super props
@@ -14,7 +14,7 @@ class OverviewMarkupComponent extends React.Component
     @setState @store.get()
 
   componentWillMount: ->
-    @store = @context.ctx.overviewStore
+    @store = @context.ctx.exampleStore
     @setState @store.get()
 
   componentDidMount: ->
@@ -41,7 +41,7 @@ class OverviewMarkupComponent extends React.Component
             if !@loadingQueue.some((p) -> p == path)
               @loadingQueue.push path
               # console.log "path:", path
-              @context.ctx.overviewAction.updateOverview "#{path}"
+              @context.ctx.exampleAction.updateExample "#{path}"
           <span>loading...</span>
       }
     </div>
@@ -60,7 +60,7 @@ styles =
 #     marginRight: 120
 
 
-OverviewMarkupComponent.contextTypes =
+ExampleMarkupComponent.contextTypes =
   ctx: React.PropTypes.any
 
-module.exports = Radium OverviewMarkupComponent
+module.exports = Radium ExampleMarkupComponent

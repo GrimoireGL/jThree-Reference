@@ -5,7 +5,7 @@ colors = require './colors/color-definition'
 
 ###
 @props.list [required] list array contains hash
-hash overview:
+hash example:
 {target: (string), content: [ReactElement, 'match', ...]}
 target: target of search
 content: elements array which is inserted to result list. if array factor

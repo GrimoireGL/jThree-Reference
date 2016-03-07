@@ -1,7 +1,7 @@
 React = require 'react'
 Radium = require 'radium'
 
-class OverviewSidebarItemComponent extends React.Component
+class ExampleSidebarItemComponent extends React.Component
 
   constructor: (props) ->
     super props
@@ -40,7 +40,7 @@ styles =
     borderBottom: '1px solid #eee'
 
 
-OverviewSidebarItemComponent.contextTypes =
+ExampleSidebarItemComponent.contextTypes =
   ctx: React.PropTypes.any
 
-module.exports = Radium OverviewSidebarItemComponent
+module.exports = Radium ExampleSidebarItemComponent

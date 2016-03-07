@@ -1,10 +1,10 @@
 React = require 'react'
 Radium = require 'radium'
-OverviewSidebarItemComponent = require './overview-sidebar-item-component'
-OverviewSidebarTitleComponent = require './overview-sidebar-title-component'
+ExampleSidebarItemComponent = require './example-sidebar-item-component'
+ExampleSidebarTitleComponent = require './example-sidebar-title-component'
 Route = require './route-component'
 
-class OverviewSidebarComponent extends React.Component
+class ExampleSidebarComponent extends React.Component
 
   constructor: (props) ->
     super props
@@ -13,7 +13,7 @@ class OverviewSidebarComponent extends React.Component
     @setState @store.get()
 
   componentWillMount: ->
-    @store = @context.ctx.overviewStore
+    @store = @context.ctx.exampleStore
     @setState @store.get()
 
   componentDidMount: ->
@@ -25,21 +25,21 @@ class OverviewSidebarComponent extends React.Component
   render: ->
     structure = @state.structure
     <div style={[].concat.apply([], [styles.sidebar, @props.style])}>
-      <OverviewSidebarItemComponent>
+      <ExampleSidebarItemComponent>
         {
           structure.map (data) ->
-            <OverviewSidebarTitleComponent level={data.level} url={data.url}>
+            <ExampleSidebarTitleComponent level={data.level} url={data.url}>
               {data.title}
-            </OverviewSidebarTitleComponent>
+            </ExampleSidebarTitleComponent>
         }
-      </OverviewSidebarItemComponent>
+      </ExampleSidebarItemComponent>
     </div>
 
 styles =
   sidebar: {}
 
 
-OverviewSidebarComponent.contextTypes =
+ExampleSidebarComponent.contextTypes =
   ctx: React.PropTypes.any
 
-module.exports = Radium OverviewSidebarComponent
+module.exports = Radium ExampleSidebarComponent

@@ -22,8 +22,8 @@ class HeaderComponent extends React.Component
           <li route='forum' key='forum' style={[styles.li, styles.left_separator]}>
             <a href='//forum.jthree.io' style={styles.link}>Forum</a>
           </li>
-          <li route='overview' key='overview' style={[styles.li, styles.left_separator]}>
-            <Link href='/overview' style={styles.link}>Overview</Link>
+          <li route='example' key='example' style={[styles.li, styles.left_separator]}>
+            <Link href='/example' style={styles.link}>Example</Link>
           </li>
           <li route='class' key='class' style={[styles.li, styles.left_separator]}>
             <Link href='/class' style={styles.link}>Reference</Link>

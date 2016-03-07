@@ -5,7 +5,7 @@ Link = require './link-component'
 IndexComponent = require './index-component'
 ErrorComponent = require './error-component'
 ClassDocComponent = require './classdoc-component'
-OverviewComponent = require './overview-component'
+ExampleComponent = require './example-component'
 HeaderComponent = require './header-component'
 
 class AppComponent extends React.Component
@@ -46,7 +46,7 @@ class AppComponent extends React.Component
         <IndexComponent route='index' />
         <ClassDocComponent route='class' style={[styles.main, dstyle.main]} />
         <ErrorComponent route='error' style={[styles.main, dstyle.main]} />
-        <OverviewComponent route='overview' style={[styles.main, dstyle.main]} />
+        <ExampleComponent route='example' style={[styles.main, dstyle.main]} />
       </Route>
     </div>
 
