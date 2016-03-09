@@ -1,8 +1,8 @@
 gulp = require 'gulp'
 uglify = require 'gulp-uglify'
 sourcemaps = require 'gulp-sourcemaps'
-source = require 'vinyl-source-stream'
 buffer = require 'vinyl-buffer'
+watchify = require 'gulp-watchify'
 reactify = require 'coffee-reactify'
 gutil = require 'gulp-util'
 plumber = require 'gulp-plumber'
@@ -10,12 +10,8 @@ rename = require 'gulp-rename'
 gulpif = require 'gulp-if'
 envify = require 'envify/custom'
 mocha = require 'gulp-mocha'
-watchify = require 'watchify'
-browserify = require 'browserify'
-formatter = require 'pretty-hrtime'
-path = require 'path'
-_ = require 'lodash'
 fs = require 'fs'
+path = require 'path'
 
 others = [
 ]
@@ -34,84 +30,48 @@ gulp.task 'watch', ['build:others', 'enable-watch-mode', 'browserify', 'bundle-e
   for it in others
     gulp.watch it.src, ["build:#{it.suffix}"]
 
-config =
-  server:
-    entries: 'src/server.coffee'
-    extensions: ['.coffee', '.js']
-    transform: [
-      'coffee-reactify'
-      {name: 'envify', opt: {NODE_ENV: (if env_production then 'production' else 'development')}}
-    ]
+target = [
+    suffix: 'server'
+    src: 'src/server.coffee'
     name: 'app.js'
     dest: ''
     bundleExternal: false
     minify: false
     detectGlobals: false
-  browser:
-    entries: 'src/browser.coffee'
-    extensions: ['.coffee', '.js']
-    transform: [
-      'coffee-reactify'
-      {name: 'envify', opt: {NODE_ENV: (if env_production then 'production' else 'development')}}
-    ]
+  ,
+    suffix: 'browser'
+    src: 'src/browser.coffee'
     name: 'bundle.js'
     dest: 'public/js'
     bundleExternal: true
     minify: true
     detectGlobals: true
+]
 
-gulp.task "browserify", ("browserify:#{suffix}" for suffix of config)
+gulp.task "browserify", ("browserify:#{it.suffix}" for it in target)
 
-###
-bundling task
-###
-
-getBundler = (opt) ->
-  if watching
-    opt = _.merge opt, watchify.args
-  b = browserify opt
-  if watching
-    b = watchify b, opt
-  return b
-
-Object.keys(config).forEach (suffix) ->
-  c = config[suffix]
-  gulp.task "browserify:#{suffix}", ->
-    opt =
-      entries: path.resolve(__dirname, c.entries)
-      cache: {}
-      packageCache: {}
-      extensions: c.extensions
-      debug: true
-      detectGlobals: c.detectGlobals
-      bundleExternal: c.bundleExternal
-    b = getBundler opt
-    c.transform.forEach (v) ->
-      if _.isString v
-        b = b.transform v
-      else if _.isPlainObject v
-        b = b.transform v.name, v.opt
-    bundle = ->
-      time = process.hrtime()
-      gutil.log "Bundling #{suffix} #{if watching then '(watch mode)' else ''}"
-      b
-        .bundle()
-        .on 'error', (err) ->
-          gutil.log err.message
-          @emit 'end'
-        .on 'end', ->
-          taskTime = formatter process.hrtime time
-          gutil.log("Finished #{suffix} " + gutil.colors.magenta("#{taskTime}"))
-        .pipe source c.name
+target.forEach (it) ->
+  gulp.task "browserify:#{it.suffix}", watchify (watchify) ->
+    gulp
+      .src it.src
+        .pipe plumber()
+        .pipe watchify
+          watch: watching
+          extensions: ['.coffee', '.js']
+          debug: true
+          transform: ['coffee-reactify']
+          detectGlobals: it.detectGlobals
+          bundleExternal: it.bundleExternal
+          setup: (b) ->
+            b.transform envify
+              NODE_ENV: if env_production then 'production' else 'development'
         .pipe buffer()
         .pipe sourcemaps.init
           loadMaps: true
-        .pipe gulpif(!watching && env_production, gulpif(c.minify, uglify()))
-        .pipe sourcemaps.write('./')
+        .pipe gulpif(!watching && env_production, gulpif(it.minify, uglify()))
+        .pipe rename(it.name)
         .pipe gulpif(!(!watching && env_production), sourcemaps.write('./'))
-    if watching
-      b.on 'update', bundle
-    bundle()
+        .pipe gulp.dest(it.dest)
 
 gulp.task 'test', ->
   gulp

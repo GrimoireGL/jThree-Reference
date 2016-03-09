@@ -77,10 +77,10 @@ class IndexComponent extends React.Component
           <Li>Provide a good learning resource for the beginners to know how programming is awesome via this library.</Li>
           <Li>Sharing features that will be achieved easily by this library implemented with javascript.</Li>
           <Li>Redefine legacies of 3DCG technologies on the Internet.</Li>
-          <Li>Have Enjoyable contributions :heart:</Li>
+          <Li>Have Enjoyable contributions ❤️</Li>
         </Ul>
         <H3><A id="Dependencies_14"></A>Dependencies</H3>
-        <P>This library depends on the following libraries. We appreciate these contributors below :heart:</P>
+        <P>This library depends on the following libraries. We appreciate these contributors below</P>
         <Table>
           <Thead>
             <Tr>
@@ -98,7 +98,7 @@ class IndexComponent extends React.Component
           </Tbody>
         </Table>
         <H2><A id="Contributions_23"></A>Contributions</H2>
-        <P>Thank you for your interest in contributions!   :kissing_smiling_eyes:</P>
+        <P>Thank you for your interest in contributions!  ❤️</P>
         <H3><A id="Installation_to_build_28"></A>Installation to build</H3>
         <P>You need the applications below.</P>
         <Ul>
@@ -109,14 +109,14 @@ class IndexComponent extends React.Component
         <P>You need to run the command below to install npm packages,bower packages,and so on in local environment.</P>
         <Pre>
           <Code class="language-shell">
-            $ npm <Span class="hljs-keyword">install</Span>
+            $ npm install
           </Code>
         </Pre>
         <P><Strong>That is all you need to do for preparation!</Strong></P>
         <P>Then, run the command below to build “j3.js”</P>
         <Pre>
           <Code class="language-shell">
-            $ npm <Span class="hljs-command">run</Span> build
+            $ npm run build
           </Code>
         </Pre>
         <Table>
