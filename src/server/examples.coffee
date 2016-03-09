@@ -17,7 +17,7 @@ class Examples
    * @return {Examples}
   ###
   constructor: ->
-    @json = JSON.parse fs.readFileSync config.examples.path_to_json, 'utf8'
+    @json = JSON.parse fs.readFileSync config.example.path_to_json, 'utf8'
     @structure = @getStructure()
     @routes = @getRoutes()
     # @markdown = fs.readFileSync config.example.markdown, 'utf8'

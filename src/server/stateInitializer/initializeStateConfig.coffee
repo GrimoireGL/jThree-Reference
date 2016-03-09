@@ -7,8 +7,8 @@ fs = require 'fs'
 module.exports =
   typedoc:
     path_to_json: './src/server/doc.json'
-  examples:
+  example:
     markdown: './src/server/examples.md'
-    path_to_json: './src/server/examples.json'
+    path_to_json: './src/server/example.json'
   router:
     root: '/'

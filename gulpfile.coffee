@@ -79,7 +79,7 @@ gulp.task 'test', ->
     .pipe mocha()
 
 gulp.task 'bundle-example-files', ->
-  targetDir = "#{fs.realpathSync('./')}/clones/jThree-Example/markdowns"
+  targetDir = "#{fs.realpathSync('./')}/clones/jThree-Example/sample"
   walk = (p, callback) ->
     results = []
     fs.readdir p, (err, files) ->
@@ -109,8 +109,9 @@ gulp.task 'bundle-example-files', ->
         #ファイル名を保存
         # stat = fs.statSync(file)
         content = fs.readFileSync(file, "utf-8")
-        fileName = (temp = path.basename(file).match(/(.*)(?:\.([^.]+$))/))[1]
-        fileExtension = temp[2]
+        fileName = (temp = path.basename(file).match(/([0-9]{2}\_)(.*)(?:\.([^.]+$))/) ? [])[2]
+        fileExtension = temp[3]
+        # fileNumber = temp[1]
         if fileExtension == "md" || fileExtension == "markdown"
           results.push
             type: "file"

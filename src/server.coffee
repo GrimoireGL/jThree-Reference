@@ -9,7 +9,7 @@ Root = require './renderer/components/root-component'
 InitializeState = require './server/initializeState'
 Docs = require './server/docs'
 Examples = require './server/examples'
-
+console.log('Examples: ', Examples)
 console.log "environment: #{process.env.NODE_ENV}"
 
 server = express()
