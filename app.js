@@ -1,99 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var Context, Docs, Handlebars, InitializeState, Overviews, React, Root, docs, express, favicon, fs, initializeState, overviews, server, template;
-
-if ("production" === 'development') {
-  require('source-map-support').install();
-}
-
-express = require('express');
-
-favicon = require('serve-favicon');
-
-fs = require('fs');
-
-Handlebars = require('handlebars');
-
-React = require('react');
-
-Context = require('./renderer/context');
-
-Root = require('./renderer/components/root-component');
-
-InitializeState = require('./server/initializeState');
-
-Docs = require('./server/docs');
-
-Overviews = require('./server/overviews');
-
-console.log("environment: " + "production");
-
-server = express();
-
-server.use('/static', express["static"]('public'));
-
-server.use(favicon((fs.realpathSync('./')) + "/public/assets/favicon/favicon.ico"));
-
-template = Handlebars.compile(fs.readFileSync((fs.realpathSync('./')) + "/view/index.hbs").toString());
-
-docs = new Docs();
-
-overviews = new Overviews();
-
-initializeState = new InitializeState(docs);
-
-docs.getJsonScheduler(3 * 60 * 60, function() {
-  return initializeState.gen();
-});
-
-
-/**
- * API for get doc data
- * @param  {Object} req express request object
- * @param  {Object} res express response object
- * @return {[type]}     [description]
- */
-
-server.get('/api/class/global/:file_id/:factor_id', function(req, res) {
-  console.log(req.originalUrl);
-  return res.json(docs.getDocDataById(req.params.file_id, req.params.factor_id));
-});
-
-server.get('/api/overview/:title_id', function(req, res) {
-  console.log(req.originalUrl);
-  return res.json({
-    markup: overviews.getOverviewHtml(req.params.title_id),
-    structure: overviews.getTitleStructure()
-  });
-});
-
-
-/**
- * All page view request routing is processed here
- * generate view by React server-side rendering
- * @param  {Object} req express request object
- * @param  {Object} res express response object
- */
-
-server.get('*', function(req, res) {
-  var context, initialStates;
-  console.log(req.originalUrl);
-  initialStates = initializeState.initialize(req);
-  context = new Context(initialStates);
-  return res.send(template({
-    initialStates: JSON.stringify(initialStates),
-    markup: React.renderToString(React.createElement(Root, {
-      context: context
-    }))
-  }));
-});
-
-console.log('running on', 'PORT:', process.env.PORT || 5000, 'IP:', process.env.IP);
-
-server.listen(process.env.PORT || 5000, process.env.IP);
-
-
-
-},{"./renderer/components/root-component":49,"./renderer/context":56,"./server/docs":64,"./server/initializeState":65,"./server/overviews":66,"express":undefined,"fs":undefined,"handlebars":undefined,"react":undefined,"serve-favicon":undefined,"source-map-support":undefined}],2:[function(require,module,exports){
 var DocAction, Flux, Promise, keys, request,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -153,8 +58,7 @@ DocAction = (function(superClass) {
 module.exports = DocAction;
 
 
-
-},{"../keys":57,"bluebird":undefined,"material-flux":undefined,"superagent":undefined}],3:[function(require,module,exports){
+},{"../keys":57,"bluebird":undefined,"material-flux":undefined,"superagent":undefined}],2:[function(require,module,exports){
 var DocAction, Flux, keys,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -183,9 +87,8 @@ DocAction = (function(superClass) {
 module.exports = DocAction;
 
 
-
-},{"../keys":57,"material-flux":undefined}],4:[function(require,module,exports){
-var Flux, OverviewAction, Promise, keys, request,
+},{"../keys":57,"material-flux":undefined}],3:[function(require,module,exports){
+var ExampleAction, Flux, Promise, keys, request,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -197,48 +100,50 @@ request = require('superagent');
 
 Promise = require('bluebird');
 
-OverviewAction = (function(superClass) {
-  extend(OverviewAction, superClass);
+ExampleAction = (function(superClass) {
+  extend(ExampleAction, superClass);
 
 
   /**
-   * flux action for overview
-   * @return {OverviewAction}
+   * flux action for example
+   * @return {ExampleAction}
    */
 
-  function OverviewAction() {
-    OverviewAction.__super__.constructor.apply(this, arguments);
+  function ExampleAction() {
+    ExampleAction.__super__.constructor.apply(this, arguments);
   }
 
 
   /**
-   * get and update overview object
-   * @param  {String|Number} title_id   id of child of overview root
+   * get and update example object
+   * @param  {String|Number} title_id   id of child of example root
    */
 
-  OverviewAction.prototype.updateOverview = function(title_id) {
+  ExampleAction.prototype.updateExample = function(path) {
+    path = path.split("/").join(":::");
     return new Promise((function(_this) {
       return function(resolve, reject) {
-        return request.get("/api/overview/" + title_id).end(function(err, res) {});
+        return request.get("/api/example/root:::" + path).end(function(err, res) {
+          return resolve(res.body);
+        });
       };
     })(this)).then((function(_this) {
       return function(res) {
-        return _this.dispatch(keys.updateOverview, res);
+        return _this.dispatch(keys.updateExample, path, res);
       };
     })(this))["catch"](function(err) {
       return console.error(err);
     });
   };
 
-  return OverviewAction;
+  return ExampleAction;
 
 })(Flux.Action);
 
-module.exports = OverviewAction;
+module.exports = ExampleAction;
 
 
-
-},{"../keys":57,"bluebird":undefined,"material-flux":undefined,"superagent":undefined}],5:[function(require,module,exports){
+},{"../keys":57,"bluebird":undefined,"material-flux":undefined,"superagent":undefined}],4:[function(require,module,exports){
 var Flux, History, RouteAction, keys,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -321,8 +226,7 @@ RouteAction = (function(superClass) {
 module.exports = RouteAction;
 
 
-
-},{"../keys":57,"html5-history":undefined,"material-flux":undefined}],6:[function(require,module,exports){
+},{"../keys":57,"html5-history":undefined,"material-flux":undefined}],5:[function(require,module,exports){
 var Flux, ToggleVisibilityAction, keys,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -349,9 +253,8 @@ ToggleVisibilityAction = (function(superClass) {
 module.exports = ToggleVisibilityAction;
 
 
-
-},{"../keys":57,"material-flux":undefined}],7:[function(require,module,exports){
-var AppComponent, ClassDocComponent, ErrorComponent, HeaderComponent, IndexComponent, Link, OverviewComponent, Radium, React, Route, styles,
+},{"../keys":57,"material-flux":undefined}],6:[function(require,module,exports){
+var AppComponent, ClassDocComponent, ErrorComponent, ExampleComponent, HeaderComponent, IndexComponent, Link, Radium, React, Route, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -369,7 +272,7 @@ ErrorComponent = require('./error-component');
 
 ClassDocComponent = require('./classdoc-component');
 
-OverviewComponent = require('./overview-component');
+ExampleComponent = require('./example-component');
 
 HeaderComponent = require('./header-component');
 
@@ -431,8 +334,8 @@ AppComponent = (function(superClass) {
     }), React.createElement(ErrorComponent, {
       "route": 'error',
       "style": [styles.main, dstyle.main]
-    }), React.createElement(OverviewComponent, {
-      "route": 'overview',
+    }), React.createElement(ExampleComponent, {
+      "route": 'example',
       "style": [styles.main, dstyle.main]
     })));
   };
@@ -464,8 +367,7 @@ AppComponent.contextTypes = {
 module.exports = Radium(AppComponent);
 
 
-
-},{"./classdoc-component":9,"./error-component":36,"./header-component":37,"./index-component":38,"./link-component":39,"./overview-component":43,"./route-component":50,"radium":undefined,"react":undefined}],8:[function(require,module,exports){
+},{"./classdoc-component":8,"./error-component":35,"./example-component":36,"./header-component":41,"./index-component":42,"./link-component":44,"./route-component":50,"radium":undefined,"react":undefined}],7:[function(require,module,exports){
 var CharIconComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -524,8 +426,7 @@ CharIconComponent.contextTypes = {
 module.exports = Radium(CharIconComponent);
 
 
-
-},{"radium":undefined,"react":undefined}],9:[function(require,module,exports){
+},{"radium":undefined,"react":undefined}],8:[function(require,module,exports){
 var ClassDocComponent, DocContainerComponent, DocDetailContainerComponent, DocSlideWrapperComponent, ListComponent, Radium, React, Route, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -650,8 +551,7 @@ ClassDocComponent.contextTypes = {
 module.exports = Radium(ClassDocComponent);
 
 
-
-},{"./doc-container-component":12,"./doc-detail-container-component":15,"./doc-slide-wrapper-component":31,"./list-component":40,"./route-component":50,"radium":undefined,"react":undefined}],10:[function(require,module,exports){
+},{"./doc-container-component":11,"./doc-detail-container-component":14,"./doc-slide-wrapper-component":30,"./list-component":45,"./route-component":50,"radium":undefined,"react":undefined}],9:[function(require,module,exports){
 
 /**
  * Color definition for components styles
@@ -700,8 +600,7 @@ module.exports = {
 };
 
 
-
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 
 /**
  * Generate KindString color
@@ -746,8 +645,7 @@ module.exports = function(kindString) {
 };
 
 
-
-},{}],12:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var DocContainerComponent, DocCoverageComponent, DocDescriptionComponent, DocFactorHierarchyComponent, DocFactorImplementsComponent, DocFactorItemComponent, DocFactorTitleComponent, DocSearchContainerComponent, DocTypeparameterComponent, Link, Radium, React, Route, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -882,8 +780,7 @@ DocContainerComponent.contextTypes = {
 module.exports = Radium(DocContainerComponent);
 
 
-
-},{"./doc-coverage-component":13,"./doc-description-component":14,"./doc-factor-hierarchy-component":22,"./doc-factor-implements-component":23,"./doc-factor-item-component":24,"./doc-factor-title-component":26,"./doc-search-container-component":30,"./doc-typeparameter-component":35,"./link-component":39,"./route-component":50,"radium":undefined,"react":undefined}],13:[function(require,module,exports){
+},{"./doc-coverage-component":12,"./doc-description-component":13,"./doc-factor-hierarchy-component":21,"./doc-factor-implements-component":22,"./doc-factor-item-component":23,"./doc-factor-title-component":25,"./doc-search-container-component":29,"./doc-typeparameter-component":34,"./link-component":44,"./route-component":50,"radium":undefined,"react":undefined}],12:[function(require,module,exports){
 var DocCoverageComponent, Link, ProgressbarComponent, Radium, React, Route, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -945,8 +842,7 @@ DocCoverageComponent.contextTypes = {
 module.exports = Radium(DocCoverageComponent);
 
 
-
-},{"./link-component":39,"./progressbar-component":48,"./route-component":50,"radium":undefined,"react":undefined}],14:[function(require,module,exports){
+},{"./link-component":44,"./progressbar-component":48,"./route-component":50,"radium":undefined,"react":undefined}],13:[function(require,module,exports){
 var DocDescriptionComponent, DocItemComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1021,8 +917,7 @@ DocDescriptionComponent.contextTypes = {
 module.exports = Radium(DocDescriptionComponent);
 
 
-
-},{"./colors/color-definition":10,"./doc-item-component":29,"radium":undefined,"react":undefined}],15:[function(require,module,exports){
+},{"./colors/color-definition":9,"./doc-item-component":28,"radium":undefined,"react":undefined}],14:[function(require,module,exports){
 var DocDescriptionComponent, DocDetailContainerComponent, DocDetailParametersComponent, DocDetailReturnComponent, DocDetailTitleComponent, DocSlideWrapperComponent, DocTypeparameterComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1116,8 +1011,7 @@ DocDetailContainerComponent.contextTypes = {
 module.exports = Radium(DocDetailContainerComponent);
 
 
-
-},{"./doc-description-component":14,"./doc-detail-parameters-component":16,"./doc-detail-return-components":18,"./doc-detail-title-component":21,"./doc-slide-wrapper-component":31,"./doc-typeparameter-component":35,"radium":undefined,"react":undefined}],16:[function(require,module,exports){
+},{"./doc-description-component":13,"./doc-detail-parameters-component":15,"./doc-detail-return-components":17,"./doc-detail-title-component":20,"./doc-slide-wrapper-component":30,"./doc-typeparameter-component":34,"radium":undefined,"react":undefined}],15:[function(require,module,exports){
 var DocDetailParametersComponent, DocDetailParametersTableComponent, DocItemComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1170,8 +1064,7 @@ DocDetailParametersComponent.contextTypes = {
 module.exports = Radium(DocDetailParametersComponent);
 
 
-
-},{"./doc-detail-parameters-table-component":17,"./doc-item-component":29,"radium":undefined,"react":undefined}],17:[function(require,module,exports){
+},{"./doc-detail-parameters-table-component":16,"./doc-item-component":28,"radium":undefined,"react":undefined}],16:[function(require,module,exports){
 var DocDetailParameterTableComponent, DocSignaturesTypeComponent, DocTableComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1262,8 +1155,7 @@ DocDetailParameterTableComponent.contextTypes = {
 module.exports = Radium(DocDetailParameterTableComponent);
 
 
-
-},{"./colors/color-definition":10,"./doc-table-component":32,"./link-component":39,"./signatures/doc-signatures-type-component":54,"radium":undefined,"react":undefined}],18:[function(require,module,exports){
+},{"./colors/color-definition":9,"./doc-table-component":31,"./link-component":44,"./signatures/doc-signatures-type-component":54,"radium":undefined,"react":undefined}],17:[function(require,module,exports){
 var DocDetailReturnComponent, DocDetailReturnTableComponent, DocItemComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1315,8 +1207,7 @@ DocDetailReturnComponent.contextTypes = {
 module.exports = Radium(DocDetailReturnComponent);
 
 
-
-},{"./doc-detail-return-table-component":19,"./doc-item-component":29,"radium":undefined,"react":undefined}],19:[function(require,module,exports){
+},{"./doc-detail-return-table-component":18,"./doc-item-component":28,"radium":undefined,"react":undefined}],18:[function(require,module,exports){
 var DocDetailReturnTableComponent, DocSignaturesTypeComponent, DocTableComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1393,8 +1284,7 @@ DocDetailReturnTableComponent.contextTypes = {
 module.exports = Radium(DocDetailReturnTableComponent);
 
 
-
-},{"./colors/color-definition":10,"./doc-table-component":32,"./link-component":39,"./signatures/doc-signatures-type-component":54,"radium":undefined,"react":undefined}],20:[function(require,module,exports){
+},{"./colors/color-definition":9,"./doc-table-component":31,"./link-component":44,"./signatures/doc-signatures-type-component":54,"radium":undefined,"react":undefined}],19:[function(require,module,exports){
 var DocDetailSignaturesComponent, DocSignaturesComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1496,8 +1386,7 @@ DocDetailSignaturesComponent.contextTypes = {
 module.exports = Radium(DocDetailSignaturesComponent);
 
 
-
-},{"./colors/color-definition":10,"./signatures/doc-signatures-component":51,"radium":undefined,"react":undefined}],21:[function(require,module,exports){
+},{"./colors/color-definition":9,"./signatures/doc-signatures-component":51,"radium":undefined,"react":undefined}],20:[function(require,module,exports){
 var DocDetailSignaturesComponent, DocDetailTitleComponent, DocFlagtagsComponent, DocTitleComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1620,8 +1509,7 @@ DocDetailTitleComponent.contextTypes = {
 module.exports = Radium(DocDetailTitleComponent);
 
 
-
-},{"./colors/color-definition":10,"./doc-detail-signatures-component":20,"./doc-flagtags-component":27,"./doc-title-component":33,"./link-component":39,"radium":undefined,"react":undefined}],22:[function(require,module,exports){
+},{"./colors/color-definition":9,"./doc-detail-signatures-component":19,"./doc-flagtags-component":26,"./doc-title-component":32,"./link-component":44,"radium":undefined,"react":undefined}],21:[function(require,module,exports){
 var DocDetailParametersTableComponent, DocItemComponent, DocSignaturesTypeComponent, DocTypeparameterComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1734,8 +1622,7 @@ DocTypeparameterComponent.contextTypes = {
 module.exports = Radium(DocTypeparameterComponent);
 
 
-
-},{"./colors/color-definition":10,"./doc-detail-parameters-table-component":17,"./doc-item-component":29,"./signatures/doc-signatures-type-component":54,"radium":undefined,"react":undefined}],23:[function(require,module,exports){
+},{"./colors/color-definition":9,"./doc-detail-parameters-table-component":16,"./doc-item-component":28,"./signatures/doc-signatures-type-component":54,"radium":undefined,"react":undefined}],22:[function(require,module,exports){
 var DocFactorImplementsComponent, DocItemComponent, DocSignaturesTypeComponent, DocTableComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1815,8 +1702,7 @@ DocFactorImplementsComponent.contextTypes = {
 module.exports = Radium(DocFactorImplementsComponent);
 
 
-
-},{"./colors/color-definition":10,"./doc-item-component":29,"./doc-table-component":32,"./signatures/doc-signatures-type-component":54,"radium":undefined,"react":undefined}],24:[function(require,module,exports){
+},{"./colors/color-definition":9,"./doc-item-component":28,"./doc-table-component":31,"./signatures/doc-signatures-type-component":54,"radium":undefined,"react":undefined}],23:[function(require,module,exports){
 var DocFactorItemComponent, DocFactorTableComponent, DocItemComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1888,8 +1774,7 @@ DocFactorItemComponent.contextTypes = {
 module.exports = Radium(DocFactorItemComponent);
 
 
-
-},{"./doc-factor-table-component":25,"./doc-item-component":29,"radium":undefined,"react":undefined}],25:[function(require,module,exports){
+},{"./doc-factor-table-component":24,"./doc-item-component":28,"radium":undefined,"react":undefined}],24:[function(require,module,exports){
 var DocFactorTableComponent, DocTableComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -2044,8 +1929,7 @@ DocFactorTableComponent.contextTypes = {
 module.exports = Radium(DocFactorTableComponent);
 
 
-
-},{"./colors/color-definition":10,"./doc-table-component":32,"./link-component":39,"radium":undefined,"react":undefined}],26:[function(require,module,exports){
+},{"./colors/color-definition":9,"./doc-table-component":31,"./link-component":44,"radium":undefined,"react":undefined}],25:[function(require,module,exports){
 var DocFactorTitleComponent, DocFlagtagsComponent, DocTitleComponent, DocToggleVisibilityComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -2167,8 +2051,7 @@ DocFactorTitleComponent.contextTypes = {
 module.exports = Radium(DocFactorTitleComponent);
 
 
-
-},{"./colors/color-definition":10,"./doc-flagtags-component":27,"./doc-title-component":33,"./doc-toggle-visibility-component":34,"./link-component":39,"radium":undefined,"react":undefined}],27:[function(require,module,exports){
+},{"./colors/color-definition":9,"./doc-flagtags-component":26,"./doc-title-component":32,"./doc-toggle-visibility-component":33,"./link-component":44,"radium":undefined,"react":undefined}],26:[function(require,module,exports){
 var DocFlagtagsComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -2255,8 +2138,7 @@ DocFlagtagsComponent.contextTypes = {
 module.exports = Radium(DocFlagtagsComponent);
 
 
-
-},{"./colors/color-definition":10,"radium":undefined,"react":undefined}],28:[function(require,module,exports){
+},{"./colors/color-definition":9,"radium":undefined,"react":undefined}],27:[function(require,module,exports){
 var DocIncrementalComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -2272,7 +2154,7 @@ colors = require('./colors/color-definition');
 
 /*
 @props.list [required] list array contains hash
-hash overview:
+hash example:
 {target: (string), content: [ReactElement, 'match', ...]}
 target: target of search
 content: elements array which is inserted to result list. if array factor
@@ -2481,8 +2363,7 @@ DocIncrementalComponent.contextTypes = {
 module.exports = Radium(DocIncrementalComponent);
 
 
-
-},{"./colors/color-definition":10,"./link-component":39,"radium":undefined,"react":undefined}],29:[function(require,module,exports){
+},{"./colors/color-definition":9,"./link-component":44,"radium":undefined,"react":undefined}],28:[function(require,module,exports){
 var DocItemComponent, DocTableComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -2548,8 +2429,7 @@ DocItemComponent.contextTypes = {
 module.exports = Radium(DocItemComponent);
 
 
-
-},{"./colors/color-definition":10,"./doc-table-component":32,"radium":undefined,"react":undefined}],30:[function(require,module,exports){
+},{"./colors/color-definition":9,"./doc-table-component":31,"radium":undefined,"react":undefined}],29:[function(require,module,exports){
 var CharIconComponent, DocIncrementalSearchComponent, DocSearchContainerComponent, Radium, React, colors, find, genKindStringColor, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -2717,8 +2597,7 @@ DocSearchContainerComponent.contextTypes = {
 module.exports = Radium(DocSearchContainerComponent);
 
 
-
-},{"./char-icon-component":8,"./colors/color-definition":10,"./colors/kindString-color":11,"./doc-incremental-search-component":28,"lodash.find":undefined,"radium":undefined,"react":undefined}],31:[function(require,module,exports){
+},{"./char-icon-component":7,"./colors/color-definition":9,"./colors/kindString-color":10,"./doc-incremental-search-component":27,"lodash.find":undefined,"radium":undefined,"react":undefined}],30:[function(require,module,exports){
 var DocSlideWrapperComponent, Radium, React, clone, colors, objectAssign, slide, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -2953,8 +2832,7 @@ DocSlideWrapperComponent.contextTypes = {
 module.exports = Radium(DocSlideWrapperComponent);
 
 
-
-},{"./colors/color-definition":10,"lodash.clone":undefined,"object-assign":undefined,"radium":undefined,"react":undefined}],32:[function(require,module,exports){
+},{"./colors/color-definition":9,"lodash.clone":undefined,"object-assign":undefined,"radium":undefined,"react":undefined}],31:[function(require,module,exports){
 var DocTableComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -3052,8 +2930,7 @@ DocTableComponent.contextTypes = {
 module.exports = Radium(DocTableComponent);
 
 
-
-},{"./colors/color-definition":10,"radium":undefined,"react":undefined}],33:[function(require,module,exports){
+},{"./colors/color-definition":9,"radium":undefined,"react":undefined}],32:[function(require,module,exports){
 var DocTitleComponent, Link, Radium, React, colors, genKindStringColor, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -3154,8 +3031,7 @@ DocTitleComponent.contextTypes = {
 module.exports = Radium(DocTitleComponent);
 
 
-
-},{"./colors/color-definition":10,"./colors/kindString-color":11,"./link-component":39,"radium":undefined,"react":undefined}],34:[function(require,module,exports){
+},{"./colors/color-definition":9,"./colors/kindString-color":10,"./link-component":44,"radium":undefined,"react":undefined}],33:[function(require,module,exports){
 var DocFlagtagsComponent, DocTitleComponent, DocToggleVisibilityComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -3259,8 +3135,7 @@ DocToggleVisibilityComponent.contextTypes = {
 module.exports = Radium(DocToggleVisibilityComponent);
 
 
-
-},{"./colors/color-definition":10,"./doc-flagtags-component":27,"./doc-title-component":33,"./link-component":39,"radium":undefined,"react":undefined}],35:[function(require,module,exports){
+},{"./colors/color-definition":9,"./doc-flagtags-component":26,"./doc-title-component":32,"./link-component":44,"radium":undefined,"react":undefined}],34:[function(require,module,exports){
 var DocDetailParametersTableComponent, DocItemComponent, DocTypeparameterComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -3311,8 +3186,7 @@ DocTypeparameterComponent.contextTypes = {
 module.exports = Radium(DocTypeparameterComponent);
 
 
-
-},{"./doc-detail-parameters-table-component":17,"./doc-item-component":29,"radium":undefined,"react":undefined}],36:[function(require,module,exports){
+},{"./doc-detail-parameters-table-component":16,"./doc-item-component":28,"radium":undefined,"react":undefined}],35:[function(require,module,exports){
 var ErrorComponent, React,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -3341,8 +3215,384 @@ ErrorComponent.contextTypes = {
 module.exports = ErrorComponent;
 
 
+},{"react":undefined}],36:[function(require,module,exports){
+var ExampleComponent, ExampleMarkupComponent, ExampleSidebarComponent, Promise, Radium, React, Route, styles,
+  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-},{"react":undefined}],37:[function(require,module,exports){
+React = require('react');
+
+Radium = require('radium');
+
+ExampleMarkupComponent = require('./example-markup-component');
+
+ExampleSidebarComponent = require('./example-sidebar-component');
+
+Route = require('./route-component');
+
+Promise = require('superagent');
+
+ExampleComponent = (function(superClass) {
+  extend(ExampleComponent, superClass);
+
+  function ExampleComponent(props) {
+    ExampleComponent.__super__.constructor.call(this, props);
+  }
+
+  ExampleComponent.prototype.render = function() {
+    return React.createElement("div", {
+      "style": Array.prototype.concat.apply([], [styles.base, this.props.style])
+    }, React.createElement("div", {
+      "style": styles.sidebar
+    }, React.createElement(ExampleSidebarComponent, null)), React.createElement("div", {
+      "style": styles.contents
+    }, React.createElement(Route, null, React.createElement(ExampleMarkupComponent, null))));
+  };
+
+  return ExampleComponent;
+
+})(React.Component);
+
+styles = {
+  base: {
+    display: 'flex',
+    WebkitFlexDirection: 'row',
+    flexDirection: 'row',
+    width: '100%'
+  },
+  sidebar: {
+    boxSizing: 'border-box',
+    paddingLeft: 10,
+    paddingTop: 10,
+    width: 360,
+    borderRight: '1px solid #ccc',
+    position: 'fixed',
+    top: 80,
+    height: 'calc(100% - 80px)',
+    overflowY: 'scroll',
+    overflowX: 'hidden',
+    zIndex: 10,
+    backgroundColor: '#fff'
+  },
+  contents: {
+    boxSizing: 'border-box',
+    width: 800,
+    padding: '0 80px 0 40px',
+    flexGrow: '1',
+    WebkitFlexGrow: '1',
+    display: 'flex',
+    flexDirection: 'column',
+    WebkitFlexDirection: 'column',
+    flexWrap: 'nowrap',
+    WebkitFlexWrap: 'nowrap',
+    marginLeft: 360
+  }
+};
+
+ExampleComponent.contextTypes = {
+  ctx: React.PropTypes.any
+};
+
+module.exports = Radium(ExampleComponent);
+
+
+},{"./example-markup-component":37,"./example-sidebar-component":38,"./route-component":50,"radium":undefined,"react":undefined,"superagent":undefined}],37:[function(require,module,exports){
+var ExampleMarkupComponent, Radium, React, Route, marked, styles,
+  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+React = require('react');
+
+Radium = require('radium');
+
+marked = require('marked');
+
+Route = require('./route-component');
+
+ExampleMarkupComponent = (function(superClass) {
+  extend(ExampleMarkupComponent, superClass);
+
+  function ExampleMarkupComponent(props) {
+    ExampleMarkupComponent.__super__.constructor.call(this, props);
+    this.loadingQueue = [];
+  }
+
+  ExampleMarkupComponent.prototype._onChange = function() {
+    return this.setState(this.store.get());
+  };
+
+  ExampleMarkupComponent.prototype.componentWillMount = function() {
+    this.store = this.context.ctx.exampleStore;
+    return this.setState(this.store.get());
+  };
+
+  ExampleMarkupComponent.prototype.componentDidMount = function() {
+    return this.store.onChange(this._onChange.bind(this));
+  };
+
+  ExampleMarkupComponent.prototype.componentWillUnmount = function() {
+    return this.store.removeChangeListener(this._onChange.bind(this));
+  };
+
+  ExampleMarkupComponent.prototype.render = function() {
+    var i, path, q, splice_index;
+    return React.createElement("div", {
+      "className": 'markdown-component',
+      "style": this.props.style
+    }, ((function() {
+      var j, len, ref;
+      console.log("markdowns:", this.state.markup);
+      path = this.props.argu.fragment_arr.filter(function(s, i) {
+        return i >= 1;
+      }).join('/');
+      if (this.state.markup[path]) {
+        splice_index = null;
+        ref = this.loadingQueue;
+        for (i = j = 0, len = ref.length; j < len; i = ++j) {
+          q = ref[i];
+          if (q === path) {
+            splice_index = i;
+            break;
+          }
+        }
+        if (splice_index != null) {
+          this.loadingQueue.splice(splice_index, 1);
+        }
+        return React.createElement("div", {
+          "style": styles.container,
+          "dangerouslySetInnerHTML": {
+            __html: this.state.markup[path]
+          }
+        });
+      } else {
+        if (typeof window !== "undefined" && window !== null) {
+          if (!this.loadingQueue.some(function(p) {
+            return p === path;
+          })) {
+            this.loadingQueue.push(path);
+            this.context.ctx.exampleAction.updateExample("" + path);
+          }
+        }
+        return React.createElement("span", null, "loading...");
+      }
+    }).call(this)));
+  };
+
+  return ExampleMarkupComponent;
+
+})(React.Component);
+
+styles = {
+  container: {}
+};
+
+ExampleMarkupComponent.contextTypes = {
+  ctx: React.PropTypes.any
+};
+
+module.exports = Radium(ExampleMarkupComponent);
+
+
+},{"./route-component":50,"marked":undefined,"radium":undefined,"react":undefined}],38:[function(require,module,exports){
+var ExampleSidebarComponent, ExampleSidebarItemComponent, ExampleSidebarTitleComponent, Radium, React, Route, styles,
+  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+React = require('react');
+
+Radium = require('radium');
+
+ExampleSidebarItemComponent = require('./example-sidebar-item-component');
+
+ExampleSidebarTitleComponent = require('./example-sidebar-title-component');
+
+Route = require('./route-component');
+
+ExampleSidebarComponent = (function(superClass) {
+  extend(ExampleSidebarComponent, superClass);
+
+  function ExampleSidebarComponent(props) {
+    ExampleSidebarComponent.__super__.constructor.call(this, props);
+  }
+
+  ExampleSidebarComponent.prototype._onChange = function() {
+    return this.setState(this.store.get());
+  };
+
+  ExampleSidebarComponent.prototype.componentWillMount = function() {
+    this.store = this.context.ctx.exampleStore;
+    return this.setState(this.store.get());
+  };
+
+  ExampleSidebarComponent.prototype.componentDidMount = function() {
+    return this.store.onChange(this._onChange.bind(this));
+  };
+
+  ExampleSidebarComponent.prototype.componentWillUnmount = function() {
+    return this.store.removeChangeListener(this._onChange.bind(this));
+  };
+
+  ExampleSidebarComponent.prototype.render = function() {
+    var structure;
+    structure = this.state.structure;
+    return React.createElement("div", {
+      "style": [].concat.apply([], [styles.sidebar, this.props.style])
+    }, React.createElement(ExampleSidebarItemComponent, null, structure.map(function(data) {
+      return React.createElement(ExampleSidebarTitleComponent, {
+        "level": data.level,
+        "url": data.url
+      }, data.title);
+    })));
+  };
+
+  return ExampleSidebarComponent;
+
+})(React.Component);
+
+styles = {
+  sidebar: {}
+};
+
+ExampleSidebarComponent.contextTypes = {
+  ctx: React.PropTypes.any
+};
+
+module.exports = Radium(ExampleSidebarComponent);
+
+
+},{"./example-sidebar-item-component":39,"./example-sidebar-title-component":40,"./route-component":50,"radium":undefined,"react":undefined}],39:[function(require,module,exports){
+var ExampleSidebarItemComponent, Radium, React, styles,
+  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+React = require('react');
+
+Radium = require('radium');
+
+ExampleSidebarItemComponent = (function(superClass) {
+  extend(ExampleSidebarItemComponent, superClass);
+
+  function ExampleSidebarItemComponent(props) {
+    ExampleSidebarItemComponent.__super__.constructor.call(this, props);
+  }
+
+  ExampleSidebarItemComponent.prototype.render = function() {
+    return React.createElement("div", {
+      "style": styles['level' + this.props.level]
+    }, this.props.children);
+  };
+
+  return ExampleSidebarItemComponent;
+
+})(React.Component);
+
+styles = {
+  base: {
+    fontSize: 14,
+    padding: '10px 20px',
+    marginRight: 20,
+    borderBottom: '1px solid #eee'
+  },
+  level1: {
+    fontSize: 18,
+    padding: '10px 20px',
+    marginRight: 20,
+    borderBottom: '1px solid #eee'
+  },
+  level2: {
+    fontSize: 14,
+    padding: '10px 20px',
+    marginRight: 20,
+    borderBottom: '1px solid #eee'
+  },
+  level3: {
+    fontSize: 12,
+    padding: '10px 20px',
+    marginRight: 20,
+    borderBottom: '1px solid #eee'
+  }
+};
+
+ExampleSidebarItemComponent.contextTypes = {
+  ctx: React.PropTypes.any
+};
+
+module.exports = Radium(ExampleSidebarItemComponent);
+
+
+},{"radium":undefined,"react":undefined}],40:[function(require,module,exports){
+var ExampleSidebarTitleComponent, Link, Radium, React, styles,
+  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+React = require('react');
+
+Radium = require('radium');
+
+Link = require('./link-component');
+
+ExampleSidebarTitleComponent = (function(superClass) {
+  extend(ExampleSidebarTitleComponent, superClass);
+
+  function ExampleSidebarTitleComponent(props) {
+    ExampleSidebarTitleComponent.__super__.constructor.call(this, props);
+  }
+
+  ExampleSidebarTitleComponent.prototype.render = function() {
+    return React.createElement("div", {
+      "style": [].concat([], styles.titleBox[this.props.level - 1], this.props.style)
+    }, React.createElement(Link, {
+      "style": styles.titleText[this.props.level - 1],
+      "href": this.props.url
+    }, this.props.children));
+  };
+
+  return ExampleSidebarTitleComponent;
+
+})(React.Component);
+
+styles = {
+  titleText: [
+    {
+      textDecoration: "none",
+      color: "#000",
+      fontSize: 17,
+      padding: 10,
+      borderBottom: "3px solid #ccc"
+    }, {
+      textDecoration: "none",
+      color: "#000",
+      fontSize: 18
+    }, {
+      textDecoration: "none",
+      color: "#000",
+      fontSize: 14
+    }
+  ],
+  titleBox: [
+    {
+      marginTop: 15,
+      marginBottom: 5,
+      textAlign: "right",
+      padding: "10px 15px"
+    }, {
+      paddingLeft: "22px",
+      paddingTop: 5,
+      paddingBottom: 5
+    }, {
+      paddingLeft: "30px"
+    }
+  ]
+};
+
+ExampleSidebarTitleComponent.contextTypes = {
+  ctx: React.PropTypes.any
+};
+
+module.exports = Radium(ExampleSidebarTitleComponent);
+
+
+},{"./link-component":44,"radium":undefined,"react":undefined}],41:[function(require,module,exports){
 var HeaderComponent, Link, Radium, React, Route, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -3386,20 +3636,13 @@ HeaderComponent = (function(superClass) {
       "href": '/',
       "style": styles.link
     }, "Top")), React.createElement("li", {
-      "route": 'forum',
-      "key": 'forum',
-      "style": [styles.li, styles.left_separator]
-    }, React.createElement("a", {
-      "href": '//forum.jthree.io',
-      "style": styles.link
-    }, "Forum")), React.createElement("li", {
-      "route": 'overview',
-      "key": 'overview',
+      "route": 'example',
+      "key": 'example',
       "style": [styles.li, styles.left_separator]
     }, React.createElement(Link, {
-      "href": '/overview',
+      "href": '/example',
       "style": styles.link
-    }, "Overview")), React.createElement("li", {
+    }, "Examples")), React.createElement("li", {
       "route": 'class',
       "key": 'class',
       "style": [styles.li, styles.left_separator]
@@ -3480,9 +3723,8 @@ HeaderComponent.contextTypes = {
 module.exports = Radium(HeaderComponent);
 
 
-
-},{"./colors/color-definition":10,"./link-component":39,"./route-component":50,"radium":undefined,"react":undefined}],38:[function(require,module,exports){
-var IndexComponent, Link, Radium, React, colors, styles,
+},{"./colors/color-definition":9,"./link-component":44,"./route-component":50,"radium":undefined,"react":undefined}],42:[function(require,module,exports){
+var A, Code, Div, H2, H3, IndexComponent, Li, Link, P, Pre, Radium, React, Span, Strong, Table, Tbody, Td, Th, Thead, Tr, Ul, colors, ref, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -3493,6 +3735,8 @@ Radium = require('radium');
 colors = require('./colors/color-definition');
 
 Link = require('./link-component');
+
+ref = require('./index-extend-components'), A = ref.A, H2 = ref.H2, P = ref.P, H3 = ref.H3, Li = ref.Li, Ul = ref.Ul, Th = ref.Th, Tr = ref.Tr, Thead = ref.Thead, Td = ref.Td, Tbody = ref.Tbody, Table = ref.Table, Strong = ref.Strong, Span = ref.Span, Code = ref.Code, Pre = ref.Pre, Div = ref.Div;
 
 IndexComponent = (function(superClass) {
   extend(IndexComponent, superClass);
@@ -3522,9 +3766,9 @@ IndexComponent = (function(superClass) {
       "style": styles.logo_jthree
     }, "jThree"), React.createElement("span", {
       "style": styles.logo_v3
-    }, "v3"))), React.createElement("div", {
+    }, "β"))), React.createElement("div", {
       "style": styles.description
-    }, React.createElement("span", null, "The simpler Web3D,the more interesting.")))), React.createElement("div", {
+    }, React.createElement("span", null, "Focus on the most important.")))), React.createElement("div", {
       "style": styles.wrapper
     }, React.createElement("div", {
       "style": styles.link_container
@@ -3540,21 +3784,21 @@ IndexComponent = (function(superClass) {
       "style": styles.link_label
     }, "Github"), React.createElement("div", {
       "style": styles.link_desc
-    }, "jThree hosts sources in Github.Your any contributions are welcome!"))), React.createElement("div", {
+    }, "jThree hosts sources in Github. Your any contributions are welcome!"))), React.createElement("div", {
       "style": styles.link_container
     }, React.createElement(Link, {
-      "href": '/overview',
+      "href": '/example',
       "style": styles.link,
-      "key": 'overview'
+      "key": 'example'
     }, React.createElement("div", {
       "style": styles.link_icon_wrap
     }, React.createElement("span", {
       "className": 'icon-earth'
     })), React.createElement("div", {
       "style": styles.link_label
-    }, "OverView"), React.createElement("div", {
+    }, "Examples"), React.createElement("div", {
       "style": styles.link_desc
-    }, "Tutorials, tags, tips. Share your code and stock your idea."))), React.createElement("div", {
+    }, "Share your code and stock your idea."))), React.createElement("div", {
       "style": styles.link_container
     }, React.createElement(Link, {
       "href": '/class',
@@ -3568,21 +3812,56 @@ IndexComponent = (function(superClass) {
       "style": styles.link_label
     }, "Reference"), React.createElement("div", {
       "style": styles.link_desc
-    }, "jThree API reference. Search classes, methods, properties..."))), React.createElement("div", {
-      "style": styles.link_container
-    }, React.createElement("a", {
-      "href": '//forum.jthree.io',
-      "style": styles.link,
-      "key": 'forum'
-    }, React.createElement("div", {
-      "style": styles.link_icon_wrap
-    }, React.createElement("span", {
-      "className": 'icon-bubbles'
-    })), React.createElement("div", {
-      "style": styles.link_label
-    }, "Forum"), React.createElement("div", {
-      "style": styles.link_desc
-    }, "Discuss your problem with jThree community members. Official announcement will be posted here.")))));
+    }, "jThree API reference. Search classes, methods, properties...")))), React.createElement("div", null, this.introduction()));
+  };
+
+  IndexComponent.prototype.introduction = function() {
+    return React.createElement(Div, {
+      "style": styles.introduction.wrap
+    }, React.createElement(Div, {
+      "style": styles.introduction.body,
+      "class": "index-introduction"
+    }, React.createElement(H2, null, React.createElement(A, {
+      "id": "What_is_jThree_0"
+    }), "What is jThree?"), React.createElement(P, null, "jThree is an innovative 3D graphics engine. It may seem to be just a javascript library.\nHowever, jThree will enable browser to use most of the feature as other game engines do in local environment, plugins features,hierarchies,templates,modUle systems."), React.createElement(H3, null, React.createElement(A, {
+      "id": "Purposes_6"
+    }), "Purposes"), React.createElement(Ul, null, React.createElement(Li, null, "Provide a good learning resource for the beginners to know how programming is awesome via this library."), React.createElement(Li, null, "Sharing features that will be achieved easily by this library implemented with javascript."), React.createElement(Li, null, "Redefine legacies of 3DCG technologies on the Internet."), React.createElement(Li, null, "Have Enjoyable contributions :heart:")), React.createElement(H3, null, React.createElement(A, {
+      "id": "Dependencies_14"
+    }), "Dependencies"), React.createElement(P, null, "This library depends on the following libraries. We appreciate these contributors below :heart:"), React.createElement(Table, null, React.createElement(Thead, null, React.createElement(Tr, null, React.createElement(Th, {
+      "style": {
+        width: 100
+      }
+    }, "Name"), React.createElement(Th, {
+      "style": {
+        width: 300
+      }
+    }, "Purpose"), React.createElement(Th, {
+      "style": {
+        width: 300
+      }
+    }, "URL"))), React.createElement(Tbody, null, React.createElement(Tr, null, React.createElement(Td, null, "gl-matrix"), React.createElement(Td, null, "Use for calcUlation for webgl"), React.createElement(Td, null, React.createElement(A, {
+      "href": "https://github.com/toji/gl-matrix"
+    }, "https:\x2F\x2Fgithub.com\x2Ftoji\x2Fgl-matrix"))))), React.createElement(H2, null, React.createElement(A, {
+      "id": "Contributions_23"
+    }), "Contributions"), React.createElement(P, null, "Thank you for your interest in contributions!   :kissing_smiling_eyes:"), React.createElement(H3, null, React.createElement(A, {
+      "id": "Installation_to_build_28"
+    }), "Installation to build"), React.createElement(P, null, "You need the applications below."), React.createElement(Ul, null, React.createElement(Li, null, "node.js"), React.createElement(Li, null, "npm")), React.createElement(P, null, "You need ", React.createElement(Strong, null, "not"), " to install any packages in global."), React.createElement(P, null, "You need to run the command below to install npm packages,bower packages,and so on in local environment."), React.createElement(Pre, null, React.createElement(Code, {
+      "class": "language-shell"
+    }, "$ npm ", React.createElement(Span, {
+      "class": "hljs-keyword"
+    }, "install"))), React.createElement(P, null, React.createElement(Strong, null, "That is all you need to do for preparation!")), React.createElement(P, null, "Then, run the command below to build “j3.js”"), React.createElement(Pre, null, React.createElement(Code, {
+      "class": "language-shell"
+    }, "$ npm ", React.createElement(Span, {
+      "class": "hljs-command"
+    }, "run"), " build")), React.createElement(Table, null, React.createElement(Thead, null, React.createElement(Tr, null, React.createElement(Th, {
+      "style": {
+        width: 100
+      }
+    }, "command"), React.createElement(Th, {
+      "style": {
+        width: 400
+      }
+    }, "description"))), React.createElement(Tbody, null, React.createElement(Tr, null, React.createElement(Td, null, "npm run build"), React.createElement(Td, null, "build “j3.js”")), React.createElement(Tr, null, React.createElement(Td, null, "npm run test"), React.createElement(Td, null, "run test")), React.createElement(Tr, null, React.createElement(Td, null, "npm run watch"), React.createElement(Td, null, "watch files for build and run simple web server(under wwwroot)")), React.createElement(Tr, null, React.createElement(Td, null, "npm start"), React.createElement(Td, null, "only run simple web server(under wwwroot)")))), React.createElement(P, null, "(simple web server supported LiveReload)"), React.createElement(H3, null, "Example"), React.createElement(P, null, "Look at this simple example."), React.createElement(Pre, null, React.createElement(Code, null, "\x3C!DOCTYPE html\x3E\n\x3Chtml\x3E\n\x3Chead\x3E\n  \x3Cscript type=\"text\x2Fgoml\"\x3E\n    \x3Cgoml\x3E\n      \x3Cresources\x3E\n        \x3Ccube name=\"cube\" \x2F\x3E\n      \x3C\x2Fresources\x3E\n      \x3Ccanvases\x3E\n        \x3Ccanvas clearColor=\"purple\" frame=\".canvasContainer\"\x3E\n          \x3Cviewport cam=\"CAM1\" id=\"main\" width=\"640\" height=\"480\" name=\"MAIN\"\x2F\x3E\n        \x3C\x2Fcanvas\x3E\n      \x3C\x2Fcanvases\x3E\n      \x3Cscenes\x3E\n        \x3Cscene name=\"mainScene\"\x3E\n          \x3Cobject rotation=\"y(30d)\"\x3E\n            \x3Ccamera id=\"maincam\" aspect=\"1\" far=\"20\" fovy=\"1\x2F2p\" name=\"CAM1\" near=\"0.1\"\n                    position=\"(0,8,10)\" rotation=\"x(-30d)\"\x3E\x3C\x2Fcamera\x3E\n          \x3C\x2Fobject\x3E\n          \x3Cscenelight color=\"#FFF\" intensity=\"1\"  top=\"40\"  far=\"50\" right=\"50\" position=\"-10,-10,10\"\x2F\x3E\n          \x3Cmesh id=\"cube\" geo=\"cube\" mat=\"red\"\x2F\x3E\n        \x3C\x2Fscene\x3E\n      \x3C\x2Fscenes\x3E\n    \x3C\x2Fgoml\x3E\n  \x3C\x2Fscript\x3E\n\x3C\x2Fhead\x3E\n\x3Cbody\x3E\n\x3C\x2Fbody\x3E\n\x3C\x2Fhtml\x3E"))));
   };
 
   return IndexComponent;
@@ -3596,6 +3875,9 @@ styles = {
   },
   logo_area: {
     backgroundColor: colors.main.n["default"],
+    backgroundImage: "url('/static/img/jthreetop.png')",
+    backgroundSize: 'auto 100%',
+    backgroundPosition: 'center',
     height: 500,
     position: 'relative'
   },
@@ -3619,8 +3901,8 @@ styles = {
   },
   logo_v3: {
     fontSize: 30,
-    paddingTop: 13,
-    paddingBottom: 10,
+    paddingTop: 11,
+    paddingBottom: 15,
     paddingLeft: 13,
     paddingRight: 13,
     backgroundColor: colors.main.r.emphasis,
@@ -3694,6 +3976,18 @@ styles = {
     fontSize: 13,
     textAlign: 'center',
     color: colors.main.n.moderate
+  },
+  introduction: {
+    wrap: {
+      backgroundImage: 'url(http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/cream_dust.png)',
+      boxShadow: 'rgba(182, 194, 209, 0.33) 0px 27px 50px -18px inset',
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center'
+    },
+    body: {
+      width: 960
+    }
   }
 };
 
@@ -3704,8 +3998,347 @@ IndexComponent.contextTypes = {
 module.exports = Radium(IndexComponent);
 
 
+},{"./colors/color-definition":9,"./index-extend-components":43,"./link-component":44,"radium":undefined,"react":undefined}],43:[function(require,module,exports){
+var $, A, Code, Div, H2, H3, Li, P, Pre, Radium, React, Span, Strong, Table, Tbody, Td, Th, Thead, Tr, Ul, colors, componentAry, components, styles,
+  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-},{"./colors/color-definition":10,"./link-component":39,"radium":undefined,"react":undefined}],39:[function(require,module,exports){
+React = require('react');
+
+Radium = require('radium');
+
+colors = require('./colors/color-definition');
+
+
+/**
+ * style setting
+ */
+
+styles = {
+  h2: {
+    fontSize: 40,
+    padding: '0 10px',
+    borderBottom: '2px solid #5d8bc1',
+    marginTop: 100
+  },
+  h3: {
+    fontSize: 30,
+    ext: {
+      color: colors.main.n["default"]
+    }
+  },
+  th: {
+    borderBottom: "2px solid #5d8bc1",
+    margin: 5,
+    textAlign: 'center',
+    padding: '14px 20px'
+  },
+  tr: {
+    textAlign: 'center'
+  },
+  td: {
+    padding: '14px 20px'
+  },
+  table: {
+    borderCollapse: 'separate',
+    border: 'none',
+    backgroundColor: 'rgba(255,255,255, 0.8)',
+    padding: 8
+  },
+  code: {
+    fontFamily: 'CamingoCode, consolas, lucida'
+  },
+  pre: {
+    backgroundColor: 'white',
+    borderRadius: 3,
+    border: '1px solid #eee',
+    padding: '8px 20px'
+  }
+};
+
+$ = React.createElement;
+
+componentAry = [
+  A = (function(superClass) {
+    extend(A, superClass);
+
+    function A(props) {
+      A.__super__.constructor.call(this, props);
+    }
+
+    A.prototype.render = function() {
+      return $('a', {
+        href: this.props.href,
+        style: Array.prototype.concat.apply([], [this.props.style, styles.a])
+      }, this.props.children);
+    };
+
+    return A;
+
+  })(React.Component), H2 = (function(superClass) {
+    extend(H2, superClass);
+
+    function H2(props) {
+      H2.__super__.constructor.call(this, props);
+    }
+
+    H2.prototype.render = function() {
+      return $('h2', {
+        style: Array.prototype.concat.apply([], [this.props.style, styles.h2])
+      }, this.props.children);
+    };
+
+    return H2;
+
+  })(React.Component), H3 = (function(superClass) {
+    extend(H3, superClass);
+
+    function H3(props) {
+      H3.__super__.constructor.call(this, props);
+    }
+
+    H3.prototype.render = function() {
+      return $('h3', {
+        style: Array.prototype.concat.apply([], [this.props.style, styles.h3])
+      }, $('span', {
+        style: styles.h3.ext
+      }, '- '), this.props.children, $('span', {
+        style: styles.h3.ext
+      }, ' -'));
+    };
+
+    return H3;
+
+  })(React.Component), P = (function(superClass) {
+    extend(P, superClass);
+
+    function P(props) {
+      P.__super__.constructor.call(this, props);
+    }
+
+    P.prototype.render = function() {
+      return $('p', {
+        style: Array.prototype.concat.apply([], [this.props.style, styles.p])
+      }, this.props.children);
+    };
+
+    return P;
+
+  })(React.Component), Li = (function(superClass) {
+    extend(Li, superClass);
+
+    function Li(props) {
+      Li.__super__.constructor.call(this, props);
+    }
+
+    Li.prototype.render = function() {
+      return $('li', {
+        style: Array.prototype.concat.apply([], [this.props.style, styles.li])
+      }, this.props.children);
+    };
+
+    return Li;
+
+  })(React.Component), Ul = (function(superClass) {
+    extend(Ul, superClass);
+
+    function Ul(props) {
+      Ul.__super__.constructor.call(this, props);
+    }
+
+    Ul.prototype.render = function() {
+      return $('ul', {
+        style: Array.prototype.concat.apply([], [this.props.style, styles.ul])
+      }, this.props.children);
+    };
+
+    return Ul;
+
+  })(React.Component), Th = (function(superClass) {
+    extend(Th, superClass);
+
+    function Th(props) {
+      Th.__super__.constructor.call(this, props);
+    }
+
+    Th.prototype.render = function() {
+      return $('th', {
+        style: Array.prototype.concat.apply([], [this.props.style, styles.th])
+      }, this.props.children);
+    };
+
+    return Th;
+
+  })(React.Component), Tr = (function(superClass) {
+    extend(Tr, superClass);
+
+    function Tr(props) {
+      Tr.__super__.constructor.call(this, props);
+    }
+
+    Tr.prototype.render = function() {
+      return $('tr', {
+        style: Array.prototype.concat.apply([], [this.props.style, styles.tr])
+      }, this.props.children);
+    };
+
+    return Tr;
+
+  })(React.Component), Thead = (function(superClass) {
+    extend(Thead, superClass);
+
+    function Thead(props) {
+      Thead.__super__.constructor.call(this, props);
+    }
+
+    Thead.prototype.render = function() {
+      return $('thead', {
+        style: Array.prototype.concat.apply([], [this.props.style, styles.thead])
+      }, this.props.children);
+    };
+
+    return Thead;
+
+  })(React.Component), Td = (function(superClass) {
+    extend(Td, superClass);
+
+    function Td(props) {
+      Td.__super__.constructor.call(this, props);
+    }
+
+    Td.prototype.render = function() {
+      return $('td', {
+        style: Array.prototype.concat.apply([], [this.props.style, styles.td])
+      }, this.props.children);
+    };
+
+    return Td;
+
+  })(React.Component), Tbody = (function(superClass) {
+    extend(Tbody, superClass);
+
+    function Tbody(props) {
+      Tbody.__super__.constructor.call(this, props);
+    }
+
+    Tbody.prototype.render = function() {
+      return $('tbody', {
+        style: Array.prototype.concat.apply([], [this.props.style, styles.tbody])
+      }, this.props.children);
+    };
+
+    return Tbody;
+
+  })(React.Component), Table = (function(superClass) {
+    extend(Table, superClass);
+
+    function Table(props) {
+      Table.__super__.constructor.call(this, props);
+    }
+
+    Table.prototype.render = function() {
+      return $('table', {
+        style: Array.prototype.concat.apply([], [this.props.style, styles.table])
+      }, this.props.children);
+    };
+
+    return Table;
+
+  })(React.Component), Strong = (function(superClass) {
+    extend(Strong, superClass);
+
+    function Strong(props) {
+      Strong.__super__.constructor.call(this, props);
+    }
+
+    Strong.prototype.render = function() {
+      return $('strong', {
+        style: Array.prototype.concat.apply([], [this.props.style, styles.strong])
+      }, this.props.children);
+    };
+
+    return Strong;
+
+  })(React.Component), Span = (function(superClass) {
+    extend(Span, superClass);
+
+    function Span(props) {
+      Span.__super__.constructor.call(this, props);
+    }
+
+    Span.prototype.render = function() {
+      return $('span', {
+        style: Array.prototype.concat.apply([], [this.props.style, styles.span])
+      }, this.props.children);
+    };
+
+    return Span;
+
+  })(React.Component), Code = (function(superClass) {
+    extend(Code, superClass);
+
+    function Code(props) {
+      Code.__super__.constructor.call(this, props);
+    }
+
+    Code.prototype.render = function() {
+      return $('code', {
+        style: Array.prototype.concat.apply([], [this.props.style, styles.code])
+      }, this.props.children);
+    };
+
+    return Code;
+
+  })(React.Component), Pre = (function(superClass) {
+    extend(Pre, superClass);
+
+    function Pre(props) {
+      Pre.__super__.constructor.call(this, props);
+    }
+
+    Pre.prototype.render = function() {
+      return $('pre', {
+        style: Array.prototype.concat.apply([], [this.props.style, styles.pre])
+      }, this.props.children);
+    };
+
+    return Pre;
+
+  })(React.Component), Div = (function(superClass) {
+    extend(Div, superClass);
+
+    function Div(props) {
+      Div.__super__.constructor.call(this, props);
+    }
+
+    Div.prototype.render = function() {
+      return $('div', {
+        style: Array.prototype.concat.apply([], [this.props.style, styles.div])
+      }, this.props.children);
+    };
+
+    return Div;
+
+  })(React.Component)
+];
+
+components = {};
+
+componentAry.map(function(Component) {
+  Component.contextTypes = {
+    ctx: React.PropTypes.any
+  };
+  return Component;
+}).forEach(function(Component) {
+  return components[Component.name] = Radium(Component);
+});
+
+console.log(components);
+
+module.exports = components;
+
+
+},{"./colors/color-definition":9,"radium":undefined,"react":undefined}],44:[function(require,module,exports){
 var LinkComponent, Radium, React,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -3815,8 +4448,7 @@ LinkComponent.contextTypes = {
 module.exports = Radium(LinkComponent);
 
 
-
-},{"radium":undefined,"react":undefined}],40:[function(require,module,exports){
+},{"radium":undefined,"react":undefined}],45:[function(require,module,exports){
 var CharIconComponent, Link, ListComponent, ListFolderComponent, ListItemComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4008,8 +4640,7 @@ ListComponent.contextTypes = {
 module.exports = Radium(ListComponent);
 
 
-
-},{"./char-icon-component":8,"./colors/color-definition":10,"./link-component":39,"./list-folder-component":41,"./list-item-component":42,"radium":undefined,"react":undefined}],41:[function(require,module,exports){
+},{"./char-icon-component":7,"./colors/color-definition":9,"./link-component":44,"./list-folder-component":46,"./list-item-component":47,"radium":undefined,"react":undefined}],46:[function(require,module,exports){
 var CharIconComponent, ListFolderComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4112,8 +4743,7 @@ ListFolderComponent.contextTypes = {
 module.exports = Radium(ListFolderComponent);
 
 
-
-},{"./char-icon-component":8,"./colors/color-definition":10,"radium":undefined,"react":undefined}],42:[function(require,module,exports){
+},{"./char-icon-component":7,"./colors/color-definition":9,"radium":undefined,"react":undefined}],47:[function(require,module,exports){
 var ListItemComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4177,373 +4807,7 @@ ListItemComponent.contextTypes = {
 module.exports = Radium(ListItemComponent);
 
 
-
-},{"./colors/color-definition":10,"radium":undefined,"react":undefined}],43:[function(require,module,exports){
-var OverviewComponent, OverviewMarkupComponent, OverviewSidebarComponent, Promise, Radium, React, Route, styles,
-  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-  hasProp = {}.hasOwnProperty;
-
-React = require('react');
-
-Radium = require('radium');
-
-OverviewMarkupComponent = require('./overview-markup-component');
-
-OverviewSidebarComponent = require('./overview-sidebar-component');
-
-Route = require('./route-component');
-
-Promise = require('superagent');
-
-OverviewComponent = (function(superClass) {
-  extend(OverviewComponent, superClass);
-
-  function OverviewComponent(props) {
-    OverviewComponent.__super__.constructor.call(this, props);
-  }
-
-  OverviewComponent.prototype._onChange = function() {
-    return this.setState(this.store.get());
-  };
-
-  OverviewComponent.prototype.componentWillMount = function() {
-    this.titleId = Number(this.props.argu.route_arr[1]) || 0;
-    this.store = this.context.ctx.overviewStore;
-    this.setState(this.store.get());
-    return this.context.ctx.overviewAction.updateOverview(this.titleId);
-  };
-
-  OverviewComponent.prototype.componentWillReceiveProps = function(nextProps) {
-    var nextTitleId;
-    nextTitleId = Number(nextProps.argu.route_arr[1]) || 0;
-    if (this.titleId !== nextTitleId) {
-      this.titleId = nextTitleId;
-      return this.context.ctx.overviewAction.updateOverview(this.titleId);
-    }
-  };
-
-  OverviewComponent.prototype.componentDidMount = function() {
-    return this.store.onChange(this._onChange.bind(this));
-  };
-
-  OverviewComponent.prototype.componentWillUnmount = function() {
-    return this.store.removeChangeListener(this._onChange.bind(this));
-  };
-
-  OverviewComponent.prototype.render = function() {
-    return React.createElement("div", {
-      "style": Array.prototype.concat.apply([], [styles.base, this.props.style])
-    }, React.createElement("div", {
-      "style": styles.sidebar
-    }, React.createElement(Route, null, React.createElement(OverviewSidebarComponent, {
-      "structure": this.state.structure
-    }))), React.createElement("div", {
-      "style": styles.contents
-    }, React.createElement(Route, null, React.createElement(OverviewMarkupComponent, {
-      "markup": this.state.markup
-    }))));
-  };
-
-  return OverviewComponent;
-
-})(React.Component);
-
-styles = {
-  base: {
-    display: 'flex',
-    WebkitFlexDirection: 'row',
-    flexDirection: 'row',
-    width: '100%'
-  },
-  sidebar: {
-    boxSizing: 'border-box',
-    paddingLeft: 10,
-    paddingTop: 10,
-    width: 360,
-    borderRight: '1px solid #ccc',
-    position: 'fixed',
-    top: 80,
-    height: 'calc(100% - 80px)',
-    overflowY: 'scroll',
-    overflowX: 'hidden',
-    zIndex: 10,
-    backgroundColor: '#fff'
-  },
-  contents: {
-    boxSizing: 'border-box',
-    width: 800,
-    padding: '0 80px 0 40px',
-    flexGrow: '1',
-    WebkitFlexGrow: '1',
-    display: 'flex',
-    flexDirection: 'column',
-    WebkitFlexDirection: 'column',
-    flexWrap: 'nowrap',
-    WebkitFlexWrap: 'nowrap',
-    marginLeft: 360
-  }
-};
-
-OverviewComponent.contextTypes = {
-  ctx: React.PropTypes.any
-};
-
-module.exports = Radium(OverviewComponent);
-
-
-
-},{"./overview-markup-component":44,"./overview-sidebar-component":45,"./route-component":50,"radium":undefined,"react":undefined,"superagent":undefined}],44:[function(require,module,exports){
-var OverviewMarkupComponent, Radium, React, marked, styles,
-  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-  hasProp = {}.hasOwnProperty;
-
-React = require('react');
-
-Radium = require('radium');
-
-marked = require('marked');
-
-OverviewMarkupComponent = (function(superClass) {
-  extend(OverviewMarkupComponent, superClass);
-
-  function OverviewMarkupComponent(props) {
-    OverviewMarkupComponent.__super__.constructor.call(this, props);
-  }
-
-  OverviewMarkupComponent.prototype.shouldComponentUpdate = function(nextProps, nextState) {
-    return nextProps.markup !== this.props.marked;
-  };
-
-  OverviewMarkupComponent.prototype.getMd = function() {
-    return this.props.markup;
-  };
-
-  OverviewMarkupComponent.prototype.render = function() {
-    return React.createElement("div", {
-      "className": 'markdown-component',
-      "style": this.props.style
-    }, React.createElement("div", {
-      "style": styles.container,
-      "dangerouslySetInnerHTML": {
-        __html: this.props.markup
-      }
-    }));
-  };
-
-  return OverviewMarkupComponent;
-
-})(React.Component);
-
-styles = {
-  container: {}
-};
-
-OverviewMarkupComponent.contextTypes = {
-  ctx: React.PropTypes.any
-};
-
-module.exports = Radium(OverviewMarkupComponent);
-
-
-
-},{"marked":undefined,"radium":undefined,"react":undefined}],45:[function(require,module,exports){
-var OverviewSidebarComponent, OverviewSidebarItemComponent, OverviewSidebarTitleComponent, Radium, React, Route, styles,
-  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-  hasProp = {}.hasOwnProperty;
-
-React = require('react');
-
-Radium = require('radium');
-
-OverviewSidebarItemComponent = require('./overview-sidebar-item-component');
-
-OverviewSidebarTitleComponent = require('./overview-sidebar-title-component');
-
-Route = require('./route-component');
-
-OverviewSidebarComponent = (function(superClass) {
-  extend(OverviewSidebarComponent, superClass);
-
-  function OverviewSidebarComponent(props) {
-    OverviewSidebarComponent.__super__.constructor.call(this, props);
-  }
-
-  OverviewSidebarComponent.prototype.componentWillMount = function() {
-    return this.setState({
-      structure: this.props.structure
-    });
-  };
-
-  OverviewSidebarComponent.prototype.render = function() {
-    var rootTitle, structure;
-    structure = this.state.structure;
-    return React.createElement("div", {
-      "style": [].concat.apply([], [styles.sidebar, this.props.style])
-    }, React.createElement(OverviewSidebarItemComponent, null, (rootTitle = "", structure.map(function(data) {
-      if (data.level === 1) {
-        rootTitle = data.title;
-      }
-      return React.createElement(Route, null, React.createElement(OverviewSidebarTitleComponent, {
-        "level": data.level,
-        "root": rootTitle
-      }, data.title));
-    }))));
-  };
-
-  return OverviewSidebarComponent;
-
-})(React.Component);
-
-styles = {
-  sidebar: {}
-};
-
-OverviewSidebarComponent.contextTypes = {
-  ctx: React.PropTypes.any
-};
-
-module.exports = Radium(OverviewSidebarComponent);
-
-
-
-},{"./overview-sidebar-item-component":46,"./overview-sidebar-title-component":47,"./route-component":50,"radium":undefined,"react":undefined}],46:[function(require,module,exports){
-var OverviewSidebarItemComponent, Radium, React, styles,
-  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-  hasProp = {}.hasOwnProperty;
-
-React = require('react');
-
-Radium = require('radium');
-
-OverviewSidebarItemComponent = (function(superClass) {
-  extend(OverviewSidebarItemComponent, superClass);
-
-  function OverviewSidebarItemComponent(props) {
-    OverviewSidebarItemComponent.__super__.constructor.call(this, props);
-  }
-
-  OverviewSidebarItemComponent.prototype.render = function() {
-    return React.createElement("div", {
-      "style": styles['level' + this.props.level]
-    }, this.props.children);
-  };
-
-  return OverviewSidebarItemComponent;
-
-})(React.Component);
-
-styles = {
-  base: {
-    fontSize: 14,
-    padding: '10px 20px',
-    marginRight: 20,
-    borderBottom: '1px solid #eee'
-  },
-  level1: {
-    fontSize: 18,
-    padding: '10px 20px',
-    marginRight: 20,
-    borderBottom: '1px solid #eee'
-  },
-  level2: {
-    fontSize: 14,
-    padding: '10px 20px',
-    marginRight: 20,
-    borderBottom: '1px solid #eee'
-  },
-  level3: {
-    fontSize: 12,
-    padding: '10px 20px',
-    marginRight: 20,
-    borderBottom: '1px solid #eee'
-  }
-};
-
-OverviewSidebarItemComponent.contextTypes = {
-  ctx: React.PropTypes.any
-};
-
-module.exports = Radium(OverviewSidebarItemComponent);
-
-
-
-},{"radium":undefined,"react":undefined}],47:[function(require,module,exports){
-var Link, OverviewSidebarTitleComponent, Radium, React, styles,
-  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-  hasProp = {}.hasOwnProperty;
-
-React = require('react');
-
-Radium = require('radium');
-
-Link = require('./link-component');
-
-OverviewSidebarTitleComponent = (function(superClass) {
-  extend(OverviewSidebarTitleComponent, superClass);
-
-  function OverviewSidebarTitleComponent(props) {
-    OverviewSidebarTitleComponent.__super__.constructor.call(this, props);
-  }
-
-  OverviewSidebarTitleComponent.prototype.titleToUrl = function(title) {
-    return title.replace(/^\s+/g, "").replace(/\s+$/g, "").replace(/\s/g, "-").toLowerCase();
-  };
-
-  OverviewSidebarTitleComponent.prototype.render = function() {
-    var url;
-    return React.createElement("div", {
-      "style": [].concat([], styles.titleBox[this.props.level - 1], this.props.style)
-    }, (url = "/overview/" + (this.titleToUrl(this.props.root)), this.props.level === 1 ? void 0 : url += "#" + this.titleToUrl(this.props.children), React.createElement("a", {
-      "style": styles.titleText[this.props.level - 1],
-      "href": url
-    }, this.props.children)));
-  };
-
-  return OverviewSidebarTitleComponent;
-
-})(React.Component);
-
-styles = {
-  titleText: [
-    {
-      textDecoration: "none",
-      color: "#000",
-      fontSize: 24
-    }, {
-      textDecoration: "none",
-      color: "#000",
-      fontSize: 18
-    }, {
-      textDecoration: "none",
-      color: "#000",
-      fontSize: 14
-    }
-  ],
-  titleBox: [
-    {
-      marginTop: 15,
-      marginBottom: 5,
-      background: "#f2f2f2",
-      padding: "10px 15px"
-    }, {
-      paddingLeft: "22px",
-      paddingTop: 5,
-      paddingBottom: 5
-    }, {
-      paddingLeft: "30px"
-    }
-  ]
-};
-
-OverviewSidebarTitleComponent.contextTypes = {
-  ctx: React.PropTypes.any
-};
-
-module.exports = Radium(OverviewSidebarTitleComponent);
-
-
-
-},{"./link-component":39,"radium":undefined,"react":undefined}],48:[function(require,module,exports){
+},{"./colors/color-definition":9,"radium":undefined,"react":undefined}],48:[function(require,module,exports){
 var Link, ProgressbarComponent, Radium, React, Route, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4627,8 +4891,7 @@ ProgressbarComponent.contextTypes = {
 module.exports = Radium(ProgressbarComponent);
 
 
-
-},{"./colors/color-definition":10,"./link-component":39,"./route-component":50,"radium":undefined,"react":undefined}],49:[function(require,module,exports){
+},{"./colors/color-definition":9,"./link-component":44,"./route-component":50,"radium":undefined,"react":undefined}],49:[function(require,module,exports){
 var App, React, RootComponent,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4665,8 +4928,7 @@ RootComponent.childContextTypes = {
 module.exports = RootComponent;
 
 
-
-},{"./app-component":7,"react":undefined}],50:[function(require,module,exports){
+},{"./app-component":6,"react":undefined}],50:[function(require,module,exports){
 var Radium, React, RouteComponent, Router,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4838,7 +5100,6 @@ RouteComponent.contextTypes = {
 module.exports = Radium(RouteComponent);
 
 
-
 },{"../lib/router":58,"radium":undefined,"react":undefined}],51:[function(require,module,exports){
 var DocSignaturesComponent, DocSignaturesNameComponent, DocSignaturesParametersComponent, DocSignaturesTypeComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -4903,7 +5164,6 @@ DocSignaturesComponent.contextTypes = {
 module.exports = Radium(DocSignaturesComponent);
 
 
-
 },{"./doc-signatures-name-component":52,"./doc-signatures-parameters-component":53,"./doc-signatures-type-component":54,"radium":undefined,"react":undefined}],52:[function(require,module,exports){
 var DocSignaturesNameComponent, DocSignaturesTypeargumentsComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -4954,7 +5214,6 @@ DocSignaturesNameComponent.contextTypes = {
 };
 
 module.exports = Radium(DocSignaturesNameComponent);
-
 
 
 },{"./doc-signatures-typearguments-component":55,"radium":undefined,"react":undefined}],53:[function(require,module,exports){
@@ -5021,7 +5280,6 @@ DocSignaturesParametersComponent.contextTypes = {
 };
 
 module.exports = Radium(DocSignaturesParametersComponent);
-
 
 
 },{"./doc-signatures-name-component":52,"./doc-signatures-type-component":54,"radium":undefined,"react":undefined}],54:[function(require,module,exports){
@@ -5095,8 +5353,7 @@ DocSignaturesTypeComponent.contextTypes = {
 module.exports = Radium(DocSignaturesTypeComponent);
 
 
-
-},{"../link-component":39,"./doc-signatures-typearguments-component":55,"radium":undefined,"react":undefined}],55:[function(require,module,exports){
+},{"../link-component":44,"./doc-signatures-typearguments-component":55,"radium":undefined,"react":undefined}],55:[function(require,module,exports){
 var DocSignaturesTypeargumentsComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5155,9 +5412,8 @@ DocSignaturesTypeargumentsComponent.contextTypes = {
 module.exports = Radium(DocSignaturesTypeargumentsComponent);
 
 
-
 },{"radium":undefined,"react":undefined}],56:[function(require,module,exports){
-var Context, DocAction, DocCoverageAction, DocCoverageStore, DocStore, Flux, OverviewAction, OverviewStore, RouteAction, RouteStore, ToggleVisibilityAction, ToggleVisibilityStore,
+var Context, DocAction, DocCoverageAction, DocCoverageStore, DocStore, ExampleAction, ExampleStore, Flux, RouteAction, RouteStore, ToggleVisibilityAction, ToggleVisibilityStore,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -5175,9 +5431,9 @@ DocCoverageAction = require('./actions/doc-coverage-action');
 
 DocCoverageStore = require('./stores/doc-coverage-store');
 
-OverviewAction = require('./actions/overview-action');
+ExampleAction = require('./actions/example-action');
 
-OverviewStore = require('./stores/overview-store');
+ExampleStore = require('./stores/example-store');
 
 ToggleVisibilityStore = require('./stores/toggle-visibility-store');
 
@@ -5204,8 +5460,8 @@ Context = (function(superClass) {
     this.toggleVisibilityAction = new ToggleVisibilityAction(this);
     this.docCoverageStore = new DocCoverageStore(this);
     this.docCoverageAction = new DocCoverageAction(this);
-    this.overviewStore = new OverviewStore(this);
-    this.overviewAction = new OverviewAction(this);
+    this.exampleStore = new ExampleStore(this);
+    this.exampleAction = new ExampleAction(this);
   }
 
   return Context;
@@ -5215,8 +5471,7 @@ Context = (function(superClass) {
 module.exports = Context;
 
 
-
-},{"./actions/doc-action":2,"./actions/doc-coverage-action":3,"./actions/overview-action":4,"./actions/route-action":5,"./actions/toggle-visibility-action":6,"./stores/doc-coverage-store":59,"./stores/doc-store":60,"./stores/overview-store":61,"./stores/route-store":62,"./stores/toggle-visibility-store":63,"material-flux":undefined}],57:[function(require,module,exports){
+},{"./actions/doc-action":1,"./actions/doc-coverage-action":2,"./actions/example-action":3,"./actions/route-action":4,"./actions/toggle-visibility-action":5,"./stores/doc-coverage-store":59,"./stores/doc-store":60,"./stores/example-store":61,"./stores/route-store":62,"./stores/toggle-visibility-store":63,"material-flux":undefined}],57:[function(require,module,exports){
 
 /**
  * keys linked to actions
@@ -5225,10 +5480,9 @@ module.exports = Context;
 module.exports = {
   route: 'route',
   updateDoc: 'updateDoc',
-  updateOverview: 'updateOverview',
+  updateExample: 'updateExample',
   toggleVisibility: 'toggleVisibility'
 };
-
 
 
 },{}],58:[function(require,module,exports){
@@ -5403,7 +5657,6 @@ Router = (function() {
 module.exports = Router;
 
 
-
 },{"object-assign":undefined}],59:[function(require,module,exports){
 var DocCoverageStore, Flux, keys, objectAssign,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -5448,7 +5701,6 @@ DocCoverageStore = (function(superClass) {
 })(Flux.Store);
 
 module.exports = DocCoverageStore;
-
 
 
 },{"../keys":57,"material-flux":undefined,"object-assign":undefined}],60:[function(require,module,exports){
@@ -5517,9 +5769,8 @@ DocStore = (function(superClass) {
 module.exports = DocStore;
 
 
-
 },{"../keys":57,"lodash.merge":undefined,"material-flux":undefined,"object-assign":undefined}],61:[function(require,module,exports){
-var Flux, OverviewStore, keys, objectAssign,
+var ExampleStore, Flux, keys, objectAssign,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -5529,35 +5780,42 @@ keys = require('../keys');
 
 objectAssign = require('object-assign');
 
-OverviewStore = (function(superClass) {
-  extend(OverviewStore, superClass);
+ExampleStore = (function(superClass) {
+  extend(ExampleStore, superClass);
 
 
   /**
-   * flux store for overview
-   * stores markup for overview page
+   * flux store for example
+   * stores markup for example page
    * @param  {Context} context flux context instance use for initializing state
-   * @return {OverviewStore}
+   * @return {ExampleStore}
    */
 
-  function OverviewStore(context) {
-    OverviewStore.__super__.constructor.call(this, context);
+  function ExampleStore(context) {
+    ExampleStore.__super__.constructor.call(this, context);
     this.state = {
-      markup: "",
+      markup: {},
       structure: []
     };
-    this.state = objectAssign(this.state, context.initialStates.OverviewStore);
-    this.register(keys.updateOverview, this.updateOverview);
+    this.state = objectAssign(this.state, context.initialStates.ExampleStore);
+    this.register(keys.updateExample, this.updateExample);
   }
 
 
   /**
-   * update overview's markup,structure
+   * update example's markup,structure
    * @param data.markup {string}
    */
 
-  OverviewStore.prototype.updateOverview = function(data) {
-    return this.setState(objectAssign(this.state, data));
+  ExampleStore.prototype.updateExample = function(path, data) {
+    var state;
+    state = {
+      markup: {}
+    };
+    state.markup[path.replace(/:::/g, "/")] = data.markup;
+    state.structure = data.structure;
+    console.log(state);
+    return this.setState(objectAssign(this.state, state));
   };
 
 
@@ -5566,16 +5824,15 @@ OverviewStore = (function(superClass) {
    * @return {Object} stored state
    */
 
-  OverviewStore.prototype.get = function() {
+  ExampleStore.prototype.get = function() {
     return this.state;
   };
 
-  return OverviewStore;
+  return ExampleStore;
 
 })(Flux.Store);
 
-module.exports = OverviewStore;
-
+module.exports = ExampleStore;
 
 
 },{"../keys":57,"material-flux":undefined,"object-assign":undefined}],62:[function(require,module,exports){
@@ -5645,7 +5902,6 @@ RouteStore = (function(superClass) {
 module.exports = RouteStore;
 
 
-
 },{"../keys":57,"material-flux":undefined,"object-assign":undefined}],63:[function(require,module,exports){
 var Flux, ToggleVisibilityStore, keys, objectAssign,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -5692,8 +5948,110 @@ ToggleVisibilityStore = (function(superClass) {
 module.exports = ToggleVisibilityStore;
 
 
-
 },{"../keys":57,"material-flux":undefined,"object-assign":undefined}],64:[function(require,module,exports){
+var Context, Docs, Examples, Handlebars, InitializeState, React, Root, docs, examples, express, favicon, fs, initializeState, server, template;
+
+if ("development" === 'development') {
+  require('source-map-support').install();
+}
+
+express = require('express');
+
+favicon = require('serve-favicon');
+
+fs = require('fs');
+
+Handlebars = require('handlebars');
+
+React = require('react');
+
+Context = require('./renderer/context');
+
+Root = require('./renderer/components/root-component');
+
+InitializeState = require('./server/initializeState');
+
+Docs = require('./server/docs');
+
+Examples = require('./server/examples');
+
+console.log('Examples: ', Examples);
+
+console.log("environment: " + "development");
+
+server = express();
+
+server.use('/static', express["static"]('public'));
+
+server.use(favicon((fs.realpathSync('./')) + "/public/assets/favicon/favicon.ico"));
+
+template = Handlebars.compile(fs.readFileSync((fs.realpathSync('./')) + "/view/index.hbs").toString());
+
+docs = new Docs();
+
+examples = new Examples();
+
+initializeState = new InitializeState(docs);
+
+docs.getJsonScheduler(3 * 60 * 60, function() {
+  return initializeState.gen();
+});
+
+
+/**
+ * API for get doc data
+ * @param  {Object} req express request object
+ * @param  {Object} res express response object
+ * @return {[type]}     [description]
+ */
+
+server.get('/api/class/global/:file_id/:factor_id', function(req, res) {
+  console.log(req.originalUrl);
+  return res.json(docs.getDocDataById(req.params.file_id, req.params.factor_id));
+});
+
+server.get('/api/example/:path', function(req, res) {
+  var path, pathAry;
+  console.log("server: ", req.originalUrl);
+  pathAry = req.params.path.split(":::");
+  if (pathAry[0] !== "root") {
+    return res.status(404).send();
+  } else {
+    path = pathAry.slice(1).join(":::");
+    return res.json({
+      markup: examples.getMarkupByPath(path),
+      structure: examples.structure
+    });
+  }
+});
+
+
+/**
+ * All page view request routing is processed here
+ * generate view by React server-side rendering
+ * @param  {Object} req express request object
+ * @param  {Object} res express response object
+ */
+
+server.get('*', function(req, res) {
+  var context, initialStates;
+  console.log(req.originalUrl);
+  initialStates = initializeState.initialize(req);
+  context = new Context(initialStates);
+  return res.send(template({
+    initialStates: JSON.stringify(initialStates),
+    markup: React.renderToString(React.createElement(Root, {
+      context: context
+    }))
+  }));
+});
+
+console.log('running on', 'PORT:', process.env.PORT || 5000, 'IP:', process.env.IP);
+
+server.listen(process.env.PORT || 5000, process.env.IP);
+
+
+},{"./renderer/components/root-component":49,"./renderer/context":56,"./server/docs":65,"./server/examples":66,"./server/initializeState":67,"express":undefined,"fs":undefined,"handlebars":undefined,"react":undefined,"serve-favicon":undefined,"source-map-support":undefined}],65:[function(require,module,exports){
 
 /*
 @providesModule Docs
@@ -5728,9 +6086,9 @@ Docs = (function() {
    */
 
   Docs.prototype.getJsonScheduler = function(interval, cb) {
-    if ("production" === 'production') {
+    if ("development" === 'production') {
       this.getRemoteJson(cb);
-    } else if ("production" === 'development') {
+    } else if ("development" === 'development') {
       this.getLocalJson(cb);
     }
     console.log('got json');
@@ -5868,9 +6226,138 @@ Docs = (function() {
 module.exports = Docs;
 
 
+},{"./stateInitializer/initializeStateConfig":70,"bluebird":undefined,"fs":undefined,"lodash.clone":undefined,"request":undefined}],66:[function(require,module,exports){
 
-},{"./stateInitializer/initializeStateConfig":69,"bluebird":undefined,"fs":undefined,"lodash.clone":undefined,"request":undefined}],65:[function(require,module,exports){
-var DirTree, DocCoverage, Docs, InitializeState, Overviews, Router, RoutesGen, config, readOverview;
+/*
+@providesModule Docs
+ */
+var Examples, Promise, clone, config, fs, marked, objectAssign, request,
+  bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+fs = require('fs');
+
+config = require('./stateInitializer/initializeStateConfig');
+
+clone = require('lodash.clone');
+
+request = require('request');
+
+Promise = require('bluebird');
+
+marked = require('marked');
+
+objectAssign = require('object-assign');
+
+Examples = (function() {
+
+  /**
+   * Convert Examples object from markdown text
+   * @return {Examples}
+   */
+  var _recursionSearch;
+
+  function Examples() {
+    this.findMarkdown = bind(this.findMarkdown, this);
+    this.parseStructure = bind(this.parseStructure, this);
+    this.json = JSON.parse(fs.readFileSync(config.example.path_to_json, 'utf8'));
+    this.structure = this.getStructure();
+    this.routes = this.getRoutes();
+  }
+
+  Examples.prototype.getStructure = function() {
+    var dir;
+    dir = this.json;
+    return this.parseStructure(_recursionSearch(dir));
+  };
+
+  Examples.prototype.getRoutes = function() {
+    var dir, routes;
+    dir = this.json;
+    routes = {};
+    _recursionSearch(dir).forEach((function(_this) {
+      return function(title) {
+        var fragment, route;
+        fragment = _this.titleToUrl(title);
+        route = fragment.replace(/\//g, ':');
+        return routes[fragment] = route;
+      };
+    })(this));
+    console.log(routes);
+    return routes;
+  };
+
+  Examples.prototype.titleToUrl = function(title) {
+    return title.replace(/^\s+/g, "").replace(/\s+$/g, "").replace(/\s/g, "-").toLowerCase();
+  };
+
+  Examples.prototype.parseStructure = function(routesAry) {
+    return routesAry.map((function(_this) {
+      return function(pwd) {
+        var size;
+        size = pwd.split('/').length;
+        return {
+          title: pwd.split('/')[size - 1],
+          url: "/" + (_this.titleToUrl(pwd)),
+          level: size - 1
+        };
+      };
+    })(this));
+  };
+
+  _recursionSearch = function(directory, pwd) {
+    var routesAry;
+    pwd = pwd || "";
+    routesAry = [];
+    directory.children.forEach(function(o) {
+      switch (o.type) {
+        case "file":
+          return routesAry.push("example" + pwd + "/" + o.file);
+        case "directory":
+          return routesAry = routesAry.concat(_recursionSearch(o, pwd + "/" + o.name));
+      }
+    });
+    return routesAry;
+  };
+
+  Examples.prototype.getMarkupByPath = function(path) {
+    var pathAry;
+    pathAry = path.split(":::");
+    return this.md2Html(this.findMarkdown(this.json, pathAry));
+  };
+
+  Examples.prototype.findMarkdown = function(dir, pathAry) {
+    var findedDir;
+    if (pathAry.length) {
+      findedDir = dir.children.filter((function(_this) {
+        return function(o) {
+          return _this.titleToUrl(o.file || "") === pathAry[0] || _this.titleToUrl(o.name || "") === pathAry[0];
+        };
+      })(this))[0];
+      pathAry.shift();
+      return this.findMarkdown(findedDir, pathAry);
+    }
+    return dir.content;
+  };
+
+  Examples.prototype.md2Html = function(markdown) {
+    var html;
+    marked.setOptions({
+      highlight: function(code) {
+        return require('highlight.js').highlightAuto(code).value;
+      }
+    });
+    return html = marked(markdown);
+  };
+
+  return Examples;
+
+})();
+
+module.exports = Examples;
+
+
+},{"./stateInitializer/initializeStateConfig":70,"bluebird":undefined,"fs":undefined,"highlight.js":undefined,"lodash.clone":undefined,"marked":undefined,"object-assign":undefined,"request":undefined}],67:[function(require,module,exports){
+var DirTree, DocCoverage, Docs, Examples, InitializeState, Router, RoutesGen, config, readExample;
 
 RoutesGen = require('./stateInitializer/routes-gen');
 
@@ -5884,9 +6371,9 @@ Docs = require('./docs');
 
 Router = require('../renderer/lib/router');
 
-readOverview = require('./stateInitializer/read-overview');
+readExample = require('./stateInitializer/read-example');
 
-Overviews = require('./overviews');
+Examples = require('./examples');
 
 InitializeState = (function() {
 
@@ -5900,7 +6387,7 @@ InitializeState = (function() {
     this.dirTree = new DirTree();
     this.doc_coverage = new DocCoverage();
     this.router = new Router(config.router.root, this.routeGen.routes);
-    this.overviews = new Overviews();
+    this.examples = new Examples();
   }
 
 
@@ -5909,7 +6396,7 @@ InitializeState = (function() {
    */
 
   InitializeState.prototype.gen = function() {
-    this.routeGen.gen(this.docs.json, this.overviews.getUrls());
+    this.routeGen.gen(this.docs.json, this.examples.routes);
     this.dirTree.gen(this.docs.json);
     this.doc_coverage.gen(this.docs.json);
     return this.router.setRoute(this.routeGen.routes);
@@ -5923,9 +6410,10 @@ InitializeState = (function() {
    */
 
   InitializeState.prototype.initialize = function(req) {
-    var initialState, initial_doc_data, initial_overview_markup;
+    var initialState, initial_doc_data, initial_example_markup, initial_example_structure;
     initial_doc_data = {};
-    initial_overview_markup = "";
+    initial_example_markup = "";
+    initial_example_structure = [];
     this.router.route(req.originalUrl, (function(_this) {
       return function(route, argu) {
         var factor_id, file_id, ref, ref1, title_id;
@@ -5937,9 +6425,10 @@ InitializeState = (function() {
               return initial_doc_data = _this.docs.getDocDataById(file_id, factor_id);
             }
             break;
-          case "overview":
+          case "example":
             title_id = argu.route_arr[1] || 0;
-            return initial_overview_markup = _this.overviews.getOverviewHtml(title_id);
+            initial_example_markup = {};
+            return initial_example_structure = _this.examples.structure;
         }
       };
     })(this));
@@ -5953,9 +6442,9 @@ InitializeState = (function() {
         dir_tree: this.dirTree.dir_tree,
         doc_data: initial_doc_data
       },
-      OverviewStore: {
-        markup: initial_overview_markup,
-        structure: this.overviews.getTitleStructure()
+      ExampleStore: {
+        markup: initial_example_markup,
+        structure: initial_example_structure
       },
       DocCoverageStore: {
         coverage: this.doc_coverage.coverage
@@ -5971,146 +6460,7 @@ InitializeState = (function() {
 module.exports = InitializeState;
 
 
-
-},{"../renderer/lib/router":58,"./docs":64,"./overviews":66,"./stateInitializer/dir-tree":67,"./stateInitializer/doc-coverage":68,"./stateInitializer/initializeStateConfig":69,"./stateInitializer/read-overview":70,"./stateInitializer/routes-gen":71}],66:[function(require,module,exports){
-
-/*
-@providesModule Docs
- */
-var Overviews, Promise, clone, config, fs, marked, request;
-
-fs = require('fs');
-
-config = require('./stateInitializer/initializeStateConfig');
-
-clone = require('lodash.clone');
-
-request = require('request');
-
-Promise = require('bluebird');
-
-marked = require('marked');
-
-Overviews = (function() {
-
-  /**
-   * Convert Overviews object from markdown text
-   * @return {Overviews}
-   */
-  var _getLocalMarkdown, _getTitleData;
-
-  function Overviews() {
-    this.markdown = fs.readFileSync(config.overview.markdown, 'utf8');
-    this.lines = this.markdown.split("\n");
-  }
-
-
-  /**
-   * set external markdown text
-   * @param {Object} overview markdown text
-   */
-
-
-  /**
-   * load markdown from this server
-   */
-
-  _getLocalMarkdown = function() {
-    this.markdown = fs.readFileSync(config.overview.markdown, 'utf8');
-    return this.lines = this.markdown.split("\n");
-  };
-
-  Overviews.prototype.getTitleStructure = function() {
-    var structData;
-    structData = this.lines.map(function(line, i) {
-      return _getTitleData(line, i);
-    }).filter(function(o) {
-      return (!!o.level) && (!!o.title);
-    });
-    return structData;
-  };
-
-  Overviews.prototype.getTitles = function() {
-    return this.getTitleStructure().filter(function(o) {
-      return o.level === 1;
-    }).map(function(o) {
-      return o.title;
-    });
-  };
-
-  Overviews.prototype.getUrls = function() {
-    return this.getTitles().map(function(title) {
-      return title.replace(/^\s+/g, "").replace(/\s+$/g, "").replace(/\s/g, "-").toLowerCase();
-    });
-  };
-
-  _getTitleData = function(line, lineNumber) {
-    var levelRegex, title, titleLevel, titleRegex;
-    titleRegex = /^\s*#+\s*(.+)/g;
-    levelRegex = /^\s*(#+)\s*/g;
-    title = (titleRegex.exec(line) || {
-      1: null
-    })[1];
-    titleLevel = (levelRegex.exec(line) || {
-      1: {
-        length: 0
-      }
-    })[1].length;
-    return {
-      title: title,
-      level: titleLevel,
-      lineNumber: lineNumber
-    };
-  };
-
-  Overviews.prototype.getMarkdownById = function(title_id) {
-    var len, lineNumber, texts, txt;
-    lineNumber = 0;
-    texts = [];
-    len = void 0;
-    while (len !== 0) {
-      txt = this.getMdDataByLineNumber(lineNumber);
-      texts.push(txt);
-      len = txt.split("\n").length - 1;
-      lineNumber += len + 1;
-    }
-    return texts[title_id];
-  };
-
-  Overviews.prototype.getOverviewHtml = function(title_id) {
-    var html, markdown;
-    markdown = this.getMarkdownById(title_id);
-    marked.setOptions({
-      highlight: function(code) {
-        return require('highlight.js').highlightAuto(code).value;
-      }
-    });
-    return html = marked(markdown);
-  };
-
-  Overviews.prototype.getMdDataByLineNumber = function(titleLineNumber) {
-    var endLine, nextLine, resultMd, startLine;
-    startLine = titleLineNumber;
-    nextLine = startLine + 1;
-    while (!(this.lines[nextLine] === void 0 || _getTitleData(this.lines[nextLine], nextLine).level === 1)) {
-      nextLine++;
-    }
-    endLine = nextLine - 1;
-    resultMd = this.lines.filter(function(s, i) {
-      return startLine <= i && i <= endLine;
-    }).join("\n");
-    return resultMd;
-  };
-
-  return Overviews;
-
-})();
-
-module.exports = Overviews;
-
-
-
-},{"./stateInitializer/initializeStateConfig":69,"bluebird":undefined,"fs":undefined,"highlight.js":undefined,"lodash.clone":undefined,"marked":undefined,"request":undefined}],67:[function(require,module,exports){
+},{"../renderer/lib/router":58,"./docs":65,"./examples":66,"./stateInitializer/dir-tree":68,"./stateInitializer/doc-coverage":69,"./stateInitializer/initializeStateConfig":70,"./stateInitializer/read-example":71,"./stateInitializer/routes-gen":72}],68:[function(require,module,exports){
 
 /*
 @providesModule DirTree
@@ -6239,8 +6589,7 @@ DirTree = (function() {
 module.exports = DirTree;
 
 
-
-},{"lodash.merge":undefined,"object-assign":undefined}],68:[function(require,module,exports){
+},{"lodash.merge":undefined,"object-assign":undefined}],69:[function(require,module,exports){
 
 /*
 @providesModule DocCoverage
@@ -6341,8 +6690,7 @@ DocCoverage = (function() {
 module.exports = DocCoverage;
 
 
-
-},{"lodash.merge":undefined,"object-assign":undefined}],69:[function(require,module,exports){
+},{"lodash.merge":undefined,"object-assign":undefined}],70:[function(require,module,exports){
 var fs;
 
 fs = require('fs');
@@ -6357,8 +6705,9 @@ module.exports = {
   typedoc: {
     path_to_json: './src/server/doc.json'
   },
-  overview: {
-    markdown: './src/server/overview.md'
+  example: {
+    markdown: './src/server/examples.md',
+    path_to_json: './src/server/example.json'
   },
   router: {
     root: '/'
@@ -6366,8 +6715,7 @@ module.exports = {
 };
 
 
-
-},{"fs":undefined}],70:[function(require,module,exports){
+},{"fs":undefined}],71:[function(require,module,exports){
 var conf, fs;
 
 fs = require('fs');
@@ -6375,12 +6723,11 @@ fs = require('fs');
 conf = require('./initializeStateConfig');
 
 module.exports = function() {
-  return fs.readFileSync(conf.overview.markdown, 'utf8');
+  return fs.readFileSync(conf.examples.markdown, 'utf8');
 };
 
 
-
-},{"./initializeStateConfig":69,"fs":undefined}],71:[function(require,module,exports){
+},{"./initializeStateConfig":70,"fs":undefined}],72:[function(require,module,exports){
 var RoutesGen, objectAssign;
 
 objectAssign = require('object-assign');
@@ -6392,7 +6739,7 @@ RoutesGen = (function() {
    * @param  {Object} json typedoc json
    * @return {RoutesGen}
    */
-  var constructClassRoutes, constructErrorRoutes, constructIndexRoutes, constructOverviewRoutes;
+  var _recursionSearch, constructClassRoutes, constructErrorRoutes, constructExamplesRoutes, constructIndexRoutes;
 
   function RoutesGen(json) {
     this.routes = {};
@@ -6405,8 +6752,8 @@ RoutesGen = (function() {
    * @return {Object}      routes
    */
 
-  RoutesGen.prototype.gen = function(classJson, overviewTitles) {
-    return this._constructRoutes(classJson, overviewTitles);
+  RoutesGen.prototype.gen = function(classJson, examplesStructure) {
+    return this._constructRoutes(classJson, examplesStructure);
   };
 
 
@@ -6416,11 +6763,11 @@ RoutesGen = (function() {
    * @return {Object}      merged fragment of routes
    */
 
-  RoutesGen.prototype._constructRoutes = function(classJson, overviewTitles) {
+  RoutesGen.prototype._constructRoutes = function(classJson, examplesStructure) {
     this.routes = {};
     this.routes = objectAssign({}, this.routes, constructClassRoutes(classJson));
     this.routes = objectAssign({}, this.routes, constructIndexRoutes());
-    this.routes = objectAssign({}, this.routes, constructOverviewRoutes(overviewTitles));
+    this.routes = objectAssign({}, this.routes, constructExamplesRoutes(examplesStructure));
     return this.routes = objectAssign({}, this.routes, constructErrorRoutes());
   };
 
@@ -6478,17 +6825,29 @@ RoutesGen = (function() {
 
 
   /**
-   * construct overview route
+   * construct examples route
    * @return {Object} fragment of routes
    */
 
-  constructOverviewRoutes = function(titles) {
+  constructExamplesRoutes = function(structure) {
     var routes;
-    routes = {
-      'overview': 'overview'
-    };
-    titles.forEach(function(title, i) {
-      return routes["overview/" + title] = "overview:" + i;
+    routes = structure;
+    routes["example"] = structure[Object.keys(structure)[0]];
+    console.log("example-routes:", routes);
+    return routes;
+  };
+
+  _recursionSearch = function(directory, pwd) {
+    var routes;
+    pwd = pwd || "";
+    routes = {};
+    directory.children.forEach(function(o) {
+      switch (o.type) {
+        case "file":
+          return routes["examples" + pwd + "/" + o.file] = "examples" + (pwd.replace(/\//g, ':')) + ":" + o.file;
+        case "directory":
+          return routes = objectAssign(routes, _recursionSearch(o, pwd + "/" + o.name));
+      }
     });
     return routes;
   };
@@ -6514,6 +6873,7 @@ RoutesGen = (function() {
 module.exports = RoutesGen;
 
 
+},{"object-assign":undefined}]},{},[64])
 
-},{"object-assign":undefined}]},{},[1])
 
+//# sourceMappingURL=app.js.map
