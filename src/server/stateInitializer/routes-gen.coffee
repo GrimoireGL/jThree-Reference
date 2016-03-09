@@ -15,19 +15,19 @@ class RoutesGen
    * @param  {Object} json typedoc json
    * @return {Object}      routes
   ###
-  gen: (classJson, overviewTitles) ->
-    @_constructRoutes classJson, overviewTitles
+  gen: (classJson, examplesStructure) ->
+    @_constructRoutes classJson, examplesStructure
 
   ###*
    * construct routes
    * @param  {Object} json typedoc json
    * @return {Object}      merged fragment of routes
   ###
-  _constructRoutes: (classJson, overviewTitles) ->
+  _constructRoutes: (classJson, examplesStructure) ->
     @routes = {}
     @routes = objectAssign {}, @routes, constructClassRoutes(classJson)
     @routes = objectAssign {}, @routes, constructIndexRoutes()
-    @routes = objectAssign {}, @routes, constructOverviewRoutes(overviewTitles)
+    @routes = objectAssign {}, @routes, constructExamplesRoutes(examplesStructure)
     @routes = objectAssign {}, @routes, constructErrorRoutes()
 
   ###*
@@ -62,15 +62,36 @@ class RoutesGen
     return routes
 
   ###*
-   * construct overview route
+   * construct examples route
    * @return {Object} fragment of routes
   ###
-  constructOverviewRoutes = (titles) ->
-    routes =
-      'overview': 'overview'
-    titles.forEach (title, i) ->
-      routes["overview/#{title}"] = "overview:#{i}"
+  constructExamplesRoutes = (structure) ->
+    routes = structure
+    routes["example"] = structure[Object.keys(structure)[0]]
+    console.log("example-routes:",routes)
     return routes
+
+  _recursionSearch = (directory, pwd) ->
+    pwd = pwd || ""
+    routes = {}
+    directory.children.forEach (o) ->
+      switch o.type
+        when "file"
+          routes["examples#{pwd}/#{o.file}"] = "examples#{pwd.replace /\//g, ':'}:#{o.file}"
+        when "directory"
+          routes = objectAssign(routes, _recursionSearch(o, "#{pwd}/#{o.name}"))
+    routes
+
+    # # todo: 後でリファクタリング
+    # structure.forEach (node, i) ->
+    #   routes["examples/#{node.title}"] = "examples:#{i}"
+    #   if node.children?
+    #     node.children.forEach (node2, j) ->
+    #       routes["examples/#{node.title}/#{node2.title}"] = "examples:#{i}:#{j}"
+    #       if node2.children
+    #         node2.children.forEach (node3, k) ->
+    #           routes["examples/#{node.title}/#{node2.title}/#{node3.title}"] = "examples:#{i}:#{j}:#{k}"
+    # return routes
 
   ###*
    * construct error routes
