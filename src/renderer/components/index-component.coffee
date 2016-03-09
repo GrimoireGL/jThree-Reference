@@ -193,8 +193,8 @@ styles =
 
   logo_area:
     backgroundColor: colors.main.n.default
-    backgroundImage: "url('/static/img/jthreetop3.png')"
-    backgroundSize: '100% auto'
+    backgroundImage: "url('/static/img/jthreetop.png')"
+    backgroundSize: 'auto 100%'
     backgroundPosition: 'center'
     height: 500
     position: 'relative'

@@ -31,7 +31,9 @@ styles =
     {
       textDecoration: "none"
       color: "#000"
-      fontSize: 24
+      fontSize: 17
+      padding: 10
+      borderBottom: "3px solid #ccc"
     },
     {
       textDecoration: "none"
@@ -50,7 +52,8 @@ styles =
       # borderBottom: "1px solid #999"
       marginTop: 15
       marginBottom: 5
-      background: "#f2f2f2"
+      # background: "#f2f2f2"
+      textAlign: "right"
       padding: "10px 15px"
     },
     {
