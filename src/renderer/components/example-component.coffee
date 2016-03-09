@@ -1,48 +1,23 @@
 React = require 'react'
 Radium = require 'radium'
-OverviewMarkupComponent = require './overview-markup-component'
-OverviewSidebarComponent = require './overview-sidebar-component'
+ExampleMarkupComponent = require './example-markup-component'
+ExampleSidebarComponent = require './example-sidebar-component'
 Route = require './route-component'
 Promise = require 'superagent'
 
-class OverviewComponent extends React.Component
+class ExampleComponent extends React.Component
 
   constructor: (props) ->
     super props
 
-  _onChange: ->
-    @setState @store.get()
-
-  componentWillMount: ->
-    @titleId = Number(@props.argu.route_arr[1]) || 0
-    # @context.ctx.overviewAction.updateOverview(titleId)
-    @store = @context.ctx.overviewStore
-    @setState @store.get()
-    @context.ctx.overviewAction.updateOverview(@titleId)
-
-  componentWillReceiveProps: (nextProps) ->
-    nextTitleId = Number(nextProps.argu.route_arr[1]) || 0
-    if @titleId != nextTitleId
-      @titleId = nextTitleId
-      @context.ctx.overviewAction.updateOverview(@titleId)
-
-
-  componentDidMount: ->
-    @store.onChange @_onChange.bind(@)
-
-  componentWillUnmount: ->
-    @store.removeChangeListener(@_onChange.bind(@))
-
   render: ->
     <div style={Array.prototype.concat.apply([], [styles.base, @props.style])}>
       <div style={styles.sidebar}>
-        <Route>
-          <OverviewSidebarComponent structure={@state.structure} />
-        </Route>
+        <ExampleSidebarComponent />
       </div>
       <div style={styles.contents}>
         <Route>
-          <OverviewMarkupComponent markup={@state.markup} />
+          <ExampleMarkupComponent />
         </Route>
       </div>
     </div>
@@ -83,7 +58,7 @@ styles =
     marginLeft: 360
 
 
-OverviewComponent.contextTypes =
+ExampleComponent.contextTypes =
   ctx: React.PropTypes.any
 
-module.exports = Radium OverviewComponent
+module.exports = Radium ExampleComponent

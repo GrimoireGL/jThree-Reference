@@ -4,7 +4,7 @@ marked = require 'marked'
 
 $ = React.createElement
 
-class OverviewMarkdownComponent extends React.Component
+class ExampleMarkdownComponent extends React.Component
 
   constructor: (props) ->
     super props
@@ -35,7 +35,7 @@ styles =
 #     marginRight: 120
 
 
-OverviewMarkdownComponent.contextTypes =
+ExampleMarkdownComponent.contextTypes =
   ctx: React.PropTypes.any
 
-module.exports = Radium OverviewMarkdownComponent
+module.exports = Radium ExampleMarkdownComponent

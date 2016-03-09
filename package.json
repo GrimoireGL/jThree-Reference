@@ -6,6 +6,7 @@
   "dependencies": {
     "bluebird": "^3.1.5",
     "express": "^4.13.4",
+    "co": "^4.6.0",
     "handlebars": "^4.0.5",
     "highlight.js": "^9.1.0",
     "history.js": "^1.8.0",

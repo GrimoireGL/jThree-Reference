@@ -2,31 +2,27 @@ React = require 'react'
 Radium = require 'radium'
 Link = require './link-component'
 
-class OverviewSidebarTitleComponent extends React.Component
+class ExampleSidebarTitleComponent extends React.Component
 
   constructor: (props) ->
     super props
 
-  titleToUrl: (title) ->
-    title
-      .replace /^\s+/g, ""
-      .replace /\s+$/g, ""
-      .replace /\s/g, "-"
-      .toLowerCase()
-
   render: ->
     <div style={[].concat([], styles.titleBox[@props.level-1], @props.style)}>
       {
-        url = "/overview/#{@titleToUrl(@props.root)}"
-        if @props.level == 1
-          # if @props.argu.fragment.match "#"
-          #   url += "#"
-        else
-          url += "#" + @titleToUrl(@props.children)
-        <a style={styles.titleText[@props.level-1]} href={url}>
+        <Link style={styles.titleText[@props.level-1]} href={@props.url}>
           {@props.children}
-        </a>
-
+        </Link>
+        #   url = "/example/#{@titleToUrl(@props.itemTitle)}"
+        #   if @props.level == 1
+        #     # if @props.argu.fragment.match "#"
+        #     #   url += "#"
+        #   else
+        #     url += "/" + @titleToUrl(@props.children)
+        #   <Link style={styles.titleText[@props.level-1]} href={url}>
+        #     {@props.children}
+        #   </Link>
+        #
       }
     </div>
 
@@ -35,7 +31,9 @@ styles =
     {
       textDecoration: "none"
       color: "#000"
-      fontSize: 24
+      fontSize: 17
+      padding: 10
+      borderBottom: "3px solid #ccc"
     },
     {
       textDecoration: "none"
@@ -54,7 +52,8 @@ styles =
       # borderBottom: "1px solid #999"
       marginTop: 15
       marginBottom: 5
-      background: "#f2f2f2"
+      # background: "#f2f2f2"
+      textAlign: "right"
       padding: "10px 15px"
     },
     {
@@ -67,7 +66,7 @@ styles =
     }
   ]
 
-OverviewSidebarTitleComponent.contextTypes =
+ExampleSidebarTitleComponent.contextTypes =
   ctx: React.PropTypes.any
 
-module.exports = Radium OverviewSidebarTitleComponent
+module.exports = Radium ExampleSidebarTitleComponent

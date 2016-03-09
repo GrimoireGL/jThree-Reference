@@ -4,8 +4,8 @@ DirTree = require './stateInitializer/dir-tree'
 DocCoverage = require './stateInitializer/doc-coverage'
 Docs = require './docs'
 Router = require '../renderer/lib/router'
-readOverview = require './stateInitializer/read-overview'
-Overviews = require './overviews'
+readExample = require './stateInitializer/read-example'
+Examples = require './examples'
 
 class InitializeState
   ###*
@@ -18,13 +18,14 @@ class InitializeState
     @dirTree = new DirTree()
     @doc_coverage = new DocCoverage()
     @router = new Router(config.router.root, @routeGen.routes)
-    @overviews = new Overviews()
+    @examples = new Examples()
 
   ###*
    * resetup state initializer
   ###
   gen: ->
-    @routeGen.gen @docs.json, @overviews.getUrls()
+    # console.log @examples.getTitleArray()
+    @routeGen.gen @docs.json, @examples.routes
     @dirTree.gen @docs.json
     @doc_coverage.gen @docs.json
     @router.setRoute @routeGen.routes
@@ -36,7 +37,8 @@ class InitializeState
   ###
   initialize: (req) ->
     initial_doc_data = {}
-    initial_overview_markup = ""
+    initial_example_markup = ""
+    initial_example_structure = []
     @router.route req.originalUrl, (route, argu) =>
       # console.log argu.route_arr
       switch argu.route_arr[0]
@@ -45,9 +47,10 @@ class InitializeState
           factor_id = argu.route_arr[3]?.toString()
           if file_id? && factor_id?
             initial_doc_data = @docs.getDocDataById file_id, factor_id
-        when "overview"
+        when "example"
           title_id = argu.route_arr[1] || 0
-          initial_overview_markup = @overviews.getOverviewHtml(title_id)
+          initial_example_markup = {}
+          initial_example_structure = @examples.structure
 
 
     initialState =
@@ -58,9 +61,9 @@ class InitializeState
       DocStore:
         dir_tree: @dirTree.dir_tree
         doc_data: initial_doc_data
-      OverviewStore:
-        markup: initial_overview_markup
-        structure: @overviews.getTitleStructure()
+      ExampleStore:
+        markup: initial_example_markup
+        structure: initial_example_structure
       DocCoverageStore:
         coverage: @doc_coverage.coverage
 
