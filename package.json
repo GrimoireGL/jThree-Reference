@@ -5,8 +5,8 @@
   "main": "app.js",
   "dependencies": {
     "bluebird": "^3.1.5",
-    "express": "^4.13.4",
     "co": "^4.6.0",
+    "express": "^4.13.4",
     "handlebars": "^4.0.5",
     "highlight.js": "^9.1.0",
     "history.js": "^1.8.0",
@@ -18,7 +18,7 @@
     "material-flux": "^1.4.0",
     "md2react": "^0.8.8",
     "object-assign": "^4.0.1",
-    "radium": "pnlybubbles/radium#64300db7f744eeb7c0b7cacf67eddf3a4bb6735e",
+    "radium": "^0.16.6",
     "react": "^0.14.7",
     "request": "^2.69.0",
     "serve-favicon": "^2.3.0",
@@ -60,7 +60,7 @@
   },
   "author": "pnlybubbles",
   "license": "MIT",
-  "engines":{
-    "node":"^4.4.0"
+  "engines": {
+    "node": "^4.4.0"
   }
 }
