@@ -77,7 +77,7 @@ class IndexComponent extends React.Component
           <Li>Provide a good learning resource for the beginners to know how programming is awesome via this library.</Li>
           <Li>Sharing features that will be achieved easily by this library implemented with javascript.</Li>
           <Li>Redefine legacies of 3DCG technologies on the Internet.</Li>
-          <Li>Have Enjoyable contributions ❤️</Li>
+          <Li>Have Enjoyable contributions</Li>
         </Ul>
         <H3><A id="Dependencies_14"></A>Dependencies</H3>
         <P>This library depends on the following libraries. We appreciate these contributors below</P>
@@ -98,7 +98,8 @@ class IndexComponent extends React.Component
           </Tbody>
         </Table>
         <H2><A id="Contributions_23"></A>Contributions</H2>
-        <P>Thank you for your interest in contributions!  ❤️</P>
+        <P>Thank you for your interest in contributions!</P>
+        <A href="https://jthree-slackin.herokuapp.com/"><img src="/static/img/jthree-slack.png"/></A>
         <H3><A id="Installation_to_build_28"></A>Installation to build</H3>
         <P>You need the applications below.</P>
         <Ul>

@@ -3825,7 +3825,7 @@ IndexComponent = (function(superClass) {
       "id": "What_is_jThree_0"
     }), "What is jThree?"), React.createElement(P, null, "jThree is an innovative 3D graphics engine. It may seem to be just a javascript library.\nHowever, jThree will enable browser to use most of the feature as other game engines do in local environment, plugins features,hierarchies,templates,modUle systems."), React.createElement(H3, null, React.createElement(A, {
       "id": "Purposes_6"
-    }), "Purposes"), React.createElement(Ul, null, React.createElement(Li, null, "Provide a good learning resource for the beginners to know how programming is awesome via this library."), React.createElement(Li, null, "Sharing features that will be achieved easily by this library implemented with javascript."), React.createElement(Li, null, "Redefine legacies of 3DCG technologies on the Internet."), React.createElement(Li, null, "Have Enjoyable contributions ❤️")), React.createElement(H3, null, React.createElement(A, {
+    }), "Purposes"), React.createElement(Ul, null, React.createElement(Li, null, "Provide a good learning resource for the beginners to know how programming is awesome via this library."), React.createElement(Li, null, "Sharing features that will be achieved easily by this library implemented with javascript."), React.createElement(Li, null, "Redefine legacies of 3DCG technologies on the Internet."), React.createElement(Li, null, "Have Enjoyable contributions")), React.createElement(H3, null, React.createElement(A, {
       "id": "Dependencies_14"
     }), "Dependencies"), React.createElement(P, null, "This library depends on the following libraries. We appreciate these contributors below"), React.createElement(Table, null, React.createElement(Thead, null, React.createElement(Tr, null, React.createElement(Th, {
       "style": {
@@ -3843,7 +3843,11 @@ IndexComponent = (function(superClass) {
       "href": "https://github.com/toji/gl-matrix"
     }, "https:\x2F\x2Fgithub.com\x2Ftoji\x2Fgl-matrix"))))), React.createElement(H2, null, React.createElement(A, {
       "id": "Contributions_23"
-    }), "Contributions"), React.createElement(P, null, "Thank you for your interest in contributions!  ❤️"), React.createElement(H3, null, React.createElement(A, {
+    }), "Contributions"), React.createElement(P, null, "Thank you for your interest in contributions!"), React.createElement(A, {
+      "href": "https://jthree-slackin.herokuapp.com/"
+    }, React.createElement("img", {
+      "src": "/static/img/jthree-slack.png"
+    })), React.createElement(H3, null, React.createElement(A, {
       "id": "Installation_to_build_28"
     }), "Installation to build"), React.createElement(P, null, "You need the applications below."), React.createElement(Ul, null, React.createElement(Li, null, "node.js"), React.createElement(Li, null, "npm")), React.createElement(P, null, "You need ", React.createElement(Strong, null, "not"), " to install any packages in global."), React.createElement(P, null, "You need to run the command below to install npm packages,bower packages,and so on in local environment."), React.createElement(Pre, null, React.createElement(Code, {
       "class": "language-shell"
