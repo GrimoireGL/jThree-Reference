@@ -39,11 +39,11 @@ server.get '/api/class/global/:file_id/:factor_id', (req, res) ->
 
 server.get '/api/example/:path', (req, res) ->
   console.log "server: ", req.originalUrl
-  pathAry = req.params.path.split("?")
+  pathAry = req.params.path.split(":::")
   if pathAry[0] != "root"
     res.status(404).send()
   else
-    path = pathAry[1..].join("?")
+    path = pathAry[1..].join(":::")
     res.json
       markup: examples.getMarkupByPath path #examples.getExampleHtml(req.params.path)
       structure: examples.structure # TODO sato: thiw will be separated..

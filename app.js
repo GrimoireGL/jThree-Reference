@@ -120,10 +120,10 @@ ExampleAction = (function(superClass) {
    */
 
   ExampleAction.prototype.updateExample = function(path) {
-    path = path.split("/").join("?");
+    path = path.split("/").join(":::");
     return new Promise((function(_this) {
       return function(resolve, reject) {
-        return request.get("/api/example/root?" + path).end(function(err, res) {
+        return request.get("/api/example/root:::" + path).end(function(err, res) {
           return resolve(res.body);
         });
       };
@@ -5808,7 +5808,7 @@ ExampleStore = (function(superClass) {
     state = {
       markup: {}
     };
-    state.markup[path.replace(/\?/g, "/")] = data.markup;
+    state.markup[path.replace(/:::/g, "/")] = data.markup;
     state.structure = data.structure;
     console.log(state);
     return this.setState(objectAssign(this.state, state));
@@ -6009,11 +6009,11 @@ server.get('/api/class/global/:file_id/:factor_id', function(req, res) {
 server.get('/api/example/:path', function(req, res) {
   var path, pathAry;
   console.log("server: ", req.originalUrl);
-  pathAry = req.params.path.split("?");
+  pathAry = req.params.path.split(":::");
   if (pathAry[0] !== "root") {
     return res.status(404).send();
   } else {
-    path = pathAry.slice(1).join("?");
+    path = pathAry.slice(1).join(":::");
     return res.json({
       markup: examples.getMarkupByPath(path),
       structure: examples.structure
@@ -6317,7 +6317,7 @@ Examples = (function() {
 
   Examples.prototype.getMarkupByPath = function(path) {
     var pathAry;
-    pathAry = path.split("?");
+    pathAry = path.split(":::");
     return this.md2Html(this.findMarkdown(this.json, pathAry));
   };
 
@@ -6829,6 +6829,7 @@ RoutesGen = (function() {
     var routes;
     routes = structure;
     routes["example"] = structure[Object.keys(structure)[0]];
+    console.log("example-routes:", routes);
     return routes;
   };
 

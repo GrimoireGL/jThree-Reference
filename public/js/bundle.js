@@ -41557,10 +41557,10 @@ ExampleAction = (function(superClass) {
    */
 
   ExampleAction.prototype.updateExample = function(path) {
-    path = path.split("/").join("?");
+    path = path.split("/").join(":::");
     return new Promise((function(_this) {
       return function(resolve, reject) {
-        return request.get("/api/example/root?" + path).end(function(err, res) {
+        return request.get("/api/example/root:::" + path).end(function(err, res) {
           return resolve(res.body);
         });
       };
@@ -47245,7 +47245,7 @@ ExampleStore = (function(superClass) {
     state = {
       markup: {}
     };
-    state.markup[path.replace(/\?/g, "/")] = data.markup;
+    state.markup[path.replace(/:::/g, "/")] = data.markup;
     state.structure = data.structure;
     console.log(state);
     return this.setState(objectAssign(this.state, state));

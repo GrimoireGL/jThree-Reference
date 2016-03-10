@@ -68,7 +68,7 @@ class RoutesGen
   constructExamplesRoutes = (structure) ->
     routes = structure
     routes["example"] = structure[Object.keys(structure)[0]]
-    # console.log("example-routes:",routes)
+    console.log("example-routes:",routes)
     return routes
 
   _recursionSearch = (directory, pwd) ->
