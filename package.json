@@ -50,7 +50,7 @@
     "watchify": "^3.7.0"
   },
   "scripts": {
-    "start": "foreman start",
+    "start": "node app.js",
     "debug": "node debug app.js",
     "build": "./node_modules/.bin/gulp --require coffee-script/register build",
     "build-dev": "./node_modules/.bin/gulp --require coffee-script/register build-dev",
