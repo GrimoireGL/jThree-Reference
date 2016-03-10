@@ -61,6 +61,6 @@
   "author": "pnlybubbles",
   "license": "MIT",
   "engines":{
-    "node":"^4.4.0"
+    "node":"^4.3.2"
   }
 }
