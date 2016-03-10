@@ -63,8 +63,8 @@ class Examples
     routesAry
 
   getMarkupByPath: (path) ->
-    # path is splitted by :::
-    pathAry = path.split ":::"
+    # path is splitted by aaaa
+    pathAry = path.split "aaaa"
     # console.log @md2Html @findMarkdown(@json, pathAry)
     return @md2Html @findMarkdown(@json, pathAry)
 

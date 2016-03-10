@@ -47245,7 +47245,7 @@ ExampleStore = (function(superClass) {
     state = {
       markup: {}
     };
-    state.markup[path.replace(/:::/g, "/")] = data.markup;
+    state.markup[path.replace(/aaaa/g, "/")] = data.markup;
     state.structure = data.structure;
     console.log(state);
     return this.setState(objectAssign(this.state, state));
