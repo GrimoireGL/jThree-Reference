@@ -120,10 +120,10 @@ ExampleAction = (function(superClass) {
    */
 
   ExampleAction.prototype.updateExample = function(path) {
-    path = path.split("/").join(":::");
+    path = path.split("/").join("aaaa");
     return new Promise((function(_this) {
       return function(resolve, reject) {
-        return request.get("/api/example/root:::" + path).end(function(err, res) {
+        return request.get("/api/example/rootaaaa" + path).end(function(err, res) {
           return resolve(res.body);
         });
       };
