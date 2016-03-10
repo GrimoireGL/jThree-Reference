@@ -41,6 +41,7 @@ class ExampleMarkupComponent extends React.Component
             if !@loadingQueue.some((p) -> p == path)
               @loadingQueue.push path
               # console.log "path:", path
+              
               @context.ctx.exampleAction.updateExample "#{path}"
           <span>loading...</span>
       }

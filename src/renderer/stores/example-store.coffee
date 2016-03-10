@@ -23,7 +23,7 @@ class ExampleStore extends Flux.Store
   ###
   updateExample: (path, data) ->
     state = markup:{}
-    state.markup[path.replace(/:::/g, "/")] = data.markup
+    state.markup[path.replace(/\?/g, "/")] = data.markup
     state.structure = data.structure
     console.log state
     @setState objectAssign(@state, state)
