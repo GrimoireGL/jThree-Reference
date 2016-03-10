@@ -58,7 +58,7 @@ DocAction = (function(superClass) {
 module.exports = DocAction;
 
 
-},{"../keys":57,"bluebird":undefined,"material-flux":undefined,"superagent":undefined}],2:[function(require,module,exports){
+},{"../keys":58,"bluebird":undefined,"material-flux":undefined,"superagent":undefined}],2:[function(require,module,exports){
 var DocAction, Flux, keys,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -87,7 +87,7 @@ DocAction = (function(superClass) {
 module.exports = DocAction;
 
 
-},{"../keys":57,"material-flux":undefined}],3:[function(require,module,exports){
+},{"../keys":58,"material-flux":undefined}],3:[function(require,module,exports){
 var ExampleAction, Flux, Promise, keys, request,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -143,7 +143,7 @@ ExampleAction = (function(superClass) {
 module.exports = ExampleAction;
 
 
-},{"../keys":57,"bluebird":undefined,"material-flux":undefined,"superagent":undefined}],4:[function(require,module,exports){
+},{"../keys":58,"bluebird":undefined,"material-flux":undefined,"superagent":undefined}],4:[function(require,module,exports){
 var Flux, History, RouteAction, keys,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -226,7 +226,7 @@ RouteAction = (function(superClass) {
 module.exports = RouteAction;
 
 
-},{"../keys":57,"html5-history":undefined,"material-flux":undefined}],5:[function(require,module,exports){
+},{"../keys":58,"html5-history":undefined,"material-flux":undefined}],5:[function(require,module,exports){
 var Flux, ToggleVisibilityAction, keys,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -253,7 +253,7 @@ ToggleVisibilityAction = (function(superClass) {
 module.exports = ToggleVisibilityAction;
 
 
-},{"../keys":57,"material-flux":undefined}],6:[function(require,module,exports){
+},{"../keys":58,"material-flux":undefined}],6:[function(require,module,exports){
 var AppComponent, ClassDocComponent, ErrorComponent, ExampleComponent, HeaderComponent, IndexComponent, Link, Radium, React, Route, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -367,7 +367,7 @@ AppComponent.contextTypes = {
 module.exports = Radium(AppComponent);
 
 
-},{"./classdoc-component":8,"./error-component":35,"./example-component":36,"./header-component":41,"./index-component":42,"./link-component":44,"./route-component":50,"radium":undefined,"react":undefined}],7:[function(require,module,exports){
+},{"./classdoc-component":8,"./error-component":35,"./example-component":36,"./header-component":41,"./index-component":42,"./link-component":44,"./route-component":51,"radium":undefined,"react":undefined}],7:[function(require,module,exports){
 var CharIconComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -551,7 +551,7 @@ ClassDocComponent.contextTypes = {
 module.exports = Radium(ClassDocComponent);
 
 
-},{"./doc-container-component":11,"./doc-detail-container-component":14,"./doc-slide-wrapper-component":30,"./list-component":45,"./route-component":50,"radium":undefined,"react":undefined}],9:[function(require,module,exports){
+},{"./doc-container-component":11,"./doc-detail-container-component":14,"./doc-slide-wrapper-component":30,"./list-component":45,"./route-component":51,"radium":undefined,"react":undefined}],9:[function(require,module,exports){
 
 /**
  * Color definition for components styles
@@ -780,7 +780,7 @@ DocContainerComponent.contextTypes = {
 module.exports = Radium(DocContainerComponent);
 
 
-},{"./doc-coverage-component":12,"./doc-description-component":13,"./doc-factor-hierarchy-component":21,"./doc-factor-implements-component":22,"./doc-factor-item-component":23,"./doc-factor-title-component":25,"./doc-search-container-component":29,"./doc-typeparameter-component":34,"./link-component":44,"./route-component":50,"radium":undefined,"react":undefined}],12:[function(require,module,exports){
+},{"./doc-coverage-component":12,"./doc-description-component":13,"./doc-factor-hierarchy-component":21,"./doc-factor-implements-component":22,"./doc-factor-item-component":23,"./doc-factor-title-component":25,"./doc-search-container-component":29,"./doc-typeparameter-component":34,"./link-component":44,"./route-component":51,"radium":undefined,"react":undefined}],12:[function(require,module,exports){
 var DocCoverageComponent, Link, ProgressbarComponent, Radium, React, Route, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -842,7 +842,7 @@ DocCoverageComponent.contextTypes = {
 module.exports = Radium(DocCoverageComponent);
 
 
-},{"./link-component":44,"./progressbar-component":48,"./route-component":50,"radium":undefined,"react":undefined}],13:[function(require,module,exports){
+},{"./link-component":44,"./progressbar-component":49,"./route-component":51,"radium":undefined,"react":undefined}],13:[function(require,module,exports){
 var DocDescriptionComponent, DocItemComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1155,7 +1155,7 @@ DocDetailParameterTableComponent.contextTypes = {
 module.exports = Radium(DocDetailParameterTableComponent);
 
 
-},{"./colors/color-definition":9,"./doc-table-component":31,"./link-component":44,"./signatures/doc-signatures-type-component":54,"radium":undefined,"react":undefined}],17:[function(require,module,exports){
+},{"./colors/color-definition":9,"./doc-table-component":31,"./link-component":44,"./signatures/doc-signatures-type-component":55,"radium":undefined,"react":undefined}],17:[function(require,module,exports){
 var DocDetailReturnComponent, DocDetailReturnTableComponent, DocItemComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1284,7 +1284,7 @@ DocDetailReturnTableComponent.contextTypes = {
 module.exports = Radium(DocDetailReturnTableComponent);
 
 
-},{"./colors/color-definition":9,"./doc-table-component":31,"./link-component":44,"./signatures/doc-signatures-type-component":54,"radium":undefined,"react":undefined}],19:[function(require,module,exports){
+},{"./colors/color-definition":9,"./doc-table-component":31,"./link-component":44,"./signatures/doc-signatures-type-component":55,"radium":undefined,"react":undefined}],19:[function(require,module,exports){
 var DocDetailSignaturesComponent, DocSignaturesComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1386,7 +1386,7 @@ DocDetailSignaturesComponent.contextTypes = {
 module.exports = Radium(DocDetailSignaturesComponent);
 
 
-},{"./colors/color-definition":9,"./signatures/doc-signatures-component":51,"radium":undefined,"react":undefined}],20:[function(require,module,exports){
+},{"./colors/color-definition":9,"./signatures/doc-signatures-component":52,"radium":undefined,"react":undefined}],20:[function(require,module,exports){
 var DocDetailSignaturesComponent, DocDetailTitleComponent, DocFlagtagsComponent, DocTitleComponent, Link, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1622,7 +1622,7 @@ DocTypeparameterComponent.contextTypes = {
 module.exports = Radium(DocTypeparameterComponent);
 
 
-},{"./colors/color-definition":9,"./doc-detail-parameters-table-component":16,"./doc-item-component":28,"./signatures/doc-signatures-type-component":54,"radium":undefined,"react":undefined}],22:[function(require,module,exports){
+},{"./colors/color-definition":9,"./doc-detail-parameters-table-component":16,"./doc-item-component":28,"./signatures/doc-signatures-type-component":55,"radium":undefined,"react":undefined}],22:[function(require,module,exports){
 var DocFactorImplementsComponent, DocItemComponent, DocSignaturesTypeComponent, DocTableComponent, Radium, React, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1702,7 +1702,7 @@ DocFactorImplementsComponent.contextTypes = {
 module.exports = Radium(DocFactorImplementsComponent);
 
 
-},{"./colors/color-definition":9,"./doc-item-component":28,"./doc-table-component":31,"./signatures/doc-signatures-type-component":54,"radium":undefined,"react":undefined}],23:[function(require,module,exports){
+},{"./colors/color-definition":9,"./doc-item-component":28,"./doc-table-component":31,"./signatures/doc-signatures-type-component":55,"radium":undefined,"react":undefined}],23:[function(require,module,exports){
 var DocFactorItemComponent, DocFactorTableComponent, DocItemComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -3296,8 +3296,8 @@ ExampleComponent.contextTypes = {
 module.exports = Radium(ExampleComponent);
 
 
-},{"./example-markup-component":37,"./example-sidebar-component":38,"./route-component":50,"radium":undefined,"react":undefined,"superagent":undefined}],37:[function(require,module,exports){
-var ExampleMarkupComponent, Radium, React, Route, marked, styles,
+},{"./example-markup-component":37,"./example-sidebar-component":38,"./route-component":51,"radium":undefined,"react":undefined,"superagent":undefined}],37:[function(require,module,exports){
+var ExampleMarkupComponent, Loading, Radium, React, Route, marked, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -3306,6 +3306,8 @@ React = require('react');
 Radium = require('radium');
 
 marked = require('marked');
+
+Loading = require('./loading-component');
 
 Route = require('./route-component');
 
@@ -3373,7 +3375,10 @@ ExampleMarkupComponent = (function(superClass) {
             this.context.ctx.exampleAction.updateExample("" + path);
           }
         }
-        return React.createElement("span", null, "loading...");
+        return React.createElement(Loading, {
+          "width": "300",
+          "height": "300"
+        });
       }
     }).call(this)));
   };
@@ -3393,7 +3398,7 @@ ExampleMarkupComponent.contextTypes = {
 module.exports = Radium(ExampleMarkupComponent);
 
 
-},{"./route-component":50,"marked":undefined,"radium":undefined,"react":undefined}],38:[function(require,module,exports){
+},{"./loading-component":48,"./route-component":51,"marked":undefined,"radium":undefined,"react":undefined}],38:[function(require,module,exports){
 var ExampleSidebarComponent, ExampleSidebarItemComponent, ExampleSidebarTitleComponent, Radium, React, Route, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -3460,7 +3465,7 @@ ExampleSidebarComponent.contextTypes = {
 module.exports = Radium(ExampleSidebarComponent);
 
 
-},{"./example-sidebar-item-component":39,"./example-sidebar-title-component":40,"./route-component":50,"radium":undefined,"react":undefined}],39:[function(require,module,exports){
+},{"./example-sidebar-item-component":39,"./example-sidebar-title-component":40,"./route-component":51,"radium":undefined,"react":undefined}],39:[function(require,module,exports){
 var ExampleSidebarItemComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -3723,8 +3728,8 @@ HeaderComponent.contextTypes = {
 module.exports = Radium(HeaderComponent);
 
 
-},{"./colors/color-definition":9,"./link-component":44,"./route-component":50,"radium":undefined,"react":undefined}],42:[function(require,module,exports){
-var A, Code, Div, H2, H3, IndexComponent, Li, Link, P, Pre, Radium, React, Span, Strong, Table, Tbody, Td, Th, Thead, Tr, Ul, colors, ref, styles,
+},{"./colors/color-definition":9,"./link-component":44,"./route-component":51,"radium":undefined,"react":undefined}],42:[function(require,module,exports){
+var A, Code, Div, H2, H3, IndexComponent, Li, Link, Loading, P, Pre, Radium, React, Span, Strong, Table, Tbody, Td, Th, Thead, Tr, Ul, colors, ref, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -3737,6 +3742,8 @@ colors = require('./colors/color-definition');
 Link = require('./link-component');
 
 ref = require('./index-extend-components'), A = ref.A, H2 = ref.H2, P = ref.P, H3 = ref.H3, Li = ref.Li, Ul = ref.Ul, Th = ref.Th, Tr = ref.Tr, Thead = ref.Thead, Td = ref.Td, Tbody = ref.Tbody, Table = ref.Table, Strong = ref.Strong, Span = ref.Span, Code = ref.Code, Pre = ref.Pre, Div = ref.Div;
+
+Loading = require('./loading-component');
 
 IndexComponent = (function(superClass) {
   extend(IndexComponent, superClass);
@@ -3998,7 +4005,7 @@ IndexComponent.contextTypes = {
 module.exports = Radium(IndexComponent);
 
 
-},{"./colors/color-definition":9,"./index-extend-components":43,"./link-component":44,"radium":undefined,"react":undefined}],43:[function(require,module,exports){
+},{"./colors/color-definition":9,"./index-extend-components":43,"./link-component":44,"./loading-component":48,"radium":undefined,"react":undefined}],43:[function(require,module,exports){
 var $, A, Code, Div, H2, H3, Li, P, Pre, Radium, React, Span, Strong, Table, Tbody, Td, Th, Thead, Tr, Ul, colors, componentAry, components, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4808,6 +4815,45 @@ module.exports = Radium(ListItemComponent);
 
 
 },{"./colors/color-definition":9,"radium":undefined,"react":undefined}],48:[function(require,module,exports){
+var ExampleSidebarItemComponent, Radium, React,
+  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+React = require('react');
+
+Radium = require('radium');
+
+ExampleSidebarItemComponent = (function(superClass) {
+  extend(ExampleSidebarItemComponent, superClass);
+
+  function ExampleSidebarItemComponent(props) {
+    ExampleSidebarItemComponent.__super__.constructor.call(this, props);
+  }
+
+  ExampleSidebarItemComponent.prototype.render = function() {
+    var height, ref, ref1, width;
+    width = ((ref = this.props) != null ? ref.width : void 0) || 256;
+    height = ((ref1 = this.props) != null ? ref1.height : void 0) || 256;
+    return React.createElement("div", null, React.createElement("object", {
+      "type": "image/svg+xml",
+      "data": "/static/img/loading.svg",
+      "width": width,
+      "height": height
+    }));
+  };
+
+  return ExampleSidebarItemComponent;
+
+})(React.Component);
+
+ExampleSidebarItemComponent.contextTypes = {
+  ctx: React.PropTypes.any
+};
+
+module.exports = Radium(ExampleSidebarItemComponent);
+
+
+},{"radium":undefined,"react":undefined}],49:[function(require,module,exports){
 var Link, ProgressbarComponent, Radium, React, Route, colors, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4891,7 +4937,7 @@ ProgressbarComponent.contextTypes = {
 module.exports = Radium(ProgressbarComponent);
 
 
-},{"./colors/color-definition":9,"./link-component":44,"./route-component":50,"radium":undefined,"react":undefined}],49:[function(require,module,exports){
+},{"./colors/color-definition":9,"./link-component":44,"./route-component":51,"radium":undefined,"react":undefined}],50:[function(require,module,exports){
 var App, React, RootComponent,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4928,7 +4974,7 @@ RootComponent.childContextTypes = {
 module.exports = RootComponent;
 
 
-},{"./app-component":6,"react":undefined}],50:[function(require,module,exports){
+},{"./app-component":6,"react":undefined}],51:[function(require,module,exports){
 var Radium, React, RouteComponent, Router,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5100,7 +5146,7 @@ RouteComponent.contextTypes = {
 module.exports = Radium(RouteComponent);
 
 
-},{"../lib/router":58,"radium":undefined,"react":undefined}],51:[function(require,module,exports){
+},{"../lib/router":59,"radium":undefined,"react":undefined}],52:[function(require,module,exports){
 var DocSignaturesComponent, DocSignaturesNameComponent, DocSignaturesParametersComponent, DocSignaturesTypeComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5164,7 +5210,7 @@ DocSignaturesComponent.contextTypes = {
 module.exports = Radium(DocSignaturesComponent);
 
 
-},{"./doc-signatures-name-component":52,"./doc-signatures-parameters-component":53,"./doc-signatures-type-component":54,"radium":undefined,"react":undefined}],52:[function(require,module,exports){
+},{"./doc-signatures-name-component":53,"./doc-signatures-parameters-component":54,"./doc-signatures-type-component":55,"radium":undefined,"react":undefined}],53:[function(require,module,exports){
 var DocSignaturesNameComponent, DocSignaturesTypeargumentsComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5216,7 +5262,7 @@ DocSignaturesNameComponent.contextTypes = {
 module.exports = Radium(DocSignaturesNameComponent);
 
 
-},{"./doc-signatures-typearguments-component":55,"radium":undefined,"react":undefined}],53:[function(require,module,exports){
+},{"./doc-signatures-typearguments-component":56,"radium":undefined,"react":undefined}],54:[function(require,module,exports){
 var DocSignaturesNameComponent, DocSignaturesParametersComponent, DocSignaturesTypeComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5282,7 +5328,7 @@ DocSignaturesParametersComponent.contextTypes = {
 module.exports = Radium(DocSignaturesParametersComponent);
 
 
-},{"./doc-signatures-name-component":52,"./doc-signatures-type-component":54,"radium":undefined,"react":undefined}],54:[function(require,module,exports){
+},{"./doc-signatures-name-component":53,"./doc-signatures-type-component":55,"radium":undefined,"react":undefined}],55:[function(require,module,exports){
 var DocSignaturesTypeComponent, DocSignaturesTypeargumentsComponent, Link, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5353,7 +5399,7 @@ DocSignaturesTypeComponent.contextTypes = {
 module.exports = Radium(DocSignaturesTypeComponent);
 
 
-},{"../link-component":44,"./doc-signatures-typearguments-component":55,"radium":undefined,"react":undefined}],55:[function(require,module,exports){
+},{"../link-component":44,"./doc-signatures-typearguments-component":56,"radium":undefined,"react":undefined}],56:[function(require,module,exports){
 var DocSignaturesTypeargumentsComponent, Radium, React, styles,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5412,7 +5458,7 @@ DocSignaturesTypeargumentsComponent.contextTypes = {
 module.exports = Radium(DocSignaturesTypeargumentsComponent);
 
 
-},{"radium":undefined,"react":undefined}],56:[function(require,module,exports){
+},{"radium":undefined,"react":undefined}],57:[function(require,module,exports){
 var Context, DocAction, DocCoverageAction, DocCoverageStore, DocStore, ExampleAction, ExampleStore, Flux, RouteAction, RouteStore, ToggleVisibilityAction, ToggleVisibilityStore,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5471,7 +5517,7 @@ Context = (function(superClass) {
 module.exports = Context;
 
 
-},{"./actions/doc-action":1,"./actions/doc-coverage-action":2,"./actions/example-action":3,"./actions/route-action":4,"./actions/toggle-visibility-action":5,"./stores/doc-coverage-store":59,"./stores/doc-store":60,"./stores/example-store":61,"./stores/route-store":62,"./stores/toggle-visibility-store":63,"material-flux":undefined}],57:[function(require,module,exports){
+},{"./actions/doc-action":1,"./actions/doc-coverage-action":2,"./actions/example-action":3,"./actions/route-action":4,"./actions/toggle-visibility-action":5,"./stores/doc-coverage-store":60,"./stores/doc-store":61,"./stores/example-store":62,"./stores/route-store":63,"./stores/toggle-visibility-store":64,"material-flux":undefined}],58:[function(require,module,exports){
 
 /**
  * keys linked to actions
@@ -5485,7 +5531,7 @@ module.exports = {
 };
 
 
-},{}],58:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 var Router, objectAssign;
 
 objectAssign = require('object-assign');
@@ -5657,7 +5703,7 @@ Router = (function() {
 module.exports = Router;
 
 
-},{"object-assign":undefined}],59:[function(require,module,exports){
+},{"object-assign":undefined}],60:[function(require,module,exports){
 var DocCoverageStore, Flux, keys, objectAssign,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5703,7 +5749,7 @@ DocCoverageStore = (function(superClass) {
 module.exports = DocCoverageStore;
 
 
-},{"../keys":57,"material-flux":undefined,"object-assign":undefined}],60:[function(require,module,exports){
+},{"../keys":58,"material-flux":undefined,"object-assign":undefined}],61:[function(require,module,exports){
 var DocStore, Flux, keys, merge, objectAssign,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5769,7 +5815,7 @@ DocStore = (function(superClass) {
 module.exports = DocStore;
 
 
-},{"../keys":57,"lodash.merge":undefined,"material-flux":undefined,"object-assign":undefined}],61:[function(require,module,exports){
+},{"../keys":58,"lodash.merge":undefined,"material-flux":undefined,"object-assign":undefined}],62:[function(require,module,exports){
 var ExampleStore, Flux, keys, objectAssign,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5835,7 +5881,7 @@ ExampleStore = (function(superClass) {
 module.exports = ExampleStore;
 
 
-},{"../keys":57,"material-flux":undefined,"object-assign":undefined}],62:[function(require,module,exports){
+},{"../keys":58,"material-flux":undefined,"object-assign":undefined}],63:[function(require,module,exports){
 var Flux, RouteStore, keys, objectAssign,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5902,7 +5948,7 @@ RouteStore = (function(superClass) {
 module.exports = RouteStore;
 
 
-},{"../keys":57,"material-flux":undefined,"object-assign":undefined}],63:[function(require,module,exports){
+},{"../keys":58,"material-flux":undefined,"object-assign":undefined}],64:[function(require,module,exports){
 var Flux, ToggleVisibilityStore, keys, objectAssign,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -5948,7 +5994,7 @@ ToggleVisibilityStore = (function(superClass) {
 module.exports = ToggleVisibilityStore;
 
 
-},{"../keys":57,"material-flux":undefined,"object-assign":undefined}],64:[function(require,module,exports){
+},{"../keys":58,"material-flux":undefined,"object-assign":undefined}],65:[function(require,module,exports){
 var Context, Docs, Examples, Handlebars, InitializeState, React, Root, docs, examples, express, favicon, fs, initializeState, server, template;
 
 if ("development" === 'development') {
@@ -6051,7 +6097,7 @@ console.log('running on', 'PORT:', process.env.PORT || 5000, 'IP:', process.env.
 server.listen(process.env.PORT || 5000, process.env.IP);
 
 
-},{"./renderer/components/root-component":49,"./renderer/context":56,"./server/docs":65,"./server/examples":66,"./server/initializeState":67,"express":undefined,"fs":undefined,"handlebars":undefined,"react":undefined,"serve-favicon":undefined,"source-map-support":undefined}],65:[function(require,module,exports){
+},{"./renderer/components/root-component":50,"./renderer/context":57,"./server/docs":66,"./server/examples":67,"./server/initializeState":68,"express":undefined,"fs":undefined,"handlebars":undefined,"react":undefined,"serve-favicon":undefined,"source-map-support":undefined}],66:[function(require,module,exports){
 
 /*
 @providesModule Docs
@@ -6226,7 +6272,7 @@ Docs = (function() {
 module.exports = Docs;
 
 
-},{"./stateInitializer/initializeStateConfig":70,"bluebird":undefined,"fs":undefined,"lodash.clone":undefined,"request":undefined}],66:[function(require,module,exports){
+},{"./stateInitializer/initializeStateConfig":71,"bluebird":undefined,"fs":undefined,"lodash.clone":undefined,"request":undefined}],67:[function(require,module,exports){
 
 /*
 @providesModule Docs
@@ -6356,7 +6402,7 @@ Examples = (function() {
 module.exports = Examples;
 
 
-},{"./stateInitializer/initializeStateConfig":70,"bluebird":undefined,"fs":undefined,"highlight.js":undefined,"lodash.clone":undefined,"marked":undefined,"object-assign":undefined,"request":undefined}],67:[function(require,module,exports){
+},{"./stateInitializer/initializeStateConfig":71,"bluebird":undefined,"fs":undefined,"highlight.js":undefined,"lodash.clone":undefined,"marked":undefined,"object-assign":undefined,"request":undefined}],68:[function(require,module,exports){
 var DirTree, DocCoverage, Docs, Examples, InitializeState, Router, RoutesGen, config, readExample;
 
 RoutesGen = require('./stateInitializer/routes-gen');
@@ -6460,7 +6506,7 @@ InitializeState = (function() {
 module.exports = InitializeState;
 
 
-},{"../renderer/lib/router":58,"./docs":65,"./examples":66,"./stateInitializer/dir-tree":68,"./stateInitializer/doc-coverage":69,"./stateInitializer/initializeStateConfig":70,"./stateInitializer/read-example":71,"./stateInitializer/routes-gen":72}],68:[function(require,module,exports){
+},{"../renderer/lib/router":59,"./docs":66,"./examples":67,"./stateInitializer/dir-tree":69,"./stateInitializer/doc-coverage":70,"./stateInitializer/initializeStateConfig":71,"./stateInitializer/read-example":72,"./stateInitializer/routes-gen":73}],69:[function(require,module,exports){
 
 /*
 @providesModule DirTree
@@ -6589,7 +6635,7 @@ DirTree = (function() {
 module.exports = DirTree;
 
 
-},{"lodash.merge":undefined,"object-assign":undefined}],69:[function(require,module,exports){
+},{"lodash.merge":undefined,"object-assign":undefined}],70:[function(require,module,exports){
 
 /*
 @providesModule DocCoverage
@@ -6690,7 +6736,7 @@ DocCoverage = (function() {
 module.exports = DocCoverage;
 
 
-},{"lodash.merge":undefined,"object-assign":undefined}],70:[function(require,module,exports){
+},{"lodash.merge":undefined,"object-assign":undefined}],71:[function(require,module,exports){
 var fs;
 
 fs = require('fs');
@@ -6715,7 +6761,7 @@ module.exports = {
 };
 
 
-},{"fs":undefined}],71:[function(require,module,exports){
+},{"fs":undefined}],72:[function(require,module,exports){
 var conf, fs;
 
 fs = require('fs');
@@ -6727,7 +6773,7 @@ module.exports = function() {
 };
 
 
-},{"./initializeStateConfig":70,"fs":undefined}],72:[function(require,module,exports){
+},{"./initializeStateConfig":71,"fs":undefined}],73:[function(require,module,exports){
 var RoutesGen, objectAssign;
 
 objectAssign = require('object-assign');
@@ -6873,7 +6919,7 @@ RoutesGen = (function() {
 module.exports = RoutesGen;
 
 
-},{"object-assign":undefined}]},{},[64])
+},{"object-assign":undefined}]},{},[65])
 
 
 //# sourceMappingURL=app.js.map

@@ -1,6 +1,7 @@
 React = require 'react'
 Radium = require 'radium'
 marked = require 'marked'
+Loading = require './loading-component'
 
 Route = require './route-component'
 
@@ -42,7 +43,7 @@ class ExampleMarkupComponent extends React.Component
               @loadingQueue.push path
               # console.log "path:", path
               @context.ctx.exampleAction.updateExample "#{path}"
-          <span>loading...</span>
+          <Loading width="300" height="300"/>
       }
     </div>
 

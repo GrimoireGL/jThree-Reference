@@ -3,6 +3,7 @@ Radium = require 'radium'
 colors = require './colors/color-definition'
 Link = require './link-component'
 {A,H2,P,H3,Li,Ul,Th,Tr,Thead,Td,Tbody,Table,Strong,Span,Code,Pre,Div} = require './index-extend-components'
+Loading = require './loading-component'
 
 # console.log("A is ",A.name)
 
