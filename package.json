@@ -59,5 +59,8 @@
     "test": "./node_modules/.bin/gulp --require coffee-script/register test"
   },
   "author": "pnlybubbles",
-  "license": "MIT"
+  "license": "MIT",
+  "engines":{
+    "node":4.4.0
+  }
 }
