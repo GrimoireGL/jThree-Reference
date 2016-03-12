@@ -1,3 +1,27 @@
+
+@font-face {
+  font-family: 'CamingoCode';
+  src: url('../assets/CamingoCode-Regular.eot');
+  src:
+    url('../assets/CamingoCode-Regular.eot?iefix') format('eot'),
+    url('../assets/CamingoCode-Regular.woff') format('woff'),
+    url('../assets/CamingoCode-Regular.ttf') format('truetype'),
+    url('../assets/CamingoCode-Regular.svg#webfontjSpbZQRv') format('svg');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'CamingoCode';
+  src: url('../assets/CamingoCode-Bold.eot');
+  src:
+    url('../assets/CamingoCode-Bold.eot?iefix') format('eot'),
+    url('../assets/CamingoCode-Bold.woff') format('woff'),
+    url('../assets/CamingoCode-Bold.ttf') format('truetype'),
+    url('../assets/CamingoCode-Bold.svg#webfontjSpbZQRv') format('svg');
+  font-weight: bold;
+}
+
+
 /* 自動生成だから適当 */
 
 .markdown-component {
@@ -97,6 +121,10 @@ div.status-bar-left {
   vertical-align: baseline;
   white-space: pre;
 }
+.markdown-component.toppage pre {
+  width: 860px;
+  background-color: white;
+}
 
 .markdown-component pre code {
   font-family: CamingoCode, Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif, "Hiragino Kaku Gothic ProN", Meiryo;
@@ -129,6 +157,17 @@ div.status-bar-left {
 .markdown-component .hljs-params {
   color: #475FD7;
 }
+.markdown-component .hljs-name {
+  color: #E4594C;
+}
+.markdown-component .hljs-attr {
+  color: #0184BC;
+}
+.markdown-component .hljs-meta {
+  color: #0184BC;
+}
+
+
 
 
 /*

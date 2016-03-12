@@ -151,42 +151,42 @@ class IndexComponent extends React.Component
         <H3>Example</H3>
 
         <P>Look at this simple example.</P>
-
-        <Pre>
-          <Code>
-            &lt;!DOCTYPE html&gt;
-            &lt;html&gt;
-            &lt;head&gt;
-              &lt;script type=&quot;text/goml&quot;&gt;
-                &lt;goml&gt;
-                  &lt;resources&gt;
-                    &lt;cube name=&quot;cube&quot; /&gt;
-                  &lt;/resources&gt;
-                  &lt;canvases&gt;
-                    &lt;canvas clearColor=&quot;purple&quot; frame=&quot;.canvasContainer&quot;&gt;
-                      &lt;viewport cam=&quot;CAM1&quot; id=&quot;main&quot; width=&quot;640&quot; height=&quot;480&quot; name=&quot;MAIN&quot;/&gt;
-                    &lt;/canvas&gt;
-                  &lt;/canvases&gt;
-                  &lt;scenes&gt;
-                    &lt;scene name=&quot;mainScene&quot;&gt;
-                      &lt;object rotation=&quot;y(30d)&quot;&gt;
-                        &lt;camera id=&quot;maincam&quot; aspect=&quot;1&quot; far=&quot;20&quot; fovy=&quot;1/2p&quot; name=&quot;CAM1&quot; near=&quot;0.1&quot;
-                                position=&quot;(0,8,10)&quot; rotation=&quot;x(-30d)&quot;&gt;&lt;/camera&gt;
-                      &lt;/object&gt;
-                      &lt;scenelight color=&quot;#FFF&quot; intensity=&quot;1&quot;  top=&quot;40&quot;  far=&quot;50&quot; right=&quot;50&quot; position=&quot;-10,-10,10&quot;/&gt;
-                      &lt;mesh id=&quot;cube&quot; geo=&quot;cube&quot; mat=&quot;red&quot;/&gt;
-                    &lt;/scene&gt;
-                  &lt;/scenes&gt;
-                &lt;/goml&gt;
-              &lt;/script&gt;
-            &lt;/head&gt;
-            &lt;body&gt;
-            &lt;/body&gt;
-            &lt;/html&gt;
-          </Code>
-        </Pre>
+        <div className="markdown-component toppage" dangerouslySetInnerHTML={{__html: @code()}}></div>
       </Div>
     </Div>
+
+  code: ->
+    return """
+      <pre><code class="lang-xml"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/goml"</span>&gt;</span><span class="handlebars"><span class="xml">
+          <span class="hljs-tag">&lt;<span class="hljs-name">goml</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">resources</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">cube</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"cube"</span> /&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">resources</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">canvases</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">clearColor</span>=<span class="hljs-string">"purple"</span> <span class="hljs-attr">frame</span>=<span class="hljs-string">".canvasContainer"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">viewport</span> <span class="hljs-attr">cam</span>=<span class="hljs-string">"CAM1"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"main"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"640"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"480"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"MAIN"</span>/&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">canvases</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">scenes</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">scene</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"mainScene"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">object</span> <span class="hljs-attr">rotation</span>=<span class="hljs-string">"y(30d)"</span>&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">camera</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"maincam"</span> <span class="hljs-attr">aspect</span>=<span class="hljs-string">"1"</span> <span class="hljs-attr">far</span>=<span class="hljs-string">"20"</span> <span class="hljs-attr">fovy</span>=<span class="hljs-string">"1/2p"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"CAM1"</span> <span class="hljs-attr">near</span>=<span class="hljs-string">"0.1"</span> <span class="hljs-attr">position</span>=<span class="hljs-string">"(0,8,10)"</span> <span class="hljs-attr">rotation</span>=<span class="hljs-string">"x(-30d)"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">camera</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">object</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">scenelight</span> <span class="hljs-attr">color</span>=<span class="hljs-string">"#FFF"</span> <span class="hljs-attr">intensity</span>=<span class="hljs-string">"1"</span>  <span class="hljs-attr">top</span>=<span class="hljs-string">"40"</span>  <span class="hljs-attr">far</span>=<span class="hljs-string">"50"</span> <span class="hljs-attr">right</span>=<span class="hljs-string">"50"</span> <span class="hljs-attr">position</span>=<span class="hljs-string">"-10,-10,10"</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">mesh</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"cube"</span> <span class="hljs-attr">geo</span>=<span class="hljs-string">"cube"</span> <span class="hljs-attr">mat</span>=<span class="hljs-string">"red"</span>/&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">scene</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">scenes</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">goml</span>&gt;</span>
+        </span></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+      </code></pre>
+    """
 
 styles =
   base:
@@ -305,11 +305,11 @@ styles =
       width: '100%'
       display: 'flex'
       justifyContent: 'center'
-    body: 
+    body:
       width: 960
 
 
-      
+
 
 IndexComponent.contextTypes =
   ctx: React.PropTypes.any
