@@ -157,34 +157,47 @@ class IndexComponent extends React.Component
 
   code: ->
     return """
-      <pre><code class="lang-xml"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/goml"</span>&gt;</span><span class="handlebars"><span class="xml">
-          <span class="hljs-tag">&lt;<span class="hljs-name">goml</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">resources</span>&gt;</span>
-              <span class="hljs-tag">&lt;<span class="hljs-name">cube</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"cube"</span> /&gt;</span>
-            <span class="hljs-tag">&lt;/<span class="hljs-name">resources</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">canvases</span>&gt;</span>
-              <span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">clearColor</span>=<span class="hljs-string">"purple"</span> <span class="hljs-attr">frame</span>=<span class="hljs-string">".canvasContainer"</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-name">viewport</span> <span class="hljs-attr">cam</span>=<span class="hljs-string">"CAM1"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"main"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"640"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"480"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"MAIN"</span>/&gt;</span>
-              <span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span>
-            <span class="hljs-tag">&lt;/<span class="hljs-name">canvases</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">scenes</span>&gt;</span>
-              <span class="hljs-tag">&lt;<span class="hljs-name">scene</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"mainScene"</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-name">object</span> <span class="hljs-attr">rotation</span>=<span class="hljs-string">"y(30d)"</span>&gt;</span>
-                  <span class="hljs-tag">&lt;<span class="hljs-name">camera</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"maincam"</span> <span class="hljs-attr">aspect</span>=<span class="hljs-string">"1"</span> <span class="hljs-attr">far</span>=<span class="hljs-string">"20"</span> <span class="hljs-attr">fovy</span>=<span class="hljs-string">"1/2p"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"CAM1"</span> <span class="hljs-attr">near</span>=<span class="hljs-string">"0.1"</span> <span class="hljs-attr">position</span>=<span class="hljs-string">"(0,8,10)"</span> <span class="hljs-attr">rotation</span>=<span class="hljs-string">"x(-30d)"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">camera</span>&gt;</span>
-                <span class="hljs-tag">&lt;/<span class="hljs-name">object</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-name">scenelight</span> <span class="hljs-attr">color</span>=<span class="hljs-string">"#FFF"</span> <span class="hljs-attr">intensity</span>=<span class="hljs-string">"1"</span>  <span class="hljs-attr">top</span>=<span class="hljs-string">"40"</span>  <span class="hljs-attr">far</span>=<span class="hljs-string">"50"</span> <span class="hljs-attr">right</span>=<span class="hljs-string">"50"</span> <span class="hljs-attr">position</span>=<span class="hljs-string">"-10,-10,10"</span>/&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-name">mesh</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"cube"</span> <span class="hljs-attr">geo</span>=<span class="hljs-string">"cube"</span> <span class="hljs-attr">mat</span>=<span class="hljs-string">"red"</span>/&gt;</span>
-              <span class="hljs-tag">&lt;/<span class="hljs-name">scene</span>&gt;</span>
-            <span class="hljs-tag">&lt;/<span class="hljs-name">scenes</span>&gt;</span>
-          <span class="hljs-tag">&lt;/<span class="hljs-name">goml</span>&gt;</span>
-        </span></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+      <pre><code class="lang-xml">
+        <span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"j3.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"iframe-theme"</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"canvas"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"canvasContainer"</span>/&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/goml"</span>&gt;</span><span class="handlebars"><span class="xml">
+              <span class="hljs-tag">&lt;<span class="hljs-name">goml</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">resources</span>&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">material</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sampleMaterial1"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"builtin.solid"</span> <span class="hljs-attr">color</span>=<span class="hljs-string">"yellow"</span>/&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">material</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sampleMaterial2"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"builtin.solid"</span> <span class="hljs-attr">color</span>=<span class="hljs-string">"green"</span>/&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">material</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sampleMaterial3"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"builtin.solid"</span> <span class="hljs-attr">color</span>=<span class="hljs-string">"blue"</span>/&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">material</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sampleMaterial4"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"builtin.solid"</span> <span class="hljs-attr">color</span>=<span class="hljs-string">"red"</span>/&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">material</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sampleMaterial5"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"builtin.solid"</span> <span class="hljs-attr">color</span>=<span class="hljs-string">"orange"</span>/&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">resources</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">canvases</span>&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">clearColor</span>=<span class="hljs-string">"#11022A"</span> <span class="hljs-attr">frame</span>=<span class="hljs-string">".canvasContainer"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">viewport</span> <span class="hljs-attr">cam</span>=<span class="hljs-string">"CAM1"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"main"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"640"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"480"</span>/&gt;</span>
+                  <span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">canvases</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">scenes</span>&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">scene</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"mainScene"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">camera</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"maincam"</span> <span class="hljs-attr">aspect</span>=<span class="hljs-string">"1"</span> <span class="hljs-attr">far</span>=<span class="hljs-string">"20"</span> <span class="hljs-attr">fovy</span>=<span class="hljs-string">"1/3p"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"CAM1"</span> <span class="hljs-attr">near</span>=<span class="hljs-string">"0.1"</span> <span class="hljs-attr">position</span>=<span class="hljs-string">"(0,8,10)"</span> <span class="hljs-attr">rotation</span>=<span class="hljs-string">"x(-30d)"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">camera</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">mesh</span> <span class="hljs-attr">mat</span>=<span class="hljs-string">"sampleMaterial1"</span> <span class="hljs-attr">geo</span>=<span class="hljs-string">"cube"</span> <span class="hljs-attr">position</span>=<span class="hljs-string">"2,0,0"</span>/&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">mesh</span> <span class="hljs-attr">mat</span>=<span class="hljs-string">"sampleMaterial2"</span> <span class="hljs-attr">geo</span>=<span class="hljs-string">"sphere"</span> <span class="hljs-attr">position</span>=<span class="hljs-string">"4,0,0"</span>/&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">mesh</span> <span class="hljs-attr">mat</span>=<span class="hljs-string">"sampleMaterial3"</span> <span class="hljs-attr">geo</span>=<span class="hljs-string">"quad"</span> <span class="hljs-attr">position</span>=<span class="hljs-string">"0,0,0"</span>/&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">mesh</span> <span class="hljs-attr">mat</span>=<span class="hljs-string">"sampleMaterial4"</span> <span class="hljs-attr">geo</span>=<span class="hljs-string">"cone"</span> <span class="hljs-attr">position</span>=<span class="hljs-string">"-2,0,0"</span>/&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">mesh</span> <span class="hljs-attr">mat</span>=<span class="hljs-string">"sampleMaterial5"</span> <span class="hljs-attr">geo</span>=<span class="hljs-string">"cylinder"</span> <span class="hljs-attr">position</span>=<span class="hljs-string">"-4,0,0"</span>/&gt;</span>
+                  <span class="hljs-tag">&lt;/<span class="hljs-name">scene</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">scenes</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">goml</span>&gt;</span>
+            </span></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
       </code></pre>
     """
 
