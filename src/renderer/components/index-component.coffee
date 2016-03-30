@@ -22,7 +22,7 @@ class IndexComponent extends React.Component
               <object style={styles.logo_svg} data='/static/img/jthree-logo.svg' type='image/svg+xml'></object>
             </div>
             <div style={styles.logo_text}>
-              <span style={styles.logo_jthree}>jThree</span><span style={styles.logo_v3}>β</span>
+              <span style={styles.logo_jthree}>jThree</span><span style={styles.logo_v3}>α</span>
             </div>
           </div>
           <div style={styles.description}>

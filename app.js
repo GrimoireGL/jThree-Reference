@@ -3774,7 +3774,7 @@ IndexComponent = (function(superClass) {
       "style": styles.logo_jthree
     }, "jThree"), React.createElement("span", {
       "style": styles.logo_v3
-    }, "β"))), React.createElement("div", {
+    }, "α"))), React.createElement("div", {
       "style": styles.description
     }, React.createElement("span", null, "Focus on the most important.")))), React.createElement("div", {
       "style": styles.wrapper
@@ -6007,7 +6007,7 @@ module.exports = ToggleVisibilityStore;
 },{"../keys":58,"material-flux":undefined,"object-assign":undefined}],65:[function(require,module,exports){
 var Context, Docs, Examples, Handlebars, InitializeState, React, Root, docs, examples, express, favicon, fs, initializeState, server, template;
 
-if ("development" === 'development') {
+if ("production" === 'development') {
   require('source-map-support').install();
 }
 
@@ -6033,7 +6033,7 @@ Examples = require('./server/examples');
 
 console.log('Examples: ', Examples);
 
-console.log("environment: " + "development");
+console.log("environment: " + "production");
 
 server = express();
 
@@ -6142,9 +6142,9 @@ Docs = (function() {
    */
 
   Docs.prototype.getJsonScheduler = function(interval, cb) {
-    if ("development" === 'production') {
+    if ("production" === 'production') {
       this.getRemoteJson(cb);
-    } else if ("development" === 'development') {
+    } else if ("production" === 'development') {
       this.getLocalJson(cb);
     }
     console.log('got json');
@@ -6931,5 +6931,3 @@ module.exports = RoutesGen;
 
 },{"object-assign":undefined}]},{},[65])
 
-
-//# sourceMappingURL=app.js.map
