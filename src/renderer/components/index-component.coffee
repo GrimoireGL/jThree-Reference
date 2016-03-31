@@ -3,6 +3,7 @@ Radium = require 'radium'
 colors = require './colors/color-definition'
 Link = require './link-component'
 {A,H2,P,H3,Li,Ul,Th,Tr,Thead,Td,Tbody,Table,Strong,Span,Code,Pre,Div} = require './index-extend-components'
+Loading = require './loading-component'
 
 # console.log("A is ",A.name)
 
@@ -21,7 +22,7 @@ class IndexComponent extends React.Component
               <object style={styles.logo_svg} data='/static/img/jthree-logo.svg' type='image/svg+xml'></object>
             </div>
             <div style={styles.logo_text}>
-              <span style={styles.logo_jthree}>jThree</span><span style={styles.logo_v3}>β</span>
+              <span style={styles.logo_jthree}>jThree</span><span style={styles.logo_v3}>α</span>
             </div>
           </div>
           <div style={styles.description}>
@@ -77,7 +78,7 @@ class IndexComponent extends React.Component
           <Li>Provide a good learning resource for the beginners to know how programming is awesome via this library.</Li>
           <Li>Sharing features that will be achieved easily by this library implemented with javascript.</Li>
           <Li>Redefine legacies of 3DCG technologies on the Internet.</Li>
-          <Li>Have Enjoyable contributions ❤️</Li>
+          <Li>Have Enjoyable contributions</Li>
         </Ul>
         <H3><A id="Dependencies_14"></A>Dependencies</H3>
         <P>This library depends on the following libraries. We appreciate these contributors below</P>
@@ -98,7 +99,8 @@ class IndexComponent extends React.Component
           </Tbody>
         </Table>
         <H2><A id="Contributions_23"></A>Contributions</H2>
-        <P>Thank you for your interest in contributions!  ❤️</P>
+        <P>Thank you for your interest in contributions!</P>
+        <A href="https://jthree-slackin.herokuapp.com/"><img src="/static/img/jthree-slack.png"/></A>
         <H3><A id="Installation_to_build_28"></A>Installation to build</H3>
         <P>You need the applications below.</P>
         <Ul>
@@ -149,42 +151,55 @@ class IndexComponent extends React.Component
         <H3>Example</H3>
 
         <P>Look at this simple example.</P>
-
-        <Pre>
-          <Code>
-            &lt;!DOCTYPE html&gt;
-            &lt;html&gt;
-            &lt;head&gt;
-              &lt;script type=&quot;text/goml&quot;&gt;
-                &lt;goml&gt;
-                  &lt;resources&gt;
-                    &lt;cube name=&quot;cube&quot; /&gt;
-                  &lt;/resources&gt;
-                  &lt;canvases&gt;
-                    &lt;canvas clearColor=&quot;purple&quot; frame=&quot;.canvasContainer&quot;&gt;
-                      &lt;viewport cam=&quot;CAM1&quot; id=&quot;main&quot; width=&quot;640&quot; height=&quot;480&quot; name=&quot;MAIN&quot;/&gt;
-                    &lt;/canvas&gt;
-                  &lt;/canvases&gt;
-                  &lt;scenes&gt;
-                    &lt;scene name=&quot;mainScene&quot;&gt;
-                      &lt;object rotation=&quot;y(30d)&quot;&gt;
-                        &lt;camera id=&quot;maincam&quot; aspect=&quot;1&quot; far=&quot;20&quot; fovy=&quot;1/2p&quot; name=&quot;CAM1&quot; near=&quot;0.1&quot;
-                                position=&quot;(0,8,10)&quot; rotation=&quot;x(-30d)&quot;&gt;&lt;/camera&gt;
-                      &lt;/object&gt;
-                      &lt;scenelight color=&quot;#FFF&quot; intensity=&quot;1&quot;  top=&quot;40&quot;  far=&quot;50&quot; right=&quot;50&quot; position=&quot;-10,-10,10&quot;/&gt;
-                      &lt;mesh id=&quot;cube&quot; geo=&quot;cube&quot; mat=&quot;red&quot;/&gt;
-                    &lt;/scene&gt;
-                  &lt;/scenes&gt;
-                &lt;/goml&gt;
-              &lt;/script&gt;
-            &lt;/head&gt;
-            &lt;body&gt;
-            &lt;/body&gt;
-            &lt;/html&gt;
-          </Code>
-        </Pre>
+        <div className="markdown-component toppage" dangerouslySetInnerHTML={{__html: @code()}}></div>
       </Div>
     </Div>
+
+  code: ->
+    return """
+      <pre><code class="lang-xml">
+        <span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"j3.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"iframe-theme"</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"canvas"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"canvasContainer"</span>/&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/goml"</span>&gt;</span><span class="handlebars"><span class="xml">
+              <span class="hljs-tag">&lt;<span class="hljs-name">goml</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">resources</span>&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">material</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sampleMaterial1"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"builtin.solid"</span> <span class="hljs-attr">color</span>=<span class="hljs-string">"yellow"</span>/&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">material</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sampleMaterial2"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"builtin.solid"</span> <span class="hljs-attr">color</span>=<span class="hljs-string">"green"</span>/&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">material</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sampleMaterial3"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"builtin.solid"</span> <span class="hljs-attr">color</span>=<span class="hljs-string">"blue"</span>/&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">material</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sampleMaterial4"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"builtin.solid"</span> <span class="hljs-attr">color</span>=<span class="hljs-string">"red"</span>/&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">material</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sampleMaterial5"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"builtin.solid"</span> <span class="hljs-attr">color</span>=<span class="hljs-string">"orange"</span>/&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">resources</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">canvases</span>&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">clearColor</span>=<span class="hljs-string">"#11022A"</span> <span class="hljs-attr">frame</span>=<span class="hljs-string">".canvasContainer"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">viewport</span> <span class="hljs-attr">cam</span>=<span class="hljs-string">"CAM1"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"main"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"640"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"480"</span>/&gt;</span>
+                  <span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">canvases</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">scenes</span>&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">scene</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"mainScene"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">camera</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"maincam"</span> <span class="hljs-attr">aspect</span>=<span class="hljs-string">"1"</span> <span class="hljs-attr">far</span>=<span class="hljs-string">"20"</span> <span class="hljs-attr">fovy</span>=<span class="hljs-string">"1/3p"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"CAM1"</span> <span class="hljs-attr">near</span>=<span class="hljs-string">"0.1"</span> <span class="hljs-attr">position</span>=<span class="hljs-string">"(0,8,10)"</span> <span class="hljs-attr">rotation</span>=<span class="hljs-string">"x(-30d)"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">camera</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">mesh</span> <span class="hljs-attr">mat</span>=<span class="hljs-string">"sampleMaterial1"</span> <span class="hljs-attr">geo</span>=<span class="hljs-string">"cube"</span> <span class="hljs-attr">position</span>=<span class="hljs-string">"2,0,0"</span>/&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">mesh</span> <span class="hljs-attr">mat</span>=<span class="hljs-string">"sampleMaterial2"</span> <span class="hljs-attr">geo</span>=<span class="hljs-string">"sphere"</span> <span class="hljs-attr">position</span>=<span class="hljs-string">"4,0,0"</span>/&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">mesh</span> <span class="hljs-attr">mat</span>=<span class="hljs-string">"sampleMaterial3"</span> <span class="hljs-attr">geo</span>=<span class="hljs-string">"quad"</span> <span class="hljs-attr">position</span>=<span class="hljs-string">"0,0,0"</span>/&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">mesh</span> <span class="hljs-attr">mat</span>=<span class="hljs-string">"sampleMaterial4"</span> <span class="hljs-attr">geo</span>=<span class="hljs-string">"cone"</span> <span class="hljs-attr">position</span>=<span class="hljs-string">"-2,0,0"</span>/&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">mesh</span> <span class="hljs-attr">mat</span>=<span class="hljs-string">"sampleMaterial5"</span> <span class="hljs-attr">geo</span>=<span class="hljs-string">"cylinder"</span> <span class="hljs-attr">position</span>=<span class="hljs-string">"-4,0,0"</span>/&gt;</span>
+                  <span class="hljs-tag">&lt;/<span class="hljs-name">scene</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">scenes</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">goml</span>&gt;</span>
+            </span></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+      </code></pre>
+    """
 
 styles =
   base:
@@ -303,11 +318,11 @@ styles =
       width: '100%'
       display: 'flex'
       justifyContent: 'center'
-    body: 
+    body:
       width: 960
 
 
-      
+
 
 IndexComponent.contextTypes =
   ctx: React.PropTypes.any

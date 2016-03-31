@@ -1,6 +1,7 @@
 React = require 'react'
 Radium = require 'radium'
 marked = require 'marked'
+Loading = require './loading-component'
 
 Route = require './route-component'
 
@@ -23,7 +24,7 @@ class ExampleMarkupComponent extends React.Component
   componentWillUnmount: ->
     @store.removeChangeListener(@_onChange.bind(@))
 
-  render: ->    
+  render: ->
     <div className={'markdown-component'} style={@props.style}>
       {
         console.log "markdowns:", @state.markup
@@ -41,9 +42,9 @@ class ExampleMarkupComponent extends React.Component
             if !@loadingQueue.some((p) -> p == path)
               @loadingQueue.push path
               # console.log "path:", path
-              
               @context.ctx.exampleAction.updateExample "#{path}"
-          <span>loading...</span>
+              window.scroll(0, 0)
+          <Loading width="300" height="300"/>
       }
     </div>
 

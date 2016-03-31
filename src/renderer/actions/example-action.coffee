@@ -16,10 +16,10 @@ class ExampleAction extends Flux.Action
    * @param  {String|Number} title_id   id of child of example root
   ###
   updateExample: (path) ->
-    path = path.split("/").join("?")
+    path = path.split("/").join("aaaa")
     new Promise (resolve, reject) =>
       request
-        .get "/api/example/root?#{path}"
+        .get "/api/example/rootaaaa#{path}"
         .end (err, res) ->
           # console.log "connect to: ", "/api/example/#{path}"
           # console.log "res.body: ", res.body
