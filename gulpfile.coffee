@@ -68,9 +68,9 @@ target.forEach (it) ->
         .pipe buffer()
         .pipe sourcemaps.init
           loadMaps: true
-        .pipe gulpif(!watching && env_production, gulpif(it.minify, uglify()))
+        # .pipe gulpif(!watching && env_production, gulpif(it.minify, uglify()))
         .pipe rename(it.name)
-        .pipe gulpif(!(!watching && env_production), sourcemaps.write('./'))
+        # .pipe gulpif(!(!watching && env_production), sourcemaps.write('./'))
         .pipe gulp.dest(it.dest)
 
 gulp.task 'test', ->
