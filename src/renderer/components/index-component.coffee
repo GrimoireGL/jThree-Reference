@@ -50,6 +50,15 @@ class IndexComponent extends React.Component
           </Link>
         </div>
         <div style={styles.link_container}>
+          <a href='http://studio.jthree.io/' style={styles.link} key='studio'>
+            <div style={styles.link_icon_wrap}>
+              <span className='icon-cube'></span>
+            </div>
+            <div style={styles.link_label}>jThree Studio</div>
+            <div style={styles.link_desc}>Editor for jThree. Let's write with it and share code!</div>
+          </a>
+        </div>
+        <div style={styles.link_container}>
           <Link href='/class' style={styles.link} key='reference'>
             <div style={styles.link_icon_wrap}>
               <span className='icon-books'></span>

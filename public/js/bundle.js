@@ -47348,6 +47348,20 @@ IndexComponent = (function(superClass) {
       "style": styles.link_desc
     }, "Share your code and stock your idea."))), React.createElement("div", {
       "style": styles.link_container
+    }, React.createElement("a", {
+      "href": 'http://studio.jthree.io/',
+      "style": styles.link,
+      "key": 'studio'
+    }, React.createElement("div", {
+      "style": styles.link_icon_wrap
+    }, React.createElement("span", {
+      "className": 'icon-cube'
+    })), React.createElement("div", {
+      "style": styles.link_label
+    }, "jThree Studio"), React.createElement("div", {
+      "style": styles.link_desc
+    }, "Editor for jThree. Let\'s write with it and share code!"))), React.createElement("div", {
+      "style": styles.link_container
     }, React.createElement(Link, {
       "href": '/class',
       "style": styles.link,
