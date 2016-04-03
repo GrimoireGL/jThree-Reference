@@ -8,8 +8,8 @@ colors = require './colors/color-definition'
 ###*
 # style setting
 ###
-styles = 
-  # a: 
+styles =
+  # a:
 
   h2:
     fontSize: 40
@@ -18,7 +18,7 @@ styles =
     marginTop: 100
   h3:
     fontSize: 30
-    ext: 
+    ext:
       color: colors.main.n.default
   # p:
   # li:
@@ -99,7 +99,7 @@ componentAry = [
     render: ->
       $ 'li', style: Array.prototype.concat.apply([], [this.props.style,styles.li]),
         @props.children
-  ,      
+  ,
   class Ul extends React.Component
     constructor: (props) ->
       super props
@@ -191,9 +191,8 @@ componentAry
     Component.contextTypes =
       ctx: React.PropTypes.any
     Component
-  .forEach (Component) -> 
+  .forEach (Component) ->
     components[Component.name] = Radium(Component)
 
-console.log components
 module.exports = components
 

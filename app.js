@@ -4350,8 +4350,6 @@ componentAry.map(function(Component) {
   return components[Component.name] = Radium(Component);
 });
 
-console.log(components);
-
 module.exports = components;
 
 
@@ -6007,7 +6005,7 @@ module.exports = ToggleVisibilityStore;
 },{"../keys":58,"material-flux":undefined,"object-assign":undefined}],65:[function(require,module,exports){
 var Context, Docs, Examples, Handlebars, InitializeState, React, Root, docs, examples, express, favicon, fs, initializeState, server, template;
 
-if ("production" === 'development') {
+if ("development" === 'development') {
   require('source-map-support').install();
 }
 
@@ -6031,9 +6029,7 @@ Docs = require('./server/docs');
 
 Examples = require('./server/examples');
 
-console.log('Examples: ', Examples);
-
-console.log("environment: " + "production");
+console.log("environment: " + "development");
 
 server = express();
 
@@ -6142,9 +6138,9 @@ Docs = (function() {
    */
 
   Docs.prototype.getJsonScheduler = function(interval, cb) {
-    if ("production" === 'production') {
+    if ("development" === 'production') {
       this.getRemoteJson(cb);
-    } else if ("production" === 'development') {
+    } else if ("development" === 'development') {
       this.getLocalJson(cb);
     }
     console.log('got json');
@@ -6335,10 +6331,10 @@ Examples = (function() {
         var fragment, route;
         fragment = _this.titleToUrl(title);
         route = fragment.replace(/\//g, ':');
-        return routes[fragment] = route;
+        routes[fragment] = route;
+        return console.log("ExampleRoutes", routes);
       };
     })(this));
-    console.log(routes);
     return routes;
   };
 
@@ -6889,7 +6885,6 @@ RoutesGen = (function() {
     var routes;
     routes = structure;
     routes["example"] = structure[Object.keys(structure)[0]];
-    console.log("example-routes:", routes);
     return routes;
   };
 

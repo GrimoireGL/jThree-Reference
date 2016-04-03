@@ -47890,8 +47890,6 @@ componentAry.map(function(Component) {
   return components[Component.name] = Radium(Component);
 });
 
-console.log(components);
-
 module.exports = components;
 
 
